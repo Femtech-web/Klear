@@ -16,7 +16,7 @@ const KIND: Record<StepKind, { label: string; tone: Tone; node: string }> = {
 /** The live run, step by step, each step linked to the transactions that prove it. */
 export function Timeline({ steps, start = 1 }: { steps: Step[]; start?: number }) {
   return (
-    <ol className="relative m-0 list-none p-0 before:absolute before:bottom-2 before:left-[15px] before:top-2 before:w-0.5 before:rounded-sm before:bg-gradient-to-b before:from-line-strong before:to-line">
+    <ol className="relative m-0 list-none p-0 before:absolute before:bottom-2 before:left-[15px] before:top-2 before:w-0.5 before:rounded-sm before:bg-line-strong">
       {steps.map((s, i) => (
         <li key={i} className="reveal relative grid grid-cols-[32px_1fr] gap-4 pb-8">
           <span

@@ -1,0 +1,89 @@
+├  Unsigned transaction:
+│    signer_id:    keel-delever-7953ec.testnet
+│    receiver_id:  keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  create_strategy
+│                       args:         {
+│                                       "config": {
+│                                         "chain_id": 998,
+│                                         "investor": "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c",
+│                                         "investor_account": "investor.keel-delever-7953ec.testnet",
+│                                         "leg": "0xBa22538b6de4D81570Ce4e0B7E440A5D882b922d",
+│                                         "manager": "manager.keel-delever-7953ec.testnet",
+│                                         "policy": {
+│                                           "band_bp": 100,
+│                                           "delever_reward": "100000000000000000000000",
+│                                           "delever_target_bp": 2000,
+│                                           "dust": 10000,
+│                                           "equity_floor_usd6": 3000000,
+│                                           "fee_bp": 5,
+│                                           "flatten_reward": "100000000000000000000000",
+│                                           "heartbeat_s": 0,
+│                                           "hedge": false,
+│                                           "job_ttl_s": 14400,
+│                                           "max_basis_bp": 500,
+│                                           "max_evidence_age_s": 3600,
+│                                           "max_failed_attempts": 3,
+│                                           "max_leverage_bp": 20000,
+│                                           "max_loss_usd6": 1000000,
+│                                           "max_order_sz": 1000000,
+│                                           "max_perp_age_s": 300,
+│                                           "on_silence": "nothing",
+│                                           "order_ttl_s": 300,
+│                                           "perp": 4,
+│                                           "repair_reward": "0",
+│                                           "settle_delay_l1": 300,
+│                                           "spot_haircut_bp": 100,
+│                                           "spot_reward": "50000000000000000000000",
+│                                           "sz_decimals": 4,
+│                                           "tolerance": 100000,
+│                                           "usdc_dust_usd6": 50000,
+│                                           "warn_usd6": 15000000
+│                                         },
+│                                         "probe": "0x104d138c0f09e899e12a3aA49dC67E5a6768B773",
+│                                         "spot_account": "0x104d138c0f09e899e12a3aA49dC67E5a6768B773",
+│                                         "spot_chain": "base",
+│                                         "spot_chain_id": 84532,
+│                                         "spot_token": "0x4200000000000000000000000000000000000006",
+│                                         "strategy_id": 476786444
+│                                       },
+│                                       "label": "delever",
+│                                       "name": "delever"
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      4.8423 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A53Zv5KE5WF1ww5QsDhcvenvDkLYGC1TQnsTCrj9Qf7V
+│    Signature:  ed25519:4Udu5VuEQi3mKXX4LgDd4h2fMQackxgxaEbt2p8rtneyPArtJpiqDk583fHyRTVatLLffv6oddaGrVMn1CT1keci
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 62.4 Tgas
+│    Transaction fee: 0.0124438323901539 NEAR
+│    Transaction ID: ER2rE2GAjt4GWy3UCCzmPHjXuMx3H4oFhHDkXMMt1Ay5
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/ER2rE2GAjt4GWy3UCCzmPHjXuMx3H4oFhHDkXMMt1Ay5
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-factory-bcf915.testnet]:[39m
+│      created delever.keel-factory-bcf915.testnet for keel-delever-7953ec.testnet
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "create_strategy" call to <keel-factory-bcf915.testnet> on behalf of <keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-factory-bcf915.testnet create_strategy json-args '{"name": "delever", "config": {"strategy_id": 476786444, "chain_id": 998, "leg": "0xBa22538b6de4D81570Ce4e0B7E440A5D882b922d", "spot_account": "0x104d138c0f09e899e12a3aA49dC67E5a6768B773", "spot_token": "0x4200000000000000000000000000000000000006", "probe": "0x104d138c0f09e899e12a3aA49dC67E5a6768B773", "spot_chain": "base", "spot_chain_id": 84532, "investor": "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c", "investor_account": "investor.keel-delever-7953ec.testnet", "policy": {"perp": 4, "sz_decimals": 4, "band_bp": 100, "max_basis_bp": 500, "fee_bp": 5, "max_order_sz": 1000000, "tolerance": 100000, "max_loss_usd6": 1000000, "settle_delay_l1": 300, "max_evidence_age_s": 3600, "max_perp_age_s": 300, "order_ttl_s": 300, "job_ttl_s": 14400, "max_failed_attempts": 3, "dust": 10000, "repair_reward": "0", "flatten_reward": "100000000000000000000000", "spot_reward": "50000000000000000000000", "max_leverage_bp": 20000, "equity_floor_usd6": 3000000, "spot_haircut_bp": 100, "usdc_dust_usd6": 50000, "hedge": false, "heartbeat_s": 0, "on_silence": "nothing", "warn_usd6": 15000000, "delever_target_bp": 2000, "delever_reward": "100000000000000000000000"}, "manager": "manager.keel-delever-7953ec.testnet"}, "label": "delever"}' prepaid-gas '200.0 Tgas' attached-deposit '4.8423 NEAR' sign-as keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-delever-7953ec.testnet.json send[39m
+

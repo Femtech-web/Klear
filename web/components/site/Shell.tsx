@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { KeelMark } from "@/components/ui/icons";
+import { HeaderHeight } from "./HeaderHeight";
 import { Nav } from "./Nav";
 import { cn } from "@/lib/cn";
 import { config } from "@/lib/config";
@@ -21,6 +22,7 @@ export function Header() {
         <strong className="font-semibold">Testnet.</strong> Every rescue on this site ran on public testnets with test
         funds. Nothing here is audited.
       </p>
+      <HeaderHeight />
       <header className="sticky top-0 z-20 border-b border-line bg-canvas/80 backdrop-blur-md backdrop-saturate-150">
         <div className="page flex flex-col gap-2 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0">
           <div className="flex items-center justify-between gap-4">

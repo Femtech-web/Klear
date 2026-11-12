@@ -15,6 +15,7 @@ export const JUDGES = { href: "/judges", label: "For judges" } as const;
 export const PROOF = [
   { href: "/proof", label: "Overview" },
   { href: "/proof/rescue", label: "Live rescue" },
+  { href: "/proof/deleverage", label: "Early cut" },
   { href: "/proof/replay", label: "AI replay" },
   { href: "/proof/contracts", label: "Locked contracts" },
   { href: "/proof/attacks", label: "Try to break it" },

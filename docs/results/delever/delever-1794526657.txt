@@ -1,0 +1,63 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_deleverage
+│                       args:         {
+│                                       "perp": "hyperevm:0x32491665c87b08ba1f37b25717d092777a69b0d0797f12e561621d82a33fef5e:1",
+│                                       "spot": "base:0x17b863f0d5fcde79b207d46c7884654324e8088f7c7f2781ce06bdec90bdd4be:1"
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:8KfDYgy9qUuoptMQ7gukgSxHt6aW3YWy2QJ9LoCfouc2
+│    Signature:  ed25519:4dGBN2Jv63Ad8ik9YTW7t8V2KkVFoGZ3bPQYrW9g4McJLVJG5jkeAxKe7qNVcYSH1JqHdQWTPpPBnfaMC5JBCU4T
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.9 Tgas
+│    Transaction fee: 0.0014953336045118 NEAR
+│    Transaction ID: AoXL6hjT5AWBFEvZ9edJfSTT86FKskiGot3FGGzoqso9
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AoXL6hjT5AWBFEvZ9edJfSTT86FKskiGot3FGGzoqso9
+│     [0m
+├  Function execution logs:
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m
+│      {"outcome":"sign","job_id":1,"order":{"nonce":1,"is_buy":false,"limit_px":196880000000,"sz":890000,"reduce_only":true,"cloid":"63964767933561140893499685413156861612","deadline":1794526959},"digest":"0xf3918581c22e35ff514dd913e84930e432eefcff2def40dd35ef424ec3293218"}
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("delever.keel-factory-bcf915.testnet"), request=SignRequestArgs { path: "keel/1/hyperevm", payload: Ecdsa(BoundedVec { inner: [243, 145, 133, 129, 194, 46, 53, 255, 81, 77, 217, 19, 232, 73, 48, 228, 50, 238, 252, 255, 45, 239, 64, 221, 53, 239, 66, 78, 195, 41, 50, 24], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m
+│      signed 1:1
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "0xf3918581c22e35ff514dd913e84930e432eefcff2def40dd35ef424ec3293218",
+  "job_id": 1,
+  "order": {
+    "cloid": "63964767933561140893499685413156861612",
+    "deadline": 1794526959,
+    "is_buy": false,
+    "limit_px": 196880000000,
+    "nonce": 1,
+    "reduce_only": true,
+    "sz": 890000
+  },
+  "outcome": "sign"
+}
+
+
+The "open_deleverage" call to <delever.keel-factory-bcf915.testnet> on behalf of <guardian.keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet open_deleverage json-args '{"perp":"hyperevm:0x32491665c87b08ba1f37b25717d092777a69b0d0797f12e561621d82a33fef5e:1","spot":"base:0x17b863f0d5fcde79b207d46c7884654324e8088f7c7f2781ce06bdec90bdd4be:1"}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-delever-7953ec.testnet.json send[39m
+

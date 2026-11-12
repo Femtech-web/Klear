@@ -93,7 +93,15 @@ mark 2950, 0.01 WETH, 1% haircut, 100 bp band, 5 bp fee:
 - **Not modelled (limit):** order-book depth beyond the band (the rescue closes in bounded steps instead),
   funding still to be charged, and price moves after the snapshot.
 
-## Not built yet
+## Deleveraging, before the floor
 
-Early-warning deleveraging (a bounded reduce-only job when value nears the floor) is the next step on the
-same order machinery. As you asked, it waits until the live rescue on the replacement judge has passed.
+A judge from v3.1 on can also cut risk early, with no exit. The investor sets a warning level above the floor
+(`warn_usd6`), a target leverage (`delever_target_bp`) and a reward (`delever_reward`). Anyone but the manager
+may call `open_deleverage` on evidence they attested when either:
+
+- the liquidation value is under the warning level (`early-warning`), or
+- prices have pushed leverage past the cap with no order doing it (`leverage-drift`).
+
+The judge plans reduce-only orders down to the target, on the same bounded-loss machinery as the rescue, and
+pays the reward once, on a settled snapshot that shows the position at or under the target. Below the floor
+it cannot open: the rescue is the backstop. Run live once: [docs/results/delever](results/delever/README.md).

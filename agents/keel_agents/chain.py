@@ -109,6 +109,9 @@ class Chain:
     def open(self, perp: str, spot: str, signer: str) -> Call:
         return parse_call(self.run("open", perp, spot, signer))
 
+    def delever(self, perp: str, spot: str, signer: str) -> Call:
+        return parse_call(self.run("delever", perp, spot, signer))
+
     def settle(self, perp: str, spot: str, signer: str) -> Call:
         return parse_call(self.run("settle", perp, spot, signer))
 

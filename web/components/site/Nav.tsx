@@ -10,7 +10,7 @@ export function Nav() {
   return (
     <nav
       aria-label="Main"
-      className="-mx-6 flex gap-0.5 overflow-x-auto px-6 [mask-image:linear-gradient(to_right,black_82%,transparent)] [scrollbar-width:none] md:mx-0 md:px-0 md:[mask-image:none]"
+      className="-mx-6 flex min-w-0 gap-0.5 overflow-x-auto px-6 [mask-image:linear-gradient(to_right,black_82%,transparent)] [scrollbar-width:none] md:mx-0 md:px-0 md:[mask-image:none]"
     >
       {NAV.map((n) => {
         const active = path === n.href || path.startsWith(n.href + "/");

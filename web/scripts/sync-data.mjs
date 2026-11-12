@@ -128,6 +128,7 @@ write("deployments.json", {
 const fe = env(read("docs/results/factory/env"));
 const fh = read("docs/results/factory/code-hashes.txt");
 const pe = env(read("docs/results/practice/env"));
+const de = env(read("docs/results/delever/env"));
 write("factory.json", {
   factory: fe.FACTORY,
   deployers: { hyperevm: fe.DEPLOYER_HYPER, base: fe.DEPLOYER_BASE },
@@ -141,6 +142,7 @@ write("factory.json", {
     guardian: pe.G7_GUARDIAN,
     investor: pe.G7_INVESTOR,
   },
+  delever: { judge: de.G7_JUDGE, leg: de.G7_LEG, vault: de.G7_VAULT },
 });
 
 // ---- the daily drill: one summary per cycle, newest first ----

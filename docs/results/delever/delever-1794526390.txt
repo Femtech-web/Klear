@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_deleverage
+│                       args:         {
+│                                       "perp": "hyperevm:0xc14fed90d0f40dcd7c04935d4919a27ef71cd22a83abfe30af0c2f464606978a:0",
+│                                       "spot": "base:0x17b863f0d5fcde79b207d46c7884654324e8088f7c7f2781ce06bdec90bdd4be:1"
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:8KfDYgy9qUuoptMQ7gukgSxHt6aW3YWy2QJ9LoCfouc2
+│    Signature:  ed25519:3qEBnpicr5JAPwd2ADKJAUwagNSGnVLsJZdPc8K8ReJUg6Vqm7X5kHiHMVUMPJDGWVb3C1n9gnA88TvqLLq1Szpo
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.9 Tgas
+│    Transaction fee: 0.0002621829485647 NEAR
+│    Transaction ID: EoKtE9v44LJwm4cRkxQXbMNdS93BAJhdb6wrHfxRVjjv
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/EoKtE9v44LJwm4cRkxQXbMNdS93BAJhdb6wrHfxRVjjv
+│     [0m
+├  Function execution logs:
+│    [31mLogs [delever.keel-factory-bcf915.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet open_deleverage json-args '{"perp":"hyperevm:0xc14fed90d0f40dcd7c04935d4919a27ef71cd22a83abfe30af0c2f464606978a:0","spot":"base:0x17b863f0d5fcde79b207d46c7884654324e8088f7c7f2781ce06bdec90bdd4be:1"}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-delever-7953ec.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: snapshot-not-settled")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

@@ -26,7 +26,11 @@ export default defineConfig({
       name: "desktop-dark",
       use: { ...devices["Desktop Chrome"], ...chrome, colorScheme: "dark", viewport: { width: 1366, height: 900 } },
     },
-    { name: "mobile", use: { ...devices["Pixel 7"], ...chrome, colorScheme: "light" } },
+    // A narrow phone (360 px is among the smallest widths in common use): catches content that pushes past the edge.
+    {
+      name: "mobile",
+      use: { ...devices["Pixel 7"], ...chrome, colorScheme: "light", viewport: { width: 360, height: 780 } },
+    },
   ],
   webServer: external
     ? undefined

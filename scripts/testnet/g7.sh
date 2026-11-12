@@ -23,7 +23,7 @@
 #   g7.sh propose <perp> <spot> <buy|sell> <sz> <px>   as the AI, with its restricted key
 #   g7.sh heartbeat                  as the AI, with its restricted key
 #   g7.sh request-exit               as the investor
-#   g7.sh open|settle <perp> <spot> <signer>
+#   g7.sh open|settle|delever <perp> <spot> <signer>   (delever: open_deleverage, judge v3.1)
 #   g7.sh confirm <receipt-key> <signer>
 #   g7.sh relay-order <job:nonce> | relay-sweep <n> | relay-exit <n>    anyone; prints the tx
 #   g7.sh receipt <exit-tx> <signer>  wait for Base finality, attest the vault's Exited log; prints key
@@ -241,8 +241,8 @@ print(json.dumps(c))' "$policy" "$WETH" "$G7_INVESTOR")
   judge-status)
     near_view "$G7_JUDGE" status '{}'
     ;;
-  open|settle)
-    m=$([ "$1" = open ] && echo open_flatten || echo settle)
+  open|settle|delever)
+    case "$1" in open) m=open_flatten ;; delever) m=open_deleverage ;; *) m=settle ;; esac
     call "${4:?signer}" "$m" "{\"perp\":\"${2:?perp}\",\"spot\":\"${3:?spot}\"}" '0 NEAR' "$OUT/$1-$(date +%s).txt"
     ;;
   confirm)

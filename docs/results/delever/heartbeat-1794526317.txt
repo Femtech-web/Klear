@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    manager.keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  heartbeat
+│                       args:         {}
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:CwmZDR9quD6CuuLyaVFi5NwXcgH5umiQ7ZWsRSv5MoYE
+│    Signature:  ed25519:59oB61hfo4TQDWieXH6q2jjwrkn6XHgoWJhxe3CcMrTU48v7JZKgycQoKgWrR3JuQuZmLbyyT32U7kZw5oA6yJq
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.6 Tgas
+│    Transaction fee: 0.0002317093407059 NEAR
+│    Transaction ID: 6LytrwkLZhJ2C6984D8vnYxCxUpqGL2SwXJi9TVW9S34
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/6LytrwkLZhJ2C6984D8vnYxCxUpqGL2SwXJi9TVW9S34
+│     [0m
+├  Function execution logs:
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "heartbeat" call to <delever.keel-factory-bcf915.testnet> on behalf of <manager.keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet heartbeat json-args {} prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as manager.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/manager-fc.keel-delever-7953ec.testnet.json send[39m
+

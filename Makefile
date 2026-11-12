@@ -78,13 +78,14 @@ web-test: web
 	cd web && npm run lint && npm run typecheck && npm test && npx playwright test
 
 # The release artifacts locally, as .github/workflows/release.yml builds them (dist/, with SHA256SUMS).
-release: judge
+release: factory
 	cargo build -q --locked --release -p keel-core --bin keel-judge -p keel-replay
 	cd contracts/evm && forge build
 	rm -rf dist && mkdir -p dist/evm
 	tar -czf dist/keel-$$(uname -m)-$$(uname -s | tr A-Z a-z).tar.gz -C target/release keel-judge keel-replay
 	cp contracts/near-keel/target/near/near_keel.wasm dist/near_keel.wasm
-	for c in KeelLeg KeelVault BalanceProbe; do cp contracts/evm/out/$$c.sol/$$c.json dist/evm/$$c.json; done
+	cp contracts/near-keel-factory/target/near/near_keel_factory.wasm dist/near_keel_factory.wasm
+	for c in KeelLeg KeelVault KeelDeployer BalanceProbe; do cp contracts/evm/out/$$c.sol/$$c.json dist/evm/$$c.json; done
 	tar -czf dist/keel-evm.tar.gz -C dist evm && rm -r dist/evm
 	cp docs/results/replay/summary.json dist/alpha-arena-replay.json
 	cd dist && shasum -a 256 * > SHA256SUMS && cat SHA256SUMS

@@ -166,6 +166,21 @@
   p {
     @apply text-pretty;
   }
+  /* A token longer than its line (a test name, a hash, a path) wraps instead of pushing the page sideways. */
+  p,
+  li,
+  dt,
+  dd,
+  td,
+  th,
+  blockquote {
+    overflow-wrap: break-word;
+  }
+  /* A grid with no column count gets one column that shrinks to its container, never one sized to its widest
+     content (a long hash or command would push a phone's page sideways). grid-cols-* utilities still win. */
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
   a {
     text-underline-offset: 3px;
   }

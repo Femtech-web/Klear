@@ -34,7 +34,7 @@ export default function DrillPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 06"
+        eyebrow="Proof · 07"
         title="It fails every day, on purpose, and is rescued"
         lede="A rescue that worked once could be luck. The practice strategy runs the whole failure and the whole rescue as a daily cycle, on the same locked judge, and records each one, failures included."
       >

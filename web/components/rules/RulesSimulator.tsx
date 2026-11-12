@@ -138,9 +138,12 @@ export function RulesSimulator({
             return (
               <li key={a.address} className="rounded-md border border-line bg-surface px-4 py-3 shadow-soft">
                 <div className="flex items-baseline justify-between gap-3">
-                  <span className="truncate font-medium">
+                  <span className="min-w-0 font-medium">
                     {modelName(a.model)}{" "}
-                    <span className="font-normal text-ink-3">· {competitionName(a.competition)}</span>
+                    <span className="block text-sm font-normal text-ink-3 sm:inline sm:text-base">
+                      <span className="hidden sm:inline">· </span>
+                      {competitionName(a.competition)}
+                    </span>
                   </span>
                   <span
                     className={cn(

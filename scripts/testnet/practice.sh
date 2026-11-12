@@ -5,6 +5,7 @@
 #
 # Its payout addresses are the operator's relayer, so each cycle's funds return and fund the next one.
 # Chain I/O for the running strategy is scripts/testnet/g7.sh with KEEL_DIR=docs/results/practice.
+# KEEL_STRATEGY=<name> runs the same steps for another factory strategy (docs/results/<name>, its own policy).
 #
 #   scripts/testnet/practice.sh accounts      keel-practice-<hex>.testnet (faucet) with investor., manager.
 #                                             and guardian. sub-accounts, and the manager's function-call key
@@ -17,7 +18,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT_DIR"
 
-OUT=docs/results/practice
+NAME=${KEEL_STRATEGY:-practice}
+OUT=docs/results/$NAME
 mkdir -p "$OUT"
 STATE=$OUT/env
 [ -f "$STATE" ] && set -a && . "$STATE" && set +a
@@ -26,7 +28,7 @@ STATE=$OUT/env
 NEAR_RPC=https://test.rpc.fastnear.com
 NEAR="$ROOT_DIR/node_modules/.bin/near"
 RELAYER_EVM=0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c
-JUDGE=practice.$FACTORY
+JUDGE=$NAME.$FACTORY
 
 key() { echo ".secrets/near/$1.json"; }
 pub() { python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["public_key"])' "$(key "$1")"; }
@@ -47,7 +49,7 @@ grant_manager_key() {
 
 case "${1:-}" in
   accounts)
-    [ -n "${PRACTICE:-}" ] || put PRACTICE "keel-practice-$(openssl rand -hex 3).testnet"
+    [ -n "${PRACTICE:-}" ] || put PRACTICE "keel-$NAME-$(openssl rand -hex 3).testnet"
     for a in "$PRACTICE" {investor,manager,guardian}."$PRACTICE"; do
       [ -f "$(key "$a")" ] || node scripts/keys/gen_near_key.mjs "$a" "$(key "$a")" >/dev/null
     done
@@ -71,9 +73,9 @@ case "${1:-}" in
     ;;
   create)
     pool=${2:-1}
-    out=$(CREATOR=$PRACTICE scripts/testnet/factory.sh create practice "$OUT/policy.json" "$RELAYER_EVM" "investor.$PRACTICE" "$pool" "manager.$PRACTICE")
+    out=$(CREATOR=$PRACTICE scripts/testnet/factory.sh create "$NAME" "$OUT/policy.json" "$RELAYER_EVM" "investor.$PRACTICE" "$pool" "manager.$PRACTICE")
     echo "$out"
-    eval "$(cat docs/results/factory/practice/addresses.txt)"
+    eval "$(cat docs/results/factory/$NAME/addresses.txt)"
     put G7_LEG "$leg"; put G7_VAULT "$vault"; put G7_CONTROLLER "$controller"; put G7_VAULT_CONTROLLER "$vault_controller"
     ;;
   manager-key)

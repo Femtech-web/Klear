@@ -75,7 +75,8 @@ function Checks({ x }: { x: Inspection }) {
           x.entry.ok &&
           (entry ? (
             <>
-              registry entry by <code className="font-mono">{entry.creator}</code>, {utc(entry.createdAt * 1000)}
+              registry entry by <code className="break-all font-mono">{entry.creator}</code>,{" "}
+              {utc(entry.createdAt * 1000)}
             </>
           ) : (
             "not in the registry: deployed some other way, so the checks below matter even more"
@@ -95,7 +96,7 @@ function Checks({ x }: { x: Inspection }) {
         detail={
           x.code.ok && (
             <>
-              sha256 <code className="font-mono">{x.code.value.slice(0, 16)}…</code>
+              sha256 <code className="break-all font-mono">{x.code.value.slice(0, 16)}…</code>
               {x.code.value === factory.judgeCodeSha256 && ", the same as the source build"}
             </>
           )
@@ -109,8 +110,8 @@ function Checks({ x }: { x: Inspection }) {
           x.leg.ok &&
           d && (
             <>
-              KeelLeg controller <code className="font-mono">{x.leg.value.controller}</code>; the judge&apos;s MPC key{" "}
-              <code className="font-mono">{d.leg}</code>
+              KeelLeg controller <code className="break-all font-mono">{x.leg.value.controller}</code>; the judge&apos;s
+              MPC key <code className="break-all font-mono">{d.leg}</code>
             </>
           )
         }
@@ -123,8 +124,8 @@ function Checks({ x }: { x: Inspection }) {
           x.vault.ok &&
           d && (
             <>
-              KeelVault controller <code className="font-mono">{x.vault.value.controller}</code>; the judge&apos;s MPC
-              key <code className="font-mono">{d.vault}</code>
+              KeelVault controller <code className="break-all font-mono">{x.vault.value.controller}</code>; the
+              judge&apos;s MPC key <code className="break-all font-mono">{d.vault}</code>
             </>
           )
         }
@@ -142,7 +143,7 @@ function Checks({ x }: { x: Inspection }) {
         detail={
           s?.investor && (
             <>
-              the investor&apos;s address in the mandate: <code className="font-mono">{s.investor}</code>
+              the investor&apos;s address in the mandate: <code className="break-all font-mono">{s.investor}</code>
             </>
           )
         }

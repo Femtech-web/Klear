@@ -29,7 +29,7 @@ equity points within a median 1.3% of the stake. Rebuild it: `make replay && git
 
 ### 2. Nobody can change the rules (1 min)
 
-Four contracts, each with no access keys and the code built from this repository:
+Five contracts, each with no access keys and the code built from this repository:
 
 | Contract | Account | Source build sha256 |
 |---|---|---|
@@ -37,6 +37,7 @@ Four contracts, each with no access keys and the code built from this repository
 | Judge of the investor-exit run | `keel-human-c0caa7.testnet` | `be140d65…` |
 | Factory | `keel-factory-bcf915.testnet` | `2bd8332e…` ([hashes](docs/results/factory/code-hashes.txt)) |
 | Judge of the practice strategy | `practice.keel-factory-bcf915.testnet` | `2aeaaf8b…` |
+| Judge of the deleverage run | `delever.keel-factory-bcf915.testnet` | `2aeaaf8b…` |
 
 ```bash
 curl -s https://test.rpc.fastnear.com -H 'content-type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"query","params":{"request_type":"view_access_key_list","finality":"final","account_id":"keel-ai-76e036.testnet"}}'
@@ -54,6 +55,11 @@ investor on HyperCore, and **only then** is the guardian paid 0.5 NEAR
 investor on Base, then 0.3 NEAR ([`2LFFGqVJ…`](https://testnet.nearblocks.io/txns/2LFFGqVJ3xhfZcX7cBtmGnpLhHqFUZfrJtzv5WihVSoN)).
 A second run is the investor's own exit ([`H56zWCGx…`](https://testnet.nearblocks.io/txns/H56zWCGxrRSceS1CX34Z5ay2FkkPRzsUygBZH7MzX2a5)),
 rescued by hand, each leg paid once.
+
+Before the floor there is an earlier cut: [docs/results/delever](docs/results/delever/README.md). Under the
+investor's $15 warning level, a guardian opened a deleverage; the judge planned a reduce-only sell from 0.01 to
+0.0011 ETH, the investor's 0.2x target, and paid 0.1 NEAR only once a settled snapshot showed it
+([`52X2qJsZ…`](https://testnet.nearblocks.io/txns/52X2qJsZPjz3oQamskBcRNYAv7hFJEByT7DCm956Dxe3)).
 
 ### 4. Try to break it (3 min)
 

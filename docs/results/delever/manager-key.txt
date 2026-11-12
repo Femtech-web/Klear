@@ -1,0 +1,30 @@
+├  Unsigned transaction:
+│    signer_id:    manager.keel-delever-7953ec.testnet
+│    receiver_id:  manager.keel-delever-7953ec.testnet
+│    actions:
+│       -- add access key:     
+│                       public key:   ed25519:CwmZDR9quD6CuuLyaVFi5NwXcgH5umiQ7ZWsRSv5MoYE
+│                       nonce:        0
+│                       permission:   FunctionCall(FunctionCallPermission { allowance: Some(NearToken { inner: 250000000000000000000000 }), receiver_id: "delever.keel-factory-bcf915.testnet", method_names: ["propose_order", "heartbeat"] })
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4qmvaDKK3MEoNMYxTXZ8rDGECLLUH4rPfqfq56MQXfNM
+│    Signature:  ed25519:2fQaR6JcfyeBa9ihNwjHiGRhvMrauA8vrMQTq6crpyf5FEoe7ZZN4pAXDhgEtWnFM4tFNSA8Urzf4n9GawrQayDw
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 0.644 Tgas
+│    Transaction fee: 0.0000420646665888 NEAR
+│    Transaction ID: 7e3T2WP6vRwKXzCgzqCqcmjamo9QzdmWEUh1wMrB9PWo
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7e3T2WP6vRwKXzCgzqCqcmjamo9QzdmWEUh1wMrB9PWo
+│     [0m
+
+
+Added access key = ed25519:CwmZDR9quD6CuuLyaVFi5NwXcgH5umiQ7ZWsRSv5MoYE to manager.keel-delever-7953ec.testnet.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account add-key manager.keel-delever-7953ec.testnet grant-function-call-access --allowance '0.25 NEAR' --contract-account-id delever.keel-factory-bcf915.testnet --function-names propose_order,heartbeat use-manually-provided-public-key ed25519:CwmZDR9quD6CuuLyaVFi5NwXcgH5umiQ7ZWsRSv5MoYE network-config testnet sign-with-access-key-file .secrets/near/manager.keel-delever-7953ec.testnet.json send[39m
+

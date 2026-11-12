@@ -143,7 +143,10 @@ export default async function JudgesPage() {
           Perp leg: 7.887 USDC at the investor, then 0.5 NEAR to the guardian.
         </Recorded>
       ),
-      actions: [{ href: "/proof/rescue", label: "The live rescue" }],
+      actions: [
+        { href: "/proof/rescue", label: "The live rescue" },
+        { href: "/proof/deleverage", label: "The early cut, before the floor" },
+      ],
     },
     {
       id: "attacks",
@@ -237,9 +240,9 @@ export default async function JudgesPage() {
             read={aiKeys}
             pass={!!aiKey && aiKey.functionCall!.methods.every((m) => m === "propose_order" || m === "heartbeat")}
           >
-            The AI signs with a key for {aiKey ? aiKey.functionCall!.methods.join(" and ") : "its two methods"} on its judge, nothing
-            else (read now). Its account&apos;s owner key is ours, and the judge accepts only proposals and heartbeats
-            from the manager whatever key signs.
+            The AI signs with a key for {aiKey ? aiKey.functionCall!.methods.join(" and ") : "its two methods"} on its
+            judge, nothing else (read now). Its account&apos;s owner key is ours, and the judge accepts only proposals
+            and heartbeats from the manager whatever key signs.
           </Result>
           <Recorded>{restricted ? `${restricted.attempt}: rejected by NEAR.` : ""}</Recorded>
         </span>

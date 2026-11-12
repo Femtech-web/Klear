@@ -13,6 +13,7 @@ const PAGES = [
   "/trust",
   "/proof",
   "/proof/rescue",
+  "/proof/deleverage",
   "/proof/replay",
   "/proof/replay/0x61f35978eb33bad00644bc9549850e7a7c65186e",
   "/proof/contracts",

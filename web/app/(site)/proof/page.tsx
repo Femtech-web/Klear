@@ -53,6 +53,17 @@ export default async function ProofPage() {
       ],
     },
     {
+      href: "/proof/deleverage",
+      kind: "Recorded run",
+      title: "The early cut",
+      claim:
+        "Under the investor's warning level, a guardian cut the manager's position to the target with an order the judge planned, and was paid only once the cut was proven.",
+      facts: [
+        ["70 s", "from the cut opening to the reward"],
+        ["0.01 → 0.0011", "ETH, the investor's 0.2x target"],
+      ],
+    },
+    {
       href: "/proof/replay",
       kind: "Dataset",
       title: "The AI replay",
@@ -123,7 +134,7 @@ export default async function ProofPage() {
     <Section
       eyebrow="Proof"
       title="Everything we claim, and how to check it"
-      lede="Seven pieces of evidence, in the order to read them. Each is a transaction you can open, a dataset you can rebuild, or a read of the chains made as you load the page. Nothing here is a mockup."
+      lede="Eight pieces of evidence, in the order to read them. Each is a transaction you can open, a dataset you can rebuild, or a read of the chains made as you load the page. Nothing here is a mockup."
     >
       <div className="mb-10 flex flex-wrap items-center gap-3 rounded-lg border border-line bg-surface px-5 py-4 shadow-soft">
         <LiveValue

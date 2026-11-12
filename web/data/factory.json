@@ -13,5 +13,10 @@
   "manager": "manager.keel-practice-53ee75.testnet",
   "guardian": "guardian.keel-practice-53ee75.testnet",
   "investor": "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c"
+ },
+ "delever": {
+  "judge": "delever.keel-factory-bcf915.testnet",
+  "leg": "0xBa22538b6de4D81570Ce4e0B7E440A5D882b922d",
+  "vault": "0x104d138c0f09e899e12a3aA49dC67E5a6768B773"
  }
 }

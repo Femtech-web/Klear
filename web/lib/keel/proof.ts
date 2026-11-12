@@ -26,6 +26,7 @@ const CONTRACTS = () => [
   },
   { role: "Factory (creates every new judge)", account: factory.factory, expected: factory.factoryCodeSha256 },
   { role: "Judge of the practice strategy", account: factory.practice.judge, expected: factory.judgeCodeSha256 },
+  { role: "Judge of the deleverage run", account: factory.delever.judge, expected: factory.judgeCodeSha256 },
 ];
 
 export async function lockedContracts(): Promise<Locked[]> {

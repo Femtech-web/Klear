@@ -162,6 +162,23 @@ strategy anyone can rescue ([the daily drill](docs/results/drill)).
 - **The way home.** On a trigger the judge plans every order itself (reduce-only, bounded loss), signs the
   sweep and the vault's exit to the investor's fixed addresses, and pays per leg on proof of arrival.
 
+## Everything Keel does
+
+| Feature | What it does | See it | Status |
+|---|---|---|---|
+| **The mandate** | Order size, price band, leverage on a conservative cross-chain liquidation value, a loss floor; the judge refuses anything outside them | [engine/mandate.rs](crates/keel-core/src/engine/mandate.rs), [the live refusal](docs/results/g7/README.md) | live |
+| **Early deleverage** | Below the investor's warning level, or when prices push leverage past the cap, anyone may cut the position back to a target, before the floor is ever reached | [the live cut](docs/results/delever/README.md), [engine/deleverage.rs](crates/keel-core/src/engine/deleverage.rs) | live once: 0.01 ETH cut to the 0.2x target, 0.1 NEAR paid on proof |
+| **The rescue** | On the floor, the investor's request or a silent manager: reduce-only close, sweep and vault exit to the investor, each leg paid only on proof of arrival | [the live rescue](#the-live-rescue), [docs/rescue.md](docs/rescue.md) | live, four times (two G7 runs, the drill, a stranger) |
+| **Rearm** | After a rescue the investor restarts the same strategy, same rules and accounts, next cycle | `rearm` on the judge | live (the drill) |
+| **The factory** | Anyone creates a strategy in one transaction; its judge is locked from birth, its EVM accounts land at CREATE2 addresses fixed in advance | [docs/results/factory](docs/results/factory/README.md) | live, locked |
+| **Inspection** | Six checks before trusting any strategy: factory-made, no keys, the factory's code, both accounts controlled only by the judge's MPC keys, payouts only to the investor | `/strategies/<judge>`, `inspect_strategy`, `factory.sh verify` | live |
+| **Create in the browser** | The five-step wizard: predict every address, sign one NEAR transaction, deploy the two accounts | `/create` | built; the prediction checked against the live strategy |
+| **Rescue anywhere** | A NEAR account is enough: the CLI (`make rescue`), a NEAR wallet in the browser (`/practice`), or an agent over MCP; the courier pays the EVM gas | [a stranger's rescue](docs/results/visitor/README.md) | live |
+| **AI manager and AI guardian** | Claude trades under the mandate with a key that can only propose; another Claude may decline a trigger, never invent one; every decision logged with its prompt | [agents/](agents/README.md) | live |
+| **The daily drill** | The practice strategy fails on purpose and is rescued every day, failures recorded | [docs/results/drill](docs/results/drill) | GitHub Actions; needs its key secret |
+| **The AI replay** | 32 real AI traders replayed fill by fill through the rules | [docs/results/replay](docs/results/replay/README.md) | reproducible in CI |
+| **Private payouts** | A rescue's payout into a NEAR Intents confidential balance: the recipient hidden | [docs/results/mainnet](docs/results/mainnet/README.md), [docs/privacy.md](docs/privacy.md) | one mainnet test |
+
 ## What NEAR makes possible
 
 - **One keyless contract controls accounts on two other chains.** Chain Signatures let the judge, and only
@@ -175,6 +192,14 @@ strategy anyone can rescue ([the daily drill](docs/results/drill)).
   test showed the recipient hidden ([docs/results/mainnet](docs/results/mainnet/README.md)).
 
 ## Proven on real AI history
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/replay-dark.png">
+  <img src="docs/assets/replay-light.png" width="100%" alt="Grok 4's real Alpha Arena account: $10,000 falling to $325 by December 12. A floor 30% down is crossed on the first day; a Keel rescue there would have returned $6,801.">
+</picture>
+
+Grok 4's real account in Alpha Arena: $10,000 to $325. A floor 30% down was crossed on its first day; a Keel
+rescue there would have returned $6,801. Every agent's chart: the site's `/proof/replay`.
 
 The 32 Alpha Arena agents' real Hyperliquid fills, replayed through Keel's rules
 ([`crates/keel-replay`](crates/keel-replay)), rebuild each account to within a median 1.3% of Hyperliquid's
@@ -194,7 +219,7 @@ own equity points. With a 3x leverage cap and a floor 30% down:
 - **Twenty attempts to cheat the live, locked judges, all refused on chain**: a forged snapshot, strangers
   posing as the investor or the manager, the AI's own key reaching for the rescue, replayed evidence, a second
   rescue ([docs/try-to-break-it.md](docs/try-to-break-it.md), with the command to repeat each).
-- **Four contracts locked**, each running exactly the code built from this repository
+- **Five contracts locked**, each running exactly the code built from this repository
   ([hashes](docs/results/g7/code-hashes.txt), [factory](docs/results/factory/code-hashes.txt)).
 - **Any strategy can be inspected** before you trust it: no keys, the factory's code, controllers that are the
   judge's own MPC keys, payouts only to the investor (`/strategies/<judge>` runs all six live).

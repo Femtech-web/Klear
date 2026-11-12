@@ -53,7 +53,7 @@ export default async function FactoryPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 05"
+        eyebrow="Proof · 06"
         title="Anyone can create a strategy. Nobody can change one."
         lede="The factory creates each strategy's judge in one transaction, with no key, so its code and its investor's mandate are final from the first block. It is locked itself, and it keeps the public registry guardians read."
       >

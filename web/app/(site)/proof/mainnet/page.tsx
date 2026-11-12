@@ -37,7 +37,7 @@ export default function MainnetPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 07"
+        eyebrow="Proof · 08"
         title="A rescue's payout can land where nobody can attribute it"
         lede="One real test on mainnet, authorized and funded by the user: 3 USDC from Hyperliquid into a NEAR Intents confidential balance. It shows exactly what Confidential Intents hides, checked rather than assumed."
       >

@@ -1,0 +1,11 @@
+PRACTICE=keel-delever-7953ec.testnet
+G7_JUDGE=delever.keel-factory-bcf915.testnet
+G7_INVESTOR=0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c
+G7_INVESTOR_ACCOUNT=investor.keel-delever-7953ec.testnet
+G7_MANAGER=manager.keel-delever-7953ec.testnet
+G7_MANAGER_KEY=manager-fc.keel-delever-7953ec.testnet
+G7_GUARDIAN=guardian.keel-delever-7953ec.testnet
+G7_LEG=0xBa22538b6de4D81570Ce4e0B7E440A5D882b922d
+G7_VAULT=0x104d138c0f09e899e12a3aA49dC67E5a6768B773
+G7_CONTROLLER=0x4b1ce799cf5bfd671870b3f0e1bf9336409fabfa
+G7_VAULT_CONTROLLER=0x1ae8e1c4a2dcb89e7ebd277b23ca15f61c305480

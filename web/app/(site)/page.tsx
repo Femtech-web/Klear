@@ -71,10 +71,6 @@ export default async function Home() {
   return (
     <>
       <section className="relative overflow-hidden pb-12 pt-18">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-72 size-[720px] rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-accent)_14%,transparent),transparent)]"
-        />
         <div className="page relative grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
           <div>
             <p className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface py-1.5 pl-1.5 pr-3 text-sm text-ink-2 shadow-soft">

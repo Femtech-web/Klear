@@ -21,7 +21,7 @@ export default function ReplayPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 02 · Alpha Arena, replayed"
+        eyebrow="Proof · 03 · Alpha Arena, replayed"
         title="What Keel would have done with 32 AI traders' real money"
         lede="In Alpha Arena Season 1.5, AI models each traded $10,000 of real money on Hyperliquid, from public wallets. We replayed every one of their fills through Keel's rules, using the same code the NEAR judge runs."
       >

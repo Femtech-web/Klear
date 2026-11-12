@@ -53,13 +53,15 @@ export const breakChallenges = challenges as {
   result: string;
 }[];
 
-/** The factory and its deployers (docs/results/factory), and the practice strategy it created first. */
+/** The factory and its deployers (docs/results/factory), and the strategies it created for the proof. */
 export const factory = factoryData as {
   factory: string;
   deployers: { hyperevm: string; base: string };
   factoryCodeSha256: string;
   judgeCodeSha256: string;
   practice: { judge: string; leg: string; vault: string; manager: string; guardian: string; investor: string };
+  /** The strategy of the live deleverage (docs/results/delever). */
+  delever: { judge: string; leg: string; vault: string };
 };
 
 /** The daily drill's cycles on the practice strategy (docs/results/drill/runs.jsonl), newest first. */

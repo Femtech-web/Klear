@@ -9,7 +9,7 @@ import { PROOF } from "./nav-items";
 export function ProofNav() {
   const path = usePathname();
   return (
-    <div className="border-b border-line bg-surface/60">
+    <div className="sticky top-[var(--header-h,107px)] z-10 border-b border-line bg-canvas/85 backdrop-blur-md backdrop-saturate-150 md:top-[var(--header-h,65px)]">
       <nav
         aria-label="Proof"
         className="page flex gap-1 overflow-x-auto py-2.5 [mask-image:linear-gradient(to_right,black_85%,transparent)] [scrollbar-width:none] md:[mask-image:none]"
