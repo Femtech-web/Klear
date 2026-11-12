@@ -25,7 +25,18 @@ describe("KeelDeployer calls", () => {
     expect(selector("predictLeg(bytes32,address,address,uint32,uint8,uint64,uint16,uint16)")).toBe("0xd4f3ed1f");
   });
   it("refuses an address that is not one", () => {
-    expect(() => predictLeg({ salt: SALT, controller: "0x12", payout: "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c", perp: 4, szDecimals: 4, maxOrderSz: 1n, bandBp: 1, maxBasisBp: 1 })).toThrow(/address/);
+    expect(() =>
+      predictLeg({
+        salt: SALT,
+        controller: "0x12",
+        payout: "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c",
+        perp: 4,
+        szDecimals: 4,
+        maxOrderSz: 1n,
+        bandBp: 1,
+        maxBasisBp: 1,
+      }),
+    ).toThrow(/address/);
   });
   it("derives a strategy id as zlib.crc32 does", () => {
     expect(crc32("practice")).toBe(2146186318);

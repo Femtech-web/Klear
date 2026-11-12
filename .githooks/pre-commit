@@ -10,6 +10,15 @@ if [ -z "$GL" ]; then
 fi
 "$GL" git --pre-commit --staged --redact --no-banner --config .gitleaks.toml
 
+# The site's data is derived from docs/results; CI fails if a commit carries one without the other.
+if command -v node >/dev/null && git diff --cached --name-only | grep -qE '^(docs/results/|web/data/)'; then
+  node web/scripts/sync-data.mjs >/dev/null
+  if ! git diff --quiet -- web/data; then
+    echo "pre-commit: web/data is out of date with docs/results; it has just been regenerated: stage it (git add web/data) and commit again." >&2
+    exit 1
+  fi
+fi
+
 blocked=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^(\.secrets/|(.*/)?\.env$|(.*/)?\.env\.)' | grep -Ev '(^|/)\.env\.example$' || true)
 if [ -n "$blocked" ]; then
   echo "pre-commit: refusing never-public paths:" >&2

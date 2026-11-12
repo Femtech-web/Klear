@@ -3,3 +3,13 @@
 {"at": 1794522001, "role": "courier", "kind": "spot-probe"}
 {"at": 1794522039, "role": "courier", "kind": "relayed-sweep", "key": "2", "tx": "0x5b54412dc6434c87147a3de15d0107c350ab722888486adb696d36226b264bd9"}
 {"at": 1794522042, "role": "courier", "kind": "relayed-exit", "key": "1", "tx": "0xca83654c37ff37a9eca41df349fd6dde34bdf2156232ad8cde658efa49819d19"}
+{"at": 1794522177, "role": "courier", "kind": "tick-failed", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794522215, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794522207-perp-log.json"}
+{"at": 1794522373, "role": "courier", "kind": "tick-failed", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794522404, "role": "courier", "kind": "tick-failed", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794522435, "role": "courier", "kind": "tick-failed", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794522472, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794522465-perp-log.json"}
+{"at": 1794522637, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794522628-perp-log.json"}
+{"at": 1794522799, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794522792-perp-log.json"}
+{"at": 1794522966, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794522956-perp-log.json"}
+{"at": 1794523128, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794523121-perp-log.json"}

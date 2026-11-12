@@ -15,14 +15,20 @@ import { config } from "@/lib/config";
  *   ?name=<name>&investor=<0x…>&maxOrderSz=<1e8 units>&bandBp=<bp>&maxBasisBp=<bp>
  */
 
-const json = (body: unknown, status = 200) => NextResponse.json(body, { status, headers: { "cache-control": "no-store" } });
+const json = (body: unknown, status = 200) =>
+  NextResponse.json(body, { status, headers: { "cache-control": "no-store" } });
 const int = (v: string | null, max: number) => (v && /^\d+$/.test(v) && Number(v) <= max ? Number(v) : null);
 
 async function exists(account: string): Promise<boolean> {
   const r = await fetch(config.nearRpc, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "query", params: { request_type: "view_account", finality: "final", account_id: account } }),
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "query",
+      params: { request_type: "view_account", finality: "final", account_id: account },
+    }),
     cache: "no-store",
   }).then((x) => x.json());
   return Boolean(r?.result);
@@ -37,7 +43,8 @@ export async function GET(request: NextRequest) {
   const maxBasisBp = int(q.get("maxBasisBp"), 10_000);
   if (!validName(name)) return json({ error: "name: 2 to 32 of a-z 0-9 - _, starting with a letter or digit" }, 400);
   if (!/^0x[0-9a-fA-F]{40}$/.test(investor)) return json({ error: "investor: an EVM address" }, 400);
-  if (maxOrderSz === null || bandBp === null || maxBasisBp === null) return json({ error: "limits: whole numbers" }, 400);
+  if (maxOrderSz === null || bandBp === null || maxBasisBp === null)
+    return json({ error: "limits: whole numbers" }, 400);
 
   const judge = `${name}.${factory.factory}`;
   try {
@@ -48,7 +55,16 @@ export async function GET(request: NextRequest) {
       view(factory.factory, "creation_cost"),
     ]);
     const salt = saltFor(judge);
-    const leg = { salt, controller: legController, payout: investor, perp: 4, szDecimals: 4, maxOrderSz: BigInt(maxOrderSz), bandBp, maxBasisBp };
+    const leg = {
+      salt,
+      controller: legController,
+      payout: investor,
+      perp: 4,
+      szDecimals: 4,
+      maxOrderSz: BigInt(maxOrderSz),
+      bandBp,
+      maxBasisBp,
+    };
     const [legAt, vaultAt] = await Promise.all([
       ethCall("hyperevm", factory.deployers.hyperevm, predictLeg(leg)),
       ethCall("base", factory.deployers.base, predictVault(salt, vaultController, investor)),

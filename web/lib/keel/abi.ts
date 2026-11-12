@@ -50,8 +50,10 @@ function vaultData(name: "deployVault" | "predictVault", salt: string, controlle
 
 export const deployLeg = (a: LegArgs) => legData("deployLeg", a);
 export const predictLeg = (a: LegArgs) => legData("predictLeg", a);
-export const deployVault = (salt: string, controller: string, payout: string) => vaultData("deployVault", salt, controller, payout);
-export const predictVault = (salt: string, controller: string, payout: string) => vaultData("predictVault", salt, controller, payout);
+export const deployVault = (salt: string, controller: string, payout: string) =>
+  vaultData("deployVault", salt, controller, payout);
+export const predictVault = (salt: string, controller: string, payout: string) =>
+  vaultData("predictVault", salt, controller, payout);
 
 /** An address returned by an eth_call (its last 20 bytes). */
 export const returnedAddress = (ret: string) => `0x${ret.slice(-40)}`;

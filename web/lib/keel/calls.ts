@@ -16,7 +16,13 @@ export interface Tx {
 }
 
 const TGAS = 1_000_000_000_000n;
-const call = (receiverId: string, methodName: string, args: Record<string, unknown>, deposit = "0", tgas = 300n): Tx => ({
+const call = (
+  receiverId: string,
+  methodName: string,
+  args: Record<string, unknown>,
+  deposit = "0",
+  tgas = 300n,
+): Tx => ({
   receiverId,
   actions: [{ type: "FunctionCall", params: { methodName, args, gas: (tgas * TGAS).toString(), deposit } }],
 });
@@ -24,7 +30,8 @@ const call = (receiverId: string, methodName: string, args: Record<string, unkno
 // ---- a guardian's rescue (anyone) ----
 
 /** Ask NEAR's MPC network to verify an EVM log; the signer becomes its attester (1 yoctoNEAR). */
-export const attest = (judge: string, chain: "hyperevm" | "base", log: unknown) => call(judge, "attest", { chain, log }, "1");
+export const attest = (judge: string, chain: "hyperevm" | "base", log: unknown) =>
+  call(judge, "attest", { chain, log }, "1");
 export const openFlatten = (judge: string, perp: string, spot: string) => call(judge, "open_flatten", { perp, spot });
 export const settle = (judge: string, perp: string, spot: string) => call(judge, "settle", { perp, spot });
 export const confirmExit = (judge: string, receipt: string) => call(judge, "confirm_exit", { receipt });
@@ -102,7 +109,15 @@ export function policy(m: MandateInput): Record<string, unknown> {
 export const WETH_BASE_SEPOLIA = "0x4200000000000000000000000000000000000006";
 
 /** The judge's config, as scripts/testnet/factory.sh builds it. */
-export function strategyConfig(a: { name: string; leg: string; vault: string; investor: string; investorAccount: string; manager?: string; mandate: MandateInput }) {
+export function strategyConfig(a: {
+  name: string;
+  leg: string;
+  vault: string;
+  investor: string;
+  investorAccount: string;
+  manager?: string;
+  mandate: MandateInput;
+}) {
   return {
     strategy_id: crc32(a.name),
     chain_id: 998,
@@ -119,8 +134,13 @@ export function strategyConfig(a: { name: string; leg: string; vault: string; in
   };
 }
 
-export const createStrategy = (factory: string, name: string, config: Record<string, unknown>, label: string, depositYocto: string) =>
-  call(factory, "create_strategy", { name, config, label }, depositYocto, 200n);
+export const createStrategy = (
+  factory: string,
+  name: string,
+  config: Record<string, unknown>,
+  label: string,
+  depositYocto: string,
+) => call(factory, "create_strategy", { name, config, label }, depositYocto, 200n);
 
 /** A strategy name the factory accepts: 2 to 32 of a-z 0-9 - _, starting with a letter or digit. */
 export const validName = (name: string) => /^[a-z0-9][a-z0-9_-]{1,31}$/.test(name);

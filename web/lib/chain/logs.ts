@@ -33,12 +33,19 @@ const LOGS: Record<EvmChain, { urls: string[]; step: number }> = {
 
 async function rpc(url: string, method: string, params: unknown[]): Promise<unknown> {
   const r = await postJson(url, { jsonrpc: "2.0", id: 1, method, params });
-  if (!isRecord(r) || !("result" in r)) throw new Error(`${method}: ${JSON.stringify(isRecord(r) ? r.error : r).slice(0, 160)}`);
+  if (!isRecord(r) || !("result" in r))
+    throw new Error(`${method}: ${JSON.stringify(isRecord(r) ? r.error : r).slice(0, 160)}`);
   return r.result;
 }
 
-export async function block(chain: EvmChain, tag: "finalized" | "latest" | number): Promise<{ number: number; timestamp: number }> {
-  const b = await rpc(RPC[chain], "eth_getBlockByNumber", [typeof tag === "number" ? `0x${tag.toString(16)}` : tag, false]);
+export async function block(
+  chain: EvmChain,
+  tag: "finalized" | "latest" | number,
+): Promise<{ number: number; timestamp: number }> {
+  const b = await rpc(RPC[chain], "eth_getBlockByNumber", [
+    typeof tag === "number" ? `0x${tag.toString(16)}` : tag,
+    false,
+  ]);
   if (!isRecord(b)) throw new Error(`${chain}: no block ${tag}`);
   return { number: Number(b.number), timestamp: Number(b.timestamp) };
 }
@@ -58,7 +65,14 @@ export async function recentLogs(
   const { urls, step } = LOGS[chain];
   const out: EvmLog[] = [];
   for (let from = start; from <= to.number; from += step) {
-    const params = [{ address, fromBlock: `0x${from.toString(16)}`, toBlock: `0x${Math.min(from + step - 1, to.number).toString(16)}`, topics: [topic0, ...(opts.topics ?? [])] }];
+    const params = [
+      {
+        address,
+        fromBlock: `0x${from.toString(16)}`,
+        toBlock: `0x${Math.min(from + step - 1, to.number).toString(16)}`,
+        topics: [topic0, ...(opts.topics ?? [])],
+      },
+    ];
     let got: unknown = null;
     for (const [i, url] of urls.entries()) {
       try {
@@ -74,7 +88,8 @@ export async function recentLogs(
 }
 
 /** The judge's key for a log: "<chain>:<tx hash>:<log index>". */
-export const evidenceKey = (chain: EvmChain, log: EvmLog) => `${chain}:${log.transactionHash.toLowerCase()}:${parseInt(log.logIndex, 16)}`;
+export const evidenceKey = (chain: EvmChain, log: EvmLog) =>
+  `${chain}:${log.transactionHash.toLowerCase()}:${parseInt(log.logIndex, 16)}`;
 
 /** The i-th 32-byte word of a log's data. */
 export const word = (log: EvmLog, i: number) => BigInt(`0x${log.data.slice(2 + 64 * i, 2 + 64 * (i + 1))}`);

@@ -9,7 +9,14 @@ describe("the calls a wallet signs", () => {
     expect(policy(DEFAULT_MANDATE)).toEqual(want);
   });
   it("puts the factory's config together as factory.sh does", () => {
-    const c = strategyConfig({ name: "practice", leg: "0xa", vault: "0xb", investor: "0xc", investorAccount: "i.testnet", mandate: DEFAULT_MANDATE });
+    const c = strategyConfig({
+      name: "practice",
+      leg: "0xa",
+      vault: "0xb",
+      investor: "0xc",
+      investorAccount: "i.testnet",
+      mandate: DEFAULT_MANDATE,
+    });
     expect(c.strategy_id).toBe(2146186318);
     expect(c).toMatchObject({ chain_id: 998, spot_chain: "base", spot_chain_id: 84532, probe: "0xb" });
   });
@@ -21,7 +28,15 @@ describe("the calls a wallet signs", () => {
     expect(["a", "Upper", "-lead", "has.dot"].some(validName)).toBe(false);
   });
   it("reads the judge's refusal from a failed outcome", () => {
-    const outcome = { status: { Failure: { ActionError: { kind: { FunctionCallError: { ExecutionError: "Smart contract panicked: mandate:not-the-investor" } } } } } };
+    const outcome = {
+      status: {
+        Failure: {
+          ActionError: {
+            kind: { FunctionCallError: { ExecutionError: "Smart contract panicked: mandate:not-the-investor" } },
+          },
+        },
+      },
+    };
     expect(failure(outcome)).toBe("mandate:not-the-investor");
     expect(failure({ status: { SuccessValue: "" } })).toBeNull();
   });

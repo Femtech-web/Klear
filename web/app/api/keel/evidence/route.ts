@@ -13,7 +13,8 @@ import { evidenceKey, receipt, recentLogs, TOPICS, word, type EvmLog } from "@/l
  */
 
 const ACCOUNT = /^(?=.{2,64}$)[a-z0-9]+([-_][a-z0-9]+)*(\.[a-z0-9]+([-_][a-z0-9]+)*)*$/;
-const json = (body: unknown, status = 200) => NextResponse.json(body, { status, headers: { "cache-control": "no-store" } });
+const json = (body: unknown, status = 200) =>
+  NextResponse.json(body, { status, headers: { "cache-control": "no-store" } });
 
 async function accounts(judge: string): Promise<{ leg: string; vault: string }> {
   const s = await view(judge, "get_strategy");
@@ -64,9 +65,18 @@ export async function GET(request: NextRequest) {
       const log: EvmLog | undefined = final.find((l) => l.transactionHash === tx);
       if (!log) {
         const r = await receipt("base", tx);
-        return json({ tx, waiting: "relayed; Base finalizes a block about 25 minutes after it", block: r?.blockNumber ?? null });
+        return json({
+          tx,
+          waiting: "relayed; Base finalizes a block about 25 minutes after it",
+          block: r?.blockNumber ?? null,
+        });
       }
-      return json({ tx, log, key: evidenceKey("base", log), attested: await attested(judge, evidenceKey("base", log)) });
+      return json({
+        tx,
+        log,
+        key: evidenceKey("base", log),
+        attested: await attested(judge, evidenceKey("base", log)),
+      });
     }
 
     return json({ error: "kind: snapshot, spot or exit" }, 400);

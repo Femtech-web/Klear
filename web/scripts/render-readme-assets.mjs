@@ -4,9 +4,7 @@ import { chromium } from "@playwright/test";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../..", import.meta.url));
-const ASSETS = [
-  { src: "architecture", width: 1400, height: 900 },
-];
+const ASSETS = [{ src: "architecture", width: 1400, height: 900 }];
 
 const browser = await chromium.launch(process.env.CI ? {} : { channel: "chrome" });
 for (const a of ASSETS) {

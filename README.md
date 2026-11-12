@@ -4,8 +4,8 @@
 
 # Keel
 
-**Give an AI your money. Never your keys.**<br />
-The AI can trade it. Nobody can take it. Anyone can bring it home, and is paid only when it arrives.
+### When your AI trader fails, anyone can bring your money home.
+**And they are paid only when it lands.**
 
 [For judges](JUDGES.md) · [The live rescue](docs/results/g7/README.md) · [Rescue it yourself](docs/practice.md) · [The AI replay](docs/results/replay/README.md) · [Try to break it](docs/try-to-break-it.md)
 
@@ -28,7 +28,8 @@ questions that matter when it goes wrong: **who stops it, and who brings the mon
 through your loss limit, or simply goes quiet, your money is stuck wherever it left it, on whichever chain,
 until someone with the keys acts. That someone is the AI, or its operator.
 
-**Keel takes the keys away from the AI and gives them to your rules.**
+**Keel turns that rescue into a job anyone can do, and pays for it only on proof of arrival.** The AI never
+holds a key; your rules do.
 
 1. **Your rules become a NEAR contract with no keys**, the judge: order size, price band, leverage, a loss
    floor, what a silent manager means, and your own payout addresses. Nobody can change it, us included.
@@ -76,6 +77,10 @@ npx near account create-account sponsor-by-faucet-service <you>.testnet autogene
   save-to-legacy-keychain network-config testnet create
 make rescue ACCOUNT=<you>.testnet       # waits for the window, then rescues; prints what the judge paid you
 ```
+
+On 2026-11-12 a stranger did exactly this: a faucet account created that evening, with no EVM gas and no
+role in the strategy, rescued it and was paid by the judge four minutes after opening the rescue
+([its transactions](docs/results/visitor/README.md)).
 
 The site runs the same rescue with a NEAR wallet (`/practice`), lets you inspect any strategy with six live
 checks (`/strategies`), and creates your own, locked from birth, in five steps (`/create`). What you sign

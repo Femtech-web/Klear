@@ -31,7 +31,8 @@ function provider(): Eip1193 {
   return eth;
 }
 
-export const hasEvmWallet = () => typeof window !== "undefined" && Boolean((window as unknown as { ethereum?: unknown }).ethereum);
+export const hasEvmWallet = () =>
+  typeof window !== "undefined" && Boolean((window as unknown as { ethereum?: unknown }).ethereum);
 
 export async function evmAccount(): Promise<string> {
   const accounts = (await provider().request({ method: "eth_requestAccounts" })) as string[];
@@ -56,7 +57,9 @@ export async function sendEvm(chain: EvmChainName, to: string, data: string): Pr
   const from = await evmAccount();
   const hash = (await provider().request({ method: "eth_sendTransaction", params: [{ from, to, data }] })) as string;
   for (let i = 0; i < 90; i++) {
-    const r = (await provider().request({ method: "eth_getTransactionReceipt", params: [hash] })) as { status?: string } | null;
+    const r = (await provider().request({ method: "eth_getTransactionReceipt", params: [hash] })) as {
+      status?: string;
+    } | null;
     if (r?.status === "0x1") return hash;
     if (r?.status === "0x0") throw new Error(`reverted: ${hash}`);
     await new Promise((res) => setTimeout(res, 2000));

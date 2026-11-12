@@ -82,14 +82,14 @@ export default async function Home() {
               {t.agents} real AI traders, replayed through Keel
             </p>
             <h1 className="text-display tracking-[-0.03em] [font-variation-settings:'opsz'_120,'SOFT'_50]">
-              Let AI manage your money. <em className="text-accent">Never</em> hand it the keys.
+              When your AI trader fails, <em className="text-accent">anyone</em> can bring your money home.
             </h1>
-            <p className="mt-6 max-w-[34ch] text-[1.22rem] text-ink-2">
-              Keel gives an AI trader real authority under rules it cannot break. If it fails, anyone can bring your
-              money home, and they are paid only once it arrives.
+            <p className="mt-6 max-w-[36ch] text-[1.22rem] text-ink-2">
+              And they are paid only when it lands. The AI trades within rules it cannot change, held by a NEAR contract
+              with no keys; when it breaks them or goes quiet, the way home opens to everyone.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/rules">Set your rules</LinkButton>
+              <LinkButton href="/practice">Rescue one yourself</LinkButton>
               <LinkButton href="/proof/rescue" variant="secondary">
                 Watch a live rescue
               </LinkButton>

@@ -5,7 +5,8 @@ import { isRecord } from "@/lib/chain/rpc";
 /** A strategy's rescue state for the browser's guardian and investor flows (read-only; polled). */
 
 const ACCOUNT = /^(?=.{2,64}$)[a-z0-9]+([-_][a-z0-9]+)*(\.[a-z0-9]+([-_][a-z0-9]+)*)*$/;
-const json = (body: unknown, status = 200) => NextResponse.json(body, { status, headers: { "cache-control": "no-store" } });
+const json = (body: unknown, status = 200) =>
+  NextResponse.json(body, { status, headers: { "cache-control": "no-store" } });
 
 export async function GET(request: NextRequest) {
   const judge = request.nextUrl.searchParams.get("judge") ?? "";
@@ -18,7 +19,13 @@ export async function GET(request: NextRequest) {
     const attempt = job && isRecord(job.attempt) && isRecord(job.attempt.order) ? job.attempt.order : null;
     return json({
       status,
-      job: job && { id: job.id, kind: job.kind, agent: job.agent, expiresAt: job.expires_at, orderNonce: attempt?.nonce ?? null },
+      job: job && {
+        id: job.id,
+        kind: job.kind,
+        agent: job.agent,
+        expiresAt: job.expires_at,
+        orderNonce: attempt?.nonce ?? null,
+      },
       rescue: {
         trigger: r.trigger ?? null,
         agent: r.agent ?? null,

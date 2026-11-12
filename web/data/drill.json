@@ -1,6 +1,51 @@
 [
  {
   "cycle": 1,
+  "started": 1794520099,
+  "ended": 1794521321,
+  "ok": false,
+  "error": "json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "rescuer": null,
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": null,
+   "short": null
+  }
+ },
+ {
+  "cycle": 1,
+  "started": 1794519907,
+  "ended": 1794519919,
+  "ok": false,
+  "error": "scripts/testnet/practice.sh fund: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "rescuer": null,
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": null,
+   "short": null
+  }
+ },
+ {
+  "cycle": 1,
+  "started": 1794519485,
+  "ended": 1794519497,
+  "ok": false,
+  "error": "scripts/testnet/practice.sh fund: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "rescuer": null,
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": null,
+   "short": null
+  }
+ },
+ {
+  "cycle": 1,
   "started": 1794519370,
   "ended": 1794519439,
   "ok": false,
