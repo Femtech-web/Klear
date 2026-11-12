@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Keel cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=block" rel="stylesheet" />
+<style>
+  :root {
+    --canvas: #f6f4ee; --surface: #ffffff; --surface-2: #efece4; --ink: #0d1b2e; --ink-2: #3a4a5f; --ink-3: #5c6a7d;
+    --line: rgb(13 27 46 / 0.10); --line-strong: rgb(13 27 46 / 0.18); --accent: #0b6e66; --accent-soft: #e2efec; --glow: rgb(11 110 102 / 0.13);
+    --on-accent: #ffffff;
+  }
+  :root[data-theme="dark"] {
+    --canvas: #08111d; --surface: #0e1a2b; --surface-2: #122136; --ink: #e9eef5; --ink-2: #b3bfcf; --ink-3: #8a98ad;
+    --line: rgb(233 238 245 / 0.09); --line-strong: rgb(233 238 245 / 0.17); --accent: #5fd6c4; --accent-soft: rgb(95 214 196 / 0.12); --glow: rgb(95 214 196 / 0.12);
+    --on-accent: #052521;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1280px; height: 560px; background: var(--canvas); }
+  body { font-family: Geist, system-ui, sans-serif; color: var(--ink); overflow: hidden; position: relative; }
+  .glow { position: absolute; right: -180px; top: -260px; width: 760px; height: 760px; border-radius: 50%;
+    background: radial-gradient(closest-side, var(--glow), transparent); }
+  .grid { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 40px 40px; mask-image: radial-gradient(ellipse at 75% 45%, black 0%, transparent 62%); opacity: .55; }
+  .wrap { position: relative; display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 40px; align-items: center; height: 100%; padding: 0 72px; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand svg { width: 58px; height: 58px; color: var(--accent); }
+  .brand span { font-family: Fraunces, serif; font-size: 58px; font-weight: 600; letter-spacing: -0.02em; }
+  h1 { margin-top: 30px; font-family: Fraunces, serif; font-weight: 500; font-size: 50px; line-height: 1.08; letter-spacing: -0.016em;
+    font-variation-settings: "opsz" 120, "SOFT" 50; }
+  h1 em { color: var(--accent); }
+  p.sub { margin-top: 20px; max-width: 30ch; font-size: 21px; line-height: 1.45; color: var(--ink-2); }
+  .chips { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 13.5px; font-weight: 500; color: var(--ink-2); border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 12px; background: var(--surface); }
+  .chip b { color: var(--accent); font-weight: 600; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 22px; box-shadow: 0 30px 60px -30px rgb(0 0 0 / .28); }
+  svg.diagram { display: block; width: 100%; height: auto; }
+  .box { fill: var(--surface-2); stroke: var(--line-strong); }
+  .t { fill: var(--ink); font: 600 15px Geist, sans-serif; text-anchor: middle; }
+  .s { fill: var(--ink-3); font: 400 12px Geist, sans-serif; text-anchor: middle; }
+  .flow { fill: none; stroke: var(--ink-3); stroke-dasharray: 5 6; stroke-width: 1.6; }
+  .home { fill: none; stroke: var(--accent); stroke-dasharray: 5 6; stroke-width: 2.2; }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="grid"></div>
+<div class="wrap">
+  <div>
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16.6 3.5v12h9.2z" fill="currentColor" opacity="0.45" />
+        <path d="M15.4 6.5v9H8.6z" fill="currentColor" opacity="0.7" />
+        <path d="M3.5 17.5h25l-3.6 4.6H7.1z" fill="currentColor" />
+        <path d="M14.3 22.1h3.4l-0.9 7.4h-1.6z" fill="currentColor" />
+      </svg>
+      <span>Keel</span>
+    </div>
+    <h1>Let AI manage your money.<br /><em>Never</em> hand it the keys.</h1>
+    <p class="sub">Rules an AI cannot break, held by a NEAR contract with no keys. If the AI fails, anyone can bring the money home, and is paid only once it arrives.</p>
+    <div class="chips">
+      <span class="chip"><b>NEAR</b> Chain Signatures</span>
+      <span class="chip"><b>NEAR</b> Read MPC</span>
+      <span class="chip">Hyperliquid</span>
+      <span class="chip">Base</span>
+    </div>
+  </div>
+  <div class="card">
+    <svg class="diagram" viewBox="0 0 440 400" role="img" aria-label="The AI proposes; the rules sign only what fits; the accounts only pay you.">
+      <defs>
+        <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)" /></marker>
+        <marker id="h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent)" /></marker>
+      </defs>
+      <rect x="20" y="24" width="150" height="62" rx="16" class="box" /><text x="95" y="51" class="t">AI manager</text><text x="95" y="70" class="s">can only propose</text>
+      <rect x="270" y="24" width="150" height="62" rx="16" class="box" /><text x="345" y="51" class="t">Guardians</text><text x="345" y="70" class="s">anyone, when allowed</text>
+      <path d="M95 86 C95 120 170 128 205 150" marker-end="url(#a)" class="flow" />
+      <path d="M345 86 C345 120 270 128 235 150" marker-end="url(#a)" class="flow" />
+      <rect x="110" y="152" width="220" height="78" rx="20" fill="var(--ink)" />
+      <text x="220" y="186" style="fill:var(--canvas);font:600 19px Fraunces,serif;text-anchor:middle">Your rules</text>
+      <text x="220" y="207" style="fill:var(--canvas);opacity:.72;font:400 12px Geist,sans-serif;text-anchor:middle">a NEAR contract with no keys</text>
+      <path d="M170 230 C150 255 120 262 105 278" marker-end="url(#a)" class="flow" />
+      <path d="M270 230 C290 255 320 262 335 278" marker-end="url(#a)" class="flow" />
+      <text x="96" y="252" style="fill:var(--ink-3);font:400 11px Geist,sans-serif;text-anchor:end">signs only</text>
+      <text x="344" y="252" style="fill:var(--ink-3);font:400 11px Geist,sans-serif">what fits</text>
+      <rect x="20" y="280" width="170" height="54" rx="14" class="box" /><text x="105" y="303" class="t">Hyperliquid</text><text x="105" y="321" class="s">your trading account</text>
+      <rect x="250" y="280" width="170" height="54" rx="14" class="box" /><text x="335" y="303" class="t">Base</text><text x="335" y="321" class="s">your asset vault</text>
+      <path d="M105 334 C105 360 170 372 198 378" marker-end="url(#h)" class="home" />
+      <path d="M335 334 C335 360 270 372 242 378" marker-end="url(#h)" class="home" />
+      <circle cx="220" cy="380" r="17" fill="var(--accent)" />
+      <text x="220" y="384" style="fill:var(--on-accent);font:600 11px Geist,sans-serif;text-anchor:middle">You</text>
+    </svg>
+  </div>
+</div>
+</body>
+</html>

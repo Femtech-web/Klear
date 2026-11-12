@@ -12,6 +12,7 @@
 #   scripts/testnet/practice.sh create [pool] the judge through the factory (pool default 1 NEAR), then the
 #                                             KeelLeg and KeelVault at their predicted addresses
 #   scripts/testnet/practice.sh fund <usdc> <weth-wei>   top both legs up from the relayer
+#   scripts/testnet/practice.sh manager-key   renew the manager's key allowance (the same key)
 set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT_DIR"
@@ -22,7 +23,7 @@ STATE=$OUT/env
 [ -f "$STATE" ] && set -a && . "$STATE" && set +a
 . docs/results/factory/env
 
-NEAR_RPC=https://rpc.testnet.near.org
+NEAR_RPC=https://test.rpc.fastnear.com
 NEAR="$ROOT_DIR/node_modules/.bin/near"
 RELAYER_EVM=0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c
 JUDGE=practice.$FACTORY
@@ -32,8 +33,16 @@ pub() { python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["publi
 put() { touch "$STATE"; grep -q "^$1=" "$STATE" && sed -i '' "s|^$1=.*|$1=$2|" "$STATE" || echo "$1=$2" >> "$STATE"; export "$1=$2"; }
 plain() { sed 's/\x1b\[[0-9;]*m//g' "$1"; }
 balance() {
-  curl -s "$NEAR_RPC" -H 'content-type: application/json' -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"finality\":\"final\",\"account_id\":\"$1\"}}" |
+  curl -s --retry 5 --retry-all-errors --retry-delay 3 "$NEAR_RPC" -H 'content-type: application/json' -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"finality\":\"final\",\"account_id\":\"$1\"}}" |
     python3 -I -c 'import json,sys;r=json.load(sys.stdin).get("result");print(r["amount"] if r else "")'
+}
+
+# The manager's own key: propose_order and heartbeat on the practice judge only, with a 0.25 NEAR gas allowance.
+grant_manager_key() {
+  "$NEAR" account add-key "manager.$PRACTICE" grant-function-call-access --allowance '0.25 NEAR' --contract-account-id "$JUDGE" \
+    --function-names 'propose_order, heartbeat' use-manually-provided-public-key "$(pub "manager-fc.$PRACTICE")" \
+    network-config testnet sign-with-access-key-file "$(key "manager.$PRACTICE")" send > "$OUT/manager-key.txt" 2>&1
+  plain "$OUT/manager-key.txt" | grep -E "Transaction ID|Error" | head -2
 }
 
 case "${1:-}" in
@@ -54,10 +63,7 @@ case "${1:-}" in
     done
     if [ ! -f "$(key "manager-fc.$PRACTICE")" ]; then
       node scripts/keys/gen_near_key.mjs "manager.$PRACTICE" "$(key "manager-fc.$PRACTICE")" >/dev/null
-      "$NEAR" account add-key "manager.$PRACTICE" grant-function-call-access --allowance '0.25 NEAR' --contract-account-id "$JUDGE" \
-        --function-names 'propose_order, heartbeat' use-manually-provided-public-key "$(pub "manager-fc.$PRACTICE")" \
-        network-config testnet sign-with-access-key-file "$(key "manager.$PRACTICE")" send > "$OUT/manager-key.txt" 2>&1
-      plain "$OUT/manager-key.txt" | grep -E "Transaction ID|Error" | head -2
+      grant_manager_key
     fi
     put G7_JUDGE "$JUDGE"; put G7_INVESTOR "$RELAYER_EVM"; put G7_INVESTOR_ACCOUNT "investor.$PRACTICE"
     put G7_MANAGER "manager.$PRACTICE"; put G7_MANAGER_KEY "manager-fc.$PRACTICE"; put G7_GUARDIAN "guardian.$PRACTICE"
@@ -70,6 +76,12 @@ case "${1:-}" in
     eval "$(cat docs/results/factory/practice/addresses.txt)"
     put G7_LEG "$leg"; put G7_VAULT "$vault"; put G7_CONTROLLER "$controller"; put G7_VAULT_CONTROLLER "$vault_controller"
     ;;
+  manager-key)
+    # A spent allowance: replace the manager's key with the same one and a fresh allowance.
+    "$NEAR" account delete-keys "manager.$PRACTICE" public-keys "$(pub "manager-fc.$PRACTICE")" network-config testnet \
+      sign-with-access-key-file "$(key "manager.$PRACTICE")" send > "$OUT/manager-key-delete.txt" 2>&1
+    grant_manager_key
+    ;;
   fund)
     # Top both legs up to <usdc> and <weth-wei> from the relayer, reusing what the last rescue paid back.
     usdc=${2:?usdc}; wei=${3:?weth wei}
@@ -77,11 +89,15 @@ case "${1:-}" in
     have=$($py -I scripts/testnet/relayer.py balances "$G7_LEG" | python3 -I -c 'import json,sys;print(json.load(sys.stdin)["perp_account_value"])')
     need=$(python3 -I -c "print(max(0, round(float('$usdc') - float('$have'), 2)))")
     if [ "$need" != 0 ]; then
-      # A first transfer to a new HyperCore account also costs the sender 1 USDC.
+      # The first transfer to a new HyperCore account pays its 1 USDC activation out of the amount sent.
+      role=$(curl -s --retry 5 --retry-all-errors --retry-delay 3 https://api.hyperliquid-testnet.xyz/info -H 'content-type: application/json' -d "{\"type\":\"userRole\",\"user\":\"$G7_LEG\"}" |
+        python3 -I -c 'import json,sys;print(json.load(sys.stdin)["role"])')
+      [ "$role" = missing ] && need=$(python3 -I -c "print(round(float('$need') + 1, 2))")
       rel=$($py -I scripts/testnet/relayer.py balances | python3 -I -c 'import json,sys;print(json.load(sys.stdin)["perp_withdrawable"])')
-      move=$(python3 -I -c "print(max(0, round(float('$need') + 1 - float('$rel'), 2)))")
-      [ "$move" = 0 ] || $py -I scripts/testnet/relayer.py to-perp "$move" >/dev/null
-      $py -I scripts/testnet/relayer.py send-perp-usdc "$G7_LEG" "$need" | python3 -I -c 'import json,sys;r=json.load(sys.stdin);sys.exit(0 if r.get("status")=="ok" else "usd send: "+json.dumps(r))'
+      move=$(python3 -I -c "print(max(0, round(float('$need') - float('$rel'), 2)))")
+      ok='import json,sys;r=json.load(sys.stdin);sys.exit(0 if r.get("status")=="ok" else sys.argv[1]+": "+json.dumps(r))'
+      [ "$move" = 0 ] || $py -I scripts/testnet/relayer.py to-perp "$move" | python3 -I -c "$ok" "relayer spot to perp"
+      $py -I scripts/testnet/relayer.py send-perp-usdc "$G7_LEG" "$need" | python3 -I -c "$ok" "usd send"
     fi
     weth() { cast call 0x4200000000000000000000000000000000000006 'balanceOf(address)(uint256)' "$1" --rpc-url https://sepolia.base.org | cut -d' ' -f1; }
     short=$(python3 -I -c "print(max(0, $wei - $(weth "$G7_VAULT")))")
@@ -94,5 +110,5 @@ case "${1:-}" in
     fi
     echo "leg: $($py -I scripts/testnet/relayer.py balances "$G7_LEG" | python3 -I -c 'import json,sys;print(json.load(sys.stdin)["perp_account_value"])') USDC | vault: $(weth "$G7_VAULT") WETH wei"
     ;;
-  *) sed -n '2,15p' "$0"; exit 2 ;;
+  *) sed -n '2,16p' "$0"; exit 2 ;;
 esac

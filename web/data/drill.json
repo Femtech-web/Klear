@@ -1,0 +1,71 @@
+[
+ {
+  "cycle": 1,
+  "started": 1794519370,
+  "ended": 1794519439,
+  "ok": false,
+  "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+  "rescuer": null,
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": "J2G5bmpjcqqqCLQWauV9A5tbLN9Ki5NmrucTcKt1Bm8L",
+   "short": null
+  }
+ },
+ {
+  "cycle": 0,
+  "started": 1794517203,
+  "ended": 1794519124,
+  "ok": true,
+  "error": null,
+  "rescuer": "guardian.keel-practice-53ee75.testnet",
+  "trigger": "manager-silent",
+  "payouts": [
+   {
+    "agent": "guardian.keel-practice-53ee75.testnet",
+    "yocto": "100000000000000000000000",
+    "reason": "perp"
+   },
+   {
+    "agent": "guardian.keel-practice-53ee75.testnet",
+    "yocto": "50000000000000000000000",
+    "reason": "spot"
+   }
+  ],
+  "deliveries": [
+   {
+    "leg": "perp",
+    "amount": "490000000",
+    "chain": "hyperevm",
+    "tx": "0xa340921cd0ca34f76d81d84a01631c4b27e0b78f211264b18c2d042179974249"
+   },
+   {
+    "leg": "spot",
+    "amount": "4000000000000000",
+    "chain": "base",
+    "tx": "0xa0b0c6eadb42d9843629d5e6506ec7096d8d7d5a77f6c63be9cfa0cb0ac1a74c"
+   }
+  ],
+  "txs": {
+   "rearm": null,
+   "short": null
+  }
+ },
+ {
+  "cycle": 0,
+  "started": 1794515649,
+  "ended": 1794517109,
+  "ok": false,
+  "error": "json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0); final state unreadable: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+  "rescuer": null,
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": null,
+   "short": "EvXaucdMmiDCbufm9Cd7SCyDrxybyj7mgBF7Xpk2oQrQ"
+  }
+ }
+]

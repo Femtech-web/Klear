@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+- **Judge v3.1** (wasm sha256 `2aeaaf8b…`): a deleverage job (an early cut back to the investor's target leverage,
+  before the floor), the investor's `rearm` after a rescue, `fund_pool`, a one-call `status` view, and delivery
+  timestamps per cycle. The two v3 judges of the live run stay as they are: they are locked.
+- **Factory** (`contracts/near-keel-factory`, `2bd8332e…`), deployed and locked at `keel-factory-bcf915.testnet`:
+  anyone creates a strategy's judge in one transaction, locked from birth, and the public registry lists it.
+  **KeelDeployer** puts a strategy's KeelLeg and KeelVault at CREATE2 addresses that commit to their controller,
+  payout and limits.
+- **The practice strategy and the daily drill**: a real strategy created through the factory fails on purpose
+  every day (`agents/drill.py`, `scripts/drill/launchd.sh`); anyone can rescue it with only a NEAR account
+  (`agents/rescue.py`, `make rescue`), while the courier pays the EVM gas (`agents/courier.py`).
+- **Site**: the product (strategies, a live inspection of any strategy, the practice rescue) and the proof
+  (`/proof/*`) as separate sections; a judges' guide with live checks (`/judges`, `JUDGES.md`); every chain read
+  uncached, deduplicated per request and retried on rate limits.
+- NEAR reads moved to FastNEAR: `rpc.testnet.near.org` is deprecated and answers 429.
+
 ## v0.1.0
 
 The first release: the judge, the two strategy accounts, the agents, the replay and the site, as run live on

@@ -12,7 +12,8 @@ function spread<T extends { y: number }>(labels: T[], gap = 15): T[] {
   return sorted;
 }
 
-const day = (ms: number) => new Date(ms).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+const day = (ms: number) =>
+  new Date(ms).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 const label = "font-sans text-[11px] tabular-nums";
 
 /**
@@ -47,7 +48,13 @@ export function EquityChart({ agent, floor, legend = true }: { agent: Agent; flo
         </defs>
         {[0, 0.25, 0.5, 0.75, 1].map((k) => (
           <g key={k}>
-            <line x1={PAD.left} x2={W - PAD.right} y1={y(k * agent.initial)} y2={y(k * agent.initial)} className="stroke-chart-grid" />
+            <line
+              x1={PAD.left}
+              x2={W - PAD.right}
+              y1={y(k * agent.initial)}
+              y2={y(k * agent.initial)}
+              className="stroke-chart-grid"
+            />
             <text x={PAD.left - 8} y={y(k * agent.initial) + 4} textAnchor="end" className={`${label} fill-ink-3`}>
               {usd(k * agent.initial)}
             </text>
@@ -67,10 +74,20 @@ export function EquityChart({ agent, floor, legend = true }: { agent: Agent; flo
           className="animate-draw fill-none stroke-chart-real [stroke-dasharray:1] [stroke-dashoffset:1] [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]"
         />
 
-        <line x1={PAD.left} x2={W - PAD.right} y1={y(floorUsd)} y2={y(floorUsd)} className="stroke-warn [stroke-dasharray:5_5] [stroke-width:1.4]" />
+        <line
+          x1={PAD.left}
+          x2={W - PAD.right}
+          y1={y(floorUsd)}
+          y2={y(floorUsd)}
+          className="stroke-warn [stroke-dasharray:5_5] [stroke-width:1.4]"
+        />
         {spread([
           { y: y(floorUsd) + 4, text: `floor ${usd(floorUsd)}`, cls: "fill-warn" },
-          { y: Math.min(y(agent.final), H - PAD.bottom - 2) + 4, text: `real ${usd(agent.final)}`, cls: "fill-chart-real" },
+          {
+            y: Math.min(y(agent.final), H - PAD.bottom - 2) + 4,
+            text: `real ${usd(agent.final)}`,
+            cls: "fill-chart-real",
+          },
           ...(r ? [{ y: y(r.returned) + 4, text: `Keel ${usd(r.returned)}`, cls: "fill-chart-keel" }] : []),
         ]).map((l) => (
           <text key={l.text} x={W - PAD.right + 8} y={l.y} className={`${label} ${l.cls} font-semibold`}>
@@ -80,8 +97,19 @@ export function EquityChart({ agent, floor, legend = true }: { agent: Agent; flo
 
         {r && (
           <g className="animate-fade-in opacity-0 [animation-delay:1.5s]">
-            <line x1={x(r.time)} x2={W - PAD.right} y1={y(r.returned)} y2={y(r.returned)} className="stroke-chart-keel [stroke-linecap:round] [stroke-width:2.5]" />
-            <circle cx={x(r.time)} cy={y(r.value)} r={6} className="fill-surface stroke-chart-keel [stroke-width:2.5]" />
+            <line
+              x1={x(r.time)}
+              x2={W - PAD.right}
+              y1={y(r.returned)}
+              y2={y(r.returned)}
+              className="stroke-chart-keel [stroke-linecap:round] [stroke-width:2.5]"
+            />
+            <circle
+              cx={x(r.time)}
+              cy={y(r.value)}
+              r={6}
+              className="fill-surface stroke-chart-keel [stroke-width:2.5]"
+            />
           </g>
         )}
       </svg>

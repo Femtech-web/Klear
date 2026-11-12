@@ -11,7 +11,12 @@ export async function erc20Balance(token: string, owner: string, rpc: string = c
 
 /** A no-argument view returning an address (KeelLeg/KeelVault `payout()`, `controller()`). */
 export async function addressCall(contract: string, selector: string, rpc: string): Promise<string> {
-  const r = await postJson(rpc, { jsonrpc: "2.0", id: 1, method: "eth_call", params: [{ to: contract, data: selector }, "latest"] });
+  const r = await postJson(rpc, {
+    jsonrpc: "2.0",
+    id: 1,
+    method: "eth_call",
+    params: [{ to: contract, data: selector }, "latest"],
+  });
   if (!isRecord(r) || typeof r.result !== "string" || r.result.length < 66) throw new Error("eth_call: no address");
   return "0x" + r.result.slice(-40);
 }

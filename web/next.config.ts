@@ -18,7 +18,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   // A nonce-based CSP needs every page rendered per request, which rules out the static shell Cache
-  // Components prerenders. Chain reads stay cached in the Data Cache (lib/chain/*).
+  // Components prerenders. Chain reads are never cached (lib/chain/rpc.ts).
   cacheComponents: false,
   poweredByHeader: false,
   reactStrictMode: true,
@@ -26,6 +26,15 @@ const nextConfig: NextConfig = {
   turbopack: { root: process.cwd() },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
+  },
+  // The evidence moved under /proof; old links keep working.
+  async redirects() {
+    return [
+      { source: "/replay/:path*", destination: "/proof/replay/:path*", permanent: true },
+      { source: "/moment", destination: "/proof/rescue", permanent: true },
+      { source: "/live", destination: "/proof/contracts", permanent: true },
+      { source: "/break", destination: "/proof/attacks", permanent: true },
+    ];
   },
 };
 

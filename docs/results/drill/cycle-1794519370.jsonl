@@ -1,0 +1,4 @@
+{"at": 1794519376, "role": "drill", "kind": "rearm", "tx": "J2G5bmpjcqqqCLQWauV9A5tbLN9Ki5NmrucTcKt1Bm8L", "refused": null, "outcome": null}
+{"at": 1794519383, "role": "drill", "kind": "heartbeat", "tx": "J5iDAhzTaFJtEQP76NLD4PvnTQt3GSX9JWaTYiFtL5rC", "refused": null, "outcome": null}
+{"at": 1794519414, "role": "drill", "kind": "fund", "out": "leg: 4.9 USDC | vault: 4000000000000000 WETH wei"}
+{"at": 1794519437, "role": "drill", "kind": "failed", "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"}

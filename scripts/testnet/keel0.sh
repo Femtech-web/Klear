@@ -21,7 +21,7 @@ if [ -f .env ]; then
 fi
 
 MPC=v1.signer-prod.testnet
-NEAR_RPC=https://rpc.testnet.near.org
+NEAR_RPC=https://test.rpc.fastnear.com
 RPC=https://rpc.hyperliquid-testnet.xyz/evm
 API=https://api.hyperliquid-testnet.xyz/info
 CHAIN_ID=998

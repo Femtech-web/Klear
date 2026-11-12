@@ -7,10 +7,12 @@
 #   make factory    the NEAR factory (contracts/near-keel-factory), which embeds the judge just built
 #   make replay     Alpha Arena's AI agents' real history through Keel's rules (cached; `replay-fetch` refreshes)
 #   make web        sync the site's data from docs/results, then build it; `web-test` runs its unit and browser tests
+#   make drill      one cycle of the daily drill on the practice strategy (testnet; ~1 h); `drill-install` schedules it
+#   make rescue ACCOUNT=you.testnet   rescue the practice strategy yourself when it is due (docs/practice.md)
 # The real-network steps are in docs/testnet-runbook.md and scripts/testnet/g7.sh.
 
 SHELL := /bin/bash
-.PHONY: test rust evm e2e build judge judge-test factory factory-test live-read keys status replay replay-fetch web web-test release
+.PHONY: test rust evm e2e build judge judge-test factory factory-test live-read keys status replay replay-fetch web web-test release drill drill-install rescue
 
 test: rust evm e2e judge-test factory-test
 
@@ -57,6 +59,17 @@ replay-fetch:
 
 replay:
 	cargo run -q -p keel-replay --release
+
+drill:
+	.tools/venv/bin/python -u agents/drill.py --grace $${GRACE:-0}
+
+drill-install:
+	scripts/drill/launchd.sh install
+
+rescue:
+	test -x node_modules/.bin/near || npm ci
+	test -x .tools/rescue/bin/python || (python3 -m venv .tools/rescue && .tools/rescue/bin/pip install -q certifi==2026.10.23)
+	.tools/rescue/bin/python agents/rescue.py --account $(ACCOUNT) --wait
 
 web:
 	cd web && npm ci && npm run sync-data && npm run build

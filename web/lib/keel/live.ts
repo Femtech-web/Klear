@@ -10,7 +10,7 @@ const HYPEREVM_RPC = "https://rpc.hyperliquid-testnet.xyz/evm";
 /** A live read that may fail: the site shows "unavailable" rather than a stale or invented value. */
 export type Read<T> = { ok: true; value: T } | { ok: false; error: string };
 
-async function read<T>(f: () => Promise<T>): Promise<Read<T>> {
+export async function read<T>(f: () => Promise<T>): Promise<Read<T>> {
   try {
     return { ok: true, value: await f() };
   } catch (e) {
@@ -38,11 +38,23 @@ export async function judgeStatus(name: "ai" | "human"): Promise<JudgeStatus> {
     read(() => addressCall(d.leg, SELECTORS.payout, HYPEREVM_RPC)),
     read(() => addressCall(d.vault, SELECTORS.payout, config.baseRpc)),
   ]);
-  return { name, judge: d.judge, keys, code, codeMatchesBuild: code.ok && code.value === deployment.localBuildSha256, strategy, legPayout, vaultPayout };
+  return {
+    name,
+    judge: d.judge,
+    keys,
+    code,
+    codeMatchesBuild: code.ok && code.value === deployment.localBuildSha256,
+    strategy,
+    legPayout,
+    vaultPayout,
+  };
 }
 
 /** What the investor's own addresses hold now: WETH on Base and USDC on HyperCore (testnet). */
 export async function investorBalances() {
-  const [weth, usdc] = await Promise.all([read(() => erc20Balance(deployment.weth, deployment.investor)), read(() => spotUsdc(deployment.investor))]);
+  const [weth, usdc] = await Promise.all([
+    read(() => erc20Balance(deployment.weth, deployment.investor)),
+    read(() => spotUsdc(deployment.investor)),
+  ]);
   return { weth, usdc };
 }

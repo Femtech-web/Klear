@@ -26,7 +26,8 @@ describe("replay totals", () => {
   });
 
   it("names every model the replay contains", () => {
-    for (const a of replay.agents) expect(modelName(a.model)).not.toBe(a.model.toUpperCase() === a.model && a.model !== "GPT-5.1" ? a.model : "");
+    for (const a of replay.agents)
+      expect(modelName(a.model)).not.toBe(a.model.toUpperCase() === a.model && a.model !== "GPT-5.1" ? a.model : "");
   });
 
   it("names read naturally", () => {

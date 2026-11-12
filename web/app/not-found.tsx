@@ -7,7 +7,11 @@ export default function NotFound() {
     <>
       <Header />
       <main id="main">
-        <Section eyebrow="Not found" title="Nothing at this address." lede="Unlike your money under Keel, this page can go missing.">
+        <Section
+          eyebrow="Not found"
+          title="Nothing at this address."
+          lede="Unlike your money under Keel, this page can go missing."
+        >
           <LinkButton href="/">Back home</LinkButton>
         </Section>
       </main>

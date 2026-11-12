@@ -10,13 +10,15 @@ import json
 import os
 import re
 import subprocess
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
+from . import evm
 from .net import post_json
 
 ROOT = Path(__file__).resolve().parents[2]
-NEAR_RPC = "https://rpc.testnet.near.org"
+NEAR_RPC = "https://test.rpc.fastnear.com"
 
 
 @dataclass
@@ -65,11 +67,28 @@ class Chain:
     def perp(self, tag: str, signer: str) -> str:
         return self.run("perp", tag, signer).strip().splitlines()[-1]
 
+    def snapshot(self, tag: str) -> str:
+        """A finalized KeelLeg snapshot, not attested (anyone may attest it); returns the log file."""
+        return self.run("snapshot", tag).strip().splitlines()[-1]
+
+    def attest(self, chain: str, log_file: str, signer: str) -> str:
+        return self.run("attest", chain, log_file, signer).strip().splitlines()[-1]
+
     def spot(self, tag: str, signer: str) -> str:
         return self.run("spot", tag, signer).strip().splitlines()[-1]
 
     def latest_spot(self) -> str:
         return (self.out / "latest-spot").read_text().strip()
+
+    def attested_spot(self, within_s: int) -> tuple[str, int] | None:
+        """The newest vault balance anyone attested whose probe is under `within_s` old: (key, probe time)."""
+        now = time.time()
+        for log in reversed(evm.logs(evm.BASE, self.state["G7_VAULT"], evm.BALANCE, within_s)):
+            at = int(log["data"][2 + 64 * 2: 2 + 64 * 3], 16)  # Balance(..., balance, evmBlock, timestamp, tag)
+            key = f"base:{log['transactionHash'].lower()}:{int(log['logIndex'], 16)}"
+            if now - at < within_s and self.view("get_attested", {"key": key}) is not None:
+                return key, at
+        return None
 
     def receipt(self, exit_tx: str, signer: str) -> str:
         return self.run("receipt", exit_tx, signer).strip().splitlines()[-1]

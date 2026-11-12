@@ -1,0 +1,67 @@
+name: drill
+
+# The daily drill on GitHub's runners, so it does not depend on anyone's machine being on: the practice
+# strategy fails on purpose and is rescued on testnet (docs/practice.md). The rescue stays open to anyone
+# for GRACE seconds first; the courier pays their EVM gas. The cycle's record is committed back to main,
+# which redeploys the site's /proof/drill.
+#
+# Needs one secret, KEEL_DRILL_SECRETS: base64 of a tar.gz of the practice accounts' NEAR key files and the
+# relayer's EVM keystore (testnet only; docs/practice.md#running-the-drill says how to make it).
+# Turn it off with the repository variable DRILL_ENABLED=false.
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+    inputs:
+      grace:
+        description: seconds the rescue stays open to anyone before the drill's own guardian acts
+        default: "10800"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: drill
+  cancel-in-progress: false
+
+jobs:
+  drill:
+    if: vars.DRILL_ENABLED != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: foundry-rs/foundry-toolchain@dba66c27052e63476d886f22216e119ba7e615bf # v1.9.2
+      - name: tools (near-cli-rs, the agents' Python)
+        run: |
+          npm ci
+          python3 -m venv .tools/venv
+          .tools/venv/bin/pip install -q -r agents/requirements.txt
+      - name: the practice accounts' keys (never printed)
+        env:
+          KEEL_DRILL_SECRETS: ${{ secrets.KEEL_DRILL_SECRETS }}
+        run: |
+          test -n "$KEEL_DRILL_SECRETS" || { echo "KEEL_DRILL_SECRETS is not set" >&2; exit 1; }
+          umask 077
+          echo "$KEEL_DRILL_SECRETS" | base64 -d | tar xzf -
+          ls .secrets/near .secrets/evm | sed 's/^/  /'
+      - name: one cycle
+        run: .tools/venv/bin/python -u agents/drill.py --grace "${{ inputs.grace || '10800' }}"
+      - name: publish the record
+        if: always()
+        run: |
+          node web/scripts/sync-data.mjs
+          git config user.name "keel-drill"
+          git config user.email "keel-drill@users.noreply.github.com"
+          git add docs/results/drill web/data/drill.json
+          git diff --cached --quiet && exit 0
+          git commit -m "drill: cycle record $(date -u +%Y-%m-%d)"
+          git pull --rebase --autostash
+          git push
+      - name: remove the keys
+        if: always()
+        run: rm -rf .secrets

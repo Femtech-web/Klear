@@ -8,7 +8,21 @@ import { useCountUp } from "./useCountUp";
 
 type Slim = Pick<Agent, "model" | "competition" | "address" | "initial" | "final" | "leverage" | "floors">;
 
-function Segmented<T extends number>({ label, hint, options, value, onChange, format }: { label: string; hint: string; options: T[]; value: number; onChange: (i: number) => void; format: (o: T) => string }) {
+function Segmented<T extends number>({
+  label,
+  hint,
+  options,
+  value,
+  onChange,
+  format,
+}: {
+  label: string;
+  hint: string;
+  options: T[];
+  value: number;
+  onChange: (i: number) => void;
+  format: (o: T) => string;
+}) {
   return (
     <fieldset className="m-0 border-0 p-0">
       <legend className="mb-1 font-semibold">{label}</legend>
@@ -31,7 +45,19 @@ function Segmented<T extends number>({ label, hint, options, value, onChange, fo
   );
 }
 
-export function RulesSimulator({ agents, caps, floors, initialCap, initialFloor }: { agents: Slim[]; caps: number[]; floors: number[]; initialCap: number; initialFloor: number }) {
+export function RulesSimulator({
+  agents,
+  caps,
+  floors,
+  initialCap,
+  initialFloor,
+}: {
+  agents: Slim[];
+  caps: number[];
+  floors: number[];
+  initialCap: number;
+  initialFloor: number;
+}) {
   const [cap, setCap] = useState(initialCap);
   const [floor, setFloor] = useState(initialFloor);
   const t = totals(cap, floor, agents);
@@ -41,10 +67,24 @@ export function RulesSimulator({ agents, caps, floors, initialCap, initialFloor 
   const rows = [...agents].sort((a, b) => b.floors[floor].saved - a.floors[floor].saved);
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
       <div className="space-y-8 lg:sticky lg:top-24 lg:self-start">
-        <Segmented label="Leverage cap" hint="The most the AI may borrow against what it manages." options={caps} value={cap} onChange={setCap} format={(c) => `${c}x`} />
-        <Segmented label="Loss floor" hint="How far it may fall before anyone can bring the money home." options={floors} value={floor} onChange={setFloor} format={(f) => `−${100 - f}%`} />
+        <Segmented
+          label="Leverage cap"
+          hint="The most the AI may borrow against what it manages."
+          options={caps}
+          value={cap}
+          onChange={setCap}
+          format={(c) => `${c}x`}
+        />
+        <Segmented
+          label="Loss floor"
+          hint="How far it may fall before anyone can bring the money home."
+          options={floors}
+          value={floor}
+          onChange={setFloor}
+          format={(f) => `−${100 - f}%`}
+        />
 
         <div className="rounded-xl bg-ink p-6 text-canvas shadow-lift" aria-live="polite">
           <p className="text-sm text-canvas/70">With these rules, investors would have kept</p>
@@ -75,8 +115,8 @@ export function RulesSimulator({ agents, caps, floors, initialCap, initialFloor 
           </dl>
         </div>
         <p className="text-sm text-ink-3">
-          &ldquo;Worse off&rdquo; counts agents that recovered after the floor broke: a floor protects, it does not predict. Refusals are counted on the real
-          trades; we do not simulate what the AI would have done instead.
+          &ldquo;Worse off&rdquo; counts agents that recovered after the floor broke: a floor protects, it does not
+          predict. Refusals are counted on the real trades; we do not simulate what the AI would have done instead.
         </p>
       </div>
 
@@ -99,18 +139,30 @@ export function RulesSimulator({ agents, caps, floors, initialCap, initialFloor 
               <li key={a.address} className="rounded-md border border-line bg-surface px-4 py-3 shadow-soft">
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="truncate font-medium">
-                    {modelName(a.model)} <span className="font-normal text-ink-3">· {competitionName(a.competition)}</span>
+                    {modelName(a.model)}{" "}
+                    <span className="font-normal text-ink-3">· {competitionName(a.competition)}</span>
                   </span>
-                  <span className={cn("shrink-0 text-sm font-semibold tabular-nums", f.saved > 0 ? "text-ok" : f.saved < 0 ? "text-no" : "text-ink-3")}>
+                  <span
+                    className={cn(
+                      "shrink-0 text-sm font-semibold tabular-nums",
+                      f.saved > 0 ? "text-ok" : f.saved < 0 ? "text-no" : "text-ink-3",
+                    )}
+                  >
                     {f.saved === 0 ? "untouched" : `${f.saved > 0 ? "+" : "−"}${usd(Math.abs(f.saved))}`}
                   </span>
                 </div>
                 <div className="mt-2 grid gap-1">
                   <div className="h-1.5 rounded-full bg-surface-2">
-                    <div className="h-full rounded-full bg-chart-real transition-[width] duration-500 ease-calm" style={{ width: `${(Math.max(a.final, 0) / max) * 100}%` }} />
+                    <div
+                      className="h-full rounded-full bg-chart-real transition-[width] duration-500 ease-calm"
+                      style={{ width: `${(Math.max(a.final, 0) / max) * 100}%` }}
+                    />
                   </div>
                   <div className="h-1.5 rounded-full bg-surface-2">
-                    <div className="h-full rounded-full bg-chart-keel transition-[width] duration-500 ease-calm" style={{ width: `${(Math.max(f.investor, 0) / max) * 100}%` }} />
+                    <div
+                      className="h-full rounded-full bg-chart-keel transition-[width] duration-500 ease-calm"
+                      style={{ width: `${(Math.max(f.investor, 0) / max) * 100}%` }}
+                    />
                   </div>
                 </div>
               </li>

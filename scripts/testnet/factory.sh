@@ -10,6 +10,7 @@
 #   scripts/testnet/factory.sh predict <name> <investor-evm> [policy.json]
 #                                               the judge id, its two MPC controllers, and the KeelLeg and
 #                                               KeelVault addresses, before anything is created
+#   CREATOR=you.testnet [EVM_KEYSTORE=… EVM_PASSWORD_FILE=…] \
 #   scripts/testnet/factory.sh create <name> <policy.json> <investor-evm> <investor-near> <pool-near> [manager]
 #                                               create the judge through the factory (signed by $CREATOR), then
 #                                               the two EVM accounts at the predicted addresses; verify all four
@@ -29,19 +30,21 @@ STATE=$OUT/env
 [ -f "$STATE" ] && set -a && . "$STATE" && set +a
 
 MPC=v1.signer-prod.testnet
-NEAR_RPC=https://rpc.testnet.near.org
+NEAR_RPC=https://test.rpc.fastnear.com
 HYPER=https://rpc.hyperliquid-testnet.xyz/evm
 BASE=https://sepolia.base.org
 NEAR="$ROOT_DIR/node_modules/.bin/near"
 WASM=contracts/near-keel-factory/target/near/near_keel_factory.wasm
 JUDGE_BIN=./target/debug/keel-judge
-RELAYER=(--keystore .secrets/evm/relayer --password-file .secrets/evm/relayer.password)
+# The EVM deployer of a strategy's accounts (any key with gas on HyperEVM testnet and Base Sepolia).
+RELAYER=(--keystore "${EVM_KEYSTORE:-.secrets/evm/relayer}" --password-file "${EVM_PASSWORD_FILE:-.secrets/evm/relayer.password}")
 CREATOR=${CREATOR:-agent.${KEEL_NEAR_ACCOUNT:?run make keys}}
 
-key() { echo ".secrets/near/$1.json"; }
+# A NEAR key file: .secrets/near/<account>.json, else NEAR CLI's own keychain.
+key() { local f=".secrets/near/$1.json"; [ -f "$f" ] || f="$HOME/.near-credentials/testnet/$1.json"; echo "$f"; }
 put() { touch "$STATE"; grep -q "^$1=" "$STATE" && sed -i '' "s|^$1=.*|$1=$2|" "$STATE" || echo "$1=$2" >> "$STATE"; export "$1=$2"; }
 plain() { sed 's/\x1b\[[0-9;]*m//g' "$1"; }
-near_rpc() { curl -s "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
+near_rpc() { curl -s --retry 5 --retry-all-errors --retry-delay 3 "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
 near_view() { # <account> <method> <json>
   near_rpc "$(python3 -I -c '
 import json,sys,base64

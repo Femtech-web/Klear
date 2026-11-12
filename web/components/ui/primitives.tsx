@@ -41,13 +41,23 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function LinkButton({ href, children, variant = "primary" }: { href: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
+export function LinkButton({
+  href,
+  children,
+  variant = "primary",
+}: {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+}) {
   return (
     <Link
       href={href}
       className={cn(
         "group inline-flex h-11.5 items-center gap-2 rounded-full px-5 text-[0.98rem] font-medium no-underline transition duration-300 ease-calm",
-        variant === "primary" ? "bg-ink text-canvas shadow-lift hover:-translate-y-px" : "bg-surface text-ink shadow-soft ring-1 ring-line-strong hover:bg-surface-2",
+        variant === "primary"
+          ? "bg-ink text-canvas shadow-lift hover:-translate-y-px"
+          : "bg-surface text-ink shadow-soft ring-1 ring-line-strong hover:bg-surface-2",
       )}
     >
       {children}
@@ -56,8 +66,22 @@ export function LinkButton({ href, children, variant = "primary" }: { href: stri
   );
 }
 
-export function Card({ children, raised, className }: { children: React.ReactNode; raised?: boolean; className?: string }) {
-  return <div className={cn("rounded-lg border border-line bg-surface p-6", raised ? "shadow-lift" : "shadow-soft", className)}>{children}</div>;
+export function Card({
+  children,
+  raised,
+  className,
+}: {
+  children: React.ReactNode;
+  raised?: boolean;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn("rounded-lg border border-line bg-surface p-6", raised ? "shadow-lift" : "shadow-soft", className)}
+    >
+      {children}
+    </div>
+  );
 }
 
 export type Tone = "ok" | "no" | "warn" | "ai" | "neutral";
@@ -70,9 +94,24 @@ const TONE: Record<Tone, string> = {
   neutral: "bg-surface-2 text-ink-2",
 };
 
-export function Pill({ tone, children, live, mark }: { tone: Tone; children: React.ReactNode; live?: boolean; mark?: "check" | "cross" }) {
+export function Pill({
+  tone,
+  children,
+  live,
+  mark,
+}: {
+  tone: Tone;
+  children: React.ReactNode;
+  live?: boolean;
+  mark?: "check" | "cross";
+}) {
   return (
-    <span className={cn("inline-flex h-6.5 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-xs font-semibold tracking-[0.02em]", TONE[tone])}>
+    <span
+      className={cn(
+        "inline-flex h-6.5 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-xs font-semibold tracking-[0.02em]",
+        TONE[tone],
+      )}
+    >
       {live && <span aria-hidden="true" className="size-[7px] animate-ping-soft rounded-full bg-current" />}
       {mark === "check" && <Check size={13} />}
       {mark === "cross" && <Cross size={13} />}
@@ -81,9 +120,17 @@ export function Pill({ tone, children, live, mark }: { tone: Tone; children: Rea
   );
 }
 
-export function Stat({ value, label, note }: { value: React.ReactNode; label: React.ReactNode; note?: React.ReactNode }) {
+export function Stat({
+  value,
+  label,
+  note,
+}: {
+  value: React.ReactNode;
+  label: React.ReactNode;
+  note?: React.ReactNode;
+}) {
   return (
-    <div className="grid gap-1.5">
+    <div className="grid content-start gap-1.5">
       <span className="font-serif text-stat font-medium tracking-[-0.03em] tabular-nums">{value}</span>
       <span className="text-[0.95rem] text-ink-2">{label}</span>
       {note && <span className="text-sm text-ink-3">{note}</span>}

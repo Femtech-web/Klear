@@ -20,3 +20,7 @@ __pycache__/
 
 # release artifacts (make release)
 dist/
+docs/results/drill/console.log
+
+# a visitor rescue's working files (agents/rescue.py)
+.keel-visitor/

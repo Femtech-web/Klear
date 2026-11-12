@@ -1,7 +1,12 @@
 import { config } from "@/lib/config";
 
 export function usd(x: number, digits = 0): string {
-  return x.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: digits, maximumFractionDigits: digits });
+  return x.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  });
 }
 
 export function pct(x: number, digits = 0): string {
@@ -46,3 +51,24 @@ export function accountUrl(chain: Chain, account: string): string {
 
 /** An address on Hyperliquid mainnet's explorer (the replay's agents traded real money there). */
 export const hyperliquidAddressUrl = (address: string) => `https://app.hyperliquid.xyz/explorer/address/${address}`;
+
+/** How long ago a unix-seconds time was, coarsely ("4 min", "3 h", "2 days"). */
+export function ago(unixSeconds: number, now: number = Date.now() / 1000): string {
+  const s = Math.max(0, Math.round(now - unixSeconds));
+  if (s < 90) return `${s} s`;
+  if (s < 90 * 60) return `${Math.round(s / 60)} min`;
+  if (s < 36 * 3600) return `${Math.round(s / 3600)} h`;
+  return `${Math.round(s / 86400)} days`;
+}
+
+/** The daily drill's open rescue window in UTC, e.g. "14:40 to 17:40 UTC". */
+export function drillWindowUtc(d: {
+  utcHour: number;
+  utcMinute: number;
+  dueAfterMinutes: number;
+  graceHours: number;
+}): string {
+  const at = (m: number) => `${String(Math.floor(m / 60) % 24).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+  const due = d.utcHour * 60 + d.utcMinute + d.dueAfterMinutes;
+  return `${at(due)} to ${at(due + d.graceHours * 60)} UTC`;
+}

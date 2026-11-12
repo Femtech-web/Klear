@@ -4,7 +4,7 @@ import { isRecord } from "@/lib/chain/rpc";
 
 export type LegStatus = "open" | "delivered" | "empty" | "unverified";
 export type Trigger = "investor" | "floor" | "manager-silent" | "repair-exhausted";
-export type Mode = "active" | "repairing" | "repair-exhausted" | "flattening" | "flattened" | "frozen";
+export type Mode = "active" | "repairing" | "repair-exhausted" | "deleveraging" | "flattening" | "flattened" | "frozen";
 
 export interface Delivery {
   leg: "perp" | "spot";
@@ -28,7 +28,14 @@ export interface Strategy {
   manager: string | null;
   investorAccount: string | null;
   investor: string | null;
-  policy: { maxLeverageBp: number; floorUsd6: number; heartbeatS: number; onSilence: string };
+  policy: {
+    maxLeverageBp: number;
+    floorUsd6: number;
+    heartbeatS: number;
+    onSilence: string;
+    flattenRewardYocto: bigint;
+    spotRewardYocto: bigint;
+  };
   rescue: { trigger: Trigger | null; perp: LegStatus; spot: LegStatus; deliveries: Delivery[] };
   payouts: Payout[];
 }
@@ -65,6 +72,8 @@ export function parseStrategy(raw: unknown): Strategy {
       floorUsd6: typeof p.equity_floor_usd6 === "number" ? p.equity_floor_usd6 : 0,
       heartbeatS: typeof p.heartbeat_s === "number" ? p.heartbeat_s : 0,
       onSilence: typeof p.on_silence === "string" ? p.on_silence : "nothing",
+      flattenRewardYocto: BigInt(typeof p.flatten_reward === "string" ? p.flatten_reward : "0"),
+      spotRewardYocto: BigInt(typeof p.spot_reward === "string" ? p.spot_reward : "0"),
     },
     rescue: {
       trigger: (opt(r.trigger) as Trigger | null) ?? null,
@@ -82,7 +91,12 @@ export function parseStrategy(raw: unknown): Strategy {
     },
     payouts: (Array.isArray(s.payouts) ? s.payouts : []).map((x, i) => {
       const y = rec(x, `payout ${i}`);
-      return { jobId: num(y.job_id, "payout.job_id"), agent: str(y.agent, "payout.agent"), yocto: BigInt(str(y.amount, "payout.amount")), reason: typeof y.reason === "string" ? y.reason : "" };
+      return {
+        jobId: num(y.job_id, "payout.job_id"),
+        agent: str(y.agent, "payout.agent"),
+        yocto: BigInt(str(y.amount, "payout.amount")),
+        reason: typeof y.reason === "string" ? y.reason : "",
+      };
     }),
   };
 }

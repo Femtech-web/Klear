@@ -2,6 +2,7 @@
 name = "keel-core"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
 description = "Keel repair-job rules: evidence decoding, bounded order planning, settlement and rewards"
 
 [dependencies]

@@ -1,0 +1,2 @@
+{"at": 1794519915, "role": "drill", "kind": "heartbeat", "tx": "E7gZXcZubGC4FXiMwhNqBRDWsexym9VaRaa2dpouMDHn", "refused": null, "outcome": null}
+{"at": 1794519918, "role": "drill", "kind": "failed", "error": "scripts/testnet/practice.sh fund: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}

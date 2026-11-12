@@ -1,7 +1,25 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const PAGES = ["/", "/how", "/rules", "/replay", "/replay/0x61f35978eb33bad00644bc9549850e7a7c65186e", "/moment", "/live", "/break", "/trust"];
+const PAGES = [
+  "/",
+  "/judges",
+  "/how",
+  "/rules",
+  "/strategies",
+  "/strategies/practice.keel-factory-bcf915.testnet",
+  "/practice",
+  "/trust",
+  "/proof",
+  "/proof/rescue",
+  "/proof/replay",
+  "/proof/replay/0x61f35978eb33bad00644bc9549850e7a7c65186e",
+  "/proof/contracts",
+  "/proof/attacks",
+  "/proof/factory",
+  "/proof/drill",
+  "/proof/mainnet",
+];
 
 for (const path of PAGES) {
   test(`${path} renders, talks only to this site, fits a phone and passes WCAG 2.2 AA`, async ({ page, baseURL }) => {
@@ -25,12 +43,24 @@ for (const path of PAGES) {
 
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow, "nothing wider than the viewport").toBeLessThanOrEqual(1);
+    // Content clipped at the edge does not scroll the page, so look for it too: anything past the right edge
+    // must sit inside something meant to scroll sideways (a table, a command, the menus).
+    const clipped = await page.evaluate(() =>
+      [...document.querySelectorAll("main *")]
+        .filter((el) => el.getBoundingClientRect().right > window.innerWidth + 1)
+        .filter((el) => !el.closest("[role=region], pre, nav, code, .overflow-x-auto, [aria-hidden=true]"))
+        .map((el) => `${el.tagName.toLowerCase()}.${String(el.className).split(" ").slice(0, 3).join(".")}`)
+        .slice(0, 5),
+    );
+    expect(clipped, "nothing cut off at the right edge").toEqual([]);
 
     // Audit the settled page: with reduced motion nothing is mid-fade (entrance animations measure as
     // faint text while they run), and the chart's draw-in has finished.
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.waitForTimeout(400);
-    const axe = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
+    const axe = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
     expect(axe.violations.map((v) => `${v.id}: ${v.nodes.length} × ${v.help}`)).toEqual([]);
   });
 }

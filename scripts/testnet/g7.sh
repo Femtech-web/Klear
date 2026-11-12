@@ -48,7 +48,7 @@ STATE=$OUT/env
 G7_INVESTOR=${G7_INVESTOR:-0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4}
 WETH=0x4200000000000000000000000000000000000006   # Base Sepolia's canonical WETH predeploy
 MPC=v1.signer-prod.testnet
-NEAR_RPC=https://rpc.testnet.near.org
+NEAR_RPC=https://test.rpc.fastnear.com   # rpc.testnet.near.org is deprecated and answers 429
 HYPER=https://rpc.hyperliquid-testnet.xyz/evm
 BASE=https://sepolia.base.org
 NEAR="$ROOT_DIR/node_modules/.bin/near"
@@ -56,11 +56,12 @@ WASM=contracts/near-keel/target/near/near_keel.wasm
 JUDGE_BIN=./target/debug/keel-judge
 RELAYER=(--keystore .secrets/evm/relayer --password-file .secrets/evm/relayer.password)
 
-key() { echo ".secrets/near/$1.json"; }
+# A signer's key file: .secrets/near/<account>.json, or under $KEEL_KEYS (a visiting guardian's own key, agents/rescue.py).
+key() { local f=".secrets/near/$1.json"; [ -f "$f" ] || [ -z "${KEEL_KEYS:-}" ] || f="$KEEL_KEYS/$1.json"; echo "$f"; }
 put() { touch "$STATE"; grep -q "^$1=" "$STATE" && sed -i '' "s|^$1=.*|$1=$2|" "$STATE" || echo "$1=$2" >> "$STATE"; export "$1=$2"; }
 sleep_s() { python3 -I -c "import time,sys;time.sleep(float(sys.argv[1]))" "$1"; }
 plain() { sed 's/\x1b\[[0-9;]*m//g' "$1"; }
-near_rpc() { curl -s "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
+near_rpc() { curl -s --retry 5 --retry-all-errors --retry-delay 3 "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
 near_view() { # <account> <method> <json>
   near_rpc "$(python3 -I -c '
 import json,sys,base64

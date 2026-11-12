@@ -1,0 +1,64 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-practice-53ee75.testnet
+│    receiver_id:  practice.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  attest
+│                       args:         {
+│                                       "chain": "base",
+│                                       "log": {
+│                                         "address": "0xe35805727da624b5f233cde4a3d039522db8bc1c",
+│                                         "blockHash": "0xd892ce5d5714c9fcd53fee2744835d7f90940a17a041f7487217cd46829759a2",
+│                                         "blockNumber": "0x374a85a",
+│                                         "blockTimestamp": "0x6af62905",
+│                                         "data": "0x0000000000000000000000001d9db7f01d68cf06b3a2d2498af09a09f186615c000000000000000000000000000000000000000000000000000e35fa931a0000000000000000000000000000000000000000000000000000000000000374a85a000000000000000000000000000000000000000000000000000000006af62905",
+│                                         "logIndex": "0x1",
+│                                         "removed": false,
+│                                         "topics": [
+│                                           "0xd264510f2a581e9064c1562e54cad0ced0465fc04b03dd1566b8c46edfcca25d",
+│                                           "0x0000000000000000000000000000000000000000000000000000000000000000",
+│                                           "0x0000000000000000000000004200000000000000000000000000000000000006"
+│                                         ],
+│                                         "transactionHash": "0xa0b0c6eadb42d9843629d5e6506ec7096d8d7d5a77f6c63be9cfa0cb0ac1a74c",
+│                                         "transactionIndex": "0x2"
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A1VSoBvKHcgzKQoAAYAZp6rJ6V2gQbiH9mRf43gLSpiT
+│    Signature:  ed25519:4D6d7E8y4D2oomiWfZWnN138eCD5SmRXuTnLasSfptr6n66yKHjvcP2z4jBUaYu9wtLHzHJsnc6enENyuQwp8mwH
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.5 Tgas
+│    Transaction fee: 0.0014597967459785 NEAR
+│    Transaction ID: 7onSZPgocsJTk2Pe8mzAyz3Ge7dtG1fktsmFqJcWRgyd
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7onSZPgocsJTk2Pe8mzAyz3Ge7dtG1fktsmFqJcWRgyd
+│     [0m
+├  Function execution logs:
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      verify_foreign_transaction: predecessor=AccountId("practice.keel-factory-bcf915.testnet"), request=VerifyForeignTransactionRequestArgs { request: Base(EvmRpcRequest { tx_id: EvmTxId([160, 176, 198, 234, 219, 66, 217, 132, 54, 41, 213, 230, 80, 110, 199, 9, 109, 141, 125, 90, 119, 246, 198, 59, 233, 207, 160, 203, 10, 193, 167, 76]), extractors: BoundedVec { inner: [Log { log_index: 1 }], witness: PossiblyEmpty(()) }, finality: Finalized }), domain_id: DomainId(3), payload_version: V1, expected_payload_hash: Some(Hash256([25, 101, 216, 203, 131, 96, 65, 99, 27, 25, 28, 24, 91, 116, 201, 118, 35, 164, 72, 30, 86, 241, 232, 149, 196, 165, 219, 109, 23, 48, 149, 184])) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m
+│      attested base:0xa0b0c6eadb42d9843629d5e6506ec7096d8d7d5a77f6c63be9cfa0cb0ac1a74c:1 for guardian.keel-practice-53ee75.testnet
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "attest" call to <practice.keel-factory-bcf915.testnet> on behalf of <guardian.keel-practice-53ee75.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction practice.keel-factory-bcf915.testnet attest json-args '{"chain": "base", "log": {"address": "0xe35805727da624b5f233cde4a3d039522db8bc1c", "topics": ["0xd264510f2a581e9064c1562e54cad0ced0465fc04b03dd1566b8c46edfcca25d", "0x0000000000000000000000000000000000000000000000000000000000000000", "0x0000000000000000000000004200000000000000000000000000000000000006"], "data": "0x0000000000000000000000001d9db7f01d68cf06b3a2d2498af09a09f186615c000000000000000000000000000000000000000000000000000e35fa931a0000000000000000000000000000000000000000000000000000000000000374a85a000000000000000000000000000000000000000000000000000000006af62905", "blockHash": "0xd892ce5d5714c9fcd53fee2744835d7f90940a17a041f7487217cd46829759a2", "blockNumber": "0x374a85a", "blockTimestamp": "0x6af62905", "transactionHash": "0xa0b0c6eadb42d9843629d5e6506ec7096d8d7d5a77f6c63be9cfa0cb0ac1a74c", "transactionIndex": "0x2", "logIndex": "0x1", "removed": false}}' prepaid-gas '300.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as guardian.keel-practice-53ee75.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-practice-53ee75.testnet.json send[39m
+

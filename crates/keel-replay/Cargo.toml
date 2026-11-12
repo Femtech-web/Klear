@@ -2,6 +2,7 @@
 name = "keel-replay"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
 description = "Replays real AI trading history (Alpha Arena) through Keel's mandate rules"
 
 [dependencies]

@@ -1,0 +1,4 @@
+{"at": 1794513509, "role": "drill", "kind": "heartbeat", "tx": "7oS3WAFVw3YJWNp7pqkhSFAxAnhYFsKbvnc8abhM4J7h", "refused": null, "outcome": null}
+{"at": 1794513529, "role": "drill", "kind": "fund", "out": "leg: 4.9 USDC | vault: 4000000000000000 WETH wei"}
+{"at": 1794513529, "role": "drill", "kind": "spot-probe", "waiting": "Base finality, about 20 minutes"}
+{"at": 1794513834, "role": "drill", "kind": "heartbeat", "tx": "UbCdZpLMseGEAozy1U1SgYQp58GMeZYSYBYs3aZNiK7", "refused": null, "outcome": null}

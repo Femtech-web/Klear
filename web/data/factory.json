@@ -1,0 +1,17 @@
+{
+ "factory": "keel-factory-bcf915.testnet",
+ "deployers": {
+  "hyperevm": "0x95555109cb864D3f285606254148432Ee3d5e6E9",
+  "base": "0xDdf09a571553C82854Ea7130379581F5581641ae"
+ },
+ "factoryCodeSha256": "2bd8332e7efb992e1696835475a5b5e026795f5b8275c5bcdb1429c1a268d803",
+ "judgeCodeSha256": "2aeaaf8b59179d67eac504395d70f50b61ac3f14cf9675bea3b24abfc696b23c",
+ "practice": {
+  "judge": "practice.keel-factory-bcf915.testnet",
+  "leg": "0xa34e83D5ea3baCdFBc1C30FcDA3032AeD7830Bc7",
+  "vault": "0xE35805727DA624b5f233CdE4a3d039522Db8bC1C",
+  "manager": "manager.keel-practice-53ee75.testnet",
+  "guardian": "guardian.keel-practice-53ee75.testnet",
+  "investor": "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c"
+ }
+}

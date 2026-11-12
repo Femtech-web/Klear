@@ -1,0 +1,8 @@
+{"at": 1794515656, "role": "drill", "kind": "heartbeat", "tx": "DuupwSMVVJK9cirWgvwUQ9SjbudyEQZExRsRG73DuHeJ", "refused": null, "outcome": null}
+{"at": 1794515671, "role": "drill", "kind": "fund", "out": "leg: 4.9 USDC | vault: 4000000000000000 WETH wei"}
+{"at": 1794515673, "role": "drill", "kind": "spot-reused", "evidence": "base:0x104f934dc6bfd767e3898147456d8837134c18402f2867a33b30ba452c89bb61:21", "age_s": 1434}
+{"at": 1794515710, "role": "drill", "kind": "open-short", "tx": "EvXaucdMmiDCbufm9Cd7SCyDrxybyj7mgBF7Xpk2oQrQ", "refused": null, "outcome": {"outcome": "sign", "job_id": 0, "order": {"nonce": 0, "is_buy": false, "limit_px": 196850000000, "sz": 600000, "reduce_only": false, "cloid": "313308547618988997186016054148930254792", "deadline": 1794516002}, "digest": "0x96fd064c4555af19069b8a4ff3c45f3bb04da5c00dba9f710c33c8f8adb38095"}}
+{"at": 1794515789, "role": "drill", "kind": "relayed-short", "tx": "0xfcfd8c9fd19140837c54757e736334d9d870f72139bcbd9baebb1148fafb5d4a", "fill": {"queued_l1": 771617579, "timeout": true}}
+{"at": 1794515790, "role": "drill", "kind": "manager-silent", "last_heartbeat": 1794515702}
+{"at": 1794516620, "role": "drill", "kind": "rescue-due", "reason": "manager silent", "grace_s": 0.0}
+{"at": 1794517089, "role": "drill", "kind": "failed", "error": "spot evidence for the rescue:      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}

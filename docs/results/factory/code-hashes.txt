@@ -1,0 +1,4 @@
+factory keel-factory-bcf915.testnet deployed: 2bd8332e7efb992e1696835475a5b5e026795f5b8275c5bcdb1429c1a268d803
+factory local build:                          2bd8332e7efb992e1696835475a5b5e026795f5b8275c5bcdb1429c1a268d803
+judge it creates (judge_code_hash):           2aeaaf8b59179d67eac504395d70f50b61ac3f14cf9675bea3b24abfc696b23c
+judge local build (contracts/near-keel):      2aeaaf8b59179d67eac504395d70f50b61ac3f14cf9675bea3b24abfc696b23c

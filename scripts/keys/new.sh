@@ -13,7 +13,7 @@ NEAR="$ROOT/node_modules/.bin/near"
 set -a; [ -f .env ] && source .env; set +a
 
 view_account() {
-  curl -s https://rpc.testnet.near.org -H 'content-type: application/json' \
+  curl -s https://test.rpc.fastnear.com -H 'content-type: application/json' \
     -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"finality\":\"final\",\"account_id\":\"$1\"}}" |
     python3 -I -c 'import json,sys;r=json.load(sys.stdin).get("result");print(r["amount"] if r else "")'
 }

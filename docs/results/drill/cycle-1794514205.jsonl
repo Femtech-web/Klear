@@ -1,0 +1,8 @@
+{"at": 1794514218, "role": "drill", "kind": "heartbeat", "tx": "7jzQc3D9ZJuaEKGXKEoPRuq7fGBVXr9ALVdmPEcQX2xQ", "refused": null, "outcome": null}
+{"at": 1794514236, "role": "drill", "kind": "fund", "out": "leg: 4.9 USDC | vault: 4000000000000000 WETH wei"}
+{"at": 1794514236, "role": "drill", "kind": "spot-probe", "waiting": "Base finality, about 20 minutes"}
+{"at": 1794514532, "role": "drill", "kind": "heartbeat", "tx": "Ec4XciASjw8bbyj8cwkbbcaH8hELJggwbjBj6LRRRMzZ", "refused": null, "outcome": null}
+{"at": 1794514838, "role": "drill", "kind": "heartbeat", "tx": "7hAafVddCSTxcYhsJ7fMLq2CzfdAh436csc3to1RydqX", "refused": null, "outcome": null}
+{"at": 1794515144, "role": "drill", "kind": "heartbeat", "tx": "2tnHNkPebUBYKLwQ7haNu8rKGkXLT4nzLW845X9taHUg", "refused": null, "outcome": null}
+{"at": 1794515450, "role": "drill", "kind": "heartbeat", "tx": "5mZ6xkqfHHWc8hAY3UKYhzEMwzFKLUuDgYw6jvgVPXsC", "refused": null, "outcome": null}
+{"at": 1794515560, "role": "drill", "kind": "failed", "error": "spot evidence: on/decoder.py\", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}

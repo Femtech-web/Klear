@@ -18,9 +18,17 @@ export default defineConfig({
   reporter: "list",
   use: { baseURL: external ?? `http://127.0.0.1:${port}`, trace: "retain-on-failure" },
   projects: [
-    { name: "desktop-light", use: { ...devices["Desktop Chrome"], ...chrome, colorScheme: "light", viewport: { width: 1366, height: 900 } } },
-    { name: "desktop-dark", use: { ...devices["Desktop Chrome"], ...chrome, colorScheme: "dark", viewport: { width: 1366, height: 900 } } },
+    {
+      name: "desktop-light",
+      use: { ...devices["Desktop Chrome"], ...chrome, colorScheme: "light", viewport: { width: 1366, height: 900 } },
+    },
+    {
+      name: "desktop-dark",
+      use: { ...devices["Desktop Chrome"], ...chrome, colorScheme: "dark", viewport: { width: 1366, height: 900 } },
+    },
     { name: "mobile", use: { ...devices["Pixel 7"], ...chrome, colorScheme: "light" } },
   ],
-  webServer: external ? undefined : { command: `npx next start -p ${port}`, port, reuseExistingServer: !process.env.CI, timeout: 120_000 },
+  webServer: external
+    ? undefined
+    : { command: `npx next start -p ${port}`, port, reuseExistingServer: !process.env.CI, timeout: 120_000 },
 });

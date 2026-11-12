@@ -11,7 +11,11 @@ const subscribe = (cb: () => void) => {
 
 /** Whether the visitor asked for less motion (false while rendering on the server). */
 function useReducedMotion(): boolean {
-  return useSyncExternalStore(subscribe, () => window.matchMedia(QUERY).matches, () => false);
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(QUERY).matches,
+    () => false,
+  );
 }
 
 /** Eases a displayed number toward `target`; shows it at once when the visitor prefers less motion. */

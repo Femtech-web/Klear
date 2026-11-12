@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Keel architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=block" rel="stylesheet" />
+<style>
+  :root {
+    --canvas: #f6f4ee; --panel: #efece4; --surface: #ffffff; --ink: #0d1b2e; --ink-2: #3a4a5f; --ink-3: #5c6a7d;
+    --line: rgb(13 27 46 / 0.10); --line-strong: rgb(13 27 46 / 0.22); --accent: #0b6e66; --accent-soft: #e2efec; --ai: #4a3fb8; --ai-soft: #ebe8f8;
+    --on-ink: #f6f4ee;
+  }
+  :root[data-theme="dark"] {
+    --canvas: #08111d; --panel: #0b1626; --surface: #0e1a2b; --ink: #e9eef5; --ink-2: #b3bfcf; --ink-3: #8a98ad;
+    --line: rgb(233 238 245 / 0.09); --line-strong: rgb(233 238 245 / 0.22); --accent: #5fd6c4; --accent-soft: rgb(95 214 196 / 0.12); --ai: #a99ff5; --ai-soft: rgb(169 159 245 / 0.13);
+    --on-ink: #08111d;
+  }
+  * { margin: 0; }
+  html, body { width: 1400px; height: 900px; background: var(--canvas); overflow: hidden; }
+  svg { display: block; }
+  .panel { fill: var(--panel); stroke: var(--line); }
+  .ph { fill: var(--ink-3); font: 600 12.5px Geist, sans-serif; letter-spacing: 0.12em; }
+  .box { fill: var(--surface); stroke: var(--line-strong); }
+  .t { fill: var(--ink); font: 600 18px Geist, sans-serif; }
+  .s { fill: var(--ink-3); font: 400 13.5px Geist, sans-serif; }
+  .c { text-anchor: middle; }
+  .flow { fill: none; stroke: var(--ink-3); stroke-width: 1.7; stroke-dasharray: 6 6; }
+  .money { fill: none; stroke: var(--accent); stroke-width: 2.4; }
+  .lbl { fill: var(--ink-2); font: 500 13px Geist, sans-serif; }
+  .lbl-a { fill: var(--accent); font: 600 13px Geist, sans-serif; }
+  .n { fill: var(--ink); }
+  .nt { fill: var(--on-ink); font: 600 12px Geist Mono, monospace; text-anchor: middle; }
+</style>
+</head>
+<body>
+<svg width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="g" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink-3)" /></marker>
+    <marker id="m" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent)" /></marker>
+  </defs>
+
+  <!-- Actors -->
+  <rect x="190" y="36" width="250" height="92" rx="18" class="box" />
+  <text x="315" y="74" class="t c">Investor</text>
+  <text x="315" y="98" class="s c">sets the rules once; can exit any time</text>
+  <rect x="575" y="36" width="250" height="92" rx="18" class="box" style="stroke: var(--ai)" />
+  <text x="700" y="74" class="t c">AI manager</text>
+  <text x="700" y="98" class="s c">proposes orders, nothing else</text>
+  <rect x="960" y="36" width="250" height="92" rx="18" class="box" />
+  <text x="1085" y="74" class="t c">Guardians</text>
+  <text x="1085" y="98" class="s c">anyone, a person or an AI</text>
+
+  <!-- Chains -->
+  <rect x="30" y="196" width="380" height="440" rx="22" class="panel" />
+  <text x="56" y="620" class="ph">HYPERLIQUID TESTNET</text>
+  <rect x="490" y="196" width="420" height="440" rx="22" class="panel" />
+  <text x="516" y="620" class="ph">NEAR TESTNET</text>
+  <rect x="990" y="196" width="380" height="440" rx="22" class="panel" />
+  <text x="1016" y="620" class="ph">BASE SEPOLIA</text>
+
+  <!-- Hyperliquid -->
+  <rect x="62" y="262" width="316" height="132" rx="16" class="box" />
+  <text x="86" y="296" class="t">KeelLeg</text>
+  <text x="86" y="322" class="s">a contract on HyperEVM; runs only orders</text>
+  <text x="86" y="341" class="s">the judge signed, within its limits</text>
+  <text x="86" y="368" class="s" style="font-family: Geist Mono, monospace; font-size: 12.5px">order · sweep · snapshot()</text>
+  <rect x="62" y="460" width="316" height="132" rx="16" class="box" />
+  <text x="86" y="494" class="t">HyperCore</text>
+  <text x="86" y="520" class="s">the perp position and its USDC margin,</text>
+  <text x="86" y="539" class="s">held by KeelLeg's own account</text>
+  <path d="M220 394 V456" class="flow" marker-end="url(#g)" />
+  <text x="232" y="430" class="lbl">CoreWriter</text>
+
+  <!-- NEAR -->
+  <rect x="522" y="262" width="356" height="132" rx="18" fill="var(--ink)" />
+  <text x="700" y="304" class="c" style="fill: var(--on-ink); font: 600 24px Fraunces, serif">The judge</text>
+  <text x="700" y="332" class="c" style="fill: var(--on-ink); opacity: .75; font: 400 14px Geist, sans-serif">the investor's rules, in a contract with no keys</text>
+  <text x="700" y="356" class="c" style="fill: var(--on-ink); opacity: .75; font: 400 14px Geist, sans-serif">decides on verified evidence; pays on delivery</text>
+  <rect x="522" y="460" width="168" height="132" rx="16" class="box" />
+  <text x="606" y="496" class="t c">Factory</text>
+  <text x="606" y="522" class="s c">creates each judge</text>
+  <text x="606" y="541" class="s c">locked from birth;</text>
+  <text x="606" y="560" class="s c">the public registry</text>
+  <rect x="710" y="460" width="168" height="132" rx="16" class="box" />
+  <text x="794" y="496" class="t c">MPC network</text>
+  <text x="794" y="522" class="s c">signs only for the judge</text>
+  <text x="794" y="541" class="s c">(Chain Signatures);</text>
+  <text x="794" y="560" class="s c">verifies logs (Read MPC)</text>
+  <path d="M606 458 V398" class="flow" marker-end="url(#g)" />
+  <path d="M794 398 V456" class="flow" marker-start="url(#g)" marker-end="url(#g)" />
+
+  <!-- Base -->
+  <rect x="1022" y="262" width="316" height="132" rx="16" class="box" />
+  <text x="1046" y="296" class="t">KeelVault</text>
+  <text x="1046" y="322" class="s">holds the spot asset (WETH); one exit,</text>
+  <text x="1046" y="341" class="s">only to the investor, only if signed</text>
+  <text x="1046" y="368" class="s" style="font-family: Geist Mono, monospace; font-size: 12.5px">exit · probe() · Exited</text>
+
+  <!-- Out: signed actions; in: evidence -->
+  <path d="M520 300 H382" class="flow" marker-end="url(#g)" />
+  <text x="451" y="290" class="lbl c">signed order</text>
+  <path d="M382 360 H518" class="flow" marker-end="url(#g)" />
+  <text x="451" y="382" class="lbl c">evidence</text>
+  <path d="M880 300 H1018" class="flow" marker-end="url(#g)" />
+  <text x="949" y="290" class="lbl c">signed exit</text>
+  <path d="M1018 360 H882" class="flow" marker-end="url(#g)" />
+  <text x="949" y="382" class="lbl c">evidence</text>
+
+  <!-- Actors to the judge -->
+  <path d="M315 128 V158 Q315 172 329 172 H546 Q560 172 560 186 V258" class="flow" marker-end="url(#g)" />
+  <path d="M700 128 V258" class="flow" style="stroke: var(--ai)" marker-end="url(#g)" />
+  <text x="712" y="182" class="lbl" style="fill: var(--ai)">propose_order</text>
+  <path d="M1040 128 V158 Q1040 172 1026 172 H854 Q840 172 840 186 V258" class="flow" marker-end="url(#g)" />
+  <text x="940" y="162" class="lbl c">on a trigger: open, settle</text>
+  <path d="M866 258 V202 Q866 188 880 188 H1116 Q1130 188 1130 174 V132" class="money" marker-end="url(#m)" />
+  <text x="1144" y="166" class="lbl-a">reward, after delivery</text>
+  <text x="437" y="162" class="lbl c">the rules; request_exit</text>
+
+  <!-- Home -->
+  <rect x="470" y="718" width="460" height="112" rx="20" fill="var(--accent-soft)" stroke="var(--accent)" />
+  <text x="700" y="760" class="c" style="fill: var(--ink); font: 600 22px Fraunces, serif">The investor's own addresses</text>
+  <text x="700" y="788" class="s c">USDC on HyperCore · WETH on Base, fixed when the accounts were made</text>
+  <path d="M300 592 C300 700 360 772 466 772" class="money" marker-end="url(#m)" />
+  <path d="M1180 394 V640 C1180 720 1060 772 934 772" class="money" marker-end="url(#m)" />
+  <text x="246" y="700" class="lbl-a">sweep</text>
+  <text x="1194" y="690" class="lbl-a">exit</text>
+
+  <!-- Legend -->
+  <path d="M40 860 H76" class="flow" /><text x="86" y="864" class="s">a request, a signature or evidence</text>
+  <path d="M330 860 H366" class="money" /><text x="376" y="864" class="s">money: only ever to the investor, and rewards only after it arrives</text>
+</svg>
+</body>
+</html>

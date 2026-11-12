@@ -21,13 +21,19 @@ export function Timeline({ steps, start = 1 }: { steps: Step[]; start?: number }
         <li key={i} className="reveal relative grid grid-cols-[32px_1fr] gap-4 pb-8">
           <span
             aria-hidden="true"
-            className={cn("relative z-10 grid size-8 place-items-center rounded-full border-[1.5px] bg-surface text-xs font-semibold tabular-nums", KIND[s.kind].node)}
+            className={cn(
+              "relative z-10 grid size-8 place-items-center rounded-full border-[1.5px] bg-surface text-xs font-semibold tabular-nums",
+              KIND[s.kind].node,
+            )}
           >
             {start + i}
           </span>
           <div className="pt-0.5">
             <div className="mb-1.5 flex flex-wrap items-center gap-2">
-              <Pill tone={KIND[s.kind].tone} mark={s.kind === "paid" ? "check" : s.kind === "refused" ? "cross" : undefined}>
+              <Pill
+                tone={KIND[s.kind].tone}
+                mark={s.kind === "paid" ? "check" : s.kind === "refused" ? "cross" : undefined}
+              >
                 {KIND[s.kind].label}
               </Pill>
               {s.code && <code className="font-mono text-sm text-no">{s.code}</code>}

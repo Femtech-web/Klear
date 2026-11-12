@@ -1,0 +1,6 @@
+# Generated: data/ is written by scripts/sync-data.mjs and must match it byte for byte (CI checks).
+data/
+.next/
+test-results/
+playwright-report/
+next-env.d.ts

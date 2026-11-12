@@ -1,0 +1,4 @@
+# The agents and the drill (pinned; the AI manager also needs the `claude` CLI, signed in).
+certifi==2026.10.23
+eth-account==0.13.7
+hyperliquid-python-sdk==0.24.0

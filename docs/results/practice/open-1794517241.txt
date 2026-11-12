@@ -1,0 +1,86 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-practice-53ee75.testnet
+│    receiver_id:  practice.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_flatten
+│                       args:         {
+│                                       "perp": "hyperevm:0x60674b3f058ac25d77ce008d3e314cc48dd739f32da89dd5bbb991b96af19cb8:0",
+│                                       "spot": "base:0x0f42af110520bb1eaca982c1e6b59f9f8e2f3c4cd52da8852d41f77d93b986bb:2"
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A1VSoBvKHcgzKQoAAYAZp6rJ6V2gQbiH9mRf43gLSpiT
+│    Signature:  ed25519:A164NGeuqZ89x5iXXYfUiawUSyXzUgQJrKE1XuJ1qKzPLwsCrv9Wa2H6HHAXmHWg1Pun7pNUxYih5wRV5QDLSZm
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 28.1 Tgas
+│    Transaction fee: 0.0026447876975776 NEAR
+│    Transaction ID: Emv57ejaKWyX48tSPKqK4dtNNBYZ51X24YH5qxw74Wb1
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/Emv57ejaKWyX48tSPKqK4dtNNBYZ51X24YH5qxw74Wb1
+│     [0m
+├  Function execution logs:
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m
+│      {"outcome":"rescue","job_id":1,"trigger":"manager-silent","order":null,"sweep":{"sweep":{"nonce":1,"usd_ntl":4900000,"usdc_wei":490000000,"deadline":1794517543},"digest":"0xcad8e28d73d3927a3396ef2701365103dccdb94178a2f05ff802ebdc40b52c38"},"exit":{"exit":{"nonce":0,"token":"0x4200000000000000000000000000000000000006","deadline":1794517543},"digest":"0xd1242ded2c06d81eb37bbdac1d41605933c526e2be8712e225a33e894904b5d8"},"delivered":[],"paid":[],"perp":"open","spot":"open","ended":null,"done":false}
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("practice.keel-factory-bcf915.testnet"), request=SignRequestArgs { path: "keel/1/hyperevm", payload: Ecdsa(BoundedVec { inner: [202, 216, 226, 141, 115, 211, 146, 122, 51, 150, 239, 39, 1, 54, 81, 3, 220, 205, 185, 65, 120, 162, 240, 95, 248, 2, 235, 220, 64, 181, 44, 56], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m
+│      signed sweep:1
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("practice.keel-factory-bcf915.testnet"), request=SignRequestArgs { path: "keel/1/spot", payload: Ecdsa(BoundedVec { inner: [209, 36, 45, 237, 44, 6, 216, 30, 179, 123, 189, 172, 29, 65, 96, 89, 51, 197, 38, 226, 190, 135, 18, 226, 37, 163, 62, 137, 73, 4, 181, 216], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m
+│      signed exit:0
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "delivered": [],
+  "done": false,
+  "ended": null,
+  "exit": {
+    "digest": "0xd1242ded2c06d81eb37bbdac1d41605933c526e2be8712e225a33e894904b5d8",
+    "exit": {
+      "deadline": 1794517543,
+      "nonce": 0,
+      "token": "0x4200000000000000000000000000000000000006"
+    }
+  },
+  "job_id": 1,
+  "order": null,
+  "outcome": "rescue",
+  "paid": [],
+  "perp": "open",
+  "spot": "open",
+  "sweep": {
+    "digest": "0xcad8e28d73d3927a3396ef2701365103dccdb94178a2f05ff802ebdc40b52c38",
+    "sweep": {
+      "deadline": 1794517543,
+      "nonce": 1,
+      "usd_ntl": 4900000,
+      "usdc_wei": 490000000
+    }
+  },
+  "trigger": "manager-silent"
+}
+
+
+The "open_flatten" call to <practice.keel-factory-bcf915.testnet> on behalf of <guardian.keel-practice-53ee75.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction practice.keel-factory-bcf915.testnet open_flatten json-args '{"perp":"hyperevm:0x60674b3f058ac25d77ce008d3e314cc48dd739f32da89dd5bbb991b96af19cb8:0","spot":"base:0x0f42af110520bb1eaca982c1e6b59f9f8e2f3c4cd52da8852d41f77d93b986bb:2"}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-practice-53ee75.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-practice-53ee75.testnet.json send[39m
+

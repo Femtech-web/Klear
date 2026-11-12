@@ -1,0 +1,66 @@
+├  Unsigned transaction:
+│    signer_id:    manager.keel-practice-53ee75.testnet
+│    receiver_id:  practice.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  propose_order
+│                       args:         {
+│                                       "is_buy": false,
+│                                       "limit_px": 196850000000,
+│                                       "perp": "hyperevm:0x594a43782a1c9203f42e2b35da8f9703ce673229435eec3649de9bd634c521c0:0",
+│                                       "spot": "base:0x104f934dc6bfd767e3898147456d8837134c18402f2867a33b30ba452c89bb61:21",
+│                                       "sz": 600000
+│                                     }
+│                       gas:          120.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:89S6oJe8abXSasEmUfKPVTTGv3K4nPoyyGetQ3LJctfz
+│    Signature:  ed25519:3QM2Urrz4h3BuUzR7FKaPBnjrS2wkAwtiyg8v2vBn9vSsXdbKxeYmFBq96ZFmVHPz1k8NJifE8cZJETstWhao4ai
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.6 Tgas
+│    Transaction fee: 0.0014655961086675 NEAR
+│    Transaction ID: EvXaucdMmiDCbufm9Cd7SCyDrxybyj7mgBF7Xpk2oQrQ
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/EvXaucdMmiDCbufm9Cd7SCyDrxybyj7mgBF7Xpk2oQrQ
+│     [0m
+├  Function execution logs:
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m
+│      {"outcome":"sign","job_id":0,"order":{"nonce":0,"is_buy":false,"limit_px":196850000000,"sz":600000,"reduce_only":false,"cloid":"313308547618988997186016054148930254792","deadline":1794516002},"digest":"0x96fd064c4555af19069b8a4ff3c45f3bb04da5c00dba9f710c33c8f8adb38095"}
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("practice.keel-factory-bcf915.testnet"), request=SignRequestArgs { path: "keel/1/hyperevm", payload: Ecdsa(BoundedVec { inner: [150, 253, 6, 76, 69, 85, 175, 25, 6, 155, 138, 79, 243, 196, 95, 59, 176, 77, 165, 192, 13, 186, 159, 113, 12, 51, 200, 248, 173, 179, 128, 149], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m
+│      signed 0:0
+│    [36mLogs [manager.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "0x96fd064c4555af19069b8a4ff3c45f3bb04da5c00dba9f710c33c8f8adb38095",
+  "job_id": 0,
+  "order": {
+    "cloid": "313308547618988997186016054148930254792",
+    "deadline": 1794516002,
+    "is_buy": false,
+    "limit_px": 196850000000,
+    "nonce": 0,
+    "reduce_only": false,
+    "sz": 600000
+  },
+  "outcome": "sign"
+}
+
+
+The "propose_order" call to <practice.keel-factory-bcf915.testnet> on behalf of <manager.keel-practice-53ee75.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction practice.keel-factory-bcf915.testnet propose_order json-args '{"perp": "hyperevm:0x594a43782a1c9203f42e2b35da8f9703ce673229435eec3649de9bd634c521c0:0", "spot": "base:0x104f934dc6bfd767e3898147456d8837134c18402f2867a33b30ba452c89bb61:21", "is_buy": false, "sz": 600000, "limit_px": 196850000000}' prepaid-gas '120.0 Tgas' attached-deposit '0 NEAR' sign-as manager.keel-practice-53ee75.testnet network-config testnet sign-with-access-key-file .secrets/near/manager-fc.keel-practice-53ee75.testnet.json send[39m
+

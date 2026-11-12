@@ -30,13 +30,22 @@ export interface Agent {
 
 export const replay = data as unknown as {
   season: string;
-  policy: { caps_x: number[]; floors_pct: number[]; band_bp: number; fee_bp: number; headline: { cap_x: number; floor_pct: number } };
+  policy: {
+    caps_x: number[];
+    floors_pct: number[];
+    band_bp: number;
+    fee_bp: number;
+    headline: { cap_x: number; floor_pct: number };
+  };
   agents: Agent[];
 };
 
 export const CAPS = replay.policy.caps_x;
 export const FLOORS = replay.policy.floors_pct;
-export const HEADLINE = { cap: CAPS.indexOf(replay.policy.headline.cap_x), floor: FLOORS.indexOf(replay.policy.headline.floor_pct) };
+export const HEADLINE = {
+  cap: CAPS.indexOf(replay.policy.headline.cap_x),
+  floor: FLOORS.indexOf(replay.policy.headline.floor_pct),
+};
 
 export interface Totals {
   agents: number;
@@ -51,8 +60,22 @@ export interface Totals {
 }
 
 /** Everything the replay says for one leverage cap and one floor, across the agents given. */
-export function totals(cap: number, floor: number, agents: Pick<Agent, "initial" | "final" | "leverage" | "floors">[] = replay.agents): Totals {
-  const t: Totals = { agents: agents.length, start: 0, real: 0, withKeel: 0, better: 0, rescued: 0, worse: 0, opens: 0, refused: 0 };
+export function totals(
+  cap: number,
+  floor: number,
+  agents: Pick<Agent, "initial" | "final" | "leverage" | "floors">[] = replay.agents,
+): Totals {
+  const t: Totals = {
+    agents: agents.length,
+    start: 0,
+    real: 0,
+    withKeel: 0,
+    better: 0,
+    rescued: 0,
+    worse: 0,
+    opens: 0,
+    refused: 0,
+  };
   for (const a of agents) {
     const f = a.floors[floor];
     t.start += a.initial;
@@ -85,4 +108,8 @@ const MODEL_NAMES: Record<string, string> = {
 };
 export const modelName = (m: string) => MODEL_NAMES[m] ?? m;
 /** "3: SITUATIONAL AWARENESS" -> "Situational Awareness". */
-export const competitionName = (c: string) => c.replace(/^\d+:\s*/, "").toLowerCase().replace(/(^|\s)([a-z])/g, (_, p, c2) => p + c2.toUpperCase());
+export const competitionName = (c: string) =>
+  c
+    .replace(/^\d+:\s*/, "")
+    .toLowerCase()
+    .replace(/(^|\s)([a-z])/g, (_, p, c2) => p + c2.toUpperCase());

@@ -30,7 +30,7 @@ fi
 INVESTOR=${G6_INVESTOR:-0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4}
 AGENT="agent.${KEEL_NEAR_ACCOUNT:?run make keys}"
 MPC=v1.signer-prod.testnet
-NEAR_RPC=https://rpc.testnet.near.org
+NEAR_RPC=https://test.rpc.fastnear.com
 HYPER=https://rpc.hyperliquid-testnet.xyz/evm
 BASE=https://sepolia.base.org
 NEAR="$ROOT_DIR/node_modules/.bin/near"

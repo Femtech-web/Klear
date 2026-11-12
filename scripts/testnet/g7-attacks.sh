@@ -69,7 +69,7 @@ PY
     tx=$(plain "$log" | grep -oE "Transaction ID: [A-Za-z0-9]+" | head -1 | cut -d' ' -f3 || true)
     k=$(python3 -I -c 'import json,sys;l=json.load(open(sys.argv[1]));print("hyperevm:%s:%d"%(l["transactionHash"].lower(),int(l["logIndex"],16)))' "$forged")
     sleep 8
-    stored=$(curl -s https://rpc.testnet.near.org -H 'content-type: application/json' -d "$(python3 -I -c '
+    stored=$(curl -s https://test.rpc.fastnear.com -H 'content-type: application/json' -d "$(python3 -I -c '
 import json,sys,base64
 print(json.dumps({"jsonrpc":"2.0","id":1,"method":"query","params":{"request_type":"call_function","finality":"final","account_id":sys.argv[1],"method_name":"get_attested","args_base64":base64.b64encode(json.dumps({"key":sys.argv[2]}).encode()).decode()}}))' "$J" "$k")" | python3 -I -c 'import json,sys;print(bytes(json.load(sys.stdin)["result"]["result"]).decode())')
     why=$(plain "$log" | grep -oE "not attested [^ ]+" | head -1 || true)
