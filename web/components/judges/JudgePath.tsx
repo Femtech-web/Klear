@@ -64,8 +64,8 @@ export function JudgePath({ steps }: { steps: PathStep[] }) {
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-[240px_minmax(0,1fr)]">
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <p className="m-0 text-sm text-ink-3" aria-live="polite">
-          <span className="font-serif text-[1.6rem] font-medium tabular-nums text-ink">{count}</span> of {steps.length}{" "}
-          done
+          <span className="font-display text-[1.6rem] font-medium tabular-nums text-ink">{count}</span> of{" "}
+          {steps.length} done
         </p>
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-surface-2" aria-hidden="true">
           <div

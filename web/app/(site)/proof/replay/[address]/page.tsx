@@ -56,13 +56,13 @@ export default async function AgentPage({ params }: PageProps<"/proof/replay/[ad
           </div>
           <div className="bg-surface p-6">
             <Stat
-              value={f.rescue ? usd(f.rescue.returned) : "—"}
+              value={f.rescue ? usd(f.rescue.returned) : "None"}
               label={f.rescue ? `returned by a rescue on ${utc(f.rescue.time)}` : "the 30% floor never broke"}
             />
           </div>
           <div className="bg-surface p-6">
             <Stat
-              value={a.validationError === null ? "—" : pct(a.validationError, 1)}
+              value={a.validationError === null ? "n/a" : pct(a.validationError, 1)}
               label="gap to Hyperliquid's own account values"
             />
           </div>

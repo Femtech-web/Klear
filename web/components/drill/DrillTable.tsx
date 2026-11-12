@@ -23,7 +23,7 @@ export function DrillTable({ limit }: { limit?: number }) {
         <tbody>
           {runs.map((r) => (
             <tr key={r.started} className="align-top">
-              <td className="border-b border-line py-3 pr-4 tabular-nums">{r.cycle === null ? "–" : r.cycle + 1}</td>
+              <td className="border-b border-line py-3 pr-4 tabular-nums">{r.cycle === null ? "n/a" : r.cycle + 1}</td>
               <td className="border-b border-line py-3 pr-4 whitespace-nowrap">{utc(r.started * 1000)}</td>
               <td className="border-b border-line py-3 pr-4">
                 {r.ok ? (
@@ -40,7 +40,7 @@ export function DrillTable({ limit }: { limit?: number }) {
                 )}
               </td>
               <td className="border-b border-line py-3 pr-4">
-                {r.rescuer ? <code className="font-mono">{r.rescuer}</code> : "–"}
+                {r.rescuer ? <code className="font-mono">{r.rescuer}</code> : "nobody"}
                 {r.rescuer && r.rescuer !== factory.practice.guardian && <Pill tone="ai">visitor</Pill>}
               </td>
               <td className="border-b border-line py-3 pr-4">
@@ -56,7 +56,7 @@ export function DrillTable({ limit }: { limit?: number }) {
                 </span>
               </td>
               <td className="border-b border-line py-3 pr-4 whitespace-nowrap">
-                {r.payouts.length ? near(r.payouts.reduce((a, p) => a + BigInt(p.yocto), 0n)) : "–"}
+                {r.payouts.length ? near(r.payouts.reduce((a, p) => a + BigInt(p.yocto), 0n)) : "nothing"}
               </td>
             </tr>
           ))}

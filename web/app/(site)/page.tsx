@@ -81,8 +81,8 @@ export default async function Home() {
               <b className="rounded-full bg-accent-soft px-2.5 py-0.5 font-semibold text-accent">New</b>
               {t.agents} real AI traders, replayed through Keel
             </p>
-            <h1 className="text-display tracking-[-0.03em] [font-variation-settings:'opsz'_120,'SOFT'_50]">
-              When your AI trader fails, <em className="text-accent">anyone</em> can bring your money home.
+            <h1 className="text-display tracking-[-0.03em]">
+              When your AI trader fails, <em className="not-italic text-accent">anyone</em> can bring your money home.
             </h1>
             <p className="mt-6 max-w-[36ch] text-[1.22rem] text-ink-2">
               And they are paid only when it lands. The AI trades within rules it cannot change, held by a NEAR contract
@@ -125,7 +125,7 @@ export default async function Home() {
           </div>
           <div className="bg-surface p-6">
             <Stat
-              value={locked ? "0" : "—"}
+              value={locked ? "0" : "?"}
               label="keys that can change your rules, not even ours"
               note={locked ? "Checked live, just now" : "Live check unavailable right now"}
             />
@@ -141,7 +141,7 @@ export default async function Home() {
           {DOORS.map((d) => (
             <div key={d.title} className="rounded-xl border border-line bg-surface p-6 shadow-soft md:p-8">
               <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-accent">{d.eyebrow}</p>
-              <h2 className="mt-3 font-serif text-[1.7rem] tracking-[-0.015em]">{d.title}</h2>
+              <h2 className="mt-3 font-display text-[1.7rem] tracking-[-0.015em]">{d.title}</h2>
               <p className="mt-2 text-ink-2">{d.text}</p>
               <ul className="m-0 mt-5 grid list-none gap-1 p-0">
                 {d.links.map(([href, label, note]) => (
@@ -191,7 +191,7 @@ export default async function Home() {
       >
         <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="mb-4 font-serif text-[1.65rem] leading-snug tracking-[-0.015em]">
+            <p className="mb-4 font-display text-[1.65rem] leading-snug tracking-[-0.015em]">
               With a floor 30% down, Keel would have stepped in{" "}
               {rescueDay <= 1 ? "within its first day" : `on day ${rescueDay}`} and returned{" "}
               <span className="text-accent">{usd(rescue.returned)}</span>.

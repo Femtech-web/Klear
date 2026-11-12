@@ -47,7 +47,7 @@ function Check1({
   return (
     <li className="grid grid-cols-[22px_1fr] gap-3 border-b border-line py-3 last:border-0">
       <span className={read.ok ? (pass ? "text-ok" : "text-no") : "text-ink-3"} aria-hidden="true">
-        {read.ok ? pass ? <Check size={18} /> : <Cross size={18} /> : "–"}
+        {read.ok ? pass ? <Check size={18} /> : <Cross size={18} /> : "?"}
       </span>
       <div className="min-w-0">
         <p className="m-0 font-medium">

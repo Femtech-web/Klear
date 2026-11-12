@@ -237,7 +237,7 @@ export default async function JudgesPage() {
             read={aiKeys}
             pass={!!aiKey && aiKey.functionCall!.methods.every((m) => m === "propose_order" || m === "heartbeat")}
           >
-            The AI signs with a key for {aiKey ? aiKey.functionCall!.methods.join(" and ") : "—"} on its judge, nothing
+            The AI signs with a key for {aiKey ? aiKey.functionCall!.methods.join(" and ") : "its two methods"} on its judge, nothing
             else (read now). Its account&apos;s owner key is ours, and the judge accepts only proposals and heartbeats
             from the manager whatever key signs.
           </Result>

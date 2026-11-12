@@ -88,7 +88,7 @@ export function RulesSimulator({
 
         <div className="rounded-xl bg-ink p-6 text-canvas shadow-lift" aria-live="polite">
           <p className="text-sm text-canvas/70">With these rules, investors would have kept</p>
-          <p className="mt-1 font-serif text-display leading-none tracking-[-0.03em] tabular-nums">{usd(withKeel)}</p>
+          <p className="mt-1 font-display text-display leading-none tracking-[-0.03em] tabular-nums">{usd(withKeel)}</p>
           <p className="mt-2 text-canvas/80">
             instead of <span className="tabular-nums">{usd(t.real)}</span>:{" "}
             <strong className={cn("tabular-nums", t.better >= 0 ? "text-accent-on-ink" : "text-no")}>
@@ -99,18 +99,18 @@ export function RulesSimulator({
           <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-canvas/15 pt-5 text-sm">
             <div>
               <dt className="text-canvas/60">Rescued</dt>
-              <dd className="m-0 mt-1 font-serif text-2xl tabular-nums">
+              <dd className="m-0 mt-1 font-display text-2xl tabular-nums">
                 {t.rescued}
                 <span className="text-base text-canvas/60">/{t.agents}</span>
               </dd>
             </div>
             <div>
               <dt className="text-canvas/60">Risky orders refused</dt>
-              <dd className="m-0 mt-1 font-serif text-2xl tabular-nums">{pct(t.refused / Math.max(t.opens, 1))}</dd>
+              <dd className="m-0 mt-1 font-display text-2xl tabular-nums">{pct(t.refused / Math.max(t.opens, 1))}</dd>
             </div>
             <div>
               <dt className="text-canvas/60">Worse off</dt>
-              <dd className="m-0 mt-1 font-serif text-2xl tabular-nums">{t.worse}</dd>
+              <dd className="m-0 mt-1 font-display text-2xl tabular-nums">{t.worse}</dd>
             </div>
           </dl>
         </div>

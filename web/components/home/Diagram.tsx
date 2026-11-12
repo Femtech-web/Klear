@@ -60,7 +60,7 @@ export function Diagram() {
       <path d="M345 86 C345 120 270 128 235 150" markerEnd="url(#arrow)" className={flow} />
 
       <rect x="110" y="152" width="220" height="78" rx="20" className="fill-ink" />
-      <text x="220" y="186" className="fill-canvas font-serif text-[19px] font-semibold [text-anchor:middle]">
+      <text x="220" y="186" className="fill-canvas font-display text-[19px] font-semibold [text-anchor:middle]">
         Your rules
       </text>
       <text x="220" y="207" className="fill-canvas/70 font-sans text-xs [text-anchor:middle]">

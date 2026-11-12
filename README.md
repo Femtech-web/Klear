@@ -79,7 +79,7 @@ make rescue ACCOUNT=<you>.testnet       # waits for the window, then rescues; pr
 ```
 
 On 2026-11-12 a stranger did exactly this: a faucet account created that evening, with no EVM gas and no
-role in the strategy, rescued it and was paid by the judge four minutes after opening the rescue
+role in the strategy, rescued both legs and was paid 0.15 NEAR by the judge
 ([its transactions](docs/results/visitor/README.md)).
 
 The site runs the same rescue with a NEAR wallet (`/practice`), lets you inspect any strategy with six live

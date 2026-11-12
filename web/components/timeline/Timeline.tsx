@@ -41,7 +41,7 @@ export function Timeline({ steps, start = 1 }: { steps: Step[]; start?: number }
             <h3 className="font-sans text-[1.12rem] font-semibold tracking-[-0.01em]">{s.title}</h3>
             <p className="mt-1 max-w-measure text-ink-2">{s.detail}</p>
             {s.quote && (
-              <blockquote className="mt-3 max-w-measure rounded-r-md border-l-[3px] border-ai bg-ai-soft px-4 py-3 font-serif text-[1.05rem] italic text-ink">
+              <blockquote className="mt-3 max-w-measure rounded-r-md border-l-[3px] border-ai bg-ai-soft px-4 py-3 font-display text-[1.05rem] italic text-ink">
                 &ldquo;{s.quote}&rdquo;
               </blockquote>
             )}

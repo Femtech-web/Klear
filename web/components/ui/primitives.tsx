@@ -34,11 +34,7 @@ export function Section({
 }
 
 export function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent before:h-[1.5px] before:w-[18px] before:rounded-sm before:bg-current">
-      {children}
-    </p>
-  );
+  return <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent">{children}</p>;
 }
 
 export function LinkButton({
@@ -56,7 +52,7 @@ export function LinkButton({
       className={cn(
         "group inline-flex h-11.5 items-center gap-2 rounded-full px-5 text-[0.98rem] font-medium no-underline transition duration-300 ease-calm",
         variant === "primary"
-          ? "bg-ink text-canvas shadow-lift hover:-translate-y-px"
+          ? "bg-accent text-accent-ink shadow-lift hover:-translate-y-px"
           : "bg-surface text-ink shadow-soft ring-1 ring-line-strong hover:bg-surface-2",
       )}
     >
@@ -131,7 +127,7 @@ export function Stat({
 }) {
   return (
     <div className="grid content-start gap-1.5">
-      <span className="font-serif text-stat font-medium tracking-[-0.03em] tabular-nums">{value}</span>
+      <span className="font-display text-stat font-medium tracking-[-0.03em] tabular-nums">{value}</span>
       <span className="text-[0.95rem] text-ink-2">{label}</span>
       {note && <span className="text-sm text-ink-3">{note}</span>}
     </div>

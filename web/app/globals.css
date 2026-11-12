@@ -6,50 +6,50 @@
  * Nothing in a component hard-codes a color, a radius or a shadow.
  */
 @theme {
-  --color-canvas: #f6f4ee;
-  --color-canvas-tint: #efece4;
+  --color-canvas: #f7f7f4;
+  --color-canvas-tint: #efefea;
   --color-surface: #ffffff;
-  --color-surface-2: #f3f1ea;
-  --color-ink: #0d1b2e;
-  --color-ink-2: #3a4a5f;
-  --color-ink-3: #5c6a7d;
-  --color-line: rgb(13 27 46 / 0.09);
-  --color-line-strong: rgb(13 27 46 / 0.16);
+  --color-surface-2: #f2f2ee;
+  --color-ink: #0e1116;
+  --color-ink-2: #3d4450;
+  --color-ink-3: #5b6270;
+  --color-line: rgb(14 17 22 / 0.08);
+  --color-line-strong: rgb(14 17 22 / 0.15);
   --color-accent: #0b6e66;
   --color-accent-ink: #ffffff;
-  --color-accent-soft: #e2efec;
+  --color-accent-soft: #e3f1ee;
   /* The accent on an ink panel (which inverts in dark mode). */
   --color-accent-on-ink: #5fd6c4;
   --color-ok: #0b6e66;
-  --color-ok-soft: #e2efec;
-  --color-no: #a63e17;
-  --color-no-soft: #f8e7df;
+  --color-ok-soft: #e3f1ee;
+  --color-no: #b42318;
+  --color-no-soft: #fdecea;
   --color-warn: #8f5408;
   --color-warn-soft: #f9eedb;
-  --color-ai: #4a3fb8;
-  --color-ai-soft: #ebe8f8;
-  --color-chart-real: #a63e17;
+  --color-ai: #4f46e5;
+  --color-ai-soft: #eef0fe;
+  --color-chart-real: #b42318;
   --color-chart-keel: #0b6e66;
-  --color-chart-grid: rgb(13 27 46 / 0.07);
+  --color-chart-grid: rgb(14 17 22 / 0.07);
 
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 26px;
 
-  --shadow-soft: 0 1px 2px rgb(13 27 46 / 0.05), 0 1px 1px rgb(13 27 46 / 0.03);
-  --shadow-lift: 0 18px 40px -22px rgb(13 27 46 / 0.28), 0 2px 8px rgb(13 27 46 / 0.05);
+  --shadow-soft: 0 1px 2px rgb(14 17 22 / 0.05), 0 1px 1px rgb(14 17 22 / 0.03);
+  --shadow-lift: 0 18px 40px -22px rgb(14 17 22 / 0.26), 0 2px 8px rgb(14 17 22 / 0.05);
 
   --container-page: 70rem;
   --container-measure: 64ch;
 
-  --text-display: clamp(2.6rem, 1.6rem + 4vw, 4.4rem);
-  --text-display--line-height: 1.04;
-  --text-h1: clamp(2.1rem, 1.5rem + 2.4vw, 3.1rem);
-  --text-h1--line-height: 1.08;
-  --text-h2: clamp(1.6rem, 1.25rem + 1.3vw, 2.15rem);
-  --text-h2--line-height: 1.14;
-  --text-stat: clamp(2rem, 1.5rem + 1.8vw, 2.8rem);
+  --text-display: clamp(2.5rem, 1.5rem + 3.8vw, 4.1rem);
+  --text-display--line-height: 1.02;
+  --text-h1: clamp(2rem, 1.45rem + 2.2vw, 2.9rem);
+  --text-h1--line-height: 1.06;
+  --text-h2: clamp(1.55rem, 1.25rem + 1.1vw, 2rem);
+  --text-h2--line-height: 1.12;
+  --text-stat: clamp(1.9rem, 1.5rem + 1.5vw, 2.6rem);
   --text-stat--line-height: 1;
 
   --ease-calm: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -97,7 +97,7 @@
 
 /* Fonts come from next/font (self-hosted at build time), so they are referenced, not declared. */
 @theme inline {
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
@@ -106,30 +106,30 @@
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --color-canvas: #08111d;
-    --color-canvas-tint: #0b1626;
-    --color-surface: #0e1a2b;
-    --color-surface-2: #122136;
-    --color-ink: #e9eef5;
-    --color-ink-2: #b3bfcf;
-    --color-ink-3: #8a98ad;
-    --color-line: rgb(233 238 245 / 0.08);
-    --color-line-strong: rgb(233 238 245 / 0.15);
+    --color-canvas: #0b0d0f;
+    --color-canvas-tint: #101316;
+    --color-surface: #131619;
+    --color-surface-2: #1a1e22;
+    --color-ink: #eceef1;
+    --color-ink-2: #b4bac3;
+    --color-ink-3: #8d949f;
+    --color-line: rgb(236 238 241 / 0.08);
+    --color-line-strong: rgb(236 238 241 / 0.14);
     --color-accent: #5fd6c4;
     --color-accent-ink: #052521;
     --color-accent-soft: rgb(95 214 196 / 0.12);
     --color-accent-on-ink: #0b6e66;
     --color-ok: #5fd6c4;
     --color-ok-soft: rgb(95 214 196 / 0.12);
-    --color-no: #f39a6b;
-    --color-no-soft: rgb(243 154 107 / 0.13);
+    --color-no: #f97a6b;
+    --color-no-soft: rgb(249 122 107 / 0.13);
     --color-warn: #f2c063;
     --color-warn-soft: rgb(242 192 99 / 0.13);
-    --color-ai: #aaa3f5;
-    --color-ai-soft: rgb(170 163 245 / 0.13);
-    --color-chart-real: #f39a6b;
+    --color-ai: #a5b4fc;
+    --color-ai-soft: rgb(165 180 252 / 0.13);
+    --color-chart-real: #f97a6b;
     --color-chart-keel: #5fd6c4;
-    --color-chart-grid: rgb(233 238 245 / 0.07);
+    --color-chart-grid: rgb(236 238 241 / 0.07);
     --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4);
     --shadow-lift: 0 24px 48px -24px rgb(0 0 0 / 0.7), 0 2px 8px rgb(0 0 0 / 0.3);
   }
@@ -161,7 +161,7 @@
   h1,
   h2,
   h3 {
-    @apply font-serif font-medium tracking-tight text-balance;
+    @apply font-display font-semibold tracking-[-0.022em] text-balance;
   }
   p {
     @apply text-pretty;

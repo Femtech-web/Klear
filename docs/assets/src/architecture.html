@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8" />
 <title>Keel architecture</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=block" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500..700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=block" rel="stylesheet" />
 <style>
   :root {
-    --canvas: #f6f4ee; --panel: #efece4; --surface: #ffffff; --ink: #0d1b2e; --ink-2: #3a4a5f; --ink-3: #5c6a7d;
-    --line: rgb(13 27 46 / 0.10); --line-strong: rgb(13 27 46 / 0.22); --accent: #0b6e66; --accent-soft: #e2efec; --ai: #4a3fb8; --ai-soft: #ebe8f8;
-    --on-ink: #f6f4ee;
+    --canvas: #f7f7f4; --panel: #efefea; --surface: #ffffff; --ink: #0e1116; --ink-2: #3d4450; --ink-3: #5b6270;
+    --line: rgb(14 17 22 / 0.10); --line-strong: rgb(14 17 22 / 0.22); --accent: #0b6e66; --accent-soft: #e3f1ee; --ai: #4f46e5; --ai-soft: #eef0fe;
+    --on-ink: #f7f7f4;
   }
   :root[data-theme="dark"] {
-    --canvas: #08111d; --panel: #0b1626; --surface: #0e1a2b; --ink: #e9eef5; --ink-2: #b3bfcf; --ink-3: #8a98ad;
-    --line: rgb(233 238 245 / 0.09); --line-strong: rgb(233 238 245 / 0.22); --accent: #5fd6c4; --accent-soft: rgb(95 214 196 / 0.12); --ai: #a99ff5; --ai-soft: rgb(169 159 245 / 0.13);
-    --on-ink: #08111d;
+    --canvas: #0b0d0f; --panel: #101316; --surface: #131619; --ink: #eceef1; --ink-2: #b4bac3; --ink-3: #8d949f;
+    --line: rgb(236 238 241 / 0.09); --line-strong: rgb(236 238 241 / 0.22); --accent: #5fd6c4; --accent-soft: rgb(95 214 196 / 0.12); --ai: #a5b4fc; --ai-soft: rgb(165 180 252 / 0.13);
+    --on-ink: #0b0d0f;
   }
   * { margin: 0; }
   html, body { width: 1400px; height: 900px; background: var(--canvas); overflow: hidden; }
@@ -73,7 +73,7 @@
 
   <!-- NEAR -->
   <rect x="522" y="262" width="356" height="132" rx="18" fill="var(--ink)" />
-  <text x="700" y="304" class="c" style="fill: var(--on-ink); font: 600 24px Fraunces, serif">The judge</text>
+  <text x="700" y="304" class="c" style="fill: var(--on-ink); font: 600 24px 'Instrument Sans', sans-serif">The judge</text>
   <text x="700" y="332" class="c" style="fill: var(--on-ink); opacity: .75; font: 400 14px Geist, sans-serif">the investor's rules, in a contract with no keys</text>
   <text x="700" y="356" class="c" style="fill: var(--on-ink); opacity: .75; font: 400 14px Geist, sans-serif">decides on verified evidence; pays on delivery</text>
   <rect x="522" y="460" width="168" height="132" rx="16" class="box" />
@@ -118,7 +118,7 @@
 
   <!-- Home -->
   <rect x="470" y="718" width="460" height="112" rx="20" fill="var(--accent-soft)" stroke="var(--accent)" />
-  <text x="700" y="760" class="c" style="fill: var(--ink); font: 600 22px Fraunces, serif">The investor's own addresses</text>
+  <text x="700" y="760" class="c" style="fill: var(--ink); font: 600 22px 'Instrument Sans', sans-serif">The investor's own addresses</text>
   <text x="700" y="788" class="s c">USDC on HyperCore · WETH on Base, fixed when the accounts were made</text>
   <path d="M300 592 C300 700 360 772 466 772" class="money" marker-end="url(#m)" />
   <path d="M1180 394 V640 C1180 720 1060 772 934 772" class="money" marker-end="url(#m)" />

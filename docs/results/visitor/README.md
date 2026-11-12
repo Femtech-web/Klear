@@ -20,7 +20,8 @@ judge signed. Every NEAR transaction below is signed by the visitor's own key.
 | (the courier relays the sweep and the exit) | HyperEVM `0x5b54412d…`, Base `0xca83654c…` | |
 | Attest a newer snapshot, settle | [`9XToGyjg…`](https://testnet.nearblocks.io/txns/9XToGyjgw8nF7VWvMrxFG1NYRQ5htReEB2BYbwy5mJxp), [`2zEMG1GS…`](https://testnet.nearblocks.io/txns/2zEMG1GSDxR9mLsTN8cPazBoJTznwJBNb1zx1bcLsZUy) | refused `attempt-not-resolved`: HyperCore had not yet acted on the sweep; `rescue.py` retried by itself |
 | Attest a newer snapshot, settle | [`CScn2sA2…`](https://testnet.nearblocks.io/txns/CScn2sA2PEfjB5hYhUTGqEQSz7yxVrPTpKXPYdP68nwn), [`HUBP8riT…`](https://testnet.nearblocks.io/txns/HUBP8riTU2nWt7QEmpiyHFkRakvCA5K3DhMJoS8Uhh8d) | **4.9 USDC seen at the investor's HyperCore address; 0.1 NEAR paid to the visitor** |
-| Attest the vault's `Exited` log, confirm | after Base finality (about 25 minutes) | *pending at the time of writing* |
+| Attest the vault's `Exited` log, confirm | [`6RZRNWYd…`](https://testnet.nearblocks.io/txns/6RZRNWYdyZCYXe27mMFpCbinmy6uDYnKmBK2cByhb8Xm), [`4LBAPQFi…`](https://testnet.nearblocks.io/txns/4LBAPQFioPPThddL24FNLc2ZvBoQiAUm7B2NR39xr8ia) | **0.004 WETH proven at the investor's Base address (exit `0xca83654c…`); 0.05 NEAR paid to the visitor**; the strategy is closed (`flattened`) |
 
-From the open to the visitor's first reward: about four minutes. The visitor never held a key to the strategy's
+From the open to the visitor's first reward: about four minutes; to the second, about twenty more, the wait being
+Base finality. Both legs reached the investor, and the judge paid a stranger 0.15 NEAR for bringing them home. The visitor never held a key to the strategy's
 accounts, chose no order, and could not have sent anything anywhere but to the investor.

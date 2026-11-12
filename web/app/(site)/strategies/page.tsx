@@ -71,9 +71,9 @@ export default async function StrategiesPage() {
         lede="Anyone can create a Keel strategy through the factory, and each judge it creates is locked from birth. A guardian scans this list: when an investor has asked to exit, or a manager has gone silent under a mandate that says exit, anyone may run the rescue, and the judge pays whoever delivers."
       >
         <div className="mb-10 grid gap-8 sm:grid-cols-3">
-          <Stat value={list.ok ? list.value.length : "–"} label="strategies created" />
+          <Stat value={list.ok ? list.value.length : "?"} label="strategies created" />
           <Stat
-            value={list.ok ? due : "–"}
+            value={list.ok ? due : "?"}
             label="rescue due right now"
             note="from each judge's own clock; a floor breach needs attested evidence"
           />
@@ -101,7 +101,7 @@ export default async function StrategiesPage() {
         </Card>
         <div className="mt-10 grid grid-cols-1 gap-6 rounded-lg border border-line bg-surface p-6 shadow-soft md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:p-8">
           <div>
-            <h2 className="font-serif text-[1.5rem] tracking-[-0.015em]">Create one</h2>
+            <h2 className="font-display text-[1.5rem] tracking-[-0.015em]">Create one</h2>
             <p className="mt-2 text-ink-2">
               One NEAR transaction creates the judge, locked from birth, with your mandate; two deployments put its
               accounts at addresses fixed in advance. In your browser or from the command line, with a NEAR testnet

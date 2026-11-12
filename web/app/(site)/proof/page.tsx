@@ -159,13 +159,13 @@ export default async function ProofPage() {
                 <span className="font-mono text-sm text-ink-3">{String(i + 1).padStart(2, "0")}</span>
                 <Pill tone={KIND_TONE[it.kind]}>{it.kind}</Pill>
               </div>
-              <h2 className="mt-4 font-serif text-[1.6rem] tracking-[-0.015em]">{it.title}</h2>
+              <h2 className="mt-4 font-display text-[1.6rem] tracking-[-0.015em]">{it.title}</h2>
               <p className="mt-2 max-w-[62ch] text-ink-2">{it.claim}</p>
               <div className="mt-auto pt-6">
                 <ul className="m-0 grid list-none grid-cols-2 gap-4 border-t border-line p-0 pt-5">
                   {it.facts.map(([v, l]) => (
                     <li key={l}>
-                      <span className="block font-serif text-[1.45rem] font-medium tabular-nums tracking-[-0.02em]">
+                      <span className="block font-display text-[1.45rem] font-medium tabular-nums tracking-[-0.02em]">
                         {v}
                       </span>
                       <span className="text-sm text-ink-3">{l}</span>
