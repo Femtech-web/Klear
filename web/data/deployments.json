@@ -1,0 +1,23 @@
+{
+ "investor": "0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4",
+ "weth": "0x4200000000000000000000000000000000000006",
+ "localBuildSha256": "be140d65f1e0776f58b88a3f7323ba32760c7a60ad945eb621532afe3f80a334",
+ "strategies": [
+  {
+   "name": "ai",
+   "judge": "keel-ai-76e036.testnet",
+   "leg": "0x58675f5d6b9dd6394bD635b92Be9341B44F136DA",
+   "vault": "0x9AB31b03dDa4e1F08cD2f2fC8a1FFA69a5D7Cd0c",
+   "controller": "0xf5bb08645184f895da00c16a7d284e457da54dd5",
+   "vaultController": "0x7e3a95c6f4e2ef0cc2b92cf417c4a9e6e98796e8"
+  },
+  {
+   "name": "human",
+   "judge": "keel-human-c0caa7.testnet",
+   "leg": "0x03bCCE19De27Fd9520c38427F60ed305073A3f51",
+   "vault": "0x2403529Abe0d3adaFAA630173275Fd5b53a9A13f",
+   "controller": "0xfd53e38350fe71671d96b53144c9165ae4335ab1",
+   "vaultController": "0xdf66cd1ebead4f5945dc03c995c9c6a5f28c6a39"
+  }
+ ]
+}

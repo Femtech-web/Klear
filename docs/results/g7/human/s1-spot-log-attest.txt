@@ -1,0 +1,64 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-human-c0caa7.testnet
+│    receiver_id:  keel-human-c0caa7.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  attest
+│                       args:         {
+│                                       "chain": "base",
+│                                       "log": {
+│                                         "address": "0x2403529abe0d3adafaa630173275fd5b53a9a13f",
+│                                         "blockHash": "0x61214b3929b329f7b90b26606fc050d43923132d1f6d4a57d8c74aa6ba54fb48",
+│                                         "blockNumber": "0x3725581",
+│                                         "blockTimestamp": "0x6af5b20d",
+│                                         "data": "0x00000000000000000000000000000000000000000000000000071afd498d00000000000000000000000000000000000000000000000000000000000003725581000000000000000000000000000000000000000000000000000000006af5b20d7331000000000000000000000000000000000000000000000000000000000000",
+│                                         "logIndex": "0x1",
+│                                         "removed": false,
+│                                         "topics": [
+│                                           "0x2bd3e38a1c6aed238c688414f6919db3a3533a99f0c51942438603c49641b8e6",
+│                                           "0x0000000000000000000000002403529abe0d3adafaa630173275fd5b53a9a13f",
+│                                           "0x0000000000000000000000004200000000000000000000000000000000000006"
+│                                         ],
+│                                         "transactionHash": "0x6b8887d7996f5cc65434ced7d016eb468b352440768511cf04d96d8cb6599f8c",
+│                                         "transactionIndex": "0x3"
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4dFcu9k2dnJpLzYYmKYCybpdaVvaYYgAsqpXAR98oVXb
+│    Signature:  ed25519:3Mis6q7wXpsdeJ4qN5b3tiiBywpZ9xmm6EGLi7PRtneSaHhM8qGnMt2QHnsZ7DJvrx2JQXhGAfDUaaJ4wWVchGSS
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.2 Tgas
+│    Transaction fee: 0.0014285912116082 NEAR
+│    Transaction ID: MKikDcUA8KHDqNSgQQHJn7E1s5AFX7WJzPo8oyvoH8x
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/MKikDcUA8KHDqNSgQQHJn7E1s5AFX7WJzPo8oyvoH8x
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      verify_foreign_transaction: predecessor=AccountId("keel-human-c0caa7.testnet"), request=VerifyForeignTransactionRequestArgs { request: Base(EvmRpcRequest { tx_id: EvmTxId([107, 136, 135, 215, 153, 111, 92, 198, 84, 52, 206, 215, 208, 22, 235, 70, 139, 53, 36, 64, 118, 133, 17, 207, 4, 217, 109, 140, 182, 89, 159, 140]), extractors: BoundedVec { inner: [Log { log_index: 1 }], witness: PossiblyEmpty(()) }, finality: Finalized }), domain_id: DomainId(3), payload_version: V1, expected_payload_hash: Some(Hash256([7, 145, 163, 34, 210, 232, 113, 44, 24, 247, 83, 213, 181, 12, 82, 118, 95, 182, 242, 173, 206, 1, 30, 19, 59, 128, 109, 57, 227, 138, 128, 134])) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-human-c0caa7.testnet]:[39m
+│      attested base:0x6b8887d7996f5cc65434ced7d016eb468b352440768511cf04d96d8cb6599f8c:1 for guardian.keel-human-c0caa7.testnet
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "attest" call to <keel-human-c0caa7.testnet> on behalf of <guardian.keel-human-c0caa7.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-human-c0caa7.testnet attest json-args '{"chain": "base", "log": {"address": "0x2403529abe0d3adafaa630173275fd5b53a9a13f", "topics": ["0x2bd3e38a1c6aed238c688414f6919db3a3533a99f0c51942438603c49641b8e6", "0x0000000000000000000000002403529abe0d3adafaa630173275fd5b53a9a13f", "0x0000000000000000000000004200000000000000000000000000000000000006"], "data": "0x00000000000000000000000000000000000000000000000000071afd498d00000000000000000000000000000000000000000000000000000000000003725581000000000000000000000000000000000000000000000000000000006af5b20d7331000000000000000000000000000000000000000000000000000000000000", "blockHash": "0x61214b3929b329f7b90b26606fc050d43923132d1f6d4a57d8c74aa6ba54fb48", "blockNumber": "0x3725581", "blockTimestamp": "0x6af5b20d", "transactionHash": "0x6b8887d7996f5cc65434ced7d016eb468b352440768511cf04d96d8cb6599f8c", "transactionIndex": "0x3", "logIndex": "0x1", "removed": false}}' prepaid-gas '300.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as guardian.keel-human-c0caa7.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-human-c0caa7.testnet.json send[39m
+

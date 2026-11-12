@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/*
+ * Keel's design tokens, as Tailwind theme variables: every utility (bg-surface, text-ink-2, rounded-lg,
+ * shadow-lift, animate-draw…) resolves to one of these, and the dark palette below flips them all at once.
+ * Nothing in a component hard-codes a color, a radius or a shadow.
+ */
+@theme {
+  --color-canvas: #f6f4ee;
+  --color-canvas-tint: #efece4;
+  --color-surface: #ffffff;
+  --color-surface-2: #f3f1ea;
+  --color-ink: #0d1b2e;
+  --color-ink-2: #3a4a5f;
+  --color-ink-3: #5c6a7d;
+  --color-line: rgb(13 27 46 / 0.09);
+  --color-line-strong: rgb(13 27 46 / 0.16);
+  --color-accent: #0b6e66;
+  --color-accent-ink: #ffffff;
+  --color-accent-soft: #e2efec;
+  /* The accent on an ink panel (which inverts in dark mode). */
+  --color-accent-on-ink: #5fd6c4;
+  --color-ok: #0b6e66;
+  --color-ok-soft: #e2efec;
+  --color-no: #a63e17;
+  --color-no-soft: #f8e7df;
+  --color-warn: #8f5408;
+  --color-warn-soft: #f9eedb;
+  --color-ai: #4a3fb8;
+  --color-ai-soft: #ebe8f8;
+  --color-chart-real: #a63e17;
+  --color-chart-keel: #0b6e66;
+  --color-chart-grid: rgb(13 27 46 / 0.07);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+
+  --shadow-soft: 0 1px 2px rgb(13 27 46 / 0.05), 0 1px 1px rgb(13 27 46 / 0.03);
+  --shadow-lift: 0 18px 40px -22px rgb(13 27 46 / 0.28), 0 2px 8px rgb(13 27 46 / 0.05);
+
+  --container-page: 70rem;
+  --container-measure: 64ch;
+
+  --text-display: clamp(2.6rem, 1.6rem + 4vw, 4.4rem);
+  --text-display--line-height: 1.04;
+  --text-h1: clamp(2.1rem, 1.5rem + 2.4vw, 3.1rem);
+  --text-h1--line-height: 1.08;
+  --text-h2: clamp(1.6rem, 1.25rem + 1.3vw, 2.15rem);
+  --text-h2--line-height: 1.14;
+  --text-stat: clamp(2rem, 1.5rem + 1.8vw, 2.8rem);
+  --text-stat--line-height: 1;
+
+  --ease-calm: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --animate-draw: draw 1.6s var(--ease-calm) 0.15s forwards;
+  --animate-fade-in: fade-in 0.6s var(--ease-calm) forwards;
+  --animate-flow: flow 1.6s linear infinite;
+  --animate-ping-soft: ping-soft 2.2s var(--ease-calm) infinite;
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -22;
+    }
+  }
+  @keyframes ping-soft {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 55%, transparent);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 7px transparent;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Fonts come from next/font (self-hosted at build time), so they are referenced, not declared. */
+@theme inline {
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/* The dark palette: unlayered, so it overrides the theme layer. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-canvas: #08111d;
+    --color-canvas-tint: #0b1626;
+    --color-surface: #0e1a2b;
+    --color-surface-2: #122136;
+    --color-ink: #e9eef5;
+    --color-ink-2: #b3bfcf;
+    --color-ink-3: #8a98ad;
+    --color-line: rgb(233 238 245 / 0.08);
+    --color-line-strong: rgb(233 238 245 / 0.15);
+    --color-accent: #5fd6c4;
+    --color-accent-ink: #052521;
+    --color-accent-soft: rgb(95 214 196 / 0.12);
+    --color-accent-on-ink: #0b6e66;
+    --color-ok: #5fd6c4;
+    --color-ok-soft: rgb(95 214 196 / 0.12);
+    --color-no: #f39a6b;
+    --color-no-soft: rgb(243 154 107 / 0.13);
+    --color-warn: #f2c063;
+    --color-warn-soft: rgb(242 192 99 / 0.13);
+    --color-ai: #aaa3f5;
+    --color-ai-soft: rgb(170 163 245 / 0.13);
+    --color-chart-real: #f39a6b;
+    --color-chart-keel: #5fd6c4;
+    --color-chart-grid: rgb(233 238 245 / 0.07);
+    --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-lift: 0 24px 48px -24px rgb(0 0 0 / 0.7), 0 2px 8px rgb(0 0 0 / 0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-canvas font-sans text-[1.0625rem] leading-relaxed text-ink;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-medium tracking-tight text-balance;
+  }
+  p {
+    @apply text-pretty;
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    @apply rounded-sm outline-none ring-3 ring-accent/35;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+}
+
+/* The page container. */
+@utility page {
+  @apply mx-auto w-full max-w-page px-6;
+}
+
+/* Settles into place as it enters the viewport, where the browser can tie animation to scroll, and never
+   for visitors who prefer less motion (a scroll-driven animation ignores the duration override above). */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}

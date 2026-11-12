@@ -1,0 +1,9 @@
+{
+  "name": "keel",
+  "private": true,
+  "description": "Tooling only: near-cli-rs and cargo-near for contracts/near-keel and scripts/testnet",
+  "devDependencies": {
+    "near-cli-rs": "^0.31.1",
+    "cargo-near": "^0.23.0"
+  }
+}

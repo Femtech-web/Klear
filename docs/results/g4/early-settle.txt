@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    agent.keel-8f2f34.testnet
+│    receiver_id:  judge.keel-8f2f34.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  settle
+│                       args:         {
+│                                       "perp": "hyperevm:0x285b6da600bb17853a66bb8c24b6afc1fed20dda1839a21707b64d0645425fd2:0",
+│                                       "spot": "hyperevm:0x465c98826798814bb533f400d951b606f2ae5ce9a76b5157d0febd5029fb8380:0"
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HSoHtYTHQo48fQcydrLrMZj3pSRS2TwFCm8deLC6sTQY
+│    Signature:  ed25519:3PjTZwNRi1eZZu1Lg2LLAET2wJZFMVWDqzFNTvzqThDnFZAVGB4rrHR6PypFJju8e7jFWMnmeKoWVEHN15hy17tg
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.6 Tgas
+│    Transaction fee: 0.0002353602834874 NEAR
+│    Transaction ID: BwwddBdXCunWwgJ7Uj556HDbwzWuEAVkRHNKupoVVsFN
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/BwwddBdXCunWwgJ7Uj556HDbwzWuEAVkRHNKupoVVsFN
+│     [0m
+├  Function execution logs:
+│    [31mLogs [judge.keel-8f2f34.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction judge.keel-8f2f34.testnet settle json-args '{"perp":"hyperevm:0x285b6da600bb17853a66bb8c24b6afc1fed20dda1839a21707b64d0645425fd2:0","spot":"hyperevm:0x465c98826798814bb533f400d951b606f2ae5ce9a76b5157d0febd5029fb8380:0"}' prepaid-gas '200.0 Tgas' attached-deposit '0 NEAR' sign-as agent.keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/agent.keel-8f2f34.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: snapshot-not-settled")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

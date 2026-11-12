@@ -1,0 +1,15 @@
+liquidation value 19.5450 USD (floor 12.0), silent=True, trigger=manager-silent, mode=active
+AI guardian: act=True: The manager's heartbeat is about 718s old against a 600s limit, so the investor's own silence trigger has fired and the judge has verified it. The position is still well above the floor ($19.5M vs $12M), but an unmanaged hedge is exposed: funding is sharply negative and the market is drifting down with thin books. Rescuing now returns the assets while the cushion is large.
+  open: rescue (5hHHC9FzYFJNEW32j2A4nT6YEuZKky3Xt2mVThavXqKq)
+    perp=open spot=open paid=[] done=False ended=None
+    relayed exit: {'tx': '0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac'}
+    relayed order: {'tx': '0x0afd0dde7635c179f8b2b88901d2ebb5e0a658fb5f3a4da58e1f396ea9f215d3', 'fill': {'queued_l1': 771187639, 'seen_l1': 771187703, 'blocks': 64, 'szi': 0, 'entry_ntl': 0, 'seconds': 1.6}}
+  settle: rescue (2pSpf32R51ch34PELHudRLaJUXqGkA6qkf8J4SkfgRiS)
+    perp=open spot=open paid=[] done=False ended=None
+    relayed sweep: {'tx': '0x6027db861fc7d20a49c0aa387c270499b4e24e19468f45060ca9b4bc451128bf'}
+  settle: rescue (7pYXKcXGGdxXjKjR4qmYS8ANcVUYv2yg8LdGpGwN3KYR)
+    perp=delivered spot=open paid=[{'job_id': 1, 'agent': 'guardian.keel-ai-76e036.testnet', 'amount': '500000000000000000000000', 'reason': 'perp'}] done=False ended=None
+  waiting for Base finality of the vault exit 0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac (~20 min)
+  confirm-exit: rescue (2LFFGqVJ3xhfZcX7cBtmGnpLhHqFUZfrJtzv5WihVSoN)
+    perp=delivered spot=delivered paid=[{'job_id': 1, 'agent': 'guardian.keel-ai-76e036.testnet', 'amount': '300000000000000000000000', 'reason': 'spot'}] done=True ended=None
+exit 0

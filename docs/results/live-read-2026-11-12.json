@@ -1,0 +1,62 @@
+{
+  "kind": "read-only eth_call on HyperEVM testnet (no transaction)",
+  "at": "2026-11-12T06:43:46.642346+00:00",
+  "rpc": "https://rpc.hyperliquid-testnet.xyz/evm",
+  "evm_block": 69403314,
+  "l1_block": 770825100,
+  "oracle_raw": 204570,
+  "oracle1e8": 204570000000,
+  "api_oracle": "2045.7",
+  "oracle_match": true,
+  "seconds_between_reads": 6.34,
+  "rows": [
+    {
+      "user": "0xd99f2cbd3c55c934dc6ad73f52027a373a21ed4e",
+      "keelleg_szi": 0.0544,
+      "keelleg_entryNtl_usd": 109.64727,
+      "api_szi": "0.0544",
+      "api_entry_x_size": 109.65,
+      "szi_match": true
+    },
+    {
+      "user": "0x7e552c1d686f3cf272632f9c1bf43bacb900d073",
+      "keelleg_szi": 0.1754,
+      "keelleg_entryNtl_usd": 353.157784,
+      "api_szi": "0.1754",
+      "api_entry_x_size": 353.16,
+      "szi_match": true
+    },
+    {
+      "user": "0x4547b9e33f07965711f67d0be2423939a4e33af5",
+      "keelleg_szi": 0.0835,
+      "keelleg_entryNtl_usd": 168.118521,
+      "api_szi": "0.0835",
+      "api_entry_x_size": 168.12,
+      "szi_match": true
+    },
+    {
+      "user": "0xcf7adeb99f57032e159bb7e0bfb4c2b9fb51f21f",
+      "keelleg_szi": -0.0088,
+      "keelleg_entryNtl_usd": 17.737832,
+      "api_szi": "-0.0088",
+      "api_entry_x_size": 17.74,
+      "szi_match": true
+    },
+    {
+      "user": "0xc1676ebd3d68f78561571ebc70a94d364c2ce27a",
+      "keelleg_szi": 0.0,
+      "keelleg_entryNtl_usd": 0.0,
+      "api_szi": "0",
+      "api_entry_x_size": 0,
+      "szi_match": true
+    },
+    {
+      "user": "0xabed16abeddcc1ff38cb6fb2dc53b3e7b0b8a161",
+      "keelleg_szi": 2.045,
+      "keelleg_entryNtl_usd": 4120.991487,
+      "api_szi": "2.045",
+      "api_entry_x_size": 4120.98,
+      "szi_match": true
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+├  Unsigned transaction:
+│    signer_id:    agent.keel-8f2f34.testnet
+│    receiver_id:  judge.keel-8f2f34.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  attest
+│                       args:         {
+│                                       "chain": "hyperevm",
+│                                       "log": {
+│                                         "address": "0x2317def49bb4d65841e77e518d11649a31e36b8c",
+│                                         "blockHash": "0x3224d21f4a20c41c7180ccac6f5dac268a5a1759772d4c384d4016a582453482",
+│                                         "blockNumber": "0x4232056",
+│                                         "blockTimestamp": "0x6af57d96",
+│                                         "data": "0x000000000000000000000000000000000000000000000000001550f7dca700000000000000000000000000000000000000000000000000000000000004232056000000000000000000000000000000000000000000000000000000006af57d966865616c74687900000000000000000000000000000000000000000000000000",
+│                                         "logIndex": "0x0",
+│                                         "removed": false,
+│                                         "topics": [
+│                                           "0x2bd3e38a1c6aed238c688414f6919db3a3533a99f0c51942438603c49641b8e6",
+│                                           "0x000000000000000000000000462ae7cab0c129706d8f69e472c08903e9a215be",
+│                                           "0x0000000000000000000000002403529abe0d3adafaa630173275fd5b53a9a13f"
+│                                         ],
+│                                         "transactionHash": "0x8c5a39a2fe26a891af8a7c3445eb1e3458ecb4b85221b14a3843ba716d3eb0ba",
+│                                         "transactionIndex": "0x0"
+│                                       }
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HSoHtYTHQo48fQcydrLrMZj3pSRS2TwFCm8deLC6sTQY
+│    Signature:  ed25519:5n28v2p7u6CQ9A4xomqYxr6gCSy2DXob5E5osQok3qXtafMX8Ndng6n9eXcPErLq7DzLaU5iMbqWcBS5bs3bK9FE
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 14.8 Tgas
+│    Transaction fee: 0.0013839090302851 NEAR
+│    Transaction ID: uDXc5xzZDQQdJXsz8C7PQsKWbRVJcDjRFkfdgAopWbT
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/uDXc5xzZDQQdJXsz8C7PQsKWbRVJcDjRFkfdgAopWbT
+│     [0m
+├  Function execution logs:
+│    [36mLogs [judge.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      verify_foreign_transaction: predecessor=AccountId("judge.keel-8f2f34.testnet"), request=VerifyForeignTransactionRequestArgs { request: HyperEvm(EvmRpcRequest { tx_id: EvmTxId([140, 90, 57, 162, 254, 38, 168, 145, 175, 138, 124, 52, 69, 235, 30, 52, 88, 236, 180, 184, 82, 33, 177, 74, 56, 67, 186, 113, 109, 62, 176, 186]), extractors: BoundedVec { inner: [Log { log_index: 0 }], witness: PossiblyEmpty(()) }, finality: Finalized }), domain_id: DomainId(3), payload_version: V1, expected_payload_hash: Some(Hash256([198, 42, 39, 127, 211, 115, 208, 117, 104, 33, 16, 85, 144, 198, 243, 163, 224, 93, 113, 86, 227, 211, 169, 198, 193, 226, 114, 97, 206, 71, 180, 66])) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [judge.keel-8f2f34.testnet]:[39m
+│      attested hyperevm:0x8c5a39a2fe26a891af8a7c3445eb1e3458ecb4b85221b14a3843ba716d3eb0ba:0
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "attest" call to <judge.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction judge.keel-8f2f34.testnet attest json-args '{"chain": "hyperevm", "log": {"address": "0x2317def49bb4d65841e77e518d11649a31e36b8c", "topics": ["0x2bd3e38a1c6aed238c688414f6919db3a3533a99f0c51942438603c49641b8e6", "0x000000000000000000000000462ae7cab0c129706d8f69e472c08903e9a215be", "0x0000000000000000000000002403529abe0d3adafaa630173275fd5b53a9a13f"], "data": "0x000000000000000000000000000000000000000000000000001550f7dca700000000000000000000000000000000000000000000000000000000000004232056000000000000000000000000000000000000000000000000000000006af57d966865616c74687900000000000000000000000000000000000000000000000000", "blockHash": "0x3224d21f4a20c41c7180ccac6f5dac268a5a1759772d4c384d4016a582453482", "blockNumber": "0x4232056", "blockTimestamp": "0x6af57d96", "transactionHash": "0x8c5a39a2fe26a891af8a7c3445eb1e3458ecb4b85221b14a3843ba716d3eb0ba", "transactionIndex": "0x0", "logIndex": "0x0", "removed": false}}' prepaid-gas '200.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as agent.keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/agent.keel-8f2f34.testnet.json send[39m
+

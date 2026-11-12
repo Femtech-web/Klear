@@ -1,0 +1,30 @@
+├  Unsigned transaction:
+│    signer_id:    ai.keel-ai-76e036.testnet
+│    receiver_id:  ai.keel-ai-76e036.testnet
+│    actions:
+│       -- add access key:     
+│                       public key:   ed25519:7fMMrhruckBgRowFA85CfuTP85RZx2Q3tFKBiU7n5MDu
+│                       nonce:        0
+│                       permission:   FunctionCall(FunctionCallPermission { allowance: Some(NearToken { inner: 500000000000000000000000 }), receiver_id: "keel-ai-76e036.testnet", method_names: ["propose_order", "heartbeat"] })
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9sUc6K8E634PFpYZiwdB58oy8PAw7CGsn1q9sEnpmA1S
+│    Signature:  ed25519:pc4nkdAVbQgVeXQNq7oBNWLkxX9oLfRnsvfSi6Fzm3WuXMBhsb1fVKt1MmBU65oH1En9FcJcxgWzvPGpfAHUaaL
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 0.644 Tgas
+│    Transaction fee: 0.0000420646665888 NEAR
+│    Transaction ID: D1ueCVG3YSWVQ2HxBzG8xhCPaS3mqfHb2HZ9P36W7gfV
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/D1ueCVG3YSWVQ2HxBzG8xhCPaS3mqfHb2HZ9P36W7gfV
+│     [0m
+
+
+Added access key = ed25519:7fMMrhruckBgRowFA85CfuTP85RZx2Q3tFKBiU7n5MDu to ai.keel-ai-76e036.testnet.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account add-key ai.keel-ai-76e036.testnet grant-function-call-access --allowance '0.5 NEAR' --contract-account-id keel-ai-76e036.testnet --function-names propose_order,heartbeat use-manually-provided-public-key ed25519:7fMMrhruckBgRowFA85CfuTP85RZx2Q3tFKBiU7n5MDu network-config testnet sign-with-access-key-file .secrets/near/ai.keel-ai-76e036.testnet.json send[39m
+

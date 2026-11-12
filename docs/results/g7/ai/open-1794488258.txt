@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    ai.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_flatten
+│                       args:         {
+│                                       "perp": "hyperevm:0xcdb714cf796c9d0138f3ece2eeb07c8c39739640ee7712f19c41d0ba82be26da:0",
+│                                       "spot": "base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9sUc6K8E634PFpYZiwdB58oy8PAw7CGsn1q9sEnpmA1S
+│    Signature:  ed25519:3UDSRnZfEzB9GFDh8AafUexzbZFWtSoQJPTMJ82ufEymZ81Dwh6GMbnR6ukid86XwvcXsf2ayLpU7vGwBVcu2t4
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.8 Tgas
+│    Transaction fee: 0.0002489100616555 NEAR
+│    Transaction ID: 5bbAPoJTYoGSSn5dADyzgycwftzHTFXzKHNKopTsk7vL
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/5bbAPoJTYoGSSn5dADyzgycwftzHTFXzKHNKopTsk7vL
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ai.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet open_flatten json-args '{"perp":"hyperevm:0xcdb714cf796c9d0138f3ece2eeb07c8c39739640ee7712f19c41d0ba82be26da:0","spot":"base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as ai.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/ai.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: mandate:manager-cannot-guard")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

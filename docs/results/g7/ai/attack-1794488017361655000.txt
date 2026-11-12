@@ -1,0 +1,26 @@
+├  Unsigned transaction:
+│    signer_id:    ai.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_flatten
+│                       args:         {
+│                                       "perp": "hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0",
+│                                       "spot": "base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7fMMrhruckBgRowFA85CfuTP85RZx2Q3tFKBiU7n5MDu
+│    Signature:  ed25519:5YhA2EgKrZyFeMb8xo2UBwqBiVF1n3xjZhzc737a3FrYEoBFUwptetwPAeihttf5tigax8i8jTa7mTDzZMczW7Yo
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet open_flatten json-args '{"perp":"hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0","spot":"base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as ai.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/ai-fc.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: Transaction method name <open_flatten> isn't allowed by the access key.[0m
+
+Location:
+   [35msrc/transaction_signature_options/send/mod.rs[0m:[35m185[0m

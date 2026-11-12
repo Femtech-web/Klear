@@ -1,0 +1,11 @@
+PRACTICE=keel-practice-53ee75.testnet
+G7_JUDGE=practice.keel-factory-bcf915.testnet
+G7_INVESTOR=0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c
+G7_INVESTOR_ACCOUNT=investor.keel-practice-53ee75.testnet
+G7_MANAGER=manager.keel-practice-53ee75.testnet
+G7_MANAGER_KEY=manager-fc.keel-practice-53ee75.testnet
+G7_GUARDIAN=guardian.keel-practice-53ee75.testnet
+G7_LEG=0xa34e83D5ea3baCdFBc1C30FcDA3032AeD7830Bc7
+G7_VAULT=0xE35805727DA624b5f233CdE4a3d039522Db8bC1C
+G7_CONTROLLER=0xa8e150fb95e661dcd48747d230d8655ae5eae7e9
+G7_VAULT_CONTROLLER=0x54faead2a96737c2bc90b75223a71645c65478c8

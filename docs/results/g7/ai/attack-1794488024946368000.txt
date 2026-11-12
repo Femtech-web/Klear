@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    investor.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_flatten
+│                       args:         {
+│                                       "perp": "hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0",
+│                                       "spot": "base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:2zCGddWNhpnT2Kzz42AbLBADKqWqLGNJSD3Ndh8M9swx
+│    Signature:  ed25519:2ExpRbNyacXrEk9wpyoM5odJ5krtc29PCm1wPyHo4q7M7nzXK9m61p74tRqR5178UQqRZzLhNysm35PNiXrpDHs1
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.1 Tgas
+│    Transaction fee: 0.000185805959434 NEAR
+│    Transaction ID: GpgYqSsakmJe3sjXA9FUkupfVAAti9gRbniEtASFJVwj
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/GpgYqSsakmJe3sjXA9FUkupfVAAti9gRbniEtASFJVwj
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [investor.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet open_flatten json-args '{"perp":"hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0","spot":"base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as investor.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/investor.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: only the account that attested this evidence may open a job on it")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

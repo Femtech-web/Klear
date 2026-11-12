@@ -1,0 +1,72 @@
+├  Unsigned transaction:
+│    signer_id:    base.keel-8f2f34.testnet
+│    receiver_id:  base.keel-8f2f34.testnet
+│    actions:
+│       -- deploy code <8bjShZKVxLpVQMPYnJzWjarMYTc4HyjgK7HgXLroUM6U> to a account <base.keel-8f2f34.testnet>
+│       -- function call:      
+│                       method name:  new
+│                       args:         {
+│                                       "config": {
+│                                         "chain_id": 998,
+│                                         "leg": "0x7D95418df6D08b42B072FB50c328566Ce8a539F5",
+│                                         "policy": {
+│                                           "band_bp": 100,
+│                                           "dust": 10000,
+│                                           "fee_bp": 5,
+│                                           "flatten_reward": "500000000000000000000000",
+│                                           "job_ttl_s": 14400,
+│                                           "max_basis_bp": 500,
+│                                           "max_evidence_age_s": 3600,
+│                                           "max_failed_attempts": 3,
+│                                           "max_loss_usd6": 2000000,
+│                                           "max_order_sz": 1000000,
+│                                           "order_ttl_s": 300,
+│                                           "perp": 4,
+│                                           "repair_reward": "500000000000000000000000",
+│                                           "settle_delay_l1": 300,
+│                                           "sz_decimals": 4,
+│                                           "tolerance": 100000
+│                                         },
+│                                         "probe": "0xcd5a3bDa4aC100eE2ca7d9E1166ED443F1Ae1bB1",
+│                                         "spot_account": "0x4a603a121a06c8ec11996ad3a73c3518dee6fb0d",
+│                                         "spot_chain": "base",
+│                                         "spot_token": "0x336c17D19d0c9b03f9B67d54983f9ce70739f2f1",
+│                                         "strategy_id": 2
+│                                       },
+│                                       "foreign_tx_domain": 3,
+│                                       "mpc": "v1.signer-prod.testnet",
+│                                       "owner": "keel-8f2f34.testnet",
+│                                       "sign_domain": 0,
+│                                       "sign_path": "keel/1/hyperevm"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0.6 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:12418Ck1zaVEq1xUdMUevDn7FKHswi5AVUhXfHgWxqa8
+│    Signature:  ed25519:4WjahfRV7fGwrJp3iPEjuCo1KGJriKQmfmWd9Vzm6XvfuS3S8fsL366H2ASdLJzE6R5ggWe6qVPxukUEQVUPCVjP
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 23.9 Tgas
+│    Transaction fee: 0.0023671205467442 NEAR
+│    Transaction ID: J6Jyqe3jBdLH3GEVU3pFBNPrCrHc3EtGqWfJdJPcKPfu
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/J6Jyqe3jBdLH3GEVU3pFBNPrCrHc3EtGqWfJdJPcKPfu
+│     [0m
+├  Function execution logs:
+│    [36mLogs [base.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [base.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+Contract code has been successfully deployed.
+The "new" call to <base.keel-8f2f34.testnet> on behalf of <base.keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract deploy base.keel-8f2f34.testnet use-file contracts/near-keel/target/near/near_keel.wasm with-init-call new json-args '{"owner": "keel-8f2f34.testnet", "mpc": "v1.signer-prod.testnet", "sign_path": "keel/1/hyperevm", "sign_domain": 0, "foreign_tx_domain": 3, "config": {"strategy_id": 2, "chain_id": 998, "leg": "0x7D95418df6D08b42B072FB50c328566Ce8a539F5", "spot_account": "0x4a603a121a06c8ec11996ad3a73c3518dee6fb0d", "spot_token": "0x336c17D19d0c9b03f9B67d54983f9ce70739f2f1", "probe": "0xcd5a3bDa4aC100eE2ca7d9E1166ED443F1Ae1bB1", "spot_chain": "base", "policy": {"perp": 4, "sz_decimals": 4, "band_bp": 100, "max_basis_bp": 500, "fee_bp": 5, "max_order_sz": 1000000, "tolerance": 100000, "max_loss_usd6": 2000000, "settle_delay_l1": 300, "max_evidence_age_s": 3600, "order_ttl_s": 300, "job_ttl_s": 14400, "max_failed_attempts": 3, "dust": 10000, "repair_reward": "500000000000000000000000", "flatten_reward": "500000000000000000000000"}}}' prepaid-gas '100.0 Tgas' attached-deposit '0.6 NEAR' network-config testnet sign-with-access-key-file .secrets/near/base.keel-8f2f34.testnet.json send[39m
+

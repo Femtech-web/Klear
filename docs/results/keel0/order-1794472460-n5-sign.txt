@@ -1,0 +1,58 @@
+├  Unsigned transaction:
+│    signer_id:    keel-8f2f34.testnet
+│    receiver_id:  v1.signer-prod.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  sign
+│                       args:         {
+│                                       "request": {
+│                                         "domain_id": 0,
+│                                         "path": "keel/1/hyperevm",
+│                                         "payload_v2": {
+│                                           "Ecdsa": "c04145f10bff7d75bea2a2e7a4edefe2dc5e5bffd7c175a2c4e25625df13c584"
+│                                         }
+│                                       }
+│                                     }
+│                       gas:          50.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:H9BFzoCH7cb9DFcQkkZqiLwCPtMrgaT4sE5hbjjwrRfj
+│    Signature:  ed25519:3f4aAPoVbHTVp9FaX2LyH5tuQRDXhYxAvH8BnM6M4hQ1YMisk4EUdPyZnQ5ZhM4dVGbffjP6TDFGRs6SvrXaPh2m
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 9.2 Tgas
+│    Transaction fee: 0.0008746939188907 NEAR
+│    Transaction ID: FL8XovfowQkZzonSQfPS9qU9cXo6B1QVgeD9dkFb7DiT
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FL8XovfowQkZzonSQfPS9qU9cXo6B1QVgeD9dkFb7DiT
+│     [0m
+├  Function execution logs:
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("keel-8f2f34.testnet"), request=SignRequestArgs { path: "keel/1/hyperevm", payload: Ecdsa(BoundedVec { inner: [192, 65, 69, 241, 11, 255, 125, 117, 190, 162, 162, 231, 164, 237, 239, 226, 220, 94, 91, 255, 215, 193, 117, 162, 196, 226, 86, 37, 223, 19, 197, 132], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "big_r": {
+    "affine_point": "0215d2142f3d1bbffd88f9bb1930efca5ace07e0253e96cef885b20079dd126a4c"
+  },
+  "recovery_id": 1,
+  "s": {
+    "scalar": "35b566f079359ec814996878f9565da84de72a9fffd484e4844d8b8d40ea6ea5"
+  },
+  "scheme": "Secp256k1"
+}
+
+
+The "sign" call to <v1.signer-prod.testnet> on behalf of <keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction v1.signer-prod.testnet sign json-args '{"request": {"domain_id": 0, "path": "keel/1/hyperevm", "payload_v2": {"Ecdsa": "c04145f10bff7d75bea2a2e7a4edefe2dc5e5bffd7c175a2c4e25625df13c584"}}}' prepaid-gas '50.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-8f2f34.testnet.json send[39m
+

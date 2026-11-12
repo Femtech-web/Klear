@@ -1,0 +1,19 @@
+# gitleaks configuration (used by .githooks/pre-commit).
+title = "keel"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public test vectors and recorded public chain data"
+paths = [
+  # Logs and Read MPC requests recorded from public HyperEVM testnet blocks (hashes, topics, data).
+  '''fixtures/readmpc/.*\.json$''',
+  # Results of read-only checks against public testnets.
+  '''docs/results/.*\.json$''',
+]
+
+[[allowlists]]
+description = "EVM addresses (20 bytes) are public; generic rules flag them after keys like spot_token. A private key is 32 bytes and still matches."
+regexTarget = "secret"
+regexes = ['''^0x[0-9a-fA-F]{40}$''']

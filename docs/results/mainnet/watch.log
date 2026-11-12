@@ -1,0 +1,38 @@
+14:41:22 "status": "PENDING_DEPOSIT"
+14:41:43 "status": "PENDING_DEPOSIT"
+14:42:04 "status": "SUCCESS"
+GET /v0/status: 200 {
+ "status": "SUCCESS",
+ "swapDetails": {
+  "depositedAmount": "280000000",
+  "depositedAmountUsd": "2.798572000000",
+  "depositedAmountFormatted": "2.8",
+  "intentHashes": [
+   "HtSCPtCskBTy7bnUWC3ibbYBYdUCnSVze5FEJTxm5EjL"
+  ],
+  "nearTxHashes": [
+   "91iEGtJYLTeQy4n4se4H2kZEwcoeJCbnxCAmvLEXptK6",
+   "42xAs6TskNCrV4TGbTk7kFPKm5QirhN1zwtuVRMBBVaP"
+  ],
+  "amountIn": "280000000",
+  "amountInFormatted": "2.8",
+  "amountInUsd": "2.798572000000",
+  "amountOut": "2799671",
+  "amountOutFormatted": "2.799671",
+  "amountOutUsd": "2.798243167790",
+  "slippage": 0,
+  "refundedAmount": "0",
+  "refundedAmountFormatted": "0",
+  "refundedAmountUsd": "0",
+  "refundReason": null,
+  "refundFee": "31530000",
+  "withdrawFee": "0",
+  "originChainTxHashes": [
+   {
+    "hash": "0xde036a45d9c49c90df7d0448a3432a020c82002b74c7bb6281cc159898c8767b",
+    "explorerUrl": ""
+   }
+  ],
+  "destinationChainTxHashes": []
+ }
+}

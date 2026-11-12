@@ -1,0 +1,39 @@
+├  Unsigned transaction:
+│    signer_id:    investor.keel-human-c0caa7.testnet
+│    receiver_id:  keel-human-c0caa7.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  request_exit
+│                       args:         {}
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7mkUKsJuiTqXrqBsEf1nebxYYqzdy2WFo5Tta4JGRF4a
+│    Signature:  ed25519:53vfv3BcoFJcA6dqLSSJNZMTKPMaZqtZMwMeaGUS2koUCqYSWpda6L3XRK3W2hN89HR2fuFgDYtwazisi1AsRNPX
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.6 Tgas
+│    Transaction fee: 0.0002286521297044 NEAR
+│    Transaction ID: H56zWCGxrRSceS1CX34Z5ay2FkkPRzsUygBZH7MzX2a5
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/H56zWCGxrRSceS1CX34Z5ay2FkkPRzsUygBZH7MzX2a5
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-human-c0caa7.testnet]:[39m
+│      exit requested by the investor
+│    [36mLogs [investor.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "request_exit" call to <keel-human-c0caa7.testnet> on behalf of <investor.keel-human-c0caa7.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-human-c0caa7.testnet request_exit json-args {} prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as investor.keel-human-c0caa7.testnet network-config testnet sign-with-access-key-file .secrets/near/investor.keel-human-c0caa7.testnet.json send[39m
+

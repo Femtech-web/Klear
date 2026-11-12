@@ -1,0 +1,6 @@
+[0] AI: buy 0.0099 @ 1974: The mark is about 2.4% below the oracle and hourly funding is strongly negative (-0.16%), so a long collects funding and may gain if the mark converges to the oracle. I sized it at 0.0099 ETH (about 19.5 USD notional, above the 10 USD minimum) to keep leverage just under 1.0x against the 19.7 USD liquidation value, with the limit at the best ask.
+    judge: sign (EuvwHec6iPZ1T8QausVNnmFChAaMJ1emgxAr9TvWZ7TS)
+    relayed 0x8fdaef157d65b2a334da6c1177e50187758e9fe1fd654a00f32eca5090907a06: {'queued_l1': 771171873, 'seen_l1': 771171926, 'blocks': 53, 'szi': 99, 'entry_ntl': 19540620, 'seconds': 1.6}
+[1] AI: hold 0 @ 0: The long of 0.0099 ETH is about $19.6 notional against $19.65 liquidation value, so leverage is about 0.996x and any added long would break the 1.0x cap. The position is slightly in profit and the floor isn't threatened, so I'm making no change.
+[2] AI: hold 0 @ 0: Leverage is already about 0.99x (19.6 USD perp notional vs 19.69 USD liquidation value), so any buy would breach the 1.0x cap. The liquidation value is above the 12 USD floor and funding favors longs, so there is no reason to cut the position.
+exit 0

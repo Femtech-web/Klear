@@ -1,0 +1,83 @@
+{
+ "status": "SUCCESS",
+ "updatedAt": "2026-11-12T14:42:03.000Z",
+ "correlationId": "954a98b4-5404-489f-a02c-f1fcfedaa9dc",
+ "swapDetails": {
+  "depositedAmount": "280000000",
+  "depositedAmountUsd": "2.798572000000",
+  "depositedAmountFormatted": "2.8",
+  "intentHashes": [
+   "HtSCPtCskBTy7bnUWC3ibbYBYdUCnSVze5FEJTxm5EjL"
+  ],
+  "nearTxHashes": [
+   "91iEGtJYLTeQy4n4se4H2kZEwcoeJCbnxCAmvLEXptK6",
+   "42xAs6TskNCrV4TGbTk7kFPKm5QirhN1zwtuVRMBBVaP"
+  ],
+  "amountIn": "280000000",
+  "amountInFormatted": "2.8",
+  "amountInUsd": "2.798572000000",
+  "amountOut": "2799671",
+  "amountOutFormatted": "2.799671",
+  "amountOutUsd": "2.798243167790",
+  "slippage": 0,
+  "refundedAmount": "0",
+  "refundedAmountFormatted": "0",
+  "refundedAmountUsd": "0",
+  "refundReason": null,
+  "refundFee": "31530000",
+  "withdrawFee": "0",
+  "originChainTxHashes": [
+   {
+    "hash": "0xde036a45d9c49c90df7d0448a3432a020c82002b74c7bb6281cc159898c8767b",
+    "explorerUrl": ""
+   }
+  ],
+  "destinationChainTxHashes": []
+ },
+ "quoteResponse": {
+  "timestamp": "2026-11-12T13:42:09.510Z",
+  "signature": "ed25519:3H9B1e5aovnh1GbCuK2Ja54cF4Gj1p2nz2iZ311PHq1dScjRC9NbNAU54qrWDeY9HVVTz3wREHAMwHFDhYrAtoHE",
+  "quoteRequest": {
+   "dry": false,
+   "swapType": "EXACT_INPUT",
+   "depositMode": "SIMPLE",
+   "slippageTolerance": 100,
+   "originAsset": "1cs_v1:hypercore:hip1:0x6d1e7cde53ba9467b783cb7c530ce054",
+   "depositType": "ORIGIN_CHAIN",
+   "destinationAsset": "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+   "amount": "300000000",
+   "refundTo": "0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4",
+   "refundType": "ORIGIN_CHAIN",
+   "recipient": "143fa26628ff3be7c2c356df59eabf707eb294f5ca5d5401f859517894ccc87c",
+   "recipientType": "CONFIDENTIAL_INTENTS",
+   "deadline": "2026-11-12T14:42:08.950Z",
+   "appFees": [
+    {
+     "limitOrderId": null,
+     "recipient": "2238fd089f1c92b206c218cd16b8676cb98964e0d50f8ab729c6396a81e07805",
+     "fee": 1
+    }
+   ],
+   "virtualChainRecipient": null,
+   "virtualChainRefundRecipient": null,
+   "referral": "keel",
+   "confidentiality": "basic"
+  },
+  "quote": {
+   "amountIn": "300000000",
+   "amountInFormatted": "3.0",
+   "amountInUsd": "2.998479000000",
+   "minAmountIn": "300000000",
+   "amountOut": "2799671",
+   "amountOutFormatted": "2.799671",
+   "amountOutUsd": "2.798251566803",
+   "minAmountOut": "2771674",
+   "timeWhenInactive": "2026-11-15T14:42:08.950Z",
+   "depositAddress": "0x58BD4af609Db791bBc35e122aD26C787E140cb1d",
+   "deadline": "2026-11-15T14:42:08.950Z",
+   "timeEstimate": 35,
+   "refundFee": "31530000",
+   "withdrawFee": "0"
+  }
+ }
+}

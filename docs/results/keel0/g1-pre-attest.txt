@@ -1,0 +1,72 @@
+├  Unsigned transaction:
+│    signer_id:    keel-8f2f34.testnet
+│    receiver_id:  v1.signer-prod.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  verify_foreign_transaction
+│                       args:         {
+│                                       "request": {
+│                                         "domain_id": 3,
+│                                         "expected_payload_hash": "d91d0cc80adc4fb47379d6028f0e4dbae39e893f66d67bb0ac636d9e9c32e64c",
+│                                         "payload_version": 1,
+│                                         "request": {
+│                                           "HyperEvm": {
+│                                             "extractors": [
+│                                               {
+│                                                 "Log": {
+│                                                   "log_index": 0
+│                                                 }
+│                                               }
+│                                             ],
+│                                             "finality": "Finalized",
+│                                             "tx_id": "18609f1bb1052a25b5e5daf51597d082e6edafbf733ca4cb92689492187e1d1a"
+│                                           }
+│                                         }
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:H9BFzoCH7cb9DFcQkkZqiLwCPtMrgaT4sE5hbjjwrRfj
+│    Signature:  ed25519:4C6L2MK2BDiprFfVKi64kaYb2TZJTrp7fsvnLfCV4avkrR6CXmjC1nNmZhStW3FNvCFhzNZZ9iZ4YPR1HE3LkVao
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 9.5 Tgas
+│    Transaction fee: 0.0009015201809153 NEAR
+│    Transaction ID: 76YXE3XbHMdn5czgEjFEd7iBv2BEYqikFRDXUu8ynxRJ
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/76YXE3XbHMdn5czgEjFEd7iBv2BEYqikFRDXUu8ynxRJ
+│     [0m
+├  Function execution logs:
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      verify_foreign_transaction: predecessor=AccountId("keel-8f2f34.testnet"), request=VerifyForeignTransactionRequestArgs { request: HyperEvm(EvmRpcRequest { tx_id: EvmTxId([24, 96, 159, 27, 177, 5, 42, 37, 181, 229, 218, 245, 21, 151, 208, 130, 230, 237, 175, 191, 115, 60, 164, 203, 146, 104, 148, 146, 24, 126, 29, 26]), extractors: BoundedVec { inner: [Log { log_index: 0 }], witness: PossiblyEmpty(()) }, finality: Finalized }), domain_id: DomainId(3), payload_version: V1, expected_payload_hash: Some(Hash256([217, 29, 12, 200, 10, 220, 79, 180, 115, 121, 214, 2, 143, 14, 77, 186, 227, 158, 137, 63, 102, 214, 123, 176, 172, 99, 109, 158, 156, 50, 230, 76])) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "payload_hash": "d91d0cc80adc4fb47379d6028f0e4dbae39e893f66d67bb0ac636d9e9c32e64c",
+  "signature": {
+    "big_r": {
+      "affine_point": "03fc74a8e226598c7d2233b005c922b8fcafe01709dbccd3bfbdb7e8c4bcfc7f4f"
+    },
+    "recovery_id": 0,
+    "s": {
+      "scalar": "656ae4d2979cc71afc7f8deea800e66a361eee68b01f005607a7a74da360db73"
+    },
+    "scheme": "Secp256k1"
+  }
+}
+
+
+The "verify_foreign_transaction" call to <v1.signer-prod.testnet> on behalf of <keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction v1.signer-prod.testnet verify_foreign_transaction json-args '{"request": {"domain_id": 3, "expected_payload_hash": "d91d0cc80adc4fb47379d6028f0e4dbae39e893f66d67bb0ac636d9e9c32e64c", "payload_version": 1, "request": {"HyperEvm": {"extractors": [{"Log": {"log_index": 0}}], "finality": "Finalized", "tx_id": "18609f1bb1052a25b5e5daf51597d082e6edafbf733ca4cb92689492187e1d1a"}}}}' prepaid-gas '300.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-8f2f34.testnet.json send[39m
+

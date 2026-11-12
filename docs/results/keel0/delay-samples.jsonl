@@ -1,0 +1,7 @@
+{"is_buy":true,"relay":"0x098200bcdadcf43661388b6c9b3130309197f726554e90bf17a9fa8a17ce849a","watch":{"queued_l1": 770921218, "seen_l1": 770921252, "blocks": 34, "szi": 0, "entry_ntl": 0, "seconds": 3.1}}
+{"is_buy":false,"relay":"0xc862dce2f84fb0c4ece65a42d9249d26b8c2c2d7acb6409a1ae5444652e3075e","watch":{"queued_l1": 770921554, "seen_l1": 770921624, "blocks": 70, "szi": -60, "entry_ntl": 11839200, "seconds": 1.6}}
+{"is_buy":true,"relay":"0x3d9ff169fffde96aaada46a51299ec8b98e3d4561ea149cd4e67c108a93f3bab","watch":{"queued_l1": 770921922, "seen_l1": 770921973, "blocks": 51, "szi": 0, "entry_ntl": 0, "seconds": 1.6}}
+{"is_buy":false,"relay":"0x2686fd0ab2c861f0ee5f24bf4aabbbd53bdeef407a2bb5d6e3af259ef29f7706","watch":{"queued_l1": 770922287, "seen_l1": 770922341, "blocks": 54, "szi": -60, "entry_ntl": 11837400, "seconds": 1.7}}
+{"is_buy":true,"relay":"0x9a008ba829ca7ed0310124c363277364deb64675a37657cc77ccf38f328fe231","watch":{"queued_l1": 770922625, "seen_l1": 770922679, "blocks": 54, "szi": 0, "entry_ntl": 0, "seconds": 1.6}}
+{"is_buy":false,"relay":"0x661040b3f5ee541829efbb401308c56dece46466aa0dfa15f757032c9974f78f","watch":{"queued_l1": 770922952, "seen_l1": 770922992, "blocks": 40, "szi": -60, "entry_ntl": 11886000, "seconds": 1.7}}
+{"is_buy":true,"relay":"0x8689644d69977e652b842bce45f77bfee8bacd865cd6333c213bcf95414bfcbd","watch":{"queued_l1": 770923306, "seen_l1": 770923368, "blocks": 62, "szi": 0, "entry_ntl": 0, "seconds": 1.7}}

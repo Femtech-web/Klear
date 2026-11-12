@@ -1,0 +1,68 @@
+├  Unsigned transaction:
+│    signer_id:    ai.keel-mandate-729400.testnet
+│    receiver_id:  keel-mandate-729400.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  propose_order
+│                       args:         {
+│                                       "is_buy": true,
+│                                       "limit_px": 202310000000,
+│                                       "perp": "hyperevm:0x14f58a2dbd3eb54d4cd6ea086ff8fea7e6a63c69f0035de60eb085fb04d21c7e:1",
+│                                       "spot": "base:0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f:3",
+│                                       "sz": 600000
+│                                     }
+│                       gas:          250.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:ztyVpd7HVwh5a5DC3JpB6ezxsvdQpuuU8khZzfNeeRc
+│    Signature:  ed25519:VKjpzJSzagJ3GErSztxSVULeozabVkeTziNPd1Gc5jVXRxATRQsamxZWpjLBoqXaYhvMmatFM8nUsqkG1sGUSes
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.4 Tgas
+│    Transaction fee: 0.0014487668696908 NEAR
+│    Transaction ID: 7iGs1GHfo9eZbCVWHVs9VVCDCRLEJzX9xEkEUWbdgno2
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7iGs1GHfo9eZbCVWHVs9VVCDCRLEJzX9xEkEUWbdgno2
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-mandate-729400.testnet]:[39m
+│      {"outcome":"sign","job_id":0,"order":{"nonce":1,"is_buy":true,"limit_px":202310000000,"sz":600000,"reduce_only":true,"cloid":"215418641859171455363192342073722503252","deadline":1794483085},"digest":"0x77cd8529dace4fb2cea966a96436b6709a11efe987818b3fb667163c881fe28a","spot_sell":null,"spot_exit":null}
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("keel-mandate-729400.testnet"), request=SignRequestArgs { path: "keel/1/hyperevm", payload: Ecdsa(BoundedVec { inner: [119, 205, 133, 41, 218, 206, 79, 178, 206, 169, 102, 169, 100, 54, 182, 112, 154, 17, 239, 233, 135, 129, 139, 63, 182, 103, 22, 60, 136, 31, 226, 138], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ai.keel-mandate-729400.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ai.keel-mandate-729400.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-mandate-729400.testnet]:[39m
+│      signed 0:1
+│    [36mLogs [ai.keel-mandate-729400.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ai.keel-mandate-729400.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "0x77cd8529dace4fb2cea966a96436b6709a11efe987818b3fb667163c881fe28a",
+  "job_id": 0,
+  "order": {
+    "cloid": "215418641859171455363192342073722503252",
+    "deadline": 1794483085,
+    "is_buy": true,
+    "limit_px": 202310000000,
+    "nonce": 1,
+    "reduce_only": true,
+    "sz": 600000
+  },
+  "outcome": "sign",
+  "spot_exit": null,
+  "spot_sell": null
+}
+
+
+The "propose_order" call to <keel-mandate-729400.testnet> on behalf of <ai.keel-mandate-729400.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-mandate-729400.testnet propose_order json-args '{"perp": "hyperevm:0x14f58a2dbd3eb54d4cd6ea086ff8fea7e6a63c69f0035de60eb085fb04d21c7e:1", "spot": "base:0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f:3", "is_buy": true, "sz": 600000, "limit_px": 202310000000}' prepaid-gas '250.0 Tgas' attached-deposit '0 NEAR' sign-as ai.keel-mandate-729400.testnet network-config testnet sign-with-access-key-file .secrets/near/ai.keel-mandate-729400.testnet.json send[39m
+

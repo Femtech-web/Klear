@@ -1,0 +1,4 @@
+probe 0xefdc4bd517b412093ff6f657248bbb047bcc910e2e0f8012527a9d57c008aed3; waiting for Base finality (~20 min)
+spot base:0xefdc4bd517b412093ff6f657248bbb047bcc910e2e0f8012527a9d57c008aed3:15 attested
+scripts/testnet/g6.sh: line 234: o: command not found
+exit 127

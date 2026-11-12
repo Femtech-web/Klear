@@ -1,0 +1,63 @@
+├  Unsigned transaction:
+│    signer_id:    agent.keel-8f2f34.testnet
+│    receiver_id:  judge.keel-8f2f34.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  attest
+│                       args:         {
+│                                       "chain": "hyperevm",
+│                                       "log": {
+│                                         "address": "0xeb0e3823b4ce35932c4f754865d158c0987812a5",
+│                                         "blockHash": "0x6bb80e239ba503a4403afdcc9f62cc76bcc74ae11ad823cefbe1432d73b121ec",
+│                                         "blockNumber": "0x4232052",
+│                                         "blockTimestamp": "0x6af57d92",
+│                                         "data": "0x0000000000000000000000000000000000000000000000000000000000000004ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc40000000000000000000000000000000000000000000000000000000000b5ab0800000000000000000000000000000000000000000000000000000000000320c80000000000000000000000000000000000000000000000000000000000030a66000000000000000000000000000000000000000000000000000000002df3895b0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000002df3802e0000000000000000000000000000000000000000000000000000000004232052000000000000000000000000000000000000000000000000000000006af57d926865616c74687900000000000000000000000000000000000000000000000000",
+│                                         "logIndex": "0x0",
+│                                         "removed": false,
+│                                         "topics": [
+│                                           "0x9d7d829701dbfda1ac2952aa6ca4e45180327c564380a3ae2c59795efa2d68aa",
+│                                           "0x000000000000000000000000eb0e3823b4ce35932c4f754865d158c0987812a5"
+│                                         ],
+│                                         "transactionHash": "0x2952d0131ed577f1684107ddb866a82e3a0bfb02249b420cd35763d35300ea4b",
+│                                         "transactionIndex": "0x0"
+│                                       }
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HSoHtYTHQo48fQcydrLrMZj3pSRS2TwFCm8deLC6sTQY
+│    Signature:  ed25519:WViu8W2CbfCHV8aAKi3T7GLMgxYZK7Wuvm416hkMhVBffySar2geWQtCbRkWtwzEsCt9gvusnFks24RhRJGcxQC
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.0 Tgas
+│    Transaction fee: 0.0014089546976591 NEAR
+│    Transaction ID: CBrN9dJLsSSyGvNGHD3r8bHtHTQwmsPL7gPtCkRvhp6f
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CBrN9dJLsSSyGvNGHD3r8bHtHTQwmsPL7gPtCkRvhp6f
+│     [0m
+├  Function execution logs:
+│    [36mLogs [judge.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      verify_foreign_transaction: predecessor=AccountId("judge.keel-8f2f34.testnet"), request=VerifyForeignTransactionRequestArgs { request: HyperEvm(EvmRpcRequest { tx_id: EvmTxId([41, 82, 208, 19, 30, 213, 119, 241, 104, 65, 7, 221, 184, 102, 168, 46, 58, 11, 251, 2, 36, 155, 66, 12, 211, 87, 99, 211, 83, 0, 234, 75]), extractors: BoundedVec { inner: [Log { log_index: 0 }], witness: PossiblyEmpty(()) }, finality: Finalized }), domain_id: DomainId(3), payload_version: V1, expected_payload_hash: Some(Hash256([188, 108, 90, 251, 110, 191, 171, 234, 222, 39, 91, 123, 167, 181, 130, 134, 246, 133, 80, 134, 240, 129, 147, 99, 77, 246, 116, 244, 105, 202, 133, 45])) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [judge.keel-8f2f34.testnet]:[39m
+│      attested hyperevm:0x2952d0131ed577f1684107ddb866a82e3a0bfb02249b420cd35763d35300ea4b:0
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "attest" call to <judge.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction judge.keel-8f2f34.testnet attest json-args '{"chain": "hyperevm", "log": {"address": "0xeb0e3823b4ce35932c4f754865d158c0987812a5", "topics": ["0x9d7d829701dbfda1ac2952aa6ca4e45180327c564380a3ae2c59795efa2d68aa", "0x000000000000000000000000eb0e3823b4ce35932c4f754865d158c0987812a5"], "data": "0x0000000000000000000000000000000000000000000000000000000000000004ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc40000000000000000000000000000000000000000000000000000000000b5ab0800000000000000000000000000000000000000000000000000000000000320c80000000000000000000000000000000000000000000000000000000000030a66000000000000000000000000000000000000000000000000000000002df3895b0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000002df3802e0000000000000000000000000000000000000000000000000000000004232052000000000000000000000000000000000000000000000000000000006af57d926865616c74687900000000000000000000000000000000000000000000000000", "blockHash": "0x6bb80e239ba503a4403afdcc9f62cc76bcc74ae11ad823cefbe1432d73b121ec", "blockNumber": "0x4232052", "blockTimestamp": "0x6af57d92", "transactionHash": "0x2952d0131ed577f1684107ddb866a82e3a0bfb02249b420cd35763d35300ea4b", "transactionIndex": "0x0", "logIndex": "0x0", "removed": false}}' prepaid-gas '200.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as agent.keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/agent.keel-8f2f34.testnet.json send[39m
+

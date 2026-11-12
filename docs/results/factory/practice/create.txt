@@ -1,0 +1,86 @@
+├  Unsigned transaction:
+│    signer_id:    keel-practice-53ee75.testnet
+│    receiver_id:  keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  create_strategy
+│                       args:         {
+│                                       "config": {
+│                                         "chain_id": 998,
+│                                         "investor": "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c",
+│                                         "investor_account": "investor.keel-practice-53ee75.testnet",
+│                                         "leg": "0xa34e83D5ea3baCdFBc1C30FcDA3032AeD7830Bc7",
+│                                         "manager": "manager.keel-practice-53ee75.testnet",
+│                                         "policy": {
+│                                           "band_bp": 100,
+│                                           "dust": 10000,
+│                                           "equity_floor_usd6": 3000000,
+│                                           "fee_bp": 5,
+│                                           "flatten_reward": "100000000000000000000000",
+│                                           "heartbeat_s": 900,
+│                                           "hedge": false,
+│                                           "job_ttl_s": 14400,
+│                                           "max_basis_bp": 500,
+│                                           "max_evidence_age_s": 3600,
+│                                           "max_failed_attempts": 3,
+│                                           "max_leverage_bp": 20000,
+│                                           "max_loss_usd6": 1000000,
+│                                           "max_order_sz": 1000000,
+│                                           "max_perp_age_s": 300,
+│                                           "on_silence": "exit",
+│                                           "order_ttl_s": 300,
+│                                           "perp": 4,
+│                                           "repair_reward": "0",
+│                                           "settle_delay_l1": 300,
+│                                           "spot_haircut_bp": 100,
+│                                           "spot_reward": "50000000000000000000000",
+│                                           "sz_decimals": 4,
+│                                           "tolerance": 100000,
+│                                           "usdc_dust_usd6": 50000
+│                                         },
+│                                         "probe": "0xE35805727DA624b5f233CdE4a3d039522Db8bC1C",
+│                                         "spot_account": "0xE35805727DA624b5f233CdE4a3d039522Db8bC1C",
+│                                         "spot_chain": "base",
+│                                         "spot_chain_id": 84532,
+│                                         "spot_token": "0x4200000000000000000000000000000000000006",
+│                                         "strategy_id": 2146186318
+│                                       },
+│                                       "label": "practice",
+│                                       "name": "practice"
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      5.3423 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7kvz1s2nbjgHAkUJetg4HMbdT9P63fCKGne28F37h1eQ
+│    Signature:  ed25519:WhdZfmaWQ43k84MH5BoVqH6w7RazRjqfopnPP34K2nvcYhhbpELnJp3gsTAjqre25mVNA4dwtkrRDo5q76kFnYv
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 62.3 Tgas
+│    Transaction fee: 0.0124372111187813 NEAR
+│    Transaction ID: 84CGZMpuFr29n3w6XaPHNzBx13Gq5wZ3nMp9g5fvqqmo
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/84CGZMpuFr29n3w6XaPHNzBx13Gq5wZ3nMp9g5fvqqmo
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [practice.keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-factory-bcf915.testnet]:[39m
+│      created practice.keel-factory-bcf915.testnet for keel-practice-53ee75.testnet
+│    [36mLogs [keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-practice-53ee75.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "create_strategy" call to <keel-factory-bcf915.testnet> on behalf of <keel-practice-53ee75.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-factory-bcf915.testnet create_strategy json-args '{"name": "practice", "config": {"strategy_id": 2146186318, "chain_id": 998, "leg": "0xa34e83D5ea3baCdFBc1C30FcDA3032AeD7830Bc7", "spot_account": "0xE35805727DA624b5f233CdE4a3d039522Db8bC1C", "spot_token": "0x4200000000000000000000000000000000000006", "probe": "0xE35805727DA624b5f233CdE4a3d039522Db8bC1C", "spot_chain": "base", "spot_chain_id": 84532, "investor": "0x1d9Db7f01d68CF06B3A2D2498af09a09f186615c", "investor_account": "investor.keel-practice-53ee75.testnet", "policy": {"perp": 4, "sz_decimals": 4, "band_bp": 100, "max_basis_bp": 500, "fee_bp": 5, "max_order_sz": 1000000, "tolerance": 100000, "max_loss_usd6": 1000000, "settle_delay_l1": 300, "max_evidence_age_s": 3600, "max_perp_age_s": 300, "order_ttl_s": 300, "job_ttl_s": 14400, "max_failed_attempts": 3, "dust": 10000, "repair_reward": "0", "flatten_reward": "100000000000000000000000", "spot_reward": "50000000000000000000000", "max_leverage_bp": 20000, "equity_floor_usd6": 3000000, "spot_haircut_bp": 100, "usdc_dust_usd6": 50000, "hedge": false, "heartbeat_s": 900, "on_silence": "exit"}, "manager": "manager.keel-practice-53ee75.testnet"}, "label": "practice"}' prepaid-gas '200.0 Tgas' attached-deposit '5.3423 NEAR' sign-as keel-practice-53ee75.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-practice-53ee75.testnet.json send[39m
+

@@ -1,0 +1,41 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  propose_order
+│                       args:         {
+│                                       "is_buy": false,
+│                                       "limit_px": 198000000000,
+│                                       "perp": "hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0",
+│                                       "spot": "base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3",
+│                                       "sz": 500000
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│    Signature:  ed25519:3sQsNmTCzCgSvT2qgT4naRmKTiYWwg85DCMRVe88zHF4adfEaaYr8GnkahL1fRJNdGTLQzbicJpeQrqyqbWbac1p
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.7 Tgas
+│    Transaction fee: 0.0002416035756232 NEAR
+│    Transaction ID: B8aUXhfudBQeCpsQchkDGupPwaXfz25vTybAfLwE8oNv
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/B8aUXhfudBQeCpsQchkDGupPwaXfz25vTybAfLwE8oNv
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet propose_order json-args '{"perp":"hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0","spot":"base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3","is_buy":false,"sz":500000,"limit_px":198000000000}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: mandate:not-the-manager")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

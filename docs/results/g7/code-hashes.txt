@@ -1,0 +1,3 @@
+keel-ai-76e036.testnet deployed code sha256: be140d65f1e0776f58b88a3f7323ba32760c7a60ad945eb621532afe3f80a334
+keel-human-c0caa7.testnet deployed code sha256: be140d65f1e0776f58b88a3f7323ba32760c7a60ad945eb621532afe3f80a334
+local build:  be140d65f1e0776f58b88a3f7323ba32760c7a60ad945eb621532afe3f80a334

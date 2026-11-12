@@ -1,0 +1,35 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  request_exit
+│                       args:         {}
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│    Signature:  ed25519:5Nvtu5vJ7y2Sis4cTSMJkx7tSjR4APbXpwdCcH1z9PhGGzVHpRM7xZVc7foNeoEWsmXy2EgkGXhBmZ6qTmRoVPb1
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.2 Tgas
+│    Transaction fee: 0.0001906530615238 NEAR
+│    Transaction ID: F7ZC8LJVA763C4gMcaWe4qKmzXM8UPNKhsXsKbTL924c
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/F7ZC8LJVA763C4gMcaWe4qKmzXM8UPNKhsXsKbTL924c
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet request_exit json-args {} prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: mandate:not-the-investor")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

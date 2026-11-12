@@ -1,0 +1,63 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  attest
+│                       args:         {
+│                                       "chain": "hyperevm",
+│                                       "log": {
+│                                         "address": "0x58675f5d6b9dd6394bd635b92be9341b44f136da",
+│                                         "blockHash": "0x193c6dda8067dbd792e80c5d6356a2d67b7113066ea19f8248db4a3a04b90d98",
+│                                         "blockNumber": "0x4235f1f",
+│                                         "blockTimestamp": "0x6af5bb58",
+│                                         "data": "0x0000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000006300000000000000000000000000000000000000000000000000000000012a2a8c0000000000000000000000000000000000000000000000000000000000030fa200000000000000000000000000000000000000000000000000000000000300b700000000000000000000000000000000000000000000000000000000007988d9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014f46b0400000000000000000000000000000000000000000000000000000000002df75d0f0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000002df726210000000000000000000000000000000000000000000000000000000004235f1f000000000000000000000000000000000000000000000000000000006af5bb58772d313739343438393137320000000000000000000000000000000000000000",
+│                                         "logIndex": "0x0",
+│                                         "removed": false,
+│                                         "topics": [
+│                                           "0xf690be071e71e6a54b2373f5f789bad23c206d9294aefa06dd73630a5146ee19",
+│                                           "0x00000000000000000000000058675f5d6b9dd6394bd635b92be9341b44f136da"
+│                                         ],
+│                                         "transactionHash": "0xb42804971e1e35b54477bc919b85e8035841d9b98c10e3d9e9b8c09e85ee583e",
+│                                         "transactionIndex": "0x0"
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│    Signature:  ed25519:4q4oMz71kv3psz33ow5yXwuCVd4TRtjNVYQVvVznhZBW34YLRQcAQb4Qdtq99wcigFjKHrzackvmurAbS5D9gD8i
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.6 Tgas
+│    Transaction fee: 0.0014700816504144 NEAR
+│    Transaction ID: CAWQ1mt3nWyDRsgVtzV6bnGARCNB263k3w4jzuUFgvot
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CAWQ1mt3nWyDRsgVtzV6bnGARCNB263k3w4jzuUFgvot
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      verify_foreign_transaction: predecessor=AccountId("keel-ai-76e036.testnet"), request=VerifyForeignTransactionRequestArgs { request: HyperEvm(EvmRpcRequest { tx_id: EvmTxId([180, 40, 4, 151, 30, 30, 53, 181, 68, 119, 188, 145, 155, 133, 232, 3, 88, 65, 217, 185, 140, 16, 227, 217, 233, 184, 192, 158, 133, 238, 88, 62]), extractors: BoundedVec { inner: [Log { log_index: 0 }], witness: PossiblyEmpty(()) }, finality: Finalized }), domain_id: DomainId(3), payload_version: V1, expected_payload_hash: Some(Hash256([189, 98, 231, 122, 169, 149, 141, 11, 142, 208, 135, 40, 42, 2, 167, 105, 246, 173, 119, 141, 51, 55, 163, 144, 65, 141, 240, 48, 217, 142, 29, 86])) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-ai-76e036.testnet]:[39m
+│      attested hyperevm:0xb42804971e1e35b54477bc919b85e8035841d9b98c10e3d9e9b8c09e85ee583e:0 for guardian.keel-ai-76e036.testnet
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "attest" call to <keel-ai-76e036.testnet> on behalf of <guardian.keel-ai-76e036.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet attest json-args '{"chain": "hyperevm", "log": {"address": "0x58675f5d6b9dd6394bd635b92be9341b44f136da", "topics": ["0xf690be071e71e6a54b2373f5f789bad23c206d9294aefa06dd73630a5146ee19", "0x00000000000000000000000058675f5d6b9dd6394bd635b92be9341b44f136da"], "data": "0x0000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000006300000000000000000000000000000000000000000000000000000000012a2a8c0000000000000000000000000000000000000000000000000000000000030fa200000000000000000000000000000000000000000000000000000000000300b700000000000000000000000000000000000000000000000000000000007988d9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014f46b0400000000000000000000000000000000000000000000000000000000002df75d0f0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000002df726210000000000000000000000000000000000000000000000000000000004235f1f000000000000000000000000000000000000000000000000000000006af5bb58772d313739343438393137320000000000000000000000000000000000000000", "blockHash": "0x193c6dda8067dbd792e80c5d6356a2d67b7113066ea19f8248db4a3a04b90d98", "blockNumber": "0x4235f1f", "blockTimestamp": "0x6af5bb58", "transactionHash": "0xb42804971e1e35b54477bc919b85e8035841d9b98c10e3d9e9b8c09e85ee583e", "transactionIndex": "0x0", "logIndex": "0x0", "removed": false}}' prepaid-gas '300.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as guardian.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-ai-76e036.testnet.json send[39m
+

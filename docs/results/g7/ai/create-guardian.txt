@@ -1,0 +1,34 @@
+├  Unsigned transaction:
+│    signer_id:    keel-ai-76e036.testnet
+│    receiver_id:  guardian.keel-ai-76e036.testnet
+│    actions:
+│       -- create account:      guardian.keel-ai-76e036.testnet
+│       -- transfer deposit:    1 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9SYPAws2FVLVMFjJYunzg9JpP7GCvemSEHoFHoEUgwAV
+│    Signature:  ed25519:5h97rZxkVxtEdBAL2opAby4kayLV5wjRp28oiBW6KubFqfDP7NQyhEjmfJfjuQogK7Qv7gCGp7Kin5TKQYBibwcV
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: AtYSaFJCvDyS34wYZ6SxLrAvyyLA4Boy4YNMjboBPMBr
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AtYSaFJCvDyS34wYZ6SxLrAvyyLA4Boy4YNMjboBPMBr
+│     [0m
+
+
+New account <guardian.keel-ai-76e036.testnet> has been successfully created.
+<keel-ai-76e036.testnet> has transferred 1 NEAR to <guardian.keel-ai-76e036.testnet> successfully.
+Added access key = ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya to guardian.keel-ai-76e036.testnet.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account create-account fund-myself guardian.keel-ai-76e036.testnet '1 NEAR' use-manually-provided-public-key ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya sign-as keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-ai-76e036.testnet.json send[39m
+

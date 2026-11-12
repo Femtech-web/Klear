@@ -1,0 +1,7 @@
+liquidation value 19.6092 USD (floor 12.0), silent=False, trigger=None, mode=active
+liquidation value 19.6235 USD (floor 12.0), silent=False, trigger=None, mode=active
+liquidation value 19.7821 USD (floor 12.0), silent=False, trigger=None, mode=active
+liquidation value 19.5156 USD (floor 12.0), silent=False, trigger=None, mode=active
+liquidation value 19.5534 USD (floor 12.0), silent=True, trigger=manager-silent, mode=active
+AI guardian: act=False: The manager is only about 53s past the 600s heartbeat (653s since the last one), which could be a blip. Total value of $19.55 vs the $12 floor leaves a large cushion, and the market shows no acute stress. Unwinding now would cost about 0.5% in close costs for little benefit, so I'll re-check next cycle and act if silence persists or value nears the floor.
+exit 0

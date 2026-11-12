@@ -1,0 +1,114 @@
+[
+ {
+  "n": 1,
+  "goal": "Take the funds as the deployer",
+  "how": "Look for a key: near account list-keys $J network-config testnet now",
+  "expected": "No keys: nobody can deploy new code, call as the judge, or change the mandate",
+  "result": "0 keys after BQ5HJE71…; code hash = a local build (docs/results/g7/code-hashes.txt)"
+ },
+ {
+  "n": 2,
+  "goal": "Send the funds anywhere but the investor",
+  "how": "Read payout() on KeelLeg and KeelVault",
+  "expected": "Both are immutable and equal the investor; the judge signs nothing else that moves funds",
+  "result": "Both checked after deployment (docs/results/g7/ai/evm.txt)"
+ },
+ {
+  "n": 3,
+  "goal": "Trade as the manager",
+  "how": "near contract call-function as-transaction $J propose_order json-args '{…}' … sign-as $ME",
+  "expected": "mandate:not-the-manager",
+  "result": "B8aUXhfu…"
+ },
+ {
+  "n": 4,
+  "goal": "Trigger the investor's emergency exit",
+  "how": "… request_exit json-args '{}' … sign-as $ME",
+  "expected": "mandate:not-the-investor",
+  "result": "F7ZC8LJV…"
+ },
+ {
+  "n": 5,
+  "goal": "Keep a failing manager \"alive\"",
+  "how": "… heartbeat … from your account",
+  "expected": "mandate:not-the-manager",
+  "result": "pYG7UiSt…"
+ },
+ {
+  "n": 6,
+  "goal": "Force an exit that has no reason",
+  "how": "Attest a snapshot, then open_flatten while value is above the floor, the manager is heard from, and the investor has not asked",
+  "expected": "flatten-not-triggered",
+  "result": "5x4Jez8V…"
+ },
+ {
+  "n": 7,
+  "goal": "Steal a guardian's reward by racing its call",
+  "how": "open_flatten with a snapshot another account attested",
+  "expected": "\"only the account that attested this evidence may open a job on it\"",
+  "result": "GpgYqSsa…"
+ },
+ {
+  "n": 8,
+  "goal": "Lose money on purpose as the manager, then collect the rescue reward",
+  "how": "open_flatten from the manager's account, even on evidence it attested itself",
+  "expected": "mandate:manager-cannot-guard",
+  "result": "5bbAPoJT…"
+ },
+ {
+  "n": 9,
+  "goal": "Use the AI's key for anything but trading",
+  "how": "Sign open_flatten or request_exit with the AI's function-call key",
+  "expected": "Rejected by NEAR itself before the contract runs: \"method name … isn't allowed by the access key\"",
+  "result": "docs/results/g7/ai/attacks.md"
+ },
+ {
+  "n": 10,
+  "goal": "Feed the judge a fake world",
+  "how": "Take a real, finalized KeelLeg log, change its account value to 1,000,000 USD, call attest",
+  "expected": "Read MPC confirms the real log, not yours: the payload hash cannot match and nothing is stored",
+  "result": "4gcMUUad… (judge log \"not attested\", get_attested = null)"
+ },
+ {
+  "n": 11,
+  "goal": "Call the judge's internal callbacks",
+  "how": "… on_attested json-args '{…}' …",
+  "expected": "\"Method on_attested is private\"",
+  "result": "CpuN7S9C…"
+ },
+ {
+  "n": 12,
+  "goal": "Move funds with your own signature",
+  "how": "Relay an order to KeelLeg or an exit to KeelVault signed by any key but the judge's",
+  "expected": "Reverts BadSignature() (0x5cd5d233)",
+  "result": "both, docs/results/g7/ai/attacks.md"
+ },
+ {
+  "n": 13,
+  "goal": "Over-leverage as the manager",
+  "how": "Propose an order that takes leverage past the mandate",
+  "expected": "mandate:leverage",
+  "result": "F8beikMX…"
+ },
+ {
+  "n": 14,
+  "goal": "Get paid for a rescue that did not deliver",
+  "how": "Settle when the leg is empty but the investor's balance did not rise (a liquidation)",
+  "expected": "No reward: the leg is unverified or empty",
+  "result": "engine tests a_leg_that_empties_without_arriving_pays_nothing"
+ },
+ {
+  "n": 15,
+  "goal": "Get paid twice",
+  "how": "Settle again, confirm the same receipt again, open a second rescue",
+  "expected": "no-open-job, evidence-reused, mandate:already-rescued",
+  "result": "GRxMc5xs…, 3GfZcKUt…, AyebfDKK…"
+ },
+ {
+  "n": 16,
+  "goal": "Replay old evidence",
+  "how": "Cite a snapshot or receipt the judge already used",
+  "expected": "evidence-reused",
+  "result": "engine and contract tests"
+ }
+]

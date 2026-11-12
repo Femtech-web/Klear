@@ -1,0 +1,65 @@
+├  Unsigned transaction:
+│    signer_id:    agent.keel-8f2f34.testnet
+│    receiver_id:  keel-mandate-729400.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_flatten
+│                       args:         {
+│                                       "perp": "hyperevm:0x84849843ebced9040db823c504bfbbff4bd1c0708c5fc60621466a2d9240002a:0",
+│                                       "spot": "base:0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f:3"
+│                                     }
+│                       gas:          250.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HSoHtYTHQo48fQcydrLrMZj3pSRS2TwFCm8deLC6sTQY
+│    Signature:  ed25519:2Poj5PeY8E5N8B4fP6CtGoKguC4LVNHnFbmuw752gch5H5hc9eYa3nmwsAGb5qPcQgsbda4cGPUpLK9vb42Bu6dB
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.7 Tgas
+│    Transaction fee: 0.0014749507631405 NEAR
+│    Transaction ID: 3zHpi3qDQc2axcaS3KQbYmYSTwwihEY7u71A7ouDEqjf
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3zHpi3qDQc2axcaS3KQbYmYSTwwihEY7u71A7ouDEqjf
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-mandate-729400.testnet]:[39m
+│      {"outcome":"sign-spot","job_id":1,"spot_exit":{"tx":{"chain_id":84532,"nonce":0,"max_priority_fee_per_gas":1000000,"max_fee_per_gas":50000000,"gas":80000,"to":"0x336c17d19d0c9b03f9b67d54983f9ce70739f2f1","data":"0xa9059cbb0000000000000000000000002b10cded26f15b85039d07c85d5a259b9aea5fd4000000000000000000000000000000000000000000000000001550f7dca70000"},"digest":"0xb8e99af2c982a88d3c00927b49553ec2464f83c053dc0f1c008e37b93cb0ac83"}}
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("keel-mandate-729400.testnet"), request=SignRequestArgs { path: "keel/1/spot", payload: Ecdsa(BoundedVec { inner: [184, 233, 154, 242, 201, 130, 168, 141, 60, 0, 146, 123, 73, 85, 62, 194, 70, 79, 131, 192, 83, 220, 15, 28, 0, 142, 55, 185, 60, 176, 172, 131], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-mandate-729400.testnet]:[39m
+│      signed spot:0
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "job_id": 1,
+  "outcome": "sign-spot",
+  "spot_exit": {
+    "digest": "0xb8e99af2c982a88d3c00927b49553ec2464f83c053dc0f1c008e37b93cb0ac83",
+    "tx": {
+      "chain_id": 84532,
+      "data": "0xa9059cbb0000000000000000000000002b10cded26f15b85039d07c85d5a259b9aea5fd4000000000000000000000000000000000000000000000000001550f7dca70000",
+      "gas": 80000,
+      "max_fee_per_gas": 50000000,
+      "max_priority_fee_per_gas": 1000000,
+      "nonce": 0,
+      "to": "0x336c17d19d0c9b03f9b67d54983f9ce70739f2f1"
+    }
+  }
+}
+
+
+The "open_flatten" call to <keel-mandate-729400.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-mandate-729400.testnet open_flatten json-args '{"perp":"hyperevm:0x84849843ebced9040db823c504bfbbff4bd1c0708c5fc60621466a2d9240002a:0","spot":"base:0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f:3"}' prepaid-gas '250.0 Tgas' attached-deposit '0 NEAR' sign-as agent.keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/agent.keel-8f2f34.testnet.json send[39m
+

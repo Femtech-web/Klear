@@ -1,0 +1,3 @@
+probe 0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f; waiting for Base finality (~20 min)
+spot base:0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f:3 attested
+exit 0

@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    ai.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  heartbeat
+│                       args:         {}
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7fMMrhruckBgRowFA85CfuTP85RZx2Q3tFKBiU7n5MDu
+│    Signature:  ed25519:35tR1uDYXFqRPXz2bgNMVoQXH9MHFVHAKcHpEmkCjSs13Y9Jmi8LgUPqzW8yFqBk3dEEmc3vobncpycVynuqoSoZ
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0002271819521959 NEAR
+│    Transaction ID: AaLJ1ZT9zNwwyqeFSUmmH1zmEUv326G9cUwYNX6kL4BB
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AaLJ1ZT9zNwwyqeFSUmmH1zmEUv326G9cUwYNX6kL4BB
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [ai.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "heartbeat" call to <keel-ai-76e036.testnet> on behalf of <ai.keel-ai-76e036.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet heartbeat json-args {} prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as ai.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/ai-fc.keel-ai-76e036.testnet.json send[39m
+

@@ -1,0 +1,28 @@
+├  Unsigned transaction:
+│    signer_id:    keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- delete access key:  
+│                       public key:   ed25519:9SYPAws2FVLVMFjJYunzg9JpP7GCvemSEHoFHoEUgwAV
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:9SYPAws2FVLVMFjJYunzg9JpP7GCvemSEHoFHoEUgwAV
+│    Signature:  ed25519:fHNaRvQKGiBXrxKdXtED7SFwyq2AQFbgRRjD9e3aacV6KMs8Vv1r77fyWKRsnb68LXuk9S7ETYuuikQMPwcZBd2
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 0.630 Tgas
+│    Transaction fee: 0.000040601225 NEAR
+│    Transaction ID: BQ5HJE71Z9PoXDL4qahoNkkrTxDtxJEdcnsSHmQCWos6
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/BQ5HJE71Z9PoXDL4qahoNkkrTxDtxJEdcnsSHmQCWos6
+│     [0m
+
+
+Access key <ed25519:9SYPAws2FVLVMFjJYunzg9JpP7GCvemSEHoFHoEUgwAV> for account <keel-ai-76e036.testnet> has been successfully deleted.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account delete-keys keel-ai-76e036.testnet public-keys ed25519:9SYPAws2FVLVMFjJYunzg9JpP7GCvemSEHoFHoEUgwAV network-config testnet sign-with-access-key-file .secrets/near/keel-ai-76e036.testnet.json send[39m
+

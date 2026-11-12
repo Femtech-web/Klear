@@ -1,0 +1,52 @@
+├  Unsigned transaction:
+│    signer_id:    agent.keel-8f2f34.testnet
+│    receiver_id:  base.keel-8f2f34.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  settle
+│                       args:         {
+│                                       "perp": "hyperevm:0x2067f8c306d35213efa4144d40fe988dc9c8cb4545d2d092f6ab6cb73c052a0e:0",
+│                                       "spot": "base:0xa2dc39d974e60ef56b8852f28ca466318b218a917206889909d53d61c9c58c0f:0"
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HSoHtYTHQo48fQcydrLrMZj3pSRS2TwFCm8deLC6sTQY
+│    Signature:  ed25519:2PFvBZ63ov285sm2X4GnkKZ6ska63QoUW7jtBrm1719CugJtxpCi4rp9HyXGCax87GZBZEeNAifyNoL2uJyKeRa4
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 3.9 Tgas
+│    Transaction fee: 0.0003374127294117 NEAR
+│    Transaction ID: ADVG2LaD94KDcmr1rAB4J4DbfRRJycRoouQhbRf21FTf
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/ADVG2LaD94KDcmr1rAB4J4DbfRRJycRoouQhbRf21FTf
+│     [0m
+├  Function execution logs:
+│    [36mLogs [base.keel-8f2f34.testnet]:[39m
+│      {"outcome":"repaired","job_id":1,"payout":{"job_id":1,"agent":"agent.keel-8f2f34.testnet","amount":"500000000000000000000000"}}
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "job_id": 1,
+  "outcome": "repaired",
+  "payout": {
+    "agent": "agent.keel-8f2f34.testnet",
+    "amount": "500000000000000000000000",
+    "job_id": 1
+  }
+}
+
+
+The "settle" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction base.keel-8f2f34.testnet settle json-args '{"perp":"hyperevm:0x2067f8c306d35213efa4144d40fe988dc9c8cb4545d2d092f6ab6cb73c052a0e:0","spot":"base:0xa2dc39d974e60ef56b8852f28ca466318b218a917206889909d53d61c9c58c0f:0"}' prepaid-gas '200.0 Tgas' attached-deposit '0 NEAR' sign-as agent.keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/agent.keel-8f2f34.testnet.json send[39m
+

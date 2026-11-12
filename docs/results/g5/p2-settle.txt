@@ -1,0 +1,64 @@
+├  Unsigned transaction:
+│    signer_id:    agent.keel-8f2f34.testnet
+│    receiver_id:  base.keel-8f2f34.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  settle
+│                       args:         {
+│                                       "perp": "hyperevm:0x4311b8a091a7cb6c68d857fab3f7e4b7986cb6300d19f0f12ec460e9bce97c39:0",
+│                                       "spot": "base:0x4747a5a65dadb30b44add5dd081d0473902d9a6d27e604b5f7cf2ba20416f0da:0"
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HSoHtYTHQo48fQcydrLrMZj3pSRS2TwFCm8deLC6sTQY
+│    Signature:  ed25519:3bY6Vq6RddoM9zqPHj7GqmHbfDGQXaqL8VJYNZE7L5A36GgBkbioAQi7c9G9biSRq84htLHLP9mBcoUWYq1Zj4o
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 15.4 Tgas
+│    Transaction fee: 0.0014442437827253 NEAR
+│    Transaction ID: 3RP6qhzqAWcSymb31f81E7RvfyM9eGoHRroJRvQSA91L
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3RP6qhzqAWcSymb31f81E7RvfyM9eGoHRroJRvQSA91L
+│     [0m
+├  Function execution logs:
+│    [36mLogs [base.keel-8f2f34.testnet]:[39m
+│      {"outcome":"sign","job_id":1,"order":{"nonce":0,"is_buy":false,"limit_px":200150000000,"sz":600000,"reduce_only":false,"cloid":"290213950936510759368796784213323062584","deadline":1794483243},"digest":"0x83a8a0f87654035c5d605f6571bc6406fc632256a3f793eb03761d989568a18d","spot_sell":null}
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("base.keel-8f2f34.testnet"), request=SignRequestArgs { path: "keel/1/hyperevm", payload: Ecdsa(BoundedVec { inner: [131, 168, 160, 248, 118, 84, 3, 92, 93, 96, 95, 101, 113, 188, 100, 6, 252, 99, 34, 86, 163, 247, 147, 235, 3, 118, 29, 152, 149, 104, 161, 141], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [base.keel-8f2f34.testnet]:[39m
+│      signed 1:0
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "0x83a8a0f87654035c5d605f6571bc6406fc632256a3f793eb03761d989568a18d",
+  "job_id": 1,
+  "order": {
+    "cloid": "290213950936510759368796784213323062584",
+    "deadline": 1794483243,
+    "is_buy": false,
+    "limit_px": 200150000000,
+    "nonce": 0,
+    "reduce_only": false,
+    "sz": 600000
+  },
+  "outcome": "sign",
+  "spot_sell": null
+}
+
+
+The "settle" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction base.keel-8f2f34.testnet settle json-args '{"perp":"hyperevm:0x4311b8a091a7cb6c68d857fab3f7e4b7986cb6300d19f0f12ec460e9bce97c39:0","spot":"base:0x4747a5a65dadb30b44add5dd081d0473902d9a6d27e604b5f7cf2ba20416f0da:0"}' prepaid-gas '200.0 Tgas' attached-deposit '0 NEAR' sign-as agent.keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/agent.keel-8f2f34.testnet.json send[39m
+

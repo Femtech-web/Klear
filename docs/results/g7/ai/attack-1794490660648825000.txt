@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  settle
+│                       args:         {
+│                                       "perp": "hyperevm:0xd797213d129e2ee14f6c7007791cf60149a7b87d718ca33a016fae3921c98ed8:0",
+│                                       "spot": "base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│    Signature:  ed25519:5J1tEKcdZEVgkNCTHdTPVi9nCHqGJinCEiqcjL9BumN7LmcxZWFYSLAaB7HB9nZuUbipeACNzwj4ZBBoTA4QfsRD
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.9 Tgas
+│    Transaction fee: 0.0002593407341302 NEAR
+│    Transaction ID: zKXSLrVyc7P1d2tQ6MJd3TRE2gW6rmY9oEqFNzsXiJs
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/zKXSLrVyc7P1d2tQ6MJd3TRE2gW6rmY9oEqFNzsXiJs
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet settle json-args '{"perp":"hyperevm:0xd797213d129e2ee14f6c7007791cf60149a7b87d718ca33a016fae3921c98ed8:0","spot":"base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: no-open-job")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

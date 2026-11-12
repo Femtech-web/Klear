@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    agent.keel-8f2f34.testnet
+│    receiver_id:  judge.keel-8f2f34.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  open_repair
+│                       args:         {
+│                                       "perp": "hyperevm:0xc495db0f94b00ee41405cdf39e1688a06cb4a4d6efec2630eed371002d029062:0",
+│                                       "spot": "hyperevm:0x3e195a6371bd60747f959a088c0b6c6cc1b96d7956f560e048f125249fbd7e5a:0"
+│                                     }
+│                       gas:          200.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HSoHtYTHQo48fQcydrLrMZj3pSRS2TwFCm8deLC6sTQY
+│    Signature:  ed25519:44hAs5qNzeBRhSG3sVpoB1iQrSstfuEUuk3ycqsLd7BXP6YwZ7KkWVgH4VYxJMgVxPo6NSXgjK2h2ijb6rHaU9uK
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.6 Tgas
+│    Transaction fee: 0.0002293066993161 NEAR
+│    Transaction ID: A1PBVBKumEkunmCcxQFnC9T7sA69kKZyqzNTt1tc55YU
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/A1PBVBKumEkunmCcxQFnC9T7sA69kKZyqzNTt1tc55YU
+│     [0m
+├  Function execution logs:
+│    [31mLogs [judge.keel-8f2f34.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [agent.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction judge.keel-8f2f34.testnet open_repair json-args '{"perp":"hyperevm:0xc495db0f94b00ee41405cdf39e1688a06cb4a4d6efec2630eed371002d029062:0","spot":"hyperevm:0x3e195a6371bd60747f959a088c0b6c6cc1b96d7956f560e048f125249fbd7e5a:0"}' prepaid-gas '200.0 Tgas' attached-deposit '0 NEAR' sign-as agent.keel-8f2f34.testnet network-config testnet sign-with-access-key-file .secrets/near/agent.keel-8f2f34.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: evidence-reused")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

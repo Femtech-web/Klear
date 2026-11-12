@@ -1,0 +1,74 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-human-c0caa7.testnet
+│    receiver_id:  keel-human-c0caa7.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  settle
+│                       args:         {
+│                                       "perp": "hyperevm:0x73694a6350705f74e2cef1763530c5cad9baa794f54036d004cd221dff777c39:0",
+│                                       "spot": "base:0x6b8887d7996f5cc65434ced7d016eb468b352440768511cf04d96d8cb6599f8c:1"
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4dFcu9k2dnJpLzYYmKYCybpdaVvaYYgAsqpXAR98oVXb
+│    Signature:  ed25519:57YGEHqNEP25rfNmW25WxBn2DHbgwLxbPQ2Fc4ngmotoGNwCrfe8K1QRrHAVrqCtrCjBrrQ5Wb65mExjgsgsMVoE
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 4.3 Tgas
+│    Transaction fee: 0.000382561863475 NEAR
+│    Transaction ID: ENcQJSsB4J1HSLEVNBbjNmNeUv25aX1PDGZPcqxsgDy7
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/ENcQJSsB4J1HSLEVNBbjNmNeUv25aX1PDGZPcqxsgDy7
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-human-c0caa7.testnet]:[39m
+│      {"outcome":"rescue","job_id":1,"trigger":"investor","order":null,"sweep":null,"exit":null,"delivered":[{"leg":"perp","amount":"200000000","evidence":["hyperevm","0x73694a6350705f74e2cef1763530c5cad9baa794f54036d004cd221dff777c39",0]}],"paid":[{"job_id":1,"agent":"guardian.keel-human-c0caa7.testnet","amount":"500000000000000000000000","reason":"perp"}],"perp":"delivered","spot":"open","ended":null,"done":false}
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "delivered": [
+    {
+      "amount": "200000000",
+      "evidence": [
+        "hyperevm",
+        "0x73694a6350705f74e2cef1763530c5cad9baa794f54036d004cd221dff777c39",
+        0
+      ],
+      "leg": "perp"
+    }
+  ],
+  "done": false,
+  "ended": null,
+  "exit": null,
+  "job_id": 1,
+  "order": null,
+  "outcome": "rescue",
+  "paid": [
+    {
+      "agent": "guardian.keel-human-c0caa7.testnet",
+      "amount": "500000000000000000000000",
+      "job_id": 1,
+      "reason": "perp"
+    }
+  ],
+  "perp": "delivered",
+  "spot": "open",
+  "sweep": null,
+  "trigger": "investor"
+}
+
+
+The "settle" call to <keel-human-c0caa7.testnet> on behalf of <guardian.keel-human-c0caa7.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-human-c0caa7.testnet settle json-args '{"perp":"hyperevm:0x73694a6350705f74e2cef1763530c5cad9baa794f54036d004cd221dff777c39:0","spot":"base:0x6b8887d7996f5cc65434ced7d016eb468b352440768511cf04d96d8cb6599f8c:1"}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-human-c0caa7.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-human-c0caa7.testnet.json send[39m
+

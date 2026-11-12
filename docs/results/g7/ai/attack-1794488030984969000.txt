@@ -1,0 +1,40 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  on_attested
+│                       args:         {
+│                                       "by": "guardian.keel-ai-76e036.testnet",
+│                                       "evidence": "{}",
+│                                       "expected": "00",
+│                                       "key": "hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│    Signature:  ed25519:38Xs3gLruxY46upELktinh4eAFJGGTgnvFQBJ2W7sVvDfVq3E4TTZQQJMc9vTiojfM1gkPJwUmrNbDHSWjM3sm2p
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 1.9 Tgas
+│    Transaction fee: 0.0001656855066834 NEAR
+│    Transaction ID: CpuN7S9CbX5tfT8rAWYyfqQQvWe2N8pzQhcPWaM3hDLX
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/CpuN7S9CbX5tfT8rAWYyfqQQvWe2N8pzQhcPWaM3hDLX
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet on_attested json-args '{"key":"hyperevm:0x14013dabc10450e4d6f5c7c53d6691b35cb0d1290dd3f1481136a78c333f8a6c:0","evidence":"{}","expected":"00","by":"guardian.keel-ai-76e036.testnet"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: Method on_attested is private")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

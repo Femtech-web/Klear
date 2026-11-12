@@ -1,0 +1,21 @@
+deadline passed at 1794481725
+probe 0x4747a5a65dadb30b44add5dd081d0473902d9a6d27e604b5f7cf2ba20416f0da (Base); waiting for finality (~20 min)
+snapshot 0x4311b8a091a7cb6c68d857fab3f7e4b7986cb6300d19f0f12ec460e9bce97c39 (HyperEVM)
+perp hyperevm:0x4311b8a091a7cb6c68d857fab3f7e4b7986cb6300d19f0f12ec460e9bce97c39:0
+spot base:0x4747a5a65dadb30b44add5dd081d0473902d9a6d27e604b5f7cf2ba20416f0da:0
+attest perp (hyperevm):
+│    Transaction ID: 6MMF1o68SHzsfw9oRPaYWbTDhuAeaGxPkpJ4dHmXhkzP
+The "attest" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+  stored: yes
+attest spot (base):
+│    Transaction ID: 96w5hT9ZXYL1BXD9PgyUSrscMxLQaPNNFvKEHBgg3a9v
+The "attest" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+  stored: yes
+--- settle (re-plan):
+│    Transaction ID: 3RP6qhzqAWcSymb31f81E7RvfyM9eGoHRroJRvQSA91L
+The "settle" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+{"outcome":"sign","job_id":1,"order":{"nonce":0,"is_buy":false,"limit_px":200150000000,"sz":600000,"reduce_only":false,"cloid":"290213950936510759368796784213323062584","deadline":1794483243},"digest":"0x83a8a0f87654035c5d605f6571bc6406fc632256a3f793eb03761d989568a18d","spot_sell":null}
+--- relay job 1 nonce 0:
+relayed 0xe67c3d3b8fe16df4955e8d25cb280ec717cee4ff6fd5717ac3d391a2ea7d4950
+{"queued_l1": 771084038, "seen_l1": 771084102, "blocks": 64, "szi": -60, "entry_ntl": 12029900, "seconds": 1.6}
+exit 0

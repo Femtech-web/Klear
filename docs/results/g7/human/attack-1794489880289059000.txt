@@ -1,0 +1,37 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-human-c0caa7.testnet
+│    receiver_id:  keel-human-c0caa7.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  confirm_exit
+│                       args:         {
+│                                       "receipt": "base:0x1da0bb541364c29b30f2309bcf7dac90740d41e02269d5a2fafcf06c765bb347:1"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:4dFcu9k2dnJpLzYYmKYCybpdaVvaYYgAsqpXAR98oVXb
+│    Signature:  ed25519:55rh44QGeWsHBTEmyH9MoMygqPZWnTMvZXM3qPMk6Hs79BrKLmDvLdV8ZnFPLj5S2EFqwiAk2MVMDwLi2HeMSQ9v
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0002259765569765 NEAR
+│    Transaction ID: 3GfZcKUtVPjsbjxcNVWEDRqLku6MKv4R4LVURqVPYLd1
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3GfZcKUtVPjsbjxcNVWEDRqLku6MKv4R4LVURqVPYLd1
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-human-c0caa7.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-human-c0caa7.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-human-c0caa7.testnet confirm_exit json-args '{"receipt":"base:0x1da0bb541364c29b30f2309bcf7dac90740d41e02269d5a2fafcf06c765bb347:1"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-human-c0caa7.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-human-c0caa7.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: evidence-reused")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

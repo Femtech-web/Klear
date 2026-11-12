@@ -1,0 +1,73 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  confirm_exit
+│                       args:         {
+│                                       "receipt": "base:0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac:8"
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│    Signature:  ed25519:5gb5v1HX7FZyad3sVBod1sunCNTFnAamMT4dtZkLYyRpaCzj1KLU2Rppsh28JAmexhte9BD7PxruPWhethTxdKWX
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 4.2 Tgas
+│    Transaction fee: 0.0003661755560494 NEAR
+│    Transaction ID: 2LFFGqVJ3xhfZcX7cBtmGnpLhHqFUZfrJtzv5WihVSoN
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/2LFFGqVJ3xhfZcX7cBtmGnpLhHqFUZfrJtzv5WihVSoN
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-ai-76e036.testnet]:[39m
+│      {"outcome":"rescue","job_id":1,"trigger":"manager-silent","order":null,"sweep":null,"exit":null,"delivered":[{"leg":"spot","amount":"6000000000000000","evidence":["base","0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac",8]}],"paid":[{"job_id":1,"agent":"guardian.keel-ai-76e036.testnet","amount":"300000000000000000000000","reason":"spot"}],"perp":"delivered","spot":"delivered","ended":null,"done":true}
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "delivered": [
+    {
+      "amount": "6000000000000000",
+      "evidence": [
+        "base",
+        "0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac",
+        8
+      ],
+      "leg": "spot"
+    }
+  ],
+  "done": true,
+  "ended": null,
+  "exit": null,
+  "job_id": 1,
+  "order": null,
+  "outcome": "rescue",
+  "paid": [
+    {
+      "agent": "guardian.keel-ai-76e036.testnet",
+      "amount": "300000000000000000000000",
+      "job_id": 1,
+      "reason": "spot"
+    }
+  ],
+  "perp": "delivered",
+  "spot": "delivered",
+  "sweep": null,
+  "trigger": "manager-silent"
+}
+
+
+The "confirm_exit" call to <keel-ai-76e036.testnet> on behalf of <guardian.keel-ai-76e036.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet confirm_exit json-args '{"receipt":"base:0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac:8"}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-ai-76e036.testnet.json send[39m
+

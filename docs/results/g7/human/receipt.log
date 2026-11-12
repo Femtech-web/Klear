@@ -1,0 +1,4 @@
+receipt base:0x1da0bb541364c29b30f2309bcf7dac90740d41e02269d5a2fafcf06c765bb347:1
+Transaction ID: AM2jxwQuwL1CSZL7JpW3UutxMMhtbVQUtMo5FHcsahS7
+{"outcome":"rescue","job_id":1,"trigger":"investor","order":null,"sweep":null,"exit":null,"delivered":[{"leg":"spot","amount":"2000000000000000","evidence":["base","0x1da0bb541364c29b30f2309bcf7dac90740d41e02269d5a2fafcf06c765bb347",1]}],"paid":[{"job_id":1,"agent":"guardian.keel-human-c0caa7.testnet","amount":"300000000000000000000000","reason":"spot"}],"perp":"delivered","spot":"delivered","ended":null,"done":true}
+exit 0

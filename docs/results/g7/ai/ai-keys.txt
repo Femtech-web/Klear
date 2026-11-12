@@ -1,0 +1,2 @@
+ed25519:7fMMrhruckBg... {'FunctionCall': {'allowance': '500000000000000000000000', 'method_names': ['propose_order', 'heartbeat'], 'receiver_id': 'keel-ai-76e036.testnet'}}
+ed25519:9sUc6K8E634P... FULL ACCESS

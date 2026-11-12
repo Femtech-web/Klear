@@ -1,0 +1,37 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  confirm_exit
+│                       args:         {
+│                                       "receipt": "base:0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac:8"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:GQBV8jpRzPqUHDzFTuXzimH3gKhvJpC3UFGpodC86qya
+│    Signature:  ed25519:2dBTC3yf6WoKJXfitb6mabgSaF8mWFhNa7H4A5fHU1nQPCinZFBgRpb1JLhaSfVkcq4LkqpWVqskbXm1gL7xQUrQ
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.6 Tgas
+│    Transaction fee: 0.0002297316102281 NEAR
+│    Transaction ID: AhG4D56UNTmwxVpvFEJTgsYBKFrfkbQcMAW7G1YV1i6n
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AhG4D56UNTmwxVpvFEJTgsYBKFrfkbQcMAW7G1YV1i6n
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet confirm_exit json-args '{"receipt":"base:0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac:8"}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/guardian.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: evidence-reused")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

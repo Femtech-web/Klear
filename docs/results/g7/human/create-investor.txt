@@ -1,0 +1,34 @@
+├  Unsigned transaction:
+│    signer_id:    keel-human-c0caa7.testnet
+│    receiver_id:  investor.keel-human-c0caa7.testnet
+│    actions:
+│       -- create account:      investor.keel-human-c0caa7.testnet
+│       -- transfer deposit:    1 NEAR
+│       -- add access key:     
+│                       public key:   ed25519:7mkUKsJuiTqXrqBsEf1nebxYYqzdy2WFo5Tta4JGRF4a
+│                       nonce:        0
+│                       permission:   FullAccess
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:63c3sWADbFPkd286yq3MLUNPQLRMgWHRv21jtjEX96aH
+│    Signature:  ed25519:351BHdjHpNB4ikAV5RVN7VsxyztUjFgiK1Sr2CCCqnNhBpE6ussfR5mrZeWydhDDmSCqXAkZfDCbd4kf6CRLmgUX
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 8.6 Tgas
+│    Transaction fee: 0.0071149895375 NEAR
+│    Transaction ID: 13BwPnsTUTXqmunpwzYrvunjcKVcsQQ8Zq3YsjwHyMjZ
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/13BwPnsTUTXqmunpwzYrvunjcKVcsQQ8Zq3YsjwHyMjZ
+│     [0m
+
+
+New account <investor.keel-human-c0caa7.testnet> has been successfully created.
+<keel-human-c0caa7.testnet> has transferred 1 NEAR to <investor.keel-human-c0caa7.testnet> successfully.
+Added access key = ed25519:7mkUKsJuiTqXrqBsEf1nebxYYqzdy2WFo5Tta4JGRF4a to investor.keel-human-c0caa7.testnet.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account create-account fund-myself investor.keel-human-c0caa7.testnet '1 NEAR' use-manually-provided-public-key ed25519:7mkUKsJuiTqXrqBsEf1nebxYYqzdy2WFo5Tta4JGRF4a sign-as keel-human-c0caa7.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-human-c0caa7.testnet.json send[39m
+

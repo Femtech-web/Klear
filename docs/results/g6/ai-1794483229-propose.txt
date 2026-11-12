@@ -1,0 +1,41 @@
+├  Unsigned transaction:
+│    signer_id:    ai.keel-mandate-729400.testnet
+│    receiver_id:  keel-mandate-729400.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  propose_order
+│                       args:         {
+│                                       "is_buy": false,
+│                                       "limit_px": 199230000000,
+│                                       "perp": "hyperevm:0x89dbfd4f04268d16f37854c728a5545a6d544c0e32921cde4e43c7f60ded9df4:0",
+│                                       "spot": "base:0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f:3",
+│                                       "sz": 600000
+│                                     }
+│                       gas:          250.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:ztyVpd7HVwh5a5DC3JpB6ezxsvdQpuuU8khZzfNeeRc
+│    Signature:  ed25519:SN855Wc1JvJrDgdKtzxvvZrGpQuC7BzTTUxd7QAX7vKknwuqSZ1TJDHGmN4AXmLAQVMPM9EkWZtE7ZXLjrVRHHD
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.8 Tgas
+│    Transaction fee: 0.0002502649217895 NEAR
+│    Transaction ID: 2q4XpAHDk7HnHP9pdH9RrDT7ncsAR3EbXHRfju8y8hA8
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/2q4XpAHDk7HnHP9pdH9RrDT7ncsAR3EbXHRfju8y8hA8
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-mandate-729400.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ai.keel-mandate-729400.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-mandate-729400.testnet propose_order json-args '{"perp": "hyperevm:0x89dbfd4f04268d16f37854c728a5545a6d544c0e32921cde4e43c7f60ded9df4:0", "spot": "base:0xcfc8410f2e0d6193013061b1c9dc6cdca318aaeb95c80408d74e3fb75826b33f:3", "is_buy": false, "sz": 600000, "limit_px": 199230000000}' prepaid-gas '250.0 Tgas' attached-deposit '0 NEAR' sign-as ai.keel-mandate-729400.testnet network-config testnet sign-with-access-key-file .secrets/near/ai.keel-mandate-729400.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: mandate:equity-below-floor")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

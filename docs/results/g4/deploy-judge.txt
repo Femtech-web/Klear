@@ -1,0 +1,73 @@
+├  Unsigned transaction:
+│    signer_id:    judge.keel-8f2f34.testnet
+│    receiver_id:  judge.keel-8f2f34.testnet
+│    actions:
+│       -- deploy code <8bjShZKVxLpVQMPYnJzWjarMYTc4HyjgK7HgXLroUM6U> to a account <judge.keel-8f2f34.testnet>
+│       -- function call:      
+│                       method name:  new
+│                       args:         {
+│                                       "config": {
+│                                         "chain_id": 998,
+│                                         "leg": "0xEB0e3823b4Ce35932C4f754865D158C0987812A5",
+│                                         "policy": {
+│                                           "band_bp": 100,
+│                                           "dust": 10000,
+│                                           "fee_bp": 5,
+│                                           "flatten_reward": "500000000000000000000000",
+│                                           "job_ttl_s": 7200,
+│                                           "max_basis_bp": 500,
+│                                           "max_evidence_age_s": 900,
+│                                           "max_failed_attempts": 3,
+│                                           "max_loss_usd6": 2000000,
+│                                           "max_order_sz": 1000000,
+│                                           "order_ttl_s": 300,
+│                                           "perp": 4,
+│                                           "repair_reward": "500000000000000000000000",
+│                                           "settle_delay_l1": 300,
+│                                           "sz_decimals": 4,
+│                                           "tolerance": 100000
+│                                         },
+│                                         "probe": "0x2317def49Bb4d65841E77E518D11649a31e36B8c",
+│                                         "spot_account": "0x462ae7cab0c129706d8f69e472c08903e9a215be",
+│                                         "spot_chain": "hyperevm",
+│                                         "spot_token": "0x2403529Abe0d3adaFAA630173275Fd5b53a9A13f",
+│                                         "strategy_id": 1
+│                                       },
+│                                       "foreign_tx_domain": 3,
+│                                       "mpc": "v1.signer-prod.testnet",
+│                                       "owner": "keel-8f2f34.testnet",
+│                                       "sign_domain": 0,
+│                                       "sign_path": "keel/1/hyperevm"
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:DsEbsd2PySatPZfQKiN1Wsv3KDAcUTr5jNRLPFj3rpfK
+│    Signature:  ed25519:2oBX6cqs93X1sJ35cPaDukpwhfti2kAFHSXrZEcnDLkhjzhphTfnQ2ATNYh5SveQuC3TkgNjMY9ZhqKUEckQnUjS
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 23.9 Tgas
+│    Transaction fee: 0.002367357407349 NEAR
+│    Transaction ID: 6ZHN4et6cHNCtvTM2x92YC5f78hwM3F4cipwM2pLhDfz
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/6ZHN4et6cHNCtvTM2x92YC5f78hwM3F4cipwM2pLhDfz
+│     [0m
+├  Function execution logs:
+│    [36mLogs [judge.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [judge.keel-8f2f34.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+Contract code has been successfully deployed.
+The "new" call to <judge.keel-8f2f34.testnet> on behalf of <judge.keel-8f2f34.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract deploy judge.keel-8f2f34.testnet use-file contracts/near-keel/target/near/near_keel.wasm with-init-call new json-args '{"owner": "keel-8f2f34.testnet", "mpc": "v1.signer-prod.testnet", "sign_path": "keel/1/hyperevm", "sign_domain": 0, "foreign_tx_domain": 3, "config": {"strategy_id": 1, "chain_id": 998, "leg": "0xEB0e3823b4Ce35932C4f754865D158C0987812A5", "spot_account": "0x462ae7cab0c129706d8f69e472c08903e9a215be", "spot_token": "0x2403529Abe0d3adaFAA630173275Fd5b53a9A13f", "probe": "0x2317def49Bb4d65841E77E518D11649a31e36B8c", "spot_chain": "hyperevm", "policy": {"perp": 4, "sz_decimals": 4, "band_bp": 100, "max_basis_bp": 500, "fee_bp": 5, "max_order_sz": 1000000, "tolerance": 100000, "max_loss_usd6": 2000000, "settle_delay_l1": 300, "max_evidence_age_s": 900, "order_ttl_s": 300, "job_ttl_s": 7200, "max_failed_attempts": 3, "dust": 10000, "repair_reward": "500000000000000000000000", "flatten_reward": "500000000000000000000000"}}}' prepaid-gas '100.0 Tgas' attached-deposit '1 NEAR' network-config testnet sign-with-access-key-file .secrets/near/judge.keel-8f2f34.testnet.json send[39m
+
+70e78bea9daf48be7714462e01823561c4580cf1e3c02091c714a9ac9de61785  contracts/near-keel/target/near/near_keel.wasm

@@ -1,0 +1,36 @@
+=== AI trade 1: buy 0.006
+│    Transaction ID: 7iGs1GHfo9eZbCVWHVs9VVCDCRLEJzX9xEkEUWbdgno2
+The "propose_order" call to <keel-mandate-729400.testnet> on behalf of <ai.keel-mandate-729400.testnet> succeeded.
+{"outcome":"sign","job_id":0,"order":{"nonce":1,"is_buy":true,"limit_px":202310000000,"sz":600000,"reduce_only":true,"cloid":"215418641859171455363192342073722503252","deadline":1794483085},"digest":"0x77cd8529dace4fb2cea966a96436b6709a11efe987818b3fb667163c881fe28a","spot_sell":null,"spot_exit":null}
+relayed 0x127e451fe2800cde89c5104ffab97f0200073fe1725b46d2779388636e4d8c6b
+{"queued_l1": 771081538, "seen_l1": 771081590, "blocks": 52, "szi": 0, "entry_ntl": 0, "seconds": 1.6}
+=== AI trade 2: sell 0.006
+│    Transaction ID: 3c3mGRiy58moMhS6XkfTojogjYse24ifRuLLe5ev5qjN
+The "propose_order" call to <keel-mandate-729400.testnet> on behalf of <ai.keel-mandate-729400.testnet> succeeded.
+{"outcome":"sign","job_id":0,"order":{"nonce":2,"is_buy":false,"limit_px":200020000000,"sz":600000,"reduce_only":false,"cloid":"93244762812905713231397792482607205404","deadline":1794483174},"digest":"0xdc8fda1691f937e88dc83a8b87bb964de99c77075c0c3cb31b88cac591696f60","spot_sell":null,"spot_exit":null}
+relayed 0x5ae75679c1930af83a140b1afbc29163887a76a3b456d380670aca5d01ba600e
+{"queued_l1": 771082903, "seen_l1": 771082967, "blocks": 64, "szi": -60, "entry_ntl": 12056870, "seconds": 1.6}
+=== AI trade 3: buy 0.006
+│    Transaction ID: GBfXNRitKMdFosLn59PwQTqMurYiq1RmHBZPFF9q9SYt
+The "propose_order" call to <keel-mandate-729400.testnet> on behalf of <ai.keel-mandate-729400.testnet> succeeded.
+{"outcome":"sign","job_id":0,"order":{"nonce":3,"is_buy":true,"limit_px":201850000000,"sz":600000,"reduce_only":true,"cloid":"231370927285320980202541599030429430081","deadline":1794483264},"digest":"0x340418d16c4c247bdeca6fc1515db466eba04ee3f9a1b0a397931e4d514db73b","spot_sell":null,"spot_exit":null}
+relayed 0xfdfa18f7b1ce8a7244e260ff547dd91f33f280c84a06d054e075511c8496a20d
+{"queued_l1": 771084345, "seen_l1": 771084415, "blocks": 70, "szi": 0, "entry_ntl": 0, "seconds": 2.2}
+=== AI trade 4: sell 0.006
+│    Transaction ID: ErCHt5FUTsUkPzsFTrwjPHxdJ3NbGr1mpLVvZTFb4ZdX
+The "propose_order" call to <keel-mandate-729400.testnet> on behalf of <ai.keel-mandate-729400.testnet> succeeded.
+{"outcome":"sign","job_id":0,"order":{"nonce":4,"is_buy":false,"limit_px":199400000000,"sz":600000,"reduce_only":false,"cloid":"139744463215924425679705663070957282627","deadline":1794483354},"digest":"0x399a6fa0b2925188754f3260e42ec543dddb37d2c213df5520f4102305e73068","spot_sell":null,"spot_exit":null}
+relayed 0x870c8d145c4be46ffddabd117789b3f105bd9009967efbab2c72ee3627f45fe1
+{"queued_l1": 771085943, "seen_l1": 771086009, "blocks": 66, "szi": -60, "entry_ntl": 12019200, "seconds": 1.6}
+=== AI trade 5: buy 0.006
+│    Transaction ID: 9Q15dSzBxuUJjWqbfA3tDYK44aHRpLwnVVzPzTe8Faa2
+The "propose_order" call to <keel-mandate-729400.testnet> on behalf of <ai.keel-mandate-729400.testnet> succeeded.
+{"outcome":"sign","job_id":0,"order":{"nonce":5,"is_buy":true,"limit_px":201260000000,"sz":600000,"reduce_only":true,"cloid":"70767130741938792241916303435253962283","deadline":1794483448},"digest":"0x94cf91ae232da8f1db093019550ca6586b7091ad1daa886128084f87dd55f036","spot_sell":null,"spot_exit":null}
+relayed 0x78933910057ae0f61504e9906ebe74d528e49508802d146ea73df4b3fb084d69
+{"queued_l1": 771087783, "seen_l1": 771087842, "blocks": 59, "szi": 0, "entry_ntl": 0, "seconds": 1.8}
+=== AI trade 6: sell 0.006
+AI manager (scripted) proposes: sell 600000 @ 199230000000
+│    Transaction ID: 2q4XpAHDk7HnHP9pdH9RrDT7ncsAR3EbXHRfju8y8hA8
+      ExecutionError("Smart contract panicked: mandate:equity-below-floor")
+FLOOR BREACHED: the judge refuses the AI
+exit 0

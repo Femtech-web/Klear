@@ -1,0 +1,20 @@
+├  Your transaction:
+│    signer_id:    testnet
+│    actions:
+│       -- create account:      keel-practice-53ee75.testnet
+│       -- add access key:     
+│                       public key:   ed25519:7kvz1s2nbjgHAkUJetg4HMbdT9P63fCKGne28F37h1eQ
+│                       permission:   FullAccess
+│     [0m
+├  Transaction Execution Info:
+│    Transaction ID: 9QNY8xxoJMUxKVY2HC8X2snGCSs8ox559qWgLwkXMjrB
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/9QNY8xxoJMUxKVY2HC8X2snGCSs8ox559qWgLwkXMjrB
+[0m
+New account <keel-practice-53ee75.testnet> created successfully.
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account create-account sponsor-by-faucet-service keel-practice-53ee75.testnet use-manually-provided-public-key ed25519:7kvz1s2nbjgHAkUJetg4HMbdT9P63fCKGne28F37h1eQ network-config testnet create[39m
+

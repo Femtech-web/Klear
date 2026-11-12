@@ -1,0 +1,43 @@
+├  Unsigned transaction:
+│    signer_id:    keel-factory-bcf915.testnet
+│    receiver_id:  keel-factory-bcf915.testnet
+│    actions:
+│       -- deploy code <3x9jt4URpUHCob4KcPRogfKYKidhfsNUeMgY7qtb2gnn> to a account <keel-factory-bcf915.testnet>
+│       -- function call:      
+│                       method name:  new
+│                       args:         {
+│                                       "foreign_tx_domain": 3,
+│                                       "mpc": "v1.signer-prod.testnet",
+│                                       "sign_domain": 0
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:ksgfycW9tbwkKoW7xNqNXRrS6LsxSsvhN7YrLEVopag
+│    Signature:  ed25519:NRLZRa46tx5DeHs8jGn84ATpT3diRnSmkVk3cNpHk39tsRGghMMkKBjB2ZLPN42xsVmNnCCx1fXAGtXEgQpER5h
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 41.6 Tgas
+│    Transaction fee: 0.0041285599446766 NEAR
+│    Transaction ID: FQB367QTVBwCZ3uNaGGLR98XcZiWQLN7KvtEDbrShY3g
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FQB367QTVBwCZ3uNaGGLR98XcZiWQLN7KvtEDbrShY3g
+│     [0m
+├  Function execution logs:
+│    [36mLogs [keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+Contract code has been successfully deployed.
+The "new" call to <keel-factory-bcf915.testnet> on behalf of <keel-factory-bcf915.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract deploy keel-factory-bcf915.testnet use-file contracts/near-keel-factory/target/near/near_keel_factory.wasm with-init-call new json-args '{"mpc":"v1.signer-prod.testnet","sign_domain":0,"foreign_tx_domain":3}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' network-config testnet sign-with-access-key-file .secrets/near/keel-factory-bcf915.testnet.json send[39m
+

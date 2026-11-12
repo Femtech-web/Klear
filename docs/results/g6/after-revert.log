@@ -1,0 +1,12 @@
+probe 0x57500a994891dc3745433ac1a37bbcd5676b6dcf6eddf12da0a896904abef07f; waiting for Base finality (~20 min)
+Error: error sending request for url (https://sepolia.base.org/)
+
+Context:
+- operation timed out
+scripts/testnet/g6.sh: line 78: [: : integer expression expected
+spot base:0x57500a994891dc3745433ac1a37bbcd5676b6dcf6eddf12da0a896904abef07f:0 attested
+--- settle after the reverted Base transfer:
+│    Transaction ID: E5inT13x3Pw2Kx4LMRygomRxsLvWB1vTRgHBHAz3UCuz
+The "settle" call to <keel-mandate-729400.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+{"outcome":"sign-spot","job_id":1,"spot_exit":{"tx":{"chain_id":84532,"nonce":0,"max_priority_fee_per_gas":1000000,"max_fee_per_gas":50000000,"gas":80000,"to":"0x336c17d19d0c9b03f9b67d54983f9ce70739f2f1","data":"0xa9059cbb0000000000000000000000002b10cded26f15b85039d07c85d5a259b9aea5fd4000000000000000000000000000000000000000000000000001550f7dca70000"},"digest":"0xb8e99af2c982a88d3c00927b49553ec2464f83c053dc0f1c008e37b93cb0ac83"}}
+exit 0

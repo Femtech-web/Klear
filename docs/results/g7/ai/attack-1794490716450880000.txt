@@ -1,0 +1,41 @@
+├  Unsigned transaction:
+│    signer_id:    ai.keel-ai-76e036.testnet
+│    receiver_id:  keel-ai-76e036.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  propose_order
+│                       args:         {
+│                                       "is_buy": false,
+│                                       "limit_px": 198000000000,
+│                                       "perp": "hyperevm:0xd797213d129e2ee14f6c7007791cf60149a7b87d718ca33a016fae3921c98ed8:0",
+│                                       "spot": "base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3",
+│                                       "sz": 500000
+│                                     }
+│                       gas:          100.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7fMMrhruckBgRowFA85CfuTP85RZx2Q3tFKBiU7n5MDu
+│    Signature:  ed25519:5vzoDLfPtXJwGfoJZP2EtSwsR1CaM529aAVXXqtMifWkRgewtUc1DffWfq9BjQd8nr5h8u7RmCUZFJP1S59UYUFC
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.9 Tgas
+│    Transaction fee: 0.0002607193406278 NEAR
+│    Transaction ID: 9azorqzqheK7Ts8J6jvjLSscus8qZqSvoQwmGQa4WegE
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/9azorqzqheK7Ts8J6jvjLSscus8qZqSvoQwmGQa4WegE
+│     [0m
+├  Function execution logs:
+│    [31mLogs [keel-ai-76e036.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [ai.keel-ai-76e036.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction keel-ai-76e036.testnet propose_order json-args '{"perp":"hyperevm:0xd797213d129e2ee14f6c7007791cf60149a7b87d718ca33a016fae3921c98ed8:0","spot":"base:0xd840cdcc76d94f19ac6122b94562f75478ba18b091897819bf2853af42036981:3","is_buy":false,"sz":500000,"limit_px":198000000000}' prepaid-gas '100.0 Tgas' attached-deposit '0 NEAR' sign-as ai.keel-ai-76e036.testnet network-config testnet sign-with-access-key-file .secrets/near/ai-fc.keel-ai-76e036.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: mandate:strategy-not-active")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

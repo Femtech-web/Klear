@@ -1,0 +1,236 @@
+{
+ "generated": "2026-11-12",
+ "source": "docs/results/g7/README.md (every step verified on testnet)",
+ "strategies": {
+  "ai": {
+   "title": "An AI manager, an outage, an AI guardian",
+   "steps": [
+    {
+     "kind": "setup",
+     "title": "The investor's rules, locked",
+     "detail": "A NEAR judge with the mandate: 1x leverage on liquidation value, a 12 USD floor, and exit if the manager is silent for 10 minutes. Then its only key is deleted: nobody, including us, can change it.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "F1VNtYK6rkQY3NfYDnXvcKAQRQunKH1H6PRRQR88tgmd"
+      },
+      {
+       "chain": "near",
+       "id": "BQ5HJE71Z9PoXDL4qahoNkkrTxDtxJEdcnsSHmQCWos6"
+      }
+     ]
+    },
+    {
+     "kind": "setup",
+     "title": "An AI manager with a key that can only propose",
+     "detail": "Claude manages the strategy through a NEAR function-call key that can call propose_order and heartbeat on the judge, and nothing else.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "D1ueCVG3YSWVQ2HxBzG8xhCPaS3mqfHb2HZ9P36W7gfV"
+      }
+     ]
+    },
+    {
+     "kind": "refused",
+     "title": "13 attempts to cheat, all refused",
+     "detail": "Strangers proposing, triggering the investor's exit or faking heartbeats; the AI's key reaching for the exit; a guardian's evidence taken by another; a forged snapshot claiming 1,000,000 USD that NEAR's Read MPC refused to confirm.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "4gcMUUad8v7NE9jAXY6ppKMci1qyRLBrrm9RhB8kQBac"
+      },
+      {
+       "chain": "near",
+       "id": "5bbAPoJTYoGSSn5dADyzgycwftzHTFXzKHNKopTsk7vL"
+      }
+     ]
+    },
+    {
+     "kind": "ai",
+     "title": "The AI trades, within its rules",
+     "detail": "Claude bought 0.0099 ETH; the judge signed it and Hyperliquid filled it 53 blocks later.",
+     "quote": "The mark is about 2.4% below the oracle and hourly funding is strongly negative, so a long collects funding\u2026 sized to keep leverage just under 1.0x.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "EuvwHec6iPZ1T8QausVNnmFChAaMJ1emgxAr9TvWZ7TS"
+      },
+      {
+       "chain": "hyperevm",
+       "id": "0x8fdaef157d65b2a334da6c1177e50187758e9fe1fd654a00f32eca5090907a06"
+      }
+     ]
+    },
+    {
+     "kind": "ai",
+     "title": "Then holds, on its own",
+     "detail": "Twice, Claude declined to add risk.",
+     "quote": "Leverage is already about 0.99x, so any buy would breach the 1.0x cap.",
+     "txs": []
+    },
+    {
+     "kind": "refused",
+     "title": "A trade past the limit is refused",
+     "detail": "An order taking leverage to about 1.5x, sent with the AI's own key, so the result does not depend on what the AI decides.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "F8beikMXotPVh9ConjZWvtJZ8fGNisr9kmryi8wnUwfK"
+      }
+     ],
+     "code": "mandate:leverage"
+    },
+    {
+     "kind": "disclosed",
+     "title": "The manager goes silent",
+     "detail": "We stopped its heartbeats on purpose. Ten minutes later the judge itself reports the trigger the investor chose: manager-silent.",
+     "txs": []
+    },
+    {
+     "kind": "ai",
+     "title": "An AI guardian waits, then acts",
+     "detail": "A second Claude, with no special key, watches. At 53 seconds past the window it declines; when the silence persists it acts.",
+     "quote": "The investor's own silence trigger has fired and the judge has verified it\u2026 Rescuing now returns the assets while the cushion is large.",
+     "txs": []
+    },
+    {
+     "kind": "rescue",
+     "title": "Both legs move, at once",
+     "detail": "The judge signs a reduce-only close on Hyperliquid and a vault exit on Base. The close fills; the vault sends 0.006 WETH straight to the investor.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "5hHHC9FzYFJNEW32j2A4nT6YEuZKky3Xt2mVThavXqKq"
+      },
+      {
+       "chain": "hyperevm",
+       "id": "0x0afd0dde7635c179f8b2b88901d2ebb5e0a658fb5f3a4da58e1f396ea9f215d3"
+      },
+      {
+       "chain": "base",
+       "id": "0x08692bb796eccf3787e18893684a5a713e7587ab9e86efde79e7854d9979b2ac"
+      }
+     ]
+    },
+    {
+     "kind": "rescue",
+     "title": "The USDC is swept home",
+     "detail": "Flat, so the judge signs a sweep of everything left on the Hyperliquid account to the investor's fixed address.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "2pSpf32R51ch34PELHudRLaJUXqGkA6qkf8J4SkfgRiS"
+      },
+      {
+       "chain": "hyperevm",
+       "id": "0x6027db861fc7d20a49c0aa387c270499b4e24e19468f45060ca9b4bc451128bf"
+      }
+     ]
+    },
+    {
+     "kind": "paid",
+     "title": "Paid only when it arrived: 7.887 USDC",
+     "detail": "A fresh snapshot shows the account empty and the investor's balance up by what it held. Only then is the guardian paid 0.5 NEAR.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "7pYXKcXGGdxXjKjR4qmYS8ANcVUYv2yg8LdGpGwN3KYR"
+      }
+     ]
+    },
+    {
+     "kind": "paid",
+     "title": "Paid only when it arrived: 0.006 WETH",
+     "detail": "After Base finality, NEAR's Read MPC confirms the vault's receipt. The guardian is paid 0.3 NEAR. Done.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "2LFFGqVJ3xhfZcX7cBtmGnpLhHqFUZfrJtzv5WihVSoN"
+      }
+     ]
+    },
+    {
+     "kind": "refused",
+     "title": "And nothing twice",
+     "detail": "Settling again, confirming the same receipt, a second rescue, the AI trading after the exit: all refused.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "zKXSLrVyc7P1d2tQ6MJd3TRE2gW6rmY9oEqFNzsXiJs"
+      },
+      {
+       "chain": "near",
+       "id": "9azorqzqheK7Ts8J6jvjLSscus8qZqSvoQwmGQa4WegE"
+      }
+     ]
+    }
+   ]
+  },
+  "human": {
+   "title": "The investor's own exit, a guardian by hand",
+   "steps": [
+    {
+     "kind": "setup",
+     "title": "No manager: the investor's own exit",
+     "detail": "A second locked judge, with 2 USDC on Hyperliquid and 0.002 WETH on Base.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "H5JUQL1TjLvgKsVm4iuGc32W79mcMHTzxGkm5aZWXdXw"
+      },
+      {
+       "chain": "near",
+       "id": "5TCwTXvAq7VFEYfaYaNp6pY5Ccw2LfjW6anUa8Sd8hEc"
+      }
+     ]
+    },
+    {
+     "kind": "trigger",
+     "title": "The investor asks to leave",
+     "detail": "Only the investor's NEAR account can do this, at any time, for any reason. It cannot redirect a cent.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "H56zWCGxrRSceS1CX34Z5ay2FkkPRzsUygBZH7MzX2a5"
+      }
+     ]
+    },
+    {
+     "kind": "rescue",
+     "title": "A person runs the rescue by hand",
+     "detail": "One command at a time: the guardian opens the rescue, relays the vault exit and the sweep.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "4vi4yRSUonZJLvdUpWW2ZYYDNP9RaY8UQ4xDtfeV7wGv"
+      },
+      {
+       "chain": "base",
+       "id": "0x1da0bb541364c29b30f2309bcf7dac90740d41e02269d5a2fafcf06c765bb347"
+      },
+      {
+       "chain": "hyperevm",
+       "id": "0x5a9d566468bd4014b23457b335c80a05f43f990b97aee64aaef87654488863a8"
+      }
+     ]
+    },
+    {
+     "kind": "paid",
+     "title": "Both legs home, each paid once",
+     "detail": "The investor's Hyperliquid USDC goes 898.0 \u2192 900.0 and the vault's WETH reaches the investor; each leg's reward is paid only after its arrival is proven.",
+     "txs": [
+      {
+       "chain": "near",
+       "id": "ENcQJSsB4J1HSLEVNBbjNmNeUv25aX1PDGZPcqxsgDy7"
+      },
+      {
+       "chain": "near",
+       "id": "AM2jxwQuwL1CSZL7JpW3UutxMMhtbVQUtMo5FHcsahS7"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

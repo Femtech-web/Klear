@@ -1,0 +1,22 @@
+# ---- secrets and local configuration: never committed ----
+.env
+.env.*
+!.env.example
+.secrets/
+*.key
+*.pem
+*.secret
+*.secret.json
+
+# ---- build outputs, caches, tools ----
+target/
+**/target/
+contracts/evm/out/
+contracts/evm/cache/
+node_modules/
+.tools/
+__pycache__/
+*.pyc
+
+# release artifacts (make release)
+dist/

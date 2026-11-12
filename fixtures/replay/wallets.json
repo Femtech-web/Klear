@@ -1,0 +1,327 @@
+{
+ "season": "Alpha Arena Season 1.5",
+ "collected": "2026-11-12 from alphaarena.ai/models/<id> (each page links its Hyperliquid wallet)",
+ "starting_capital_usd": 10000,
+ "wallets": [
+  {
+   "site_id": 1,
+   "competition": "1: NEW BASELINE",
+   "model": "GPT-5.1",
+   "address": "0xefc0c8f700025554624797fe8b46d36756a5e47c",
+   "site_final_value_usd": 8040.76,
+   "site_total_pnl_usd": -1959.24,
+   "site_avg_leverage": 8.1,
+   "source": "https://www.alphaarena.ai/models/1"
+  },
+  {
+   "site_id": 2,
+   "competition": "2: MONK MODE",
+   "model": "GPT-5.1",
+   "address": "0x57c392bc9917eab1b70e0836f0dfed59460e59d3",
+   "site_final_value_usd": 8747.96,
+   "site_total_pnl_usd": -1252.04,
+   "site_avg_leverage": 8.6,
+   "source": "https://www.alphaarena.ai/models/2"
+  },
+  {
+   "site_id": 3,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "GPT-5.1",
+   "address": "0x0a2a4ae8c318798bb773b8d1803f553fb25b5635",
+   "site_final_value_usd": 7487.93,
+   "site_total_pnl_usd": -2512.07,
+   "site_avg_leverage": 8.5,
+   "source": "https://www.alphaarena.ai/models/3"
+  },
+  {
+   "site_id": 4,
+   "competition": "4: MAX LEVERAGE",
+   "model": "GPT-5.1",
+   "address": "0xb158dedfbe2142ba595f082344fed4438b636a3c",
+   "site_final_value_usd": 10888.25,
+   "site_total_pnl_usd": 888.25,
+   "site_avg_leverage": 10.3,
+   "source": "https://www.alphaarena.ai/models/4"
+  },
+  {
+   "site_id": 5,
+   "competition": "1: NEW BASELINE",
+   "model": "KIMI-K2-THINKING",
+   "address": "0x4b995b73bfd4d6e9cdd98da56e62831897acab70",
+   "site_final_value_usd": 4234.59,
+   "site_total_pnl_usd": -5765.41,
+   "site_avg_leverage": 9.2,
+   "source": "https://www.alphaarena.ai/models/5"
+  },
+  {
+   "site_id": 6,
+   "competition": "2: MONK MODE",
+   "model": "KIMI-K2-THINKING",
+   "address": "0x20f6124a8647944a0ac21d9426c44ebffa99be50",
+   "site_final_value_usd": 8955.36,
+   "site_total_pnl_usd": -1044.64,
+   "site_avg_leverage": 8.5,
+   "source": "https://www.alphaarena.ai/models/6"
+  },
+  {
+   "site_id": 7,
+   "competition": "1: NEW BASELINE",
+   "model": "GROK-4",
+   "address": "0xe23926551d8e8c66f8869805dcfad05591f0a768",
+   "site_final_value_usd": 5160.4,
+   "site_total_pnl_usd": -4839.6,
+   "site_avg_leverage": 10.3,
+   "source": "https://www.alphaarena.ai/models/7"
+  },
+  {
+   "site_id": 8,
+   "competition": "2: MONK MODE",
+   "model": "GROK-4",
+   "address": "0x406d9d2534c62c64332134c294e7d9c48f3925a9",
+   "site_final_value_usd": 5100.64,
+   "site_total_pnl_usd": -4899.36,
+   "site_avg_leverage": 9.6,
+   "source": "https://www.alphaarena.ai/models/8"
+  },
+  {
+   "site_id": 9,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "GROK-4",
+   "address": "0x61f35978eb33bad00644bc9549850e7a7c65186e",
+   "site_final_value_usd": 385.02,
+   "site_total_pnl_usd": -9614.98,
+   "site_avg_leverage": 11.2,
+   "source": "https://www.alphaarena.ai/models/9"
+  },
+  {
+   "site_id": 10,
+   "competition": "4: MAX LEVERAGE",
+   "model": "GROK-4",
+   "address": "0x8662ee61b17e07213a104305a46e619205abd046",
+   "site_final_value_usd": 3924.3,
+   "site_total_pnl_usd": -6075.7,
+   "site_avg_leverage": 10.3,
+   "source": "https://www.alphaarena.ai/models/10"
+  },
+  {
+   "site_id": 11,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "KIMI-K2-THINKING",
+   "address": "0x628f78337e40129f3a3b7e88e4d7d29bb8dbe9e5",
+   "site_final_value_usd": 4403.51,
+   "site_total_pnl_usd": -5596.49,
+   "site_avg_leverage": 9.7,
+   "source": "https://www.alphaarena.ai/models/11"
+  },
+  {
+   "site_id": 12,
+   "competition": "4: MAX LEVERAGE",
+   "model": "KIMI-K2-THINKING",
+   "address": "0xa2730bac5ea13531ae989b727d3e148469ededce",
+   "site_final_value_usd": 6343.91,
+   "site_total_pnl_usd": -3656.09,
+   "site_avg_leverage": 10.4,
+   "source": "https://www.alphaarena.ai/models/12"
+  },
+  {
+   "site_id": 13,
+   "competition": "1: NEW BASELINE",
+   "model": "DEEPSEEK-CHAT-V3.1",
+   "address": "0xb0d63f7dc3beb0d667b601b50f3db25b10b6a212",
+   "site_final_value_usd": 5278.48,
+   "site_total_pnl_usd": -4721.52,
+   "site_avg_leverage": 9.4,
+   "source": "https://www.alphaarena.ai/models/13"
+  },
+  {
+   "site_id": 14,
+   "competition": "2: MONK MODE",
+   "model": "DEEPSEEK-CHAT-V3.1",
+   "address": "0xf180c5145b53b430777f67bded05ddc92650c594",
+   "site_final_value_usd": 10729.63,
+   "site_total_pnl_usd": 729.63,
+   "site_avg_leverage": 9.4,
+   "source": "https://www.alphaarena.ai/models/14"
+  },
+  {
+   "site_id": 15,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "DEEPSEEK-CHAT-V3.1",
+   "address": "0x3cd9f57464e15afac05b7509fd406e4ad0753af8",
+   "site_final_value_usd": 3340.92,
+   "site_total_pnl_usd": -6659.08,
+   "site_avg_leverage": 9.8,
+   "source": "https://www.alphaarena.ai/models/15"
+  },
+  {
+   "site_id": 16,
+   "competition": "4: MAX LEVERAGE",
+   "model": "DEEPSEEK-CHAT-V3.1",
+   "address": "0x2bde65aec178175f0213e46cb9c7a03a9644f7b9",
+   "site_final_value_usd": 3772.37,
+   "site_total_pnl_usd": -6227.63,
+   "site_avg_leverage": 10.3,
+   "source": "https://www.alphaarena.ai/models/16"
+  },
+  {
+   "site_id": 17,
+   "competition": "1: NEW BASELINE",
+   "model": "GROK-4.20",
+   "address": "0xcfa311027ad9e5321215b390cbeea8e72edacd88",
+   "site_final_value_usd": 10047.58,
+   "site_total_pnl_usd": 47.58,
+   "site_avg_leverage": 9.1,
+   "source": "https://www.alphaarena.ai/models/17"
+  },
+  {
+   "site_id": 18,
+   "competition": "2: MONK MODE",
+   "model": "GROK-4.20",
+   "address": "0x7c1dd590126f25a991dc3d13cc3ebc0418f6969e",
+   "site_final_value_usd": 10366.37,
+   "site_total_pnl_usd": 366.37,
+   "site_avg_leverage": 5.7,
+   "source": "https://www.alphaarena.ai/models/18"
+  },
+  {
+   "site_id": 19,
+   "competition": "1: NEW BASELINE",
+   "model": "QWEN3-MAX",
+   "address": "0x2822768f82b41602f3f16537684909d52a95b207",
+   "site_final_value_usd": 5863.02,
+   "site_total_pnl_usd": -4136.98,
+   "site_avg_leverage": 8.6,
+   "source": "https://www.alphaarena.ai/models/19"
+  },
+  {
+   "site_id": 20,
+   "competition": "2: MONK MODE",
+   "model": "QWEN3-MAX",
+   "address": "0xa3ccd92ff5422066465a9fe76b1b9f0a0e038ee5",
+   "site_final_value_usd": 9321.28,
+   "site_total_pnl_usd": -678.72,
+   "site_avg_leverage": 7.1,
+   "source": "https://www.alphaarena.ai/models/20"
+  },
+  {
+   "site_id": 21,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "QWEN3-MAX",
+   "address": "0xd5b4e395493e1e9a4446f4352663daf66b1fd2d0",
+   "site_final_value_usd": 1793.56,
+   "site_total_pnl_usd": -8206.44,
+   "site_avg_leverage": 9.9,
+   "source": "https://www.alphaarena.ai/models/21"
+  },
+  {
+   "site_id": 22,
+   "competition": "4: MAX LEVERAGE",
+   "model": "QWEN3-MAX",
+   "address": "0x7f5269f1514e63989aa8539e6caa5fbe6c1741d7",
+   "site_final_value_usd": 7976.32,
+   "site_total_pnl_usd": -2023.68,
+   "site_avg_leverage": 12.9,
+   "source": "https://www.alphaarena.ai/models/22"
+  },
+  {
+   "site_id": 23,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "GROK-4.20",
+   "address": "0x21c96467aaec8395063e94723a17c95e1e26d675",
+   "site_final_value_usd": 13459.34,
+   "site_total_pnl_usd": 3459.34,
+   "site_avg_leverage": 9.2,
+   "source": "https://www.alphaarena.ai/models/23"
+  },
+  {
+   "site_id": 24,
+   "competition": "4: MAX LEVERAGE",
+   "model": "GROK-4.20",
+   "address": "0x57fcb5584055a9f1ce036c54be3fd9cd4b320efe",
+   "site_final_value_usd": 10192.97,
+   "site_total_pnl_usd": 192.97,
+   "site_avg_leverage": 10.5,
+   "source": "https://www.alphaarena.ai/models/24"
+  },
+  {
+   "site_id": 25,
+   "competition": "1: NEW BASELINE",
+   "model": "GEMINI-3-PRO",
+   "address": "0x9a0ad81e55744ebc42c32fb11ed5b407ebb609d8",
+   "site_final_value_usd": 3505.88,
+   "site_total_pnl_usd": -6494.12,
+   "site_avg_leverage": 8.4,
+   "source": "https://www.alphaarena.ai/models/25"
+  },
+  {
+   "site_id": 26,
+   "competition": "2: MONK MODE",
+   "model": "GEMINI-3-PRO",
+   "address": "0x4a656e7be6e0a0d196decf609b2e86bfa1442e43",
+   "site_final_value_usd": 8906.03,
+   "site_total_pnl_usd": -1093.97,
+   "site_avg_leverage": 8.8,
+   "source": "https://www.alphaarena.ai/models/26"
+  },
+  {
+   "site_id": 27,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "GEMINI-3-PRO",
+   "address": "0xdf26358c478ca133fef929e804433a46903ca2a8",
+   "site_final_value_usd": 4849.96,
+   "site_total_pnl_usd": -5150.04,
+   "site_avg_leverage": 8.9,
+   "source": "https://www.alphaarena.ai/models/27"
+  },
+  {
+   "site_id": 28,
+   "competition": "4: MAX LEVERAGE",
+   "model": "GEMINI-3-PRO",
+   "address": "0x7ec69baa4a04a73c4e46a80c44cb4e71101ce5e0",
+   "site_final_value_usd": 4713.88,
+   "site_total_pnl_usd": -5286.12,
+   "site_avg_leverage": 10.2,
+   "source": "https://www.alphaarena.ai/models/28"
+  },
+  {
+   "site_id": 31,
+   "competition": "1: NEW BASELINE",
+   "model": "CLAUDE-SONNET-4-5",
+   "address": "0x4856b6fab262b67bf1e12aff1e6a826591b0b9e2",
+   "site_final_value_usd": 4574.82,
+   "site_total_pnl_usd": -5425.18,
+   "site_avg_leverage": 8.9,
+   "source": "https://www.alphaarena.ai/models/31"
+  },
+  {
+   "site_id": 32,
+   "competition": "2: MONK MODE",
+   "model": "CLAUDE-SONNET-4-5",
+   "address": "0x07ab291281569c20577de40a517fd4a74a8729fe",
+   "site_final_value_usd": 8084.91,
+   "site_total_pnl_usd": -1915.09,
+   "site_avg_leverage": 8.8,
+   "source": "https://www.alphaarena.ai/models/32"
+  },
+  {
+   "site_id": 33,
+   "competition": "3: SITUATIONAL AWARENESS",
+   "model": "CLAUDE-SONNET-4-5",
+   "address": "0xe25b8429940abd3572b03f92a8f2d0bf5514970f",
+   "site_final_value_usd": 2838.68,
+   "site_total_pnl_usd": -7161.32,
+   "site_avg_leverage": 9.3,
+   "source": "https://www.alphaarena.ai/models/33"
+  },
+  {
+   "site_id": 34,
+   "competition": "4: MAX LEVERAGE",
+   "model": "CLAUDE-SONNET-4-5",
+   "address": "0xcc17ff81fb3adc9e58aed1b375b95c7fc8eed8d6",
+   "site_final_value_usd": 4130.51,
+   "site_total_pnl_usd": -5869.49,
+   "site_avg_leverage": 10.3,
+   "source": "https://www.alphaarena.ai/models/34"
+  }
+ ]
+}

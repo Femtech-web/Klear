@@ -1,0 +1,17 @@
+probe 0xa2dc39d974e60ef56b8852f28ca466318b218a917206889909d53d61c9c58c0f (Base); waiting for finality (~20 min)
+snapshot 0x2067f8c306d35213efa4144d40fe988dc9c8cb4545d2d092f6ab6cb73c052a0e (HyperEVM)
+perp hyperevm:0x2067f8c306d35213efa4144d40fe988dc9c8cb4545d2d092f6ab6cb73c052a0e:0
+spot base:0xa2dc39d974e60ef56b8852f28ca466318b218a917206889909d53d61c9c58c0f:0
+attest perp (hyperevm):
+│    Transaction ID: 6Lb4CG8EoRzP6DqabxcDNPGJvsCqdn8K1FeienAFCRKK
+The "attest" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+  stored: yes
+attest spot (base):
+│    Transaction ID: 2eyjafmsgwjozVYcjyNPmpwsQuKLbSkhW489Tx6CrscR
+The "attest" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+  stored: yes
+--- settle:
+│    Transaction ID: ADVG2LaD94KDcmr1rAB4J4DbfRRJycRoouQhbRf21FTf
+The "settle" call to <base.keel-8f2f34.testnet> on behalf of <agent.keel-8f2f34.testnet> succeeded.
+{"outcome":"repaired","job_id":1,"payout":{"job_id":1,"agent":"agent.keel-8f2f34.testnet","amount":"500000000000000000000000"}}
+exit 0

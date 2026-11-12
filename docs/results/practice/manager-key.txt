@@ -1,0 +1,30 @@
+├  Unsigned transaction:
+│    signer_id:    manager.keel-practice-53ee75.testnet
+│    receiver_id:  manager.keel-practice-53ee75.testnet
+│    actions:
+│       -- add access key:     
+│                       public key:   ed25519:89S6oJe8abXSasEmUfKPVTTGv3K4nPoyyGetQ3LJctfz
+│                       nonce:        0
+│                       permission:   FunctionCall(FunctionCallPermission { allowance: Some(NearToken { inner: 250000000000000000000000 }), receiver_id: "practice.keel-factory-bcf915.testnet", method_names: ["propose_order", "heartbeat"] })
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:HKXYvMTqKLRWmHEyS6HbmNZGLhoLK9oUaWzLEiAQHuHz
+│    Signature:  ed25519:3i1kL3QKLC3EBdaFAAJcyaXE9zHnMYDi5RdcTrfEDYHxQqRd2zz37zoZ7Tsqfv3WF9GbAEqdL5FQofE7739XX3Cj
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 0.644 Tgas
+│    Transaction fee: 0.0000420646665888 NEAR
+│    Transaction ID: 3YCMuGRcc9uaMqP8zPUxPcWvkyezwrC8f3cgRrXmxYwm
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3YCMuGRcc9uaMqP8zPUxPcWvkyezwrC8f3cgRrXmxYwm
+│     [0m
+
+
+Added access key = ed25519:89S6oJe8abXSasEmUfKPVTTGv3K4nPoyyGetQ3LJctfz to manager.keel-practice-53ee75.testnet.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account add-key manager.keel-practice-53ee75.testnet grant-function-call-access --allowance '0.25 NEAR' --contract-account-id practice.keel-factory-bcf915.testnet --function-names propose_order,heartbeat use-manually-provided-public-key ed25519:89S6oJe8abXSasEmUfKPVTTGv3K4nPoyyGetQ3LJctfz network-config testnet sign-with-access-key-file .secrets/near/manager.keel-practice-53ee75.testnet.json send[39m
+

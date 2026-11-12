@@ -1,0 +1,142 @@
+[
+ {
+  "strategy": "ai",
+  "attempt": "A stranger requests the investor's exit",
+  "tx": "F7ZC8LJVA763C4gMcaWe4qKmzXM8UPNKhsXsKbTL924c",
+  "where": null,
+  "refusal": "mandate:not-the-investor"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "A stranger proposes a trade",
+  "tx": "B8aUXhfudBQeCpsQchkDGupPwaXfz25vTybAfLwE8oNv",
+  "where": null,
+  "refusal": "mandate:not-the-manager"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "A stranger sends the manager's heartbeat",
+  "tx": "pYG7UiSThHjppJgHkLEoMeue8XDzDC5dVpYtQKhagWt",
+  "where": null,
+  "refusal": "mandate:not-the-manager"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "The AI's restricted key calls open_flatten",
+  "tx": null,
+  "where": "none: NEAR rejects it before inclusion",
+  "refusal": "\"Transaction method name <open_flatten> isn't allowed by the access key\""
+ },
+ {
+  "strategy": "ai",
+  "attempt": "The AI's restricted key calls request_exit",
+  "tx": null,
+  "where": "none: NEAR rejects it before inclusion",
+  "refusal": "\"Transaction method name <request_exit> isn't allowed by the access key\""
+ },
+ {
+  "strategy": "ai",
+  "attempt": "The manager account opens on the guardian's evidence",
+  "tx": "9Cen8YuB7QNsi2VEKg52WCaoxHPV9LkFSJJ8fJFAbsGK",
+  "where": null,
+  "refusal": "only the account that attested this evidence may open a job on it"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "Another account opens a job on the guardian's evidence",
+  "tx": "GpgYqSsakmJe3sjXA9FUkupfVAAti9gRbniEtASFJVwj",
+  "where": null,
+  "refusal": "only the account that attested this evidence may open a job on it"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "Anyone calls the private attestation callback",
+  "tx": "CpuN7S9CbX5tfT8rAWYyfqQQvWe2N8pzQhcPWaM3hDLX",
+  "where": null,
+  "refusal": "Method on_attested is private"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "An exit with no trigger",
+  "tx": "5x4Jez8V76ZiYWtFkeZWX1asSTHLTvmHhQ6SR5q7PNYK",
+  "where": null,
+  "refusal": "flatten-not-triggered"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "A forged snapshot (account value 1M USD) sent for attestation",
+  "tx": "4gcMUUad8v7NE9jAXY6ppKMci1qyRLBrrm9RhB8kQBac",
+  "where": null,
+  "refusal": "judge log: \"not attested hyperevm:0x011590c6d011222119229459a1fa75b18439ac1398f124e10561e9655b06db2f:0\"; stored: null"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "A self-signed order relayed to KeelLeg",
+  "tx": null,
+  "where": "eth_call on 0x58675f5d6b9dd6394bD635b92Be9341B44F136DA",
+  "refusal": "reverts 0x5cd5d233 = BadSignature()"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "A self-signed vault exit relayed to KeelVault",
+  "tx": null,
+  "where": "eth_call on 0x9AB31b03dDa4e1F08cD2f2fC8a1FFA69a5D7Cd0c",
+  "refusal": "reverts 0x5cd5d233 = BadSignature()"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "The manager account opens on evidence it attested itself",
+  "tx": "5bbAPoJTYoGSSn5dADyzgycwftzHTFXzKHNKopTsk7vL",
+  "where": null,
+  "refusal": "mandate:manager-cannot-guard"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "Settle again after the rescue",
+  "tx": "zKXSLrVyc7P1d2tQ6MJd3TRE2gW6rmY9oEqFNzsXiJs",
+  "where": null,
+  "refusal": "no-open-job"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "Confirm the same exit receipt again",
+  "tx": "AhG4D56UNTmwxVpvFEJTgsYBKFrfkbQcMAW7G1YV1i6n",
+  "where": null,
+  "refusal": "evidence-reused"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "Open a second rescue",
+  "tx": "AkCFZLNba8ZqVNKGgcxy1AEtKeyqZ8L6S1EKcBHsTJ3J",
+  "where": null,
+  "refusal": "mandate:already-rescued"
+ },
+ {
+  "strategy": "ai",
+  "attempt": "The AI proposes after the rescue",
+  "tx": "9azorqzqheK7Ts8J6jvjLSscus8qZqSvoQwmGQa4WegE",
+  "where": null,
+  "refusal": "mandate:strategy-not-active"
+ },
+ {
+  "strategy": "human",
+  "attempt": "Settle again after the rescue",
+  "tx": "GRxMc5xsqZ3aD82KcX2DwwBG9EJpsabo6sxYr8vG3Bfh",
+  "where": null,
+  "refusal": "no-open-job"
+ },
+ {
+  "strategy": "human",
+  "attempt": "Confirm the same exit receipt again",
+  "tx": "3GfZcKUtVPjsbjxcNVWEDRqLku6MKv4R4LVURqVPYLd1",
+  "where": null,
+  "refusal": "evidence-reused"
+ },
+ {
+  "strategy": "human",
+  "attempt": "Open a second rescue",
+  "tx": "AyebfDKK96wARnctDq5PNpYSRt3wELYXJYSRWHZWNd9Y",
+  "where": null,
+  "refusal": "mandate:already-rescued"
+ }
+]

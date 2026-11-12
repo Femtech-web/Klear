@@ -1,0 +1,62 @@
+{
+ "request": {
+  "dry": true,
+  "swapType": "EXACT_INPUT",
+  "slippageTolerance": 100,
+  "originAsset": "nep141:base.omft.near",
+  "depositType": "ORIGIN_CHAIN",
+  "amount": "2000000000000000",
+  "destinationAsset": "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+  "refundTo": "0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4",
+  "refundType": "ORIGIN_CHAIN",
+  "recipient": "143fa26628ff3be7c2c356df59eabf707eb294f5ca5d5401f859517894ccc87c",
+  "recipientType": "CONFIDENTIAL_INTENTS",
+  "confidentiality": "basic",
+  "deadline": "2026-11-12T14:13:01.000Z",
+  "referral": "keel"
+ },
+ "status": 201,
+ "response": {
+  "quote": {
+   "amountIn": "2000000000000000",
+   "amountInFormatted": "0.002",
+   "amountInUsd": "4.001720000000",
+   "minAmountIn": "2000000000000000",
+   "amountOut": "3997965",
+   "amountOutFormatted": "3.997965",
+   "amountOutUsd": "3.996041978835",
+   "minAmountOut": "3957985",
+   "timeEstimate": 37,
+   "refundFee": "560000000000",
+   "withdrawFee": "0"
+  },
+  "quoteRequest": {
+   "dry": true,
+   "depositMode": "SIMPLE",
+   "swapType": "EXACT_INPUT",
+   "slippageTolerance": 100,
+   "originAsset": "nep141:base.omft.near",
+   "depositType": "ORIGIN_CHAIN",
+   "destinationAsset": "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+   "amount": "2000000000000000",
+   "refundTo": "0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4",
+   "refundType": "ORIGIN_CHAIN",
+   "recipient": "143fa26628ff3be7c2c356df59eabf707eb294f5ca5d5401f859517894ccc87c",
+   "recipientType": "CONFIDENTIAL_INTENTS",
+   "deadline": "2026-11-12T14:13:01.000Z",
+   "confidentiality": "basic",
+   "referral": "keel",
+   "quoteWaitingTimeMs": 0,
+   "insured": false,
+   "appFees": [
+    {
+     "recipient": "2238fd089f1c92b206c218cd16b8676cb98964e0d50f8ab729c6396a81e07805",
+     "fee": 20
+    }
+   ]
+  },
+  "signature": "ed25519:5nC9ihewmDiUTDW4PaocsN7z7vG5eV3SAUraw2CNnnQMe81hrsNLkuNGYJN9uvNYoLZtXX25KYMAaupg4Twa5xgD",
+  "timestamp": "2026-11-12T13:13:02.211Z",
+  "correlationId": "d9e94aa5-6a9a-4472-b1ec-3f81fcfb0ecc"
+ }
+}
