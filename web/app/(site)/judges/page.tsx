@@ -381,7 +381,7 @@ export default async function JudgesPage() {
             "Everything runs on testnets with test funds, except the one mainnet privacy test. Nothing here is audited.",
             "One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.",
             "NEAR's MPC network is trusted to sign and to verify honestly; that trust is NEAR's, not ours, and it is stated in the trust model.",
-            "The courier and the daily drill run on our machine. The courier only pays gas: it cannot change anything the judge signs.",
+            "The daily drill and its courier run on GitHub Actions with our testnet keys. The courier only pays gas: it cannot change anything the judge signs.",
             "The replay is a counterfactual: Keel's rules applied to real fills, with the closing cost modelled, not trades Keel made.",
             "The AI manager is Claude through its CLI, with no tools; its decisions and prompts are logged with each run.",
           ].map((x) => (

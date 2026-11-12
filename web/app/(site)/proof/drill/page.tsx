@@ -60,10 +60,9 @@ export default function DrillPage() {
       <Section tight eyebrow="Every cycle" title="The record">
         <DrillTable />
         <p className="mt-6 max-w-measure text-sm text-ink-3">
-          The drill runs on the operator&apos;s machine (agents/drill.py, scheduled daily at{" "}
-          {String(config.drill.utcHour).padStart(2, "0")}:{String(config.drill.utcMinute).padStart(2, "0")} UTC), so a
-          day it is off has no cycle. A cycle that fails is recorded with the step and the reason. Each cycle&apos;s
-          full step log is in{" "}
+          The drill runs on GitHub Actions (agents/drill.py, daily at {String(config.drill.utcHour).padStart(2, "0")}:
+          {String(config.drill.utcMinute).padStart(2, "0")} UTC), and each cycle&apos;s record is committed back to the
+          repository. A cycle that fails is recorded with the step and the reason. Each cycle&apos;s full step log is in{" "}
           <a href={`${config.repo}/tree/main/docs/results/drill`} target="_blank" rel="noreferrer">
             docs/results/drill
           </a>

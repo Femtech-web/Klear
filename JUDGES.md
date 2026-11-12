@@ -111,7 +111,7 @@ trusted for, and what could still go wrong.
 - One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.
 - NEAR's MPC network is trusted to sign and verify honestly; the trust model says where that applies.
 - The replay is a counterfactual: Keel's rules applied to real fills, with the closing cost modelled.
-- The daily drill and the courier run on our machine. The courier only pays gas; it cannot change anything the
+- The daily drill and the courier run on GitHub Actions, with our testnet keys. The courier only pays gas; it cannot change anything the
   judge signs.
 - The AI manager is Claude through its CLI, with no tools; every prompt and decision is logged with its run.
 - Mainnet: only the privacy test ([docs/results/mainnet](docs/results/mainnet/README.md)): 2.799671 USDC into a

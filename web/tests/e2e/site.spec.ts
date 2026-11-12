@@ -8,6 +8,7 @@ const PAGES = [
   "/rules",
   "/strategies",
   "/strategies/practice.keel-factory-bcf915.testnet",
+  "/create",
   "/practice",
   "/trust",
   "/proof",

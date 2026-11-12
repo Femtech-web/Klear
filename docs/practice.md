@@ -21,8 +21,9 @@ A real Keel strategy on testnet, created through the [factory](results/factory/R
 
 ## The daily cycle
 
-`agents/drill.py`, scheduled by `scripts/drill/launchd.sh` (daily at 14:00 UTC while the operator's machine
-is awake; every cycle is recorded in [`results/drill`](results/drill)):
+`agents/drill.py`, run daily at 14:00 UTC on GitHub's runners by
+[`.github/workflows/drill.yml`](../.github/workflows/drill.yml), so it does not depend on anyone's machine; every
+cycle is recorded in [`results/drill`](results/drill) and committed back, which redeploys the site:
 
 1. **Re-arm.** If the last cycle ended in a rescue, the investor's account starts the next one (`rearm`: same
    mandate, same accounts, next cycle).
@@ -85,3 +86,18 @@ stalls or stops costs you time, never money. Anyone with gas can do its job, inc
   opened. `rescue.py` waits for the next one by itself.
 - **No reward yet after settling.** The judge pays each leg only once the investor's address shows it, and
   HyperCore needs a few hundred L1 blocks to execute. Settle again on the next snapshot; `rescue.py` does.
+
+## Running the drill
+
+The published drill runs on GitHub Actions ([`drill.yml`](../.github/workflows/drill.yml)): daily at 14:00 UTC,
+or on demand from the Actions tab (with a shorter window for a test). It needs one repository secret holding the
+practice accounts' testnet keys and the relayer's keystore, made from a clone that has them in `.secrets/`:
+
+```bash
+tar czf - .secrets/near/*keel-practice-53ee75.testnet.json .secrets/evm/relayer .secrets/evm/relayer.password \
+  | base64 | gh secret set KEEL_DRILL_SECRETS -R Femtech-web/Keel
+```
+
+The workflow unpacks them only for the run (never printed) and deletes them after. Set the repository variable
+`DRILL_ENABLED` to `false` to stop it. Locally, `make drill` runs one cycle and `scripts/drill/launchd.sh install`
+schedules it on a Mac; run the drill in one place only, since two drills on one strategy race each other.

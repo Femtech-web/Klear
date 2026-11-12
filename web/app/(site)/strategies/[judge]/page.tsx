@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { ConnectNear } from "@/components/flows/ConnectNear";
+import { RescueFlow } from "@/components/flows/RescueFlow";
+import { StrategyActions } from "@/components/flows/StrategyActions";
 import { notFound } from "next/navigation";
 import { PhasePill } from "@/components/strategies/PhasePill";
 import { Check, Cross } from "@/components/ui/icons";
@@ -158,6 +162,7 @@ function Fact({ label, children }: { label: string; children: React.ReactNode })
 
 export default async function InspectPage({ params }: PageProps<"/strategies/[judge]">) {
   const { judge } = await params;
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   if (!ACCOUNT.test(judge)) notFound();
   const x = await inspect(judge);
   const entry = x.entry.ok ? x.entry.value : null;
@@ -231,6 +236,34 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
           </Card>
         </div>
       </div>
+      <Card className="mt-6">
+        <h2 className="mb-1 font-sans text-lg font-semibold">Act on it</h2>
+        <p className="mb-4 text-sm text-ink-3">
+          With a NEAR testnet wallet. Every action is a transaction the judge checks; this page only asks your wallet to
+          sign it.
+        </p>
+        <ConnectNear nonce={nonce} />
+        <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <section aria-labelledby="rescue-h">
+            <h3 id="rescue-h" className="mb-3 font-sans text-base font-semibold">
+              Rescue it
+            </h3>
+            <RescueFlow judge={judge} nonce={nonce} connect={false} />
+          </section>
+          <section aria-labelledby="investor-h">
+            <h3 id="investor-h" className="mb-3 font-sans text-base font-semibold">
+              The investor, and the reward pool
+            </h3>
+            <StrategyActions
+              judge={judge}
+              investorAccount={x.strategy.ok ? x.strategy.value.investorAccount : null}
+              mode={x.glance.ok ? x.glance.value.mode : "unknown"}
+              nonce={nonce}
+              connect={false}
+            />
+          </section>
+        </div>
+      </Card>
       <LiveValue
         read={x.strategy}
         render={(s) =>

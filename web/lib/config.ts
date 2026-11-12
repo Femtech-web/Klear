@@ -9,7 +9,7 @@ export const config = {
     hyperevm: "https://testnet.purrsec.com",
   },
   repo: "https://github.com/Femtech-web/Keel",
-  /** The daily drill's schedule (scripts/drill/launchd.sh defaults): it starts at this UTC time, the rescue
+  /** The daily drill's schedule (.github/workflows/drill.yml): it starts at this UTC time, the rescue
    * becomes due about 40 minutes later, and stays open to anyone for `graceHours` before Keel's own guardian acts. */
   drill: { utcHour: 14, utcMinute: 0, dueAfterMinutes: 40, graceHours: 3 },
 } as const;

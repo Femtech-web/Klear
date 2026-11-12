@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PhasePill } from "@/components/strategies/PhasePill";
 import { ArrowRight } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
-import { Card, Section, Stat } from "@/components/ui/primitives";
+import { Card, LinkButton, Section, Stat } from "@/components/ui/primitives";
 import { Hash } from "@/components/ui/Tx";
 import { factory } from "@/lib/data/live";
 import { ago, near, utc } from "@/lib/format";
@@ -104,16 +104,18 @@ export default async function StrategiesPage() {
             <h2 className="font-serif text-[1.5rem] tracking-[-0.015em]">Create one</h2>
             <p className="mt-2 text-ink-2">
               One NEAR transaction creates the judge, locked from birth, with your mandate; two deployments put its
-              accounts at addresses fixed in advance. From the command line for now, with a NEAR testnet account (about
-              5 NEAR: storage plus the reward pool) and an EVM key with gas on HyperEVM and Base; a guided version on
-              this site is next.
+              accounts at addresses fixed in advance. In your browser or from the command line, with a NEAR testnet
+              account (about 5 NEAR: storage plus the reward pool) and an EVM key with gas on HyperEVM and Base.
             </p>
-            <Link
-              href="/proof/factory"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent no-underline"
-            >
-              How the factory works <ArrowRight size={15} />
-            </Link>
+            <div className="mt-4 flex flex-wrap items-center gap-4">
+              <LinkButton href="/create">Create one in your browser</LinkButton>
+              <Link
+                href="/proof/factory"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-accent no-underline"
+              >
+                How the factory works <ArrowRight size={15} />
+              </Link>
+            </div>
           </div>
           <pre
             tabIndex={0}

@@ -1,6 +1,6 @@
-"""Rescue the practice strategy yourself, with nothing but a NEAR testnet account.
+"""Rescue a Keel strategy yourself (the practice strategy by default), with nothing but a NEAR testnet account.
 
-    python3 agents/rescue.py --account you.testnet [--key path/to/you.testnet.json] [--wait]
+    python3 agents/rescue.py --account you.testnet [--key path/to/you.testnet.json] [--judge <judge>] [--wait]
 
 When the practice strategy's manager goes silent (docs/practice.md has the daily window), the judge lets
 anyone rescue it. This runs the same rescue as Keel's own guardian, signed by your account: you attest
@@ -15,18 +15,16 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import shutil
 import sys
 import time
 from pathlib import Path
 
 from courier import rescue_due
 from guardian import Rescuer
-from keel_agents import evm
+from keel_agents import evm, registry
 from keel_agents.chain import ROOT, Chain
 from keel_agents.net import post_json
 
-STRATEGY = "docs/results/practice"
 WORK = ROOT / ".keel-visitor"
 
 
@@ -41,11 +39,15 @@ def word(log: dict, i: int) -> int:
 class VisitorChain(Chain):
     """A guardian without EVM gas: it finds the logs the courier posts and waits for its relays."""
 
-    def __init__(self, account: str, key_file: Path):
-        super().__init__(STRATEGY)
-        self.out = WORK / self.judge
-        (self.out / "keys").mkdir(parents=True, exist_ok=True)
-        shutil.copy(ROOT / STRATEGY / "env", self.out / "env")
+    def __init__(self, account: str, key_file: Path, judge: str):
+        # Any judge: its accounts are read from the chain, not from this repository. Both names become paths.
+        registry.account(account), registry.account(judge)
+        work = WORK / judge
+        (work / "keys").mkdir(parents=True, exist_ok=True)
+        c = registry.view(judge, "get_strategy")["config"]
+        (work / "env").write_text(f"G7_JUDGE={judge}\nG7_LEG={c['leg']}\nG7_VAULT={c['spot_account']}\nG7_INVESTOR={c.get('investor', '')}\n")
+        super().__init__(str(work.relative_to(ROOT)))
+        self.out = work
         link = self.out / "keys" / f"{account}.json"
         link.unlink(missing_ok=True)
         link.symlink_to(key_file.resolve())
@@ -112,6 +114,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--account", required=True, help="your NEAR testnet account")
     ap.add_argument("--key", type=Path, help="its key file (default ~/.near-credentials/testnet/<account>.json)")
+    ap.add_argument("--judge", default="practice.keel-factory-bcf915.testnet", help="the strategy's judge")
     ap.add_argument("--wait", action="store_true", help="wait for the next rescue window instead of exiting")
     a = ap.parse_args()
     key = a.key or Path.home() / ".near-credentials" / "testnet" / f"{a.account}.json"
@@ -121,7 +124,7 @@ def main() -> None:
     if bal is None or bal < 10**23:
         sys.exit(f"{a.account} needs at least 0.1 NEAR on testnet for gas (it has {0 if bal is None else bal / 1e24:.3f})")
 
-    chain = VisitorChain(a.account, key)
+    chain = VisitorChain(a.account, key, a.judge)
     st = chain.status()
     while not (rescue_due(st) or st["mode"] == "flattening"):
         if not a.wait:

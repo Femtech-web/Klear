@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { RescueFlow } from "@/components/flows/RescueFlow";
 import Link from "next/link";
 import { PhasePill } from "@/components/strategies/PhasePill";
 import { CopyButton } from "@/components/ui/CopyButton";
@@ -69,6 +71,7 @@ function Command({ cmd }: { cmd: string }) {
 }
 
 export default async function PracticePage() {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   const judge = factory.practice.judge;
   const glance = await read(async () => parseGlance(await view(judge, "status")));
   return (
@@ -152,6 +155,16 @@ export default async function PracticePage() {
             </ol>
           </Card>
         </div>
+      </Section>
+
+      <Section tight eyebrow="Or from your browser" title="Rescue it with a NEAR wallet">
+        <Card>
+          <p className="m-0 mb-5 max-w-measure text-ink-2">
+            The same rescue, one signed transaction at a time: Meteor, Intear, Nightly, or the NEAR CLI. The courier
+            pays the EVM gas while the window is open.
+          </p>
+          <RescueFlow judge={factory.practice.judge} nonce={nonce} />
+        </Card>
       </Section>
 
       <Section tight eyebrow="What you will sign" title="Five steps, each checked by the judge">

@@ -57,6 +57,7 @@ const COLUMNS = [
     title: "Use it",
     links: [
       ...NAV.filter((n) => n.href !== "/proof" && n.href !== "/how"),
+      { href: "/create", label: "Create a strategy" },
       { href: "/strategies/practice.keel-factory-bcf915.testnet", label: "Inspect a strategy" },
     ],
   },

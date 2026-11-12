@@ -1,0 +1,5 @@
+{"at": 1794521966, "role": "courier", "kind": "tick-failed", "error": "note() got multiple values for argument 'log'"}
+{"at": 1794522001, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794521995-perp-log.json"}
+{"at": 1794522001, "role": "courier", "kind": "spot-probe"}
+{"at": 1794522039, "role": "courier", "kind": "relayed-sweep", "key": "2", "tx": "0x5b54412dc6434c87147a3de15d0107c350ab722888486adb696d36226b264bd9"}
+{"at": 1794522042, "role": "courier", "kind": "relayed-exit", "key": "1", "tx": "0xca83654c37ff37a9eca41df349fd6dde34bdf2156232ad8cde658efa49819d19"}

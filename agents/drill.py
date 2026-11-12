@@ -118,7 +118,16 @@ class Drill:
             self.call("fund-pool", self.chain.fund_pool(1.0, payer))
         if allowance(st["manager"], self.chain.state["G7_MANAGER_KEY"]) < YOCTO // 20:
             self.note("manager-key", out=self.sh("scripts/testnet/practice.sh", "manager-key"))
-        self.note("fund", out=self.sh("scripts/testnet/practice.sh", "fund", str(self.a.usdc), str(self.a.weth_wei)))
+        # Funding tops up to a target, so repeating it is safe; a dropped connection gets two more tries.
+        for attempt in range(3):
+            try:
+                self.note("fund", out=self.sh("scripts/testnet/practice.sh", "fund", str(self.a.usdc), str(self.a.weth_wei)))
+                break
+            except Failed as e:
+                if attempt == 2:
+                    raise
+                self.note("fund-retry", error=str(e))
+                time.sleep(20)
         return p
 
     def trade(self, p: dict) -> None:

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# The daily drill as a macOS launchd job on this machine (it runs only while the machine is awake).
+# The daily drill as a macOS launchd job on this machine (it runs only while the machine is awake). The
+# published drill runs on GitHub Actions (.github/workflows/drill.yml); use one or the other, never both:
+# two drills on one strategy race each other's transactions.
 #
 #   scripts/drill/launchd.sh install [HH:MM UTC]   default 14:00 UTC; the rescue window opens ~40 min later
 #   scripts/drill/launchd.sh uninstall

@@ -46,7 +46,7 @@ class Courier:
             return False
         now = time.time()
         if now - self.last_snapshot > SNAPSHOT_EVERY:
-            self.note("snapshot", log=self.chain.snapshot(f"c-{int(now)}"))
+            self.note("snapshot", file=self.chain.snapshot(f"c-{int(now)}"))
             self.last_snapshot = now
         self.keep_spot_fresh(now)
         self.relay_signed()
@@ -99,7 +99,10 @@ def main() -> None:
     courier = Courier(chain, chain.state["PRACTICE"], chain.out / "courier.jsonl")
     end = time.time() + a.seconds
     while time.time() < end:
-        courier.tick()
+        try:
+            courier.tick()
+        except Exception as e:  # noqa: BLE001  a dropped connection costs one round, not the courier
+            courier.note("tick-failed", error=str(e)[-200:])
         time.sleep(a.interval)
 
 

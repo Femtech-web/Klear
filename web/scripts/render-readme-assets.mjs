@@ -1,11 +1,10 @@
-// Renders the README's cover and architecture images, light and dark, from docs/assets/src/*.html.
+// Renders the README's architecture image, light and dark, from docs/assets/src/*.html.
 // `node scripts/render-readme-assets.mjs` (from web/); the HTML loads the site's fonts from Google Fonts.
 import { chromium } from "@playwright/test";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../..", import.meta.url));
 const ASSETS = [
-  { src: "cover", width: 1280, height: 560 },
   { src: "architecture", width: 1400, height: 900 },
 ];
 
