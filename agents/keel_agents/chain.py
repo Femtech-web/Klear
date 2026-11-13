@@ -94,8 +94,9 @@ class Chain:
         return self.run("receipt", exit_tx, signer).strip().splitlines()[-1]
 
     # ---- judge calls ----
-    def propose(self, perp: str, spot: str, side: str, sz: int, px: int) -> Call:
-        return parse_call(self.run("propose", perp, spot, side, str(sz), str(px)))
+    def propose(self, perp: str, spot: str, side: str, sz: int, px: int, sealed: dict | None = None) -> Call:
+        extra = [json.dumps(sealed, separators=(",", ":"))] if sealed else []
+        return parse_call(self.run("propose", perp, spot, side, str(sz), str(px), *extra))
 
     def heartbeat(self) -> Call:
         return parse_call(self.run("heartbeat"))

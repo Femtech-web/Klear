@@ -1,0 +1,58 @@
+├  Unsigned transaction:
+│    signer_id:    klear-mandate-92fc7f.testnet
+│    receiver_id:  v1.signer-prod.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  sign
+│                       args:         {
+│                                       "request": {
+│                                         "domain_id": 0,
+│                                         "path": "klear/mandate/1",
+│                                         "payload_v2": {
+│                                           "Ecdsa": "c711ac7d3ff58c2a3719eddb68c4d74c8babf864b0786112edfca888c6bac547"
+│                                         }
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z
+│    Signature:  ed25519:boJ5DiK6tUbsxqUGXuK98a75boCgVD7h1gZ7Xri19JsSKG9FDU2D6iChoYs99TeDPNTBtQDDnzzziU98t5rV2jo
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 9.3 Tgas
+│    Transaction fee: 0.0008789773746801 NEAR
+│    Transaction ID: G7abvsNZQxozaYhd6Y34rsDBJCyBGRzR7SjJCG63vdBQ
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/G7abvsNZQxozaYhd6Y34rsDBJCyBGRzR7SjJCG63vdBQ
+│     [0m
+├  Function execution logs:
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("klear-mandate-92fc7f.testnet"), request=SignRequestArgs { path: "klear/mandate/1", payload: Ecdsa(BoundedVec { inner: [199, 17, 172, 125, 63, 245, 140, 42, 55, 25, 237, 219, 104, 196, 215, 76, 139, 171, 248, 100, 176, 120, 97, 18, 237, 252, 168, 136, 198, 186, 197, 71], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "big_r": {
+    "affine_point": "0374dcbf86bfeba532759deb5ceab536ee51cbad403e53912e0941df0381404ce3"
+  },
+  "recovery_id": 0,
+  "s": {
+    "scalar": "473a53fae49dbb78f580722bed5a9474ab95a23cf4995d513e25c6a26ae623fe"
+  },
+  "scheme": "Secp256k1"
+}
+
+
+The "sign" call to <v1.signer-prod.testnet> on behalf of <klear-mandate-92fc7f.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction v1.signer-prod.testnet sign json-args '{"request": {"path": "klear/mandate/1", "payload_v2": {"Ecdsa": "c711ac7d3ff58c2a3719eddb68c4d74c8babf864b0786112edfca888c6bac547"}, "domain_id": 0}}' prepaid-gas '300.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as klear-mandate-92fc7f.testnet network-config testnet sign-with-access-key-file /Users/mac/work/web3/near/keel/.secrets/near/klear-mandate-92fc7f.testnet.json send[39m
+

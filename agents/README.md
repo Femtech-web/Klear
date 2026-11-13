@@ -6,6 +6,7 @@ everything, and anyone may relay what it signed.
 | Agent | Run | Decides with | Key it holds |
 |---|---|---|---|
 | AI manager | `python3 agents/manager.py --strategy ai --cycles 3` | Claude (`claude-sonnet-5-5` through the signed-in `claude` CLI: no tools, no MCP, no session, JSON schema) | a NEAR function-call key for the judge's `propose_order` and `heartbeat` only |
+| Sealed AI manager | `python3 agents/manager.py --strategy docs/results/<strategy> --sealed --strategy-file <private file>` (needs `pip install -r agents/requirements-sealed.txt` and `NEAR_AI_CLOUD_API_KEY`) | a NEAR-hosted open model in a TEE on NEAR AI Cloud, end-to-end encrypted; each answer verified against TDX and GPU attestation before use | the same function-call key |
 | AI guardian | `python3 agents/guardian.py --strategy ai --ai --watch 1800` | Claude may decline a trigger the judge reports; it can never create one | a plain NEAR account (guardians need no privilege) |
 | Deterministic guardian | `python3 agents/guardian.py --strategy human` | fixed rule: act on any trigger the judge reports | same |
 | Daily drill | `python3 agents/drill.py --grace 10800` (GitHub Actions runs it daily) | fixed: the practice strategy's cycle, then its own guardian if nobody else rescued it | the practice accounts' keys |
@@ -35,13 +36,16 @@ decides every order and destination, so an agent can bring the money home and no
 
 `keel_agents/` is shared: `chain.py` (calls `scripts/testnet/g7.sh` and the judge's views), `market.py`
 (Hyperliquid's public info API: what the AI reads, never what the judge trusts), `llm.py` (the Claude call
-and the decision log), `px.py` (Hyperliquid price and size units), `net.py` (HTTPS with a verified CA bundle).
+and the decision log), `sealed.py` (the TEE decision and its receipt), `px.py` (Hyperliquid price and size units),
+`net.py` (HTTPS with a verified CA bundle, and DNS over HTTPS when the local resolver drops a name).
 
 ## Telling autonomous decisions from scripted steps
 
 Every agent appends to `docs/results/g7/<strategy>/decisions.jsonl`:
 - `"kind": "autonomous"`: a Claude decision, with the full system prompt, prompt, model, answer, latency and
   cost, plus the prompt's sha256;
+- `"kind": "sealed"`: a sealed decision: what was decided (the reasoning stays private) and the TEE's signed receipt,
+  the same one carried on chain with the order; the prompt and answer are in the investor's git-ignored record;
 - `"kind": "judge-verdict"`: what the judge did with it (transaction, refusal code or signed order);
 - `"kind": "heartbeat" | "watch" | "relayed-*"`: deterministic steps.
 

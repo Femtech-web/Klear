@@ -1,0 +1,20 @@
+├  Your transaction:
+│    signer_id:    testnet
+│    actions:
+│       -- create account:      klear-mandate-92fc7f.testnet
+│       -- add access key:     
+│                       public key:   ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z
+│                       permission:   FullAccess
+│     [0m
+├  Transaction Execution Info:
+│    Transaction ID: 5pYvcNmmHDr11VeDSPNM5PBcocqGoGfNJeDq1tLGzPio
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/5pYvcNmmHDr11VeDSPNM5PBcocqGoGfNJeDq1tLGzPio
+[0m
+New account <klear-mandate-92fc7f.testnet> created successfully.
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account create-account sponsor-by-faucet-service klear-mandate-92fc7f.testnet use-manually-provided-public-key ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z network-config testnet create[39m
+

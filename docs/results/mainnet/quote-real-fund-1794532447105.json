@@ -1,0 +1,65 @@
+{
+ "request": {
+  "dry": false,
+  "swapType": "EXACT_OUTPUT",
+  "slippageTolerance": 100,
+  "originAsset": "1cs_v1:hypercore:hip1:0x6d1e7cde53ba9467b783cb7c530ce054",
+  "depositType": "ORIGIN_CHAIN",
+  "amount": "2000000",
+  "destinationAsset": "nep141:base-0x833589fcd6edb6e08f4c7c32d4f71b54bda02913.omft.near",
+  "recipient": "0x9Bc049CE61BdA83Cb60fABc27BCdaB8Dd5704d47",
+  "recipientType": "DESTINATION_CHAIN",
+  "refundTo": "0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4",
+  "refundType": "ORIGIN_CHAIN",
+  "deadline": "2026-11-13T02:14:05.804Z",
+  "referral": "klear"
+ },
+ "status": 201,
+ "response": {
+  "quote": {
+   "amountIn": "222286700",
+   "amountInFormatted": "2.222867",
+   "amountInUsd": "2.221728892096",
+   "minAmountIn": "220263800",
+   "amountOut": "2000000",
+   "amountOutFormatted": "2.0",
+   "amountOutUsd": "1.998976000000",
+   "minAmountOut": "2000000",
+   "timeEstimate": 37,
+   "refundFee": "31530000",
+   "withdrawFee": "2400",
+   "deadline": "2026-11-16T02:14:05.804Z",
+   "timeWhenInactive": "2026-11-16T02:14:05.804Z",
+   "depositAddress": "0xD02994Bc8172589500c36Ee566d727b444345C5D"
+  },
+  "quoteRequest": {
+   "dry": false,
+   "depositMode": "SIMPLE",
+   "swapType": "EXACT_OUTPUT",
+   "slippageTolerance": 100,
+   "originAsset": "1cs_v1:hypercore:hip1:0x6d1e7cde53ba9467b783cb7c530ce054",
+   "depositType": "ORIGIN_CHAIN",
+   "destinationAsset": "nep141:base-0x833589fcd6edb6e08f4c7c32d4f71b54bda02913.omft.near",
+   "amount": "2000000",
+   "refundTo": "0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4",
+   "refundType": "ORIGIN_CHAIN",
+   "recipient": "0x9Bc049CE61BdA83Cb60fABc27BCdaB8Dd5704d47",
+   "recipientType": "DESTINATION_CHAIN",
+   "deadline": "2026-11-13T02:14:05.804Z",
+   "confidentiality": "public",
+   "referral": "klear",
+   "quoteWaitingTimeMs": 0,
+   "insured": false,
+   "appFees": [
+    {
+     "recipient": "5880ad2b362620fadf759cbceb1cd5737ce8c6ed7fb8e9942881e6731f9247dd",
+     "fee": 1,
+     "limitOrderId": null
+    }
+   ]
+  },
+  "signature": "ed25519:5DLQX4gQ5wfNTuJtu7MwfF4654SPaFRhz3fNkqcEymab4yq17NLUNHJJ5fzwhvr1hkqrCSnXroujjC9T2MNUtzb6",
+  "timestamp": "2026-11-13T01:14:06.441Z",
+  "correlationId": "9df113eb-6a3e-45ab-a9cc-0daa245598d3"
+ }
+}

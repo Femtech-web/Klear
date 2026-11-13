@@ -178,6 +178,8 @@ strategy anyone can rescue ([the daily drill](docs/results/drill)).
 | **The daily drill** | The practice strategy fails on purpose and is rescued every day, failures recorded | [docs/results/drill](docs/results/drill) | GitHub Actions; needs its key secret |
 | **The AI replay** | 32 real AI traders replayed fill by fill through the rules | [docs/results/replay](docs/results/replay/README.md) | reproducible in CI |
 | **Private payouts** | A rescue's payout into a NEAR Intents confidential balance: the recipient hidden | [docs/results/mainnet](docs/results/mainnet/README.md), [docs/privacy.md](docs/privacy.md) | one mainnet test |
+| **Sealed strategy** | The manager's prompt and the investor's strategy go end-to-end encrypted to a model in a TEE on NEAR AI Cloud; each answer is verified against Intel TDX and NVIDIA GPU attestation, and its signed receipt rides on chain with the order the judge bounds | [agents/keel_agents/sealed.py](agents/keel_agents/sealed.py), [docs/privacy.md](docs/privacy.md) | built; attestation verified live; first sealed order waits for inference credits |
+| **Confidential mandate** | The money in a confidential NEAR Intents account whose policy is the mandate, owned by a key only NEAR's MPC network holds | [docs/results/mandate](docs/results/mandate/README.md) | mainnet: created, granted, frozen and unfrozen by MPC signature; not yet funded |
 
 ## What NEAR makes possible
 

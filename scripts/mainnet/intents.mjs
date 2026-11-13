@@ -9,6 +9,12 @@
 //                                                        USDC; dry by default. --real returns a deposit address
 //                                                        (still moves nothing until someone sends to it)
 //   node scripts/mainnet/intents.mjs status <deposit-address>
+//   node scripts/mainnet/intents.mjs fund <usdc-out> <base-address> [--real]   HyperCore USDC -> exactly <usdc-out>
+//                                                        USDC on Base at <base-address> (e.g. the mandate agent's
+//                                                        deposit address); dry by default, refunds to the user
+//   node scripts/mainnet/intents.mjs fund-near <near-out> <account.near> [--real]   HyperCore USDC -> exactly
+//                                                        <near-out> native NEAR at a NEAR account (e.g. the user's
+//                                                        wallet, to pay NEAR AI Cloud credits)
 import { createHash, createPrivateKey, randomBytes, sign } from 'node:crypto';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
@@ -103,6 +109,47 @@ if (cmd === 'balances') {
   const q = out.quote || {};
   console.log(JSON.stringify({ amountIn: q.amountInFormatted, amountOut: q.amountOutFormatted, minAmountOut: q.minAmountOut, timeEstimate: q.timeEstimate, depositAddress: q.depositAddress, depositMemo: q.depositMemo, deadline: q.deadline, message: out.message }, null, 1));
   writeFileSync(`${OUT}/quote-${real ? 'real' : 'dry'}-hypercore-usdc-${Date.now()}.json`, JSON.stringify({ request: body, status: r.status, response: out }, null, 1));
+} else if (cmd === 'fund') {
+  const real = process.argv.includes('--real');
+  const usdc = Number(arg);
+  const to = process.argv[4];
+  if (!(usdc > 0 && usdc <= 5)) throw new Error('amount must be between 0 and 5 USDC (the authorized test budget)');
+  if (!/^0x[0-9a-fA-F]{40}$/.test(to || '')) throw new Error('a Base address is required');
+  const body = {
+    dry: !real, swapType: 'EXACT_OUTPUT', slippageTolerance: 100,
+    originAsset: '1cs_v1:hypercore:hip1:0x6d1e7cde53ba9467b783cb7c530ce054', depositType: 'ORIGIN_CHAIN',
+    amount: String(Math.round(usdc * 1e6)),
+    destinationAsset: 'nep141:base-0x833589fcd6edb6e08f4c7c32d4f71b54bda02913.omft.near',
+    recipient: to, recipientType: 'DESTINATION_CHAIN',
+    refundTo: env.KEEL_INVESTOR_MAINNET || '0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4', refundType: 'ORIGIN_CHAIN',
+    deadline: new Date(Date.now() + 60 * 60 * 1000).toISOString(), referral: 'klear',
+  };
+  const r = await fetch(`${API}/v0/quote`, { method: 'POST', headers, body: JSON.stringify(body) });
+  const out = await r.json();
+  const q = out.quote || {};
+  console.log(`POST /v0/quote (${real ? 'REAL' : 'dry'}): ${r.status}`);
+  console.log(JSON.stringify({ send: q.amountInFormatted, receive: q.amountOutFormatted, to, depositAddress: q.depositAddress, depositMemo: q.depositMemo, deadline: q.deadline, timeEstimate: q.timeEstimate, refundTo: body.refundTo, message: out.message }, null, 1));
+  writeFileSync(`${OUT}/quote-${real ? 'real' : 'dry'}-fund-${Date.now()}.json`, JSON.stringify({ request: body, status: r.status, response: out }, null, 1));
+} else if (cmd === 'fund-near') {
+  const real = process.argv.includes('--real');
+  const near = Number(arg);
+  const to = process.argv[4];
+  if (!(near > 0 && near <= 2)) throw new Error('amount must be between 0 and 2 NEAR (the authorized test budget)');
+  if (!/^[a-z0-9._-]+$/.test(to || '')) throw new Error('a NEAR account is required');
+  const body = {
+    dry: !real, swapType: 'EXACT_OUTPUT', slippageTolerance: 100,
+    originAsset: '1cs_v1:hypercore:hip1:0x6d1e7cde53ba9467b783cb7c530ce054', depositType: 'ORIGIN_CHAIN',
+    amount: (BigInt(Math.round(near * 1e6)) * 10n ** 18n).toString(), destinationAsset: 'nep141:wrap.near',
+    recipient: to, recipientType: 'DESTINATION_CHAIN',
+    refundTo: env.KEEL_INVESTOR_MAINNET || '0x2b10CDeD26F15B85039D07C85D5A259b9aEa5fD4', refundType: 'ORIGIN_CHAIN',
+    deadline: new Date(Date.now() + 60 * 60 * 1000).toISOString(), referral: 'klear',
+  };
+  const r = await fetch(`${API}/v0/quote`, { method: 'POST', headers, body: JSON.stringify(body) });
+  const out = await r.json();
+  const q = out.quote || {};
+  console.log(`POST /v0/quote (${real ? 'REAL' : 'dry'}): ${r.status}`);
+  console.log(JSON.stringify({ send: q.amountInFormatted, receive: q.amountOutFormatted, to, depositAddress: q.depositAddress, deadline: q.deadline, timeEstimate: q.timeEstimate, refundTo: body.refundTo, message: out.message }, null, 1));
+  writeFileSync(`${OUT}/quote-${real ? 'real' : 'dry'}-fund-near-${Date.now()}.json`, JSON.stringify({ request: body, status: r.status, response: out }, null, 1));
 } else if (cmd === 'status') {
   const r = await fetch(`${API}/v0/status?depositAddress=${encodeURIComponent(arg)}`, { headers });
   const out = await r.json();

@@ -46,6 +46,13 @@ testnet and once on mainnet (see `docs/results/`).
 - **An internal security review** (`docs/security-review.md`; not an audit).
 - **The site**: product and proof as separate sections, a judges' guide with live checks, Instrument Sans and Geist,
   a neutral palette that passes WCAG 2.2 AA in light and dark, and layouts checked at 360 px.
+- **A sealed strategy** (`agents/manager.py --sealed`, `agents/keel_agents/sealed.py`): the manager decides in a TEE
+  on NEAR AI Cloud, end-to-end encrypted and verified against TDX and GPU attestation; its receipt rides on chain in
+  `propose_order`'s arguments, which the locked judge ignores.
+- **A confidential mandate on mainnet** (`scripts/mainnet/mandate.py`, `docs/results/mandate`): an Agent API account
+  with the mandate as its confidential policy, owned by an MPC-derived key; every owner action signed by NEAR's MPC.
+- Agents fall back to DNS over HTTPS when the local resolver drops a name, and every TLS client in the process uses
+  certifi's bundle.
 - **Renamed from Keel to Klear.** Everything deployed before the rename keeps its name (`keel-*` accounts,
   `KeelLeg`, `KeelVault`, `KeelDeployer`): those contracts are locked, and their source stays byte-for-byte so the
   published hashes still match.

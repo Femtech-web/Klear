@@ -223,7 +223,9 @@ print(json.dumps(c))' "$policy" "$WETH" "$G7_INVESTOR")
     near_view "$G7_JUDGE" valuation "{\"perp\":\"${2:?perp}\",\"spot\":\"${3:?spot}\"}"
     ;;
   propose)
-    args=$(python3 -I -c 'import json,sys;print(json.dumps({"perp":sys.argv[1],"spot":sys.argv[2],"is_buy":sys.argv[3]=="buy","sz":int(sys.argv[4]),"limit_px":int(sys.argv[5])}))' "$2" "$3" "$4" "$5" "$6")
+    # An optional 7th argument, a sealed manager's receipt (JSON), rides in the call's arguments: the judge ignores
+    # it, and it stays on chain with the order it explains (agents/keel_agents/sealed.py).
+    args=$(python3 -I -c 'import json,sys;a={"perp":sys.argv[1],"spot":sys.argv[2],"is_buy":sys.argv[3]=="buy","sz":int(sys.argv[4]),"limit_px":int(sys.argv[5])};a.update({"sealed":json.loads(sys.argv[6])} if len(sys.argv)>6 and sys.argv[6] else {});print(json.dumps(a))' "$2" "$3" "$4" "$5" "$6" "${7:-}")
     GAS=120 call_with "$(key "${G7_MANAGER_KEY:-ai-fc.$G7_JUDGE}")" "${G7_MANAGER:-ai.$G7_JUDGE}" propose_order "$args" '0 NEAR' "$OUT/propose-$(date +%s).txt"
     ;;
   heartbeat)

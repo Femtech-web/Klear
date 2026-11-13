@@ -1,0 +1,4 @@
+# The sealed manager (agents/keel_agents/sealed.py): NEAR AI Cloud's SDK, which verifies the Gateway's and the
+# model's TEE attestation (Intel TDX through dcap-qvl, NVIDIA GPU evidence) and each response's signature.
+-r requirements.txt
+nearai-inference-sdk==0.3.0
