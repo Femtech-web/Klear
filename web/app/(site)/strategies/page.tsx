@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { PhasePill } from "@/components/strategies/PhasePill";
 import { ArrowRight } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
@@ -66,11 +66,18 @@ export default async function StrategiesPage() {
   return (
     <>
       <Section
+        heading="h1"
         eyebrow="The factory's registry, read live"
-        title="Every strategy, and which one needs a guardian now"
-        lede="Anyone can create a Klear strategy through the factory, and each judge it creates is locked from birth. A guardian scans this list: when an investor has asked to exit, or a manager has gone silent under a mandate that says exit, anyone may run the rescue, and the judge pays whoever delivers."
+        title="Strategies"
+        lede="Inspect the investor’s rules, check each judge on NEAR testnet, and see which strategies need a rescue."
       >
-        <div className="mb-10 grid gap-8 sm:grid-cols-3">
+        <div className="mb-7 flex flex-wrap gap-3">
+          <LinkButton href="/create">Create a strategy</LinkButton>
+          <LinkButton href="/practice" variant="secondary">
+            Practice a rescue
+          </LinkButton>
+        </div>
+        <div className="mb-6 grid gap-5 border-y border-line py-5 sm:grid-cols-3">
           <Stat value={list.ok ? list.value.length : "?"} label="strategies created" />
           <Stat
             value={list.ok ? due : "?"}
@@ -108,7 +115,6 @@ export default async function StrategiesPage() {
               account (about 5 NEAR: storage plus the reward pool) and an EVM key with gas on HyperEVM and Base.
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-4">
-              <LinkButton href="/create">Create one in your browser</LinkButton>
               <Link
                 href="/proof/factory"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-accent no-underline"

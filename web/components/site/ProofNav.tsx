@@ -1,40 +1,57 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ChevronDown } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
-import { PROOF } from "./nav-items";
+import { SiteLink } from "./SiteLink";
+import { PROOF, PROOF_GROUPS } from "./nav-items";
 
-/** The proof pages' own menu: every piece of evidence, in reading order. */
 export function ProofNav() {
   const path = usePathname();
+  const current = PROOF.slice(1).find((item) => path === item.href || path.startsWith(item.href + "/"));
+
+  if (!current) return null;
+
   return (
-    <div className="sticky top-[var(--header-h,107px)] z-10 border-b border-line bg-canvas/85 backdrop-blur-md backdrop-saturate-150 md:top-[var(--header-h,65px)]">
-      <nav
-        aria-label="Proof"
-        className="page flex gap-1 overflow-x-auto py-2.5 [mask-image:linear-gradient(to_right,black_85%,transparent)] [scrollbar-width:none] md:[mask-image:none]"
-      >
-        {PROOF.map((p, i) => {
-          const active = p.href === "/proof" ? path === "/proof" : path === p.href || path.startsWith(p.href + "/");
-          return (
-            <Link
-              key={p.href}
-              href={p.href}
-              aria-current={active ? "page" : undefined}
-              className={cn(
-                "inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-sm no-underline transition-colors duration-300",
-                active ? "bg-ink text-canvas" : "text-ink-2 hover:bg-surface-2 hover:text-ink",
-              )}
-            >
-              {i > 0 && (
-                <span className={cn("font-mono text-[0.72rem]", active ? "text-canvas/70" : "text-ink-3")}>
-                  {String(i).padStart(2, "0")}
-                </span>
-              )}
-              {p.label}
-            </Link>
-          );
-        })}
+    <div className="border-b border-line bg-canvas-tint">
+      <nav aria-label="Proof" className="page flex items-center justify-between gap-x-3">
+        <div className="flex min-h-12 items-center gap-2 text-sm">
+          <SiteLink href="/proof" className="font-semibold text-accent no-underline hover:underline">
+            Proof
+          </SiteLink>
+          <span aria-hidden="true" className="text-ink-3">
+            /
+          </span>
+          <span className="text-ink-2">{current.label}</span>
+        </div>
+        <details key={path} className="group relative z-10 shrink-0">
+          <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-sm font-medium text-ink-2 hover:text-accent [&::-webkit-details-marker]:hidden">
+            Browse evidence <ChevronDown size={15} className="group-open:rotate-180" />
+          </summary>
+          <div className="absolute right-0 top-full grid w-56 gap-4 rounded-md border border-line-strong bg-surface p-3 shadow-lift">
+            {PROOF_GROUPS.map((group) => (
+              <div key={group.title}>
+                <p className="px-2 text-xs font-semibold text-ink-3">{group.title}</p>
+                <ul className="mt-1">
+                  {group.links.map((item) => (
+                    <li key={item.href}>
+                      <SiteLink
+                        href={item.href}
+                        aria-current={item === current ? (path === item.href ? "page" : "location") : undefined}
+                        className={cn(
+                          "flex min-h-9 items-center rounded-sm px-2 text-sm no-underline hover:bg-surface-2",
+                          item === current ? "bg-accent-soft font-semibold text-accent" : "text-ink-2",
+                        )}
+                      >
+                        {item.label}
+                      </SiteLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </details>
       </nav>
     </div>
   );

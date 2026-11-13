@@ -38,13 +38,13 @@ export default function HowPage() {
   return (
     <>
       <Section
-        eyebrow="How it works"
-        title="Four parts, one promise"
+        heading="h1"
+        title="How Klear works"
         lede="Your money sits in two accounts that only one thing can move: a contract on NEAR that holds your rules, and has no keys."
       >
         <div className="grid gap-4 md:grid-cols-2">
           <Card>
-            <h3 className="text-[1.35rem]">Your rules</h3>
+            <h2 className="text-[1.35rem]">Your rules</h2>
             <p className="mt-2 text-ink-2">
               How large an order may be, the price range it must stay in, how much leverage is allowed, your loss floor,
               and what happens if the manager goes quiet. Written once into a NEAR contract, then locked: its only key
@@ -52,21 +52,21 @@ export default function HowPage() {
             </p>
           </Card>
           <Card>
-            <h3 className="text-[1.35rem]">Two accounts that only pay you</h3>
+            <h2 className="text-[1.35rem]">Two accounts that only pay you</h2>
             <p className="mt-2 text-ink-2">
               A trading account on Hyperliquid and an asset vault on Base. Each one acts only on the contract&apos;s
               signature, made by NEAR&apos;s signing network, and each can only ever pay out to your address.
             </p>
           </Card>
           <Card>
-            <h3 className="text-[1.35rem]">Decisions on verified data</h3>
+            <h2 className="text-[1.35rem]">Decisions on verified data</h2>
             <p className="mt-2 text-ink-2">
               The contract never takes anyone&apos;s word for what happened. NEAR&apos;s network confirms each
               account&apos;s state on its own chain first, and the contract decides on that.
             </p>
           </Card>
           <Card>
-            <h3 className="text-[1.35rem]">A way home anyone can run</h3>
+            <h2 className="text-[1.35rem]">A way home anyone can run</h2>
             <p className="mt-2 text-ink-2">
               When a trigger you chose fires, anyone can close the positions and move both accounts&apos; funds to you.
               They are paid per account, only once the money is seen arriving.

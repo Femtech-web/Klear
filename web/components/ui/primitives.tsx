@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { ArrowRight, Check, Cross } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 
@@ -8,6 +8,7 @@ export function Section({
   title,
   lede,
   tight,
+  heading: Heading = "h2",
   children,
 }: {
   id?: string;
@@ -15,15 +16,16 @@ export function Section({
   title?: React.ReactNode;
   lede?: React.ReactNode;
   tight?: boolean;
+  heading?: "h1" | "h2";
   children?: React.ReactNode;
 }) {
   return (
-    <section id={id} className={cn("scroll-mt-24", tight ? "py-12" : "py-18")}>
+    <section id={id} className={tight ? "py-10 md:py-12" : "py-9 md:py-13"}>
       <div className="page">
         {(eyebrow || title || lede) && (
           <header className="mb-8 max-w-measure">
             {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-            {title && <h2 className="text-h2">{title}</h2>}
+            {title && <Heading className={Heading === "h1" ? "text-h1" : "text-h2"}>{title}</Heading>}
             {lede && <p className="mt-3 text-[1.12rem] text-ink-2">{lede}</p>}
           </header>
         )}
@@ -34,7 +36,7 @@ export function Section({
 }
 
 export function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-accent">{children}</p>;
+  return <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-3">{children}</p>;
 }
 
 export function LinkButton({
@@ -50,9 +52,9 @@ export function LinkButton({
     <Link
       href={href}
       className={cn(
-        "group inline-flex h-11.5 items-center gap-2 rounded-full px-5 text-[0.98rem] font-medium no-underline transition duration-300 ease-calm",
+        "group inline-flex h-11.5 items-center gap-2 rounded-md px-4 text-[0.95rem] font-semibold no-underline transition-colors duration-300 ease-calm",
         variant === "primary"
-          ? "bg-accent text-accent-ink shadow-lift hover:-translate-y-px"
+          ? "bg-accent text-accent-ink hover:bg-ink hover:text-canvas"
           : "bg-surface text-ink shadow-soft ring-1 ring-line-strong hover:bg-surface-2",
       )}
     >

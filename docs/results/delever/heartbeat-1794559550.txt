@@ -1,0 +1,54 @@
+├  Unsigned transaction:
+│    signer_id:    manager.keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  heartbeat
+│                       args:         {
+│                                       "sealed": {
+│                                         "answer_sha256": "17f7685d126e7dd434c9474788e1b0a0fd4fc80bc614f9959ea7f5591fe23681",
+│                                         "completion": "0d350a808b634c5ba847c75467cdfc60",
+│                                         "gateway_tls": "attested",
+│                                         "gpu": "verified",
+│                                         "model": "z-ai/glm-5.3-flash",
+│                                         "prompt_sha256": "6c5a88adc9fa839a85feebdff0c367d75942bfc5086faad4b56e3e8147cb980e",
+│                                         "signature": "399a6381bf0c8f0ed6c3ef6090cf291a31645ecb22236d0bc30adec2064ed66ce3da6276db994891854c976d6a5db12f0ccec6fcac2c92fb366041a9e0dfd50c",
+│                                         "signed_text": "z-ai/glm-5.3-flash:68c7a9b6ddcc5fb677a5b29fcaddf9ae13ae4df5bcbe2f326e6888f402fdde06:4f471218aab2827c1021eaba865904d42abdbf299c78be389bce18f258d75d99",
+│                                         "signer": {
+│                                           "algo": "ed25519",
+│                                           "key": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff"
+│                                         },
+│                                         "tdx": "UpToDate"
+│                                       }
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:CwmZDR9quD6CuuLyaVFi5NwXcgH5umiQ7ZWsRSv5MoYE
+│    Signature:  ed25519:2n1mUP88cnrkcMn9eLE93LiPvABYCkTx5F9azATMTPJ2iSjsQxSQWph9uoYyU1cSqJ4jrMoXgSkxFpjZCY7EU3Mj
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 3.2 Tgas
+│    Transaction fee: 0.0002878513145343 NEAR
+│    Transaction ID: FBtEF756kZ4GiWpwzBiY2ixjZt9wniFce6Sojo1uDRE
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FBtEF756kZ4GiWpwzBiY2ixjZt9wniFce6Sojo1uDRE
+│     [0m
+├  Function execution logs:
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "heartbeat" call to <delever.keel-factory-bcf915.testnet> on behalf of <manager.keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet heartbeat json-args '{"sealed": {"model": "z-ai/glm-5.3-flash", "completion": "0d350a808b634c5ba847c75467cdfc60", "signer": {"algo": "ed25519", "key": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff"}, "signed_text": "z-ai/glm-5.3-flash:68c7a9b6ddcc5fb677a5b29fcaddf9ae13ae4df5bcbe2f326e6888f402fdde06:4f471218aab2827c1021eaba865904d42abdbf299c78be389bce18f258d75d99", "signature": "399a6381bf0c8f0ed6c3ef6090cf291a31645ecb22236d0bc30adec2064ed66ce3da6276db994891854c976d6a5db12f0ccec6fcac2c92fb366041a9e0dfd50c", "tdx": "UpToDate", "gpu": "verified", "gateway_tls": "attested", "prompt_sha256": "6c5a88adc9fa839a85feebdff0c367d75942bfc5086faad4b56e3e8147cb980e", "answer_sha256": "17f7685d126e7dd434c9474788e1b0a0fd4fc80bc614f9959ea7f5591fe23681"}}' prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as manager.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/manager-fc.keel-delever-7953ec.testnet.json send[39m
+

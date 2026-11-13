@@ -34,8 +34,11 @@ key() { echo ".secrets/near/$1.json"; }
 pub() { python3 -I -c 'import json,sys;print(json.load(open(sys.argv[1]))["public_key"])' "$(key "$1")"; }
 put() { touch "$STATE"; grep -q "^$1=" "$STATE" && sed -i '' "s|^$1=.*|$1=$2|" "$STATE" || echo "$1=$2" >> "$STATE"; export "$1=$2"; }
 plain() { sed 's/\x1b\[[0-9;]*m//g' "$1"; }
+# curl with retries: --fail keeps an error reply's body out, and the temp file is truncated before each retry,
+# so a rate-limited attempt can never glue its reply to the next one.
+fetch() { local f rc; f=$(mktemp); curl -s --fail --retry 5 --retry-all-errors --retry-delay 3 -o "$f" "$@"; rc=$?; cat "$f"; rm -f "$f"; return $rc; }
 balance() {
-  curl -s --retry 5 --retry-all-errors --retry-delay 3 "$NEAR_RPC" -H 'content-type: application/json' -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"finality\":\"final\",\"account_id\":\"$1\"}}" |
+  fetch "$NEAR_RPC" -H 'content-type: application/json' -d "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"finality\":\"final\",\"account_id\":\"$1\"}}" |
     python3 -I -c 'import json,sys;r=json.load(sys.stdin).get("result");print(r["amount"] if r else "")'
 }
 
@@ -92,7 +95,7 @@ case "${1:-}" in
     need=$(python3 -I -c "print(max(0, round(float('$usdc') - float('$have'), 2)))")
     if [ "$need" != 0 ]; then
       # The first transfer to a new HyperCore account pays its 1 USDC activation out of the amount sent.
-      role=$(curl -s --retry 5 --retry-all-errors --retry-delay 3 https://api.hyperliquid-testnet.xyz/info -H 'content-type: application/json' -d "{\"type\":\"userRole\",\"user\":\"$G7_LEG\"}" |
+      role=$(fetch https://api.hyperliquid-testnet.xyz/info -H 'content-type: application/json' -d "{\"type\":\"userRole\",\"user\":\"$G7_LEG\"}" |
         python3 -I -c 'import json,sys;print(json.load(sys.stdin)["role"])')
       [ "$role" = missing ] && need=$(python3 -I -c "print(round(float('$need') + 1, 2))")
       rel=$($py -I scripts/testnet/relayer.py balances | python3 -I -c 'import json,sys;print(json.load(sys.stdin)["perp_withdrawable"])')

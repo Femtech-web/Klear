@@ -17,8 +17,8 @@ testnet and once on mainnet (see `docs/results/`).
 - **Alpha Arena replay**: 32 AI agents' real Hyperliquid history through `keel_core::rules`.
 - **Site** (`web/`): Next.js, Tailwind, TypeScript; every chain read server-side; WCAG 2.2 AA in light, dark and
   mobile.
-- **Live**: five rescues on testnet (an AI manager's outage with an AI guardian; the investor's own exit with a
-  human guardian; the practice strategy, by its drill and by a stranger; the deleverage strategy's exit, with a
+- **Live**: six rescues on testnet (an AI manager's outage with an AI guardian; the investor's own exit with a
+  human guardian; the practice strategy, by its drill and by a stranger; the deleverage strategy's two exits, with a
   stranger's tools), 20 bypass attempts refused, and a confidential payout path on mainnet.
 - **Judge v3.1** (wasm sha256 `2aeaaf8b…`): a deleverage job (an early cut back to the investor's target leverage,
   before the floor), the investor's `rearm` after a rescue, `fund_pool`, a one-call `status` view, and delivery
@@ -46,11 +46,15 @@ testnet and once on mainnet (see `docs/results/`).
 - **An internal security review** (`docs/security-review.md`; not an audit).
 - **The site**: product and proof as separate sections, a judges' guide with live checks, Instrument Sans and Geist,
   a neutral palette that passes WCAG 2.2 AA in light and dark, and layouts checked at 360 px.
-- **A sealed strategy** (`agents/manager.py --sealed`, `agents/keel_agents/sealed.py`): the manager decides in a TEE
-  on NEAR AI Cloud, end-to-end encrypted and verified against TDX and GPU attestation; its receipt rides on chain in
-  `propose_order`'s arguments, which the locked judge ignores.
+- **A sealed strategy** (`agents/manager.py --sealed`, `agents/keel_agents/sealed.py`, `docs/results/sealed`): the
+  manager decides in a TEE on NEAR AI Cloud, end-to-end encrypted and verified against TDX and GPU attestation; every
+  decision's receipt goes on chain (in `propose_order` for a trade, in `heartbeat` for a hold), which the locked judge
+  ignores, and `agents/verify_sealed.py` checks it from the chain alone.
+- The scripts' curl retries can no longer glue a rate-limited reply to the next one (`--fail`, a temp file per call).
 - **A confidential mandate on mainnet** (`scripts/mainnet/mandate.py`, `docs/results/mandate`): an Agent API account
   with the mandate as its confidential policy, owned by an MPC-derived key; every owner action signed by NEAR's MPC.
+  Funded by the user: a sealed AI swapped inside the confidential balance, a withdrawal to a stranger was refused,
+  and the exit (grant revoked, exit granted) sent everything to the user's own addresses.
 - Agents fall back to DNS over HTTPS when the local resolver drops a name, and every TLS client in the process uses
   certifi's bundle.
 - **Renamed from Keel to Klear.** Everything deployed before the rename keeps its name (`keel-*` accounts,

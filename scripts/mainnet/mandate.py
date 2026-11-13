@@ -10,6 +10,10 @@ every owner action (create, policy, freeze) is EIP-712 typed data that the MPC n
     python3 scripts/mainnet/mandate.py freeze         the owner freezes the agent (an exit trigger's first step)
     python3 scripts/mainnet/mandate.py unfreeze       the owner lifts the freeze
     python3 scripts/mainnet/mandate.py deposit        a deposit address for HyperCore USDC into the confidential balance
+    python3 scripts/mainnet/mandate.py destinations   the owner sets where withdrawals may go: the user's own addresses
+    python3 scripts/mainnet/mandate.py manage         the sealed AI decides one action in a TEE and runs it under its grant
+    python3 scripts/mainnet/mandate.py stranger       a live withdrawal to anyone else, which the policy must refuse
+    python3 scripts/mainnet/mandate.py exit           the owner cuts the AI off, grants the exit, and everything goes home
     python3 scripts/mainnet/mandate.py status <id>    an owner intent's status
 
 Reads NEAR_INTENTS_AGENT_API_KEY and NEAR_INTENTS_AGENT_API_URL from .env; never prints them. Every step is
@@ -152,6 +156,16 @@ USDC = "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1"
 WNEAR = "nep141:wrap.near"
 HYPERCORE_USDC = "1cs_v1:hypercore:hip1:0x6d1e7cde53ba9467b783cb7c530ce054"
 GRANTS = ROOT / ".secrets" / "mandate"
+BASE_USDC = "nep141:base-0x833589fcd6edb6e08f4c7c32d4f71b54bda02913.omft.near"  # Base USDC inside NEAR Intents
+# The user funded this account; its only exits are the user's own addresses.
+HOME = {"base": "0x2b10cded26f15b85039d07c85d5a259b9aea5fd4", "near": "poorcheese6608.near"}
+
+SYSTEM = """You manage a confidential NEAR Intents account for an investor, under the investor's mandate, which the
+account enforces whatever you answer: swaps and withdrawals only, a USD budget per day and per week, withdrawals only
+to the investor. Decide one action now: swap some USDC for NEAR, or hold. Explain in one sentence."""
+SCHEMA = {"type": "object", "properties": {"action": {"type": "string", "enum": ["swap", "hold"]},
+          "amount_usdc": {"type": "number", "minimum": 0}, "reason": {"type": "string"}},
+          "required": ["action", "amount_usdc", "reason"]}
 
 
 def grant(label: str) -> None:
@@ -188,6 +202,79 @@ def rules() -> None:
             note("dry-run", what=what, refused=str(e)[:300])
 
 
+def agent_id() -> str:
+    return E["MANDATE_AGENT_ID"]
+
+
+def token(label: str) -> str:
+    return (GRANTS / f"{label}.token").read_text().strip()
+
+
+def balances() -> list[dict]:
+    b = api("GET", f"/v1/agents/{agent_id()}/balances")
+    rows = b.get("data") or b.get("balances") or []
+    return [x for x in rows if str(x.get("balance_raw", x.get("balance", "0"))) not in ("0", "")]
+
+
+def run(kind: str, path: str, body: dict, grant_label: str) -> dict:
+    """A live execution under a grant; waits for its status. A refusal comes back as an error, before any provider call."""
+    try:
+        r = api("POST", f"/v1/agents/{agent_id()}/{path}", body, {"x-grant-token": token(grant_label), "idempotency-key": str(uuid.uuid4())})
+    except RuntimeError as e:
+        note(f"{kind}-refused", request=body, error=str(e)[-400:])
+        return {"refused": str(e)}
+    st = wait(r["correlation_id"]) if r.get("correlation_id") else r
+    note(kind, request=body, correlation_id=r.get("correlation_id"), status=st.get("status"),
+         details={k: (st.get("details") or {}).get(k) for k in ("amount_in", "amount_out", "transaction_hash", "usd_value")})
+    return st
+
+
+def destinations() -> None:
+    cur = api("GET", f"/v1/agents/{agent_id()}/policy")
+    policy = dict(cur["policy"])
+    policy["destinations"] = {"mode": "only", "list": [{"action": "withdraw", "chain": "base", "address": HOME["base"], "memo": None},
+                                                       {"action": "withdraw", "chain": "near", "address": HOME["near"], "memo": None}]}
+    owner_intent("policy_update", agent_id=agent_id(), policy=policy, expected_revision=cur["revision"])
+
+
+def manage() -> None:
+    """The sealed AI decides in a TEE (keel_agents/sealed.py) and its action runs under the manager's grant."""
+    from keel_agents import sealed
+
+    urls = urllib.request.urlopen(urllib.request.Request(E["NEAR_INTENTS_AGENT_API_URL"] + "/v1/tokens", headers={"user-agent": "klear/0.1"}), timeout=30, context=_CTX)
+    near_usd = next(t["price"] for t in json.load(urls)["data"] if t["asset_id"] == WNEAR)
+    usage = api("GET", f"/v1/agents/{agent_id()}/policy")["usage"]["budget"]
+    system = SYSTEM + "\n\nThe investor's strategy, which you follow within the mandate:\n" + (ROOT / ".secrets" / "strategy-mandate.md").read_text()
+    prompt = json.dumps({"balances": [{"asset": b["asset_id"], "balance": b.get("balance")} for b in balances()],
+                         "near_price_usd": near_usd, "budget_remaining_usd": {k: v["remaining_usd"] for k, v in usage.items()}}, indent=1)
+    d, receipt = sealed.decide("mandate-manager", system, prompt, SCHEMA, OUT / "decisions.jsonl", ROOT / ".secrets" / "sealed" / "mandate.jsonl")
+    note("sealed-decision", decision={k: d[k] for k in ("action", "amount_usdc")}, receipt=receipt)
+    if d["action"] == "swap" and d["amount_usdc"] > 0:
+        run("swap", "swap", {"origin_asset": BASE_USDC, "destination_asset": WNEAR, "amount": str(round(d["amount_usdc"] * 1e6)),
+                             "note": f"sealed decision {receipt['completion']}"}, "klear-manager")
+
+
+def stranger() -> None:
+    run("withdraw-to-stranger", "withdraw", {"asset": BASE_USDC, "amount": "500000", "chain": "base",
+                                             "recipient": "0x000000000000000000000000000000000000dEaD"}, "klear-manager")
+
+
+def exit_() -> None:
+    """The confidential rescue: the owner revokes the AI's grant, grants the exit, and every balance goes to the user."""
+    grants = api("GET", f"/v1/agents/{agent_id()}/grants").get("data", [])
+    for g in grants:
+        if g.get("label") == "klear-manager" and not g.get("revoked_at"):
+            owner_intent("grant_revoke", agent_id=agent_id(), grant_id=g["grant_id"])
+    run("ai-after-revoke", "withdraw", {"asset": BASE_USDC, "amount": "100000", "chain": "base", "recipient": HOME["base"], "dry": True}, "klear-manager")
+    grant("klear-exit")
+    for b in balances():
+        raw = str(b.get("available_raw") or b.get("balance_raw"))
+        if b["asset_id"] == WNEAR:
+            run("exit-withdraw", "withdraw", {"asset": WNEAR, "amount": raw, "chain": "near", "recipient": HOME["near"]}, "klear-exit")
+        elif b["asset_id"] == BASE_USDC:
+            run("exit-withdraw", "withdraw", {"asset": BASE_USDC, "amount": raw, "chain": "base", "recipient": HOME["base"]}, "klear-exit")
+
+
 def main() -> None:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "owner"
     if cmd == "owner":
@@ -215,6 +302,14 @@ def main() -> None:
                 {"idempotency-key": str(uuid.uuid4())})
         note("deposit-address", details={k: r.get("details", {}).get(k) for k in ("deposit_address", "memo", "min_amount", "expires_at")},
              correlation_id=r.get("correlation_id"))
+    elif cmd == "destinations":
+        destinations()
+    elif cmd == "manage":
+        manage()
+    elif cmd == "stranger":
+        stranger()
+    elif cmd == "exit":
+        exit_()
     elif cmd == "status":
         print(json.dumps(api("GET", f"/v1/status?correlation_id={sys.argv[2]}"), indent=1))
     else:

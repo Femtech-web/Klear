@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { EquityChart } from "@/components/chart/EquityChart";
 import { ArrowRight } from "@/components/ui/icons";
 import { Card, LinkButton, Pill, Section, Stat } from "@/components/ui/primitives";
@@ -21,7 +21,8 @@ export default function ReplayPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 03 · Alpha Arena, replayed"
+        heading="h1"
+        eyebrow="Alpha Arena replay"
         title="What Klear would have done with 32 AI traders' real money"
         lede="In Alpha Arena Season 1.5, AI models each traded $10,000 of real money on Hyperliquid, from public wallets. We replayed every one of their fills through Klear's rules, using the same code the NEAR judge runs."
       >

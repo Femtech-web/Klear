@@ -36,7 +36,7 @@ decides every order and destination, so an agent can bring the money home and no
 
 `keel_agents/` is shared: `chain.py` (calls `scripts/testnet/g7.sh` and the judge's views), `market.py`
 (Hyperliquid's public info API: what the AI reads, never what the judge trusts), `llm.py` (the Claude call
-and the decision log), `sealed.py` (the TEE decision and its receipt), `px.py` (Hyperliquid price and size units),
+and the decision log), `sealed.py` (the TEE decision and its receipt; `verify_sealed.py <tx> <sender> --attestation` checks one from the chain), `px.py` (Hyperliquid price and size units),
 `net.py` (HTTPS with a verified CA bundle, and DNS over HTTPS when the local resolver drops a name).
 
 ## Telling autonomous decisions from scripted steps

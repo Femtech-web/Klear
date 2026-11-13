@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { ArrowRight, Check, ChevronDown } from "@/components/ui/icons";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { useState, useSyncExternalStore } from "react";
 import { createStrategy, DEFAULT_MANDATE, strategyConfig, validName, type MandateInput } from "@/lib/keel/calls";
 import { deployLeg, deployVault } from "@/lib/keel/abi";
@@ -27,7 +28,7 @@ interface Prediction {
 }
 
 const near = (yocto: bigint) => `${(Number(yocto / 10n ** 18n) / 1e6).toFixed(3)} NEAR`;
-const field = "h-10 w-full rounded-md border border-line-strong bg-surface px-3 text-[0.95rem]";
+const field = "h-11 min-w-0 w-full rounded-sm border border-line-strong bg-canvas px-3 text-base";
 
 const noop = () => () => {};
 
@@ -121,18 +122,18 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
   );
 
   return (
-    <div className="grid gap-8">
-      <Stage n={1} title="Your NEAR account" done={Boolean(me)}>
+    <div className="grid divide-y divide-line">
+      <Stage n={1} title="Connect your investor wallet" done={Boolean(me)}>
         <p className="m-0 mb-3 text-sm text-ink-2">
-          It becomes the investor&apos;s account: the only one that can request an exit or rearm the strategy.
+          This NEAR testnet account signs for creation, exit requests and new cycles.
         </p>
         <ConnectNear nonce={nonce} />
       </Stage>
 
-      <Stage n={2} title="The strategy and its mandate" done={Boolean(pred)}>
+      <Stage n={2} title="Set the rules and payout" done={Boolean(pred)}>
         <div className="grid gap-4 md:grid-cols-2">
           <label className="grid gap-1 text-sm">
-            <span className="text-ink-2">Name (the judge becomes &lt;name&gt;.{factory})</span>
+            <span className="font-medium">Strategy name</span>
             <input
               value={name}
               onChange={(e) => setName(e.target.value.trim().toLowerCase())}
@@ -141,7 +142,7 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
             />
           </label>
           <label className="grid gap-1 text-sm">
-            <span className="text-ink-2">Label, shown in the registry</span>
+            <span className="font-medium">Display name in the registry</span>
             <input
               value={label}
               onChange={(e) => setLabel(e.target.value.slice(0, 80))}
@@ -150,7 +151,7 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
             />
           </label>
           <label className="grid gap-1 text-sm">
-            <span className="text-ink-2">Your EVM address: where both accounts can ever pay out</span>
+            <span className="font-medium">Your EVM payout address</span>
             <span className="flex gap-2">
               <input
                 value={investor}
@@ -164,57 +165,76 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
                 </Button>
               )}
             </span>
+            <span className="text-xs text-ink-3">
+              Both accounts return funds here. The address is fixed once signed.
+            </span>
           </label>
           <label className="grid gap-1 text-sm">
-            <span className="text-ink-2">
-              Manager&apos;s NEAR account (optional: an AI agent that may only propose orders)
-            </span>
+            <span className="font-medium">Manager’s NEAR account (optional)</span>
             <input
               value={manager}
               onChange={(e) => setManager(e.target.value.trim())}
               className={`${field} font-mono`}
               placeholder="agent.testnet"
             />
-          </label>
-          {num("maxLeverageX", "Maximum leverage (x)")}
-          {num("floorUsd", "Floor: exit below this value (USD)")}
-          {num("maxOrderEth", "Largest single order (ETH)")}
-          {num("heartbeatMin", "Manager silence allowed (minutes)", "1")}
-          <label className="flex items-center gap-2 text-sm md:col-span-2">
-            <input
-              type="checkbox"
-              checked={m.exitOnSilence}
-              onChange={(e) => setM({ ...m, exitOnSilence: e.target.checked })}
-            />
-            <span>If the manager goes silent for longer, anyone may rescue the strategy</span>
-          </label>
-          {num("flattenRewardNear", "Reward for the Hyperliquid leg (NEAR)")}
-          {num("spotRewardNear", "Reward for the Base leg (NEAR)")}
-          <label className="grid gap-1 text-sm">
-            <span className="text-ink-2">Reward pool to fund now (NEAR, at least 0.1)</span>
-            <input
-              value={pool}
-              onChange={(e) => setPool(e.target.value.trim())}
-              inputMode="decimal"
-              className={`${field} font-mono`}
-            />
+            <span className="text-xs text-ink-3">
+              Enter the account before signing if you plan to trade. Run the manager separately.
+            </span>
           </label>
         </div>
-        <div className="mt-4">
+        <details className="group mt-4 rounded-sm border border-line">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 px-3 py-2 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+            Trading limits and guardian rewards
+            <ChevronDown size={16} className="shrink-0 transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="grid gap-4 border-t border-line p-3 md:grid-cols-2">
+            {num("maxLeverageX", "Maximum leverage (x)")}
+            {num("floorUsd", "Floor: exit below this value (USD)")}
+            {num("maxOrderEth", "Largest single order (ETH)")}
+            {num("heartbeatMin", "Manager silence allowed (minutes)", "1")}
+            <label className="flex items-center gap-2 text-sm md:col-span-2">
+              <input
+                type="checkbox"
+                checked={m.exitOnSilence}
+                onChange={(e) => setM({ ...m, exitOnSilence: e.target.checked })}
+              />
+              <span>If the manager goes silent for longer, anyone may rescue the strategy</span>
+            </label>
+            {num("flattenRewardNear", "Reward for the Hyperliquid leg (NEAR)")}
+            {num("spotRewardNear", "Reward for the Base leg (NEAR)")}
+            <label className="grid gap-1 text-sm">
+              <span className="text-ink-2">Reward pool to fund now (NEAR, at least 0.1)</span>
+              <input
+                value={pool}
+                onChange={(e) => setPool(e.target.value.trim())}
+                inputMode="decimal"
+                className={`${field} font-mono`}
+              />
+            </label>
+          </div>
+        </details>
+        <p className="mt-2 text-xs text-ink-3">
+          {m.maxLeverageX}× leverage cap · ${m.floorUsd} equity floor ·{" "}
+          {m.exitOnSilence ? `exit after ${m.heartbeatMin} minutes of silence` : "no exit on silence"}
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
           <Button disabled={!ready} onClick={() => void predict()}>
-            Predict its addresses
+            Preview addresses
           </Button>
+          <p className="text-xs text-ink-3">Enter a valid strategy name and payout address to preview.</p>
         </div>
       </Stage>
 
       {pred && (
-        <Stage n={3} title="Create the judge, locked" done={create.state.kind === "done"}>
+        <Stage n={3} title="Review and lock the judge" done={create.state.kind === "done"}>
           <dl className="m-0 grid gap-2 text-sm">
             {[
               ["Judge", pred.judge],
               ["Hyperliquid account (KeelLeg)", pred.leg],
               ["Base vault (KeelVault)", pred.vault],
-              ["Controlled only by the judge's keys", `${pred.controllers.leg} · ${pred.controllers.vault}`],
+              ["Payout address", investor],
+              ["Manager", manager || "None configured"],
+              ["Judge’s MPC controllers", `${pred.controllers.leg} · ${pred.controllers.vault}`],
               [
                 "You attach",
                 `${near(deposit)}: storage ${near(BigInt(pred.creationCostYocto))} + pool ${near(poolYocto)}`,
@@ -241,11 +261,9 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
       )}
 
       {pred && create.state.kind === "done" && legArgs && (
-        <Stage n={4} title="Deploy its two accounts" done={Boolean(deployed.leg && deployed.vault)}>
+        <Stage n={4} title="Deploy the trading account and vault" done={Boolean(deployed.leg && deployed.vault)}>
           <p className="m-0 mb-3 text-sm text-ink-2">
-            Anyone may deploy them; each lands at the predicted address only with exactly these controllers and this
-            payout. With your EVM wallet (it needs a little HYPE on HyperEVM testnet and ETH on Base Sepolia), or with
-            Foundry:
+            Use your EVM wallet with testnet HYPE and Base Sepolia ETH for gas, or deploy with Foundry.
           </p>
           {evm && (
             <div className="mb-3 flex flex-wrap gap-3">
@@ -265,30 +283,35 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
               </Button>
             </div>
           )}
-          <pre
-            tabIndex={0}
-            className="m-0 overflow-x-auto rounded-md border border-line bg-surface-2 p-3 font-mono text-[0.8rem] leading-6"
-          >
-            {[
-              "# with your key: --account <keystore> or --private-key",
-              `cast send ${pred.deployers.hyperevm} ${deployLeg(legArgs)} --rpc-url https://rpc.hyperliquid-testnet.xyz/evm`,
-              `cast send ${pred.deployers.base} ${deployVault(pred.salt, pred.controllers.vault, investor)} --rpc-url https://sepolia.base.org`,
-            ].join("\n")}
-          </pre>
+          <details open={evm ? undefined : true} className="group border-t border-line">
+            <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+              Deploy with Foundry <ChevronDown size={16} className="transition-transform group-open:rotate-180" />
+            </summary>
+            <pre
+              tabIndex={0}
+              className="m-0 overflow-x-auto rounded-sm border border-line bg-surface-2 p-3 font-mono text-[0.8rem] leading-6"
+            >
+              {[
+                "# with your key: --account <keystore> or --private-key",
+                `cast send ${pred.deployers.hyperevm} ${deployLeg(legArgs)} --rpc-url https://rpc.hyperliquid-testnet.xyz/evm`,
+                `cast send ${pred.deployers.base} ${deployVault(pred.salt, pred.controllers.vault, investor)} --rpc-url https://sepolia.base.org`,
+              ].join("\n")}
+            </pre>
+          </details>
         </Stage>
       )}
 
       {pred && create.state.kind === "done" && (
-        <Stage n={5} title="Check it, then fund it" done={false}>
+        <Stage n={5} title="Verify and fund the accounts" done={false}>
           <p className="m-0 text-sm text-ink-2">
-            The inspection page runs the six checks a guardian runs. Then send USDC to the KeelLeg on Hyperliquid
-            testnet and WETH to the vault on Base Sepolia.
+            After both deployments, verify the accounts on the strategy page before sending testnet funds. Start your
+            manager and relayer separately when you’re ready to trade.
           </p>
           <Link
-            href={`/strategies/${pred.judge}`}
-            className="mt-3 inline-block text-sm font-medium text-accent no-underline"
+            href={`/strategies/${pred.judge}#verify-and-fund`}
+            className="mt-2 inline-flex min-h-10 items-center gap-2 text-sm font-semibold hover:text-accent"
           >
-            Inspect {pred.judge}
+            Open verification and funding <ArrowRight size={16} />
           </Link>
         </Stage>
       )}
@@ -304,12 +327,12 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
 
 function Stage({ n, title, done, children }: { n: number; title: string; done: boolean; children: React.ReactNode }) {
   return (
-    <section className="grid grid-cols-[32px_minmax(0,1fr)] gap-4">
+    <section className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-3 py-5 first:pt-0 last:pb-0 sm:grid-cols-[2rem_minmax(0,1fr)] sm:gap-4">
       <span
-        className={`grid size-8 place-items-center rounded-full font-mono text-sm ${done ? "bg-accent text-canvas" : "border border-line-strong text-ink-3"}`}
+        className={`grid size-7 place-items-center rounded-full font-mono text-xs ${done ? "bg-accent-soft text-accent" : "border border-line-strong text-ink-3"}`}
         aria-hidden="true"
       >
-        {n}
+        {done ? <Check size={15} /> : n}
       </span>
       <div className="min-w-0">
         <h2 className="mb-3 mt-1 font-sans text-lg font-semibold">

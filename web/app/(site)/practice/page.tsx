@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { RescueFlow } from "@/components/flows/RescueFlow";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { PhasePill } from "@/components/strategies/PhasePill";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { LiveValue } from "@/components/ui/LiveValue";
 import { Card, Section } from "@/components/ui/primitives";
+import { ArrowRight, ChevronDown } from "@/components/ui/icons";
 import { Hash } from "@/components/ui/Tx";
 import { DrillTable } from "@/components/drill/DrillTable";
 import { view } from "@/lib/chain/near";
@@ -77,18 +78,17 @@ export default async function PracticePage() {
   return (
     <>
       <Section
-        eyebrow="Practice"
+        heading="h1"
         title="Rescue a strategy yourself"
         lede={
           <>
-            Reading about a rescue is not the same as running one. A real Klear strategy on testnet fails every day on
-            purpose: its manager opens a position and goes silent, and the investor&apos;s mandate says a silent manager
-            means exit. From {WINDOW} anyone may rescue it, and its judge pays whoever delivers.
+            A daily testnet strategy opens a position and simulates a manager outage. The rescue window is {WINDOW}. The
+            judge pays the guardian who delivers the funds.
           </>
         }
       >
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]">
-          <Card raised>
+          <Card>
             <h2 className="mb-3 font-sans text-lg font-semibold">The practice strategy now</h2>
             <LiveValue
               read={glance}
@@ -103,7 +103,7 @@ export default async function PracticePage() {
                       {due
                         ? g.job
                           ? `A rescue is under way, by ${g.job.agent}.`
-                          : "A rescue is due now. Run the three commands and it is yours."
+                          : "A rescue is due now."
                         : g.mode === "flattened"
                           ? "Rescued. The next cycle starts at the daily drill."
                           : g.manager && g.heartbeatS
@@ -138,52 +138,67 @@ export default async function PracticePage() {
             />
           </Card>
           <Card>
-            <h2 className="mb-1 font-sans text-lg font-semibold">Three commands</h2>
-            <p className="mb-4 text-sm text-ink-3">
-              Node 20+ and Python 3.10+. Your key stays on your machine; NEAR&apos;s CLI signs locally.
+            <h2 className="mb-2 text-xl">Rescue it with a NEAR wallet</h2>
+            <p className="mb-4 max-w-measure text-sm text-ink-2">
+              Use a NEAR testnet account to sign each transaction. The courier pays the EVM gas while the window is
+              open.
             </p>
-            <ol className="m-0 grid list-none gap-4 p-0">
-              {STEPS.map((s, i) => (
-                <li key={s.title} className="grid min-w-0 gap-2">
-                  <p className="m-0 text-[0.95rem] font-medium">
-                    <span className="mr-2 font-mono text-ink-3">{i + 1}</span>
-                    {s.title}
-                  </p>
-                  <Command cmd={s.cmd} />
-                </li>
-              ))}
-            </ol>
+            <RescueFlow judge={judge} nonce={nonce} />
           </Card>
         </div>
+        <Link
+          href="/try#recorded-rescue"
+          className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold hover:text-accent"
+        >
+          Preview the rescue without a wallet <ArrowRight size={16} />
+        </Link>
       </Section>
 
-      <Section tight eyebrow="Or from your browser" title="Rescue it with a NEAR wallet">
-        <Card>
-          <p className="m-0 mb-5 max-w-measure text-ink-2">
-            The same rescue, one signed transaction at a time: Meteor, Intear, Nightly, or the NEAR CLI. The courier
-            pays the EVM gas while the window is open.
-          </p>
-          <RescueFlow judge={factory.practice.judge} nonce={nonce} />
-        </Card>
-      </Section>
-
-      <Section tight eyebrow="What you will sign" title="Five steps, each checked by the judge">
-        <ol className="m-0 grid list-none gap-0 p-0 md:grid-cols-5 md:gap-4">
-          {FLOW.map(([title, detail], i) => (
-            <li key={title} className="border-t border-line py-4">
-              <p className="m-0 font-mono text-sm text-ink-3">{String(i + 1).padStart(2, "0")}</p>
-              <p className="m-0 mt-1 font-medium">{title}</p>
-              <p className="m-0 mt-1 text-sm text-ink-2">{detail}</p>
-            </li>
-          ))}
-        </ol>
-      </Section>
-
-      <Section tight eyebrow="The daily drill" title="The latest cycles">
+      <Section tight title="Recent drill attempts" lede="A cycle can have more than one attempt.">
         <DrillTable limit={3} />
-        <p className="mt-6 max-w-measure text-sm text-ink-3">
-          Every cycle, with what each one proves: <Link href="/proof/drill">the daily drill</Link>.
-        </p>
+        <Link
+          href="/proof/drill#drill-record"
+          className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold hover:text-accent"
+        >
+          View the full record <ArrowRight size={16} />
+        </Link>
+      </Section>
+
+      <Section id="terminal" tight>
+        <details className="group border-y border-line">
+          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 py-3 font-semibold [&::-webkit-details-marker]:hidden">
+            Rescue from the terminal{" "}
+            <ChevronDown size={17} className="shrink-0 transition-transform group-open:rotate-180" />
+          </summary>
+          <p className="mb-4 text-sm text-ink-3">
+            Node 20+ and Python 3.10+. Your key stays on your machine. NEAR&apos;s CLI signs locally.
+          </p>
+          <ol className="grid list-none gap-4 pb-5">
+            {STEPS.map((s, i) => (
+              <li key={s.title} className="grid min-w-0 gap-2">
+                <p className="m-0 text-[0.95rem] font-medium">
+                  <span className="mr-2 font-mono text-ink-3">{i + 1}</span>
+                  {s.title}
+                </p>
+                <Command cmd={s.cmd} />
+              </li>
+            ))}
+          </ol>
+        </details>
+        <details className="group border-b border-line">
+          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 py-3 font-semibold [&::-webkit-details-marker]:hidden">
+            What happens during a rescue{" "}
+            <ChevronDown size={17} className="shrink-0 transition-transform group-open:rotate-180" />
+          </summary>
+          <ol className="divide-y divide-line pb-4">
+            {FLOW.map(([title, detail]) => (
+              <li key={title} className="py-3">
+                <p className="text-sm font-semibold">{title}</p>
+                <p className="mt-1 text-sm text-ink-2">{detail}</p>
+              </li>
+            ))}
+          </ol>
+        </details>
       </Section>
     </>
   );

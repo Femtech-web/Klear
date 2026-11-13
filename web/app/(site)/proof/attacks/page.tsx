@@ -14,7 +14,8 @@ export default function BreakPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 05 · Try to break it"
+        heading="h1"
+        eyebrow="Recorded attack attempts"
         title="Sixteen ways in. None of them should work."
         lede={`The judges are locked and hold real testnet funds. Every attempt below is a real transaction against the real thing. If one succeeds, that is a bug, and we want to hear about it.`}
       >

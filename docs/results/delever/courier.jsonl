@@ -11,3 +11,15 @@
 {"at": 1794528231, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794528221-perp-log.json"}
 {"at": 1794528406, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794528391-perp-log.json"}
 {"at": 1794528568, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794528562-perp-log.json"}
+{"at": 1794559605, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794559587-perp-log.json"}
+{"at": 1794559605, "role": "courier", "kind": "spot-probe"}
+{"at": 1794559673, "role": "courier", "kind": "relayed-sweep", "key": "4", "tx": "0x7a27e0f726bf3a51dc0a50c21e79f2c73162e6cfc1ceee710c83733276d385ec"}
+{"at": 1794559676, "role": "courier", "kind": "relayed-exit", "key": "1", "tx": "0xc2620412ac0ba43bbb23cfb3f854755c7eabac809b8369778134ad170e631a79"}
+{"at": 1794559745, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794559738-perp-log.json"}
+{"at": 1794559907, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794559901-perp-log.json"}
+{"at": 1794560069, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794560063-perp-log.json"}
+{"at": 1794560240, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794560232-perp-log.json"}
+{"at": 1794560413, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794560407-perp-log.json"}
+{"at": 1794560575, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794560568-perp-log.json"}
+{"at": 1794560738, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794560731-perp-log.json"}
+{"at": 1794560862, "role": "courier", "kind": "spot-attested", "out": ["base:0x66cd2c6339ee93c05bd8455e52739d6205d7e5f3f95f0550a0b45066bc55d6d3:15"]}

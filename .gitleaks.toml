@@ -17,3 +17,8 @@ paths = [
 description = "EVM addresses (20 bytes) are public; generic rules flag them after keys like spot_token. A private key is 32 bytes and still matches."
 regexTarget = "secret"
 regexes = ['''^0x[0-9a-fA-F]{40}$''']
+
+[[allowlists]]
+description = "The public ed25519 signing key of NEAR AI Cloud's z-ai/glm-5.3-flash TEE, from its attestation report; sealed receipts carry it (docs/results/sealed)."
+regexTarget = "secret"
+regexes = ['''^5a0210f2442c79355784f9de021985429561da5bacc3a4424b01a[0-9a-f]{11}$''']

@@ -61,7 +61,10 @@ key() { local f=".secrets/near/$1.json"; [ -f "$f" ] || [ -z "${KEEL_KEYS:-}" ] 
 put() { touch "$STATE"; grep -q "^$1=" "$STATE" && sed -i '' "s|^$1=.*|$1=$2|" "$STATE" || echo "$1=$2" >> "$STATE"; export "$1=$2"; }
 sleep_s() { python3 -I -c "import time,sys;time.sleep(float(sys.argv[1]))" "$1"; }
 plain() { sed 's/\x1b\[[0-9;]*m//g' "$1"; }
-near_rpc() { curl -s --retry 5 --retry-all-errors --retry-delay 3 "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
+# curl with retries: --fail keeps an error reply's body out, and the temp file is truncated before each retry,
+# so a rate-limited attempt can never glue its reply to the next one.
+fetch() { local f rc; f=$(mktemp); curl -s --fail --retry 5 --retry-all-errors --retry-delay 3 -o "$f" "$@"; rc=$?; cat "$f"; rm -f "$f"; return $rc; }
+near_rpc() { fetch "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
 near_view() { # <account> <method> <json>
   near_rpc "$(python3 -I -c '
 import json,sys,base64
@@ -229,7 +232,9 @@ print(json.dumps(c))' "$policy" "$WETH" "$G7_INVESTOR")
     GAS=120 call_with "$(key "${G7_MANAGER_KEY:-ai-fc.$G7_JUDGE}")" "${G7_MANAGER:-ai.$G7_JUDGE}" propose_order "$args" '0 NEAR' "$OUT/propose-$(date +%s).txt"
     ;;
   heartbeat)
-    GAS=30 call_with "$(key "${G7_MANAGER_KEY:-ai-fc.$G7_JUDGE}")" "${G7_MANAGER:-ai.$G7_JUDGE}" heartbeat '{}' '0 NEAR' "$OUT/heartbeat-$(date +%s).txt"
+    # An optional JSON argument, a sealed manager's receipt for a hold, rides in the call's arguments like propose's.
+    args=$(python3 -I -c 'import json,sys;print(json.dumps({"sealed":json.loads(sys.argv[1])} if len(sys.argv)>1 and sys.argv[1] else {}))' "${2:-}")
+    GAS=30 call_with "$(key "${G7_MANAGER_KEY:-ai-fc.$G7_JUDGE}")" "${G7_MANAGER:-ai.$G7_JUDGE}" heartbeat "$args" '0 NEAR' "$OUT/heartbeat-$(date +%s).txt"
     ;;
   request-exit)
     call "${G7_INVESTOR_ACCOUNT:-investor.$G7_JUDGE}" request_exit '{}' '0 NEAR' "$OUT/request-exit-$(date +%s).txt"

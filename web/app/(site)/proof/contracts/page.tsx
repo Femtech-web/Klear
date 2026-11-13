@@ -138,7 +138,8 @@ export default async function LivePage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 04 · Read live from NEAR, Hyperliquid and Base"
+        heading="h1"
+        eyebrow="Live reads from NEAR, Hyperliquid and Base"
         title="The locked contracts, as the chains see them right now"
         lede="Nothing on this page is stored by us: each value is read from the chains when you load it. A locked contract has no access key, so nobody, including us, can change its code or its state except through its own rules."
       >

@@ -44,7 +44,10 @@ CREATOR=${CREATOR:-agent.${KEEL_NEAR_ACCOUNT:?run make keys}}
 key() { local f=".secrets/near/$1.json"; [ -f "$f" ] || f="$HOME/.near-credentials/testnet/$1.json"; echo "$f"; }
 put() { touch "$STATE"; grep -q "^$1=" "$STATE" && sed -i '' "s|^$1=.*|$1=$2|" "$STATE" || echo "$1=$2" >> "$STATE"; export "$1=$2"; }
 plain() { sed 's/\x1b\[[0-9;]*m//g' "$1"; }
-near_rpc() { curl -s --retry 5 --retry-all-errors --retry-delay 3 "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
+# curl with retries: --fail keeps an error reply's body out, and the temp file is truncated before each retry,
+# so a rate-limited attempt can never glue its reply to the next one.
+fetch() { local f rc; f=$(mktemp); curl -s --fail --retry 5 --retry-all-errors --retry-delay 3 -o "$f" "$@"; rc=$?; cat "$f"; rm -f "$f"; return $rc; }
+near_rpc() { fetch "$NEAR_RPC" -H 'content-type: application/json' -d "$1"; }
 near_view() { # <account> <method> <json>
   near_rpc "$(python3 -I -c '
 import json,sys,base64

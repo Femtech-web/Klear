@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     "",
     "/judges",
+    "/investor",
+    "/try",
     "/how",
     "/rules",
     "/strategies",

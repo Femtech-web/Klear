@@ -21,8 +21,8 @@ const set = (next: string | null) => {
 };
 
 async function get(nonce?: string): Promise<NearConnector> {
-  if (connector) return connector;
   const { NearConnector } = await import("@hot-labs/near-connect");
+  if (connector) return connector;
   connector = new NearConnector({
     network: "testnet",
     manifest: wallets as never,
@@ -52,8 +52,8 @@ export const nearAccount = {
 /** Restore an earlier session without opening anything. */
 export const restore = (nonce?: string) => void get(nonce);
 
-export async function connect(nonce?: string): Promise<void> {
-  await (await get(nonce)).connect();
+export async function connect(nonce: string | undefined, walletId: string): Promise<void> {
+  await (await get(nonce)).connect({ walletId });
 }
 
 export async function disconnect(): Promise<void> {

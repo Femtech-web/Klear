@@ -8,12 +8,13 @@ public: positions on Hyperliquid, balances on Base, and the judge's state, evide
   flight and the source-chain sender were not.
 - **A confidential mandate owned by no one's key** (mainnet, 2026-11-13): an Agent API account whose owner is an
   EVM key NEAR's MPC network derives, with Klear's mandate as its confidential policy; creation, a grant, a freeze
-  and an unfreeze all signed by the MPC network, and the policy refusing an over-budget swap and any withdrawal not
-  to the investor ([docs/results/mandate](results/mandate/README.md)). Not yet funded.
-- **A sealed strategy** (built): the AI manager's prompt end-to-end encrypted to a model in a TEE on NEAR AI Cloud,
-  each answer verified against Intel TDX and NVIDIA GPU attestation before it is used, and its signed receipt
-  carried on chain with the order ([`agents/keel_agents/sealed.py`](../agents/keel_agents/sealed.py)). The
-  attestation checks pass live; the first sealed order waits for the account's inference credits.
+  and an unfreeze all signed by the MPC network. Funded with 3 USDC: a sealed AI swapped 1 USDC for NEAR inside the
+  confidential balance, a withdrawal to a stranger was refused, then the owner revoked the AI's grant and everything
+  went home to the user ([docs/results/mandate](results/mandate/README.md)).
+- **A sealed strategy** (testnet, 2026-11-13): the AI manager's prompt, with the investor's strategy, end-to-end
+  encrypted to a model in a TEE on NEAR AI Cloud; each answer verified against Intel TDX and NVIDIA GPU attestation
+  before it is used; its signed receipt committed on chain with the decision, and checkable by anyone with
+  `agents/verify_sealed.py` ([docs/results/sealed](results/sealed/README.md)). The live decision was a hold.
 
 ## The tension
 
@@ -41,8 +42,9 @@ balance cannot be attested that way, by definition. So no design gets both from 
    Its prompt, with the investor's strategy, is encrypted to a model key attested inside the TEE (NEAR AI Cloud's
    E2EE), so not even NEAR AI's gateway reads it. The answer counts only after its signature verifies against the
    model's attestation (Intel TDX quote through `dcap-qvl`, NVIDIA GPU evidence). The order the manager proposes
-   carries a receipt in its arguments: the TEE's signature over the hashes of the exact encrypted exchange, the
-   signing key, the attestation status, and the sha256 of the plaintext prompt and answer. The judge ignores it
+   carries a receipt in its arguments (a hold, which places no order, carries it in the manager's heartbeat): the
+   TEE's signature over the hashes of the exact encrypted exchange, the signing key, the attestation status, and
+   the sha256 of the plaintext prompt and answer. The judge ignores it
    (its view of extra fields was tested on the locked v3.1 judge) and bounds the order as any other; the receipt
    stays on chain beside it. The plaintext stays in the investor's git-ignored record, so the investor can later
    show what the AI was told. A TEE failure would leak the strategy, never move money.
@@ -62,6 +64,5 @@ balance cannot be attested that way, by definition. So no design gets both from 
 
 **Run 2026-11-13:** the confidential mandate, on the hackathon's Agent API deployment
 (`api.demo.agentsonintents.com`, mainnet; the 1Click partner key is refused there, and its own key comes from
-`partners.demo.agentsonintents.com`). Done: the account, its policy, a grant, a freeze and an unfreeze, and the
-policy's refusals in dry runs. Still to do: fund it with 2 USDC, an AI-proposed swap under the grant, and the
-exit to the investor.
+`partners.demo.agentsonintents.com`). Done: the account, its policy, a grant, a freeze and an unfreeze, the
+policy's refusals; then, funded with 3 USDC, a sealed AI's swap under its grant, a live refusal, and the exit home.

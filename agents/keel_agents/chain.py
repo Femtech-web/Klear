@@ -98,8 +98,8 @@ class Chain:
         extra = [json.dumps(sealed, separators=(",", ":"))] if sealed else []
         return parse_call(self.run("propose", perp, spot, side, str(sz), str(px), *extra))
 
-    def heartbeat(self) -> Call:
-        return parse_call(self.run("heartbeat"))
+    def heartbeat(self, sealed: dict | None = None) -> Call:
+        return parse_call(self.run("heartbeat", *([json.dumps(sealed, separators=(",", ":"))] if sealed else [])))
 
     def rearm(self) -> Call:
         return parse_call(self.run("rearm"))

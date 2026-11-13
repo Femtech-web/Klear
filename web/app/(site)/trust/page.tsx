@@ -61,6 +61,7 @@ export default function TrustPage() {
   return (
     <>
       <Section
+        heading="h1"
         eyebrow="Trust"
         title="“No keys” is a strong promise. Here is exactly what it means."
         lede="Nobody can change your rules or redirect your money. That does not mean nothing can go wrong, so here is all of it."

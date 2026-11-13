@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
   title: { default: "Klear: when your AI trader fails, anyone can bring your money home", template: "%s · Klear" },
   description:
-    "An AI trades within rules it cannot change, held by a NEAR contract with no keys. If it fails, anyone can bring the money home across chains, and is paid only when it lands.",
+    "A keyless NEAR contract lets anyone rescue an investor’s funds across Hyperliquid and Base, and pays the guardian only after delivery.",
 };
 
 export const viewport: Viewport = {
@@ -22,13 +22,21 @@ export const viewport: Viewport = {
   ],
 };
 
+const themeScript = `try {
+  const theme = localStorage.getItem("klear:theme");
+  if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+} catch {}`;
+
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // Reading the request's headers renders every page per request, which a nonce-based CSP requires
   // (proxy.ts sets x-nonce; Next.js applies it to its own scripts). Chain reads stay in the Data Cache.
-  await headers();
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+      <body>
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {children}
+      </body>
     </html>
   );
 }

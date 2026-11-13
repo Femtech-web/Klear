@@ -4,7 +4,7 @@
     {
       "id": "meteor-wallet",
       "name": "Meteor Wallet",
-      "icon": "https://raw.githubusercontent.com/Meteor-Wallet/meteor_wallet_sdk/main/assets/meteor-logo-svg.svg",
+      "icon": "/wallet-icons/meteor.svg",
       "description": "The most simple and secure wallet to manage your crypto, access DeFi, and explore Web3",
       "website": "https://meteorwallet.app/",
       "version": "1.1.1",
@@ -80,7 +80,7 @@
     {
       "id": "nightly-wallet",
       "name": "Nightly Wallet",
-      "icon": "https://storage.herewallet.app/upload/6947eb5c14c65a715fb49a08e5937dcecc994bf224b3869b9878bd7a7db068f9.webp",
+      "icon": "/wallet-icons/nightly.webp",
       "description": "Surf through the multichain Metaverse with Nightly",
       "website": "https://nightly.app",
       "version": "1.0.0",

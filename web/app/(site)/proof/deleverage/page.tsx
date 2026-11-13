@@ -62,7 +62,8 @@ const STEPS: { title: string; body: string; txs: [Chain, string][]; refused?: st
 export default function DeleveragePage() {
   return (
     <Section
-      eyebrow="Proof · 02"
+      heading="h1"
+      eyebrow="Recorded testnet run"
       title="It cut the risk before the floor, and paid only once it was cut"
       lede="The rescue is the last resort. Before it, an investor can set a warning level: under it, anyone but the manager may cut the position back to a target, with orders the judge plans itself. One live run, on a strategy created through the factory."
     >

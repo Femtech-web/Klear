@@ -31,6 +31,10 @@ export default defineConfig({
       name: "mobile",
       use: { ...devices["Pixel 7"], ...chrome, colorScheme: "light", viewport: { width: 360, height: 780 } },
     },
+    {
+      name: "mobile-dark",
+      use: { ...devices["Pixel 7"], ...chrome, colorScheme: "dark", viewport: { width: 360, height: 780 } },
+    },
   ],
   webServer: external
     ? undefined

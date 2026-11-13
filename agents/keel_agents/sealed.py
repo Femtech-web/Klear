@@ -17,11 +17,23 @@ import os
 import time
 from pathlib import Path
 
+from .chain import ROOT
+
 from . import net  # noqa: F401  the CA bundle and DNS fallback, for the SDK's own HTTP clients too
 
 # A NEAR-hosted open model: its weights run inside the TEE. NEAR AI's Anthropic models are proxied to Anthropic,
 # so they could be verified only up to NEAR AI's gateway, never sealed.
 MODEL = os.environ.get("KLEAR_SEALED_MODEL", "z-ai/glm-5.3-flash")
+
+
+def api_key() -> str:
+    """NEAR_AI_CLOUD_API_KEY from the environment, else from the repository's .env (git-ignored)."""
+    if os.environ.get("NEAR_AI_CLOUD_API_KEY"):
+        return os.environ["NEAR_AI_CLOUD_API_KEY"]
+    for line in (ROOT / ".env").read_text().splitlines():
+        if line.startswith("NEAR_AI_CLOUD_API_KEY="):
+            return line.split("=", 1)[1].strip()
+    raise RuntimeError("no NEAR_AI_CLOUD_API_KEY in the environment or .env")
 
 
 def sha256(text: str) -> str:
@@ -46,7 +58,7 @@ def parse(text: str, schema: dict) -> dict:
 async def _ask(system: str, prompt: str, model: str):
     from nearai_inference_sdk import InferenceClient
 
-    async with InferenceClient(os.environ["NEAR_AI_CLOUD_API_KEY"], e2ee=True) as client:
+    async with InferenceClient(api_key(), e2ee=True) as client:
         attested = await client.verify(model)  # the Gateway and the model's TDX and GPU evidence, before any prompt
         c = await client.chat.completions.create(
             model=model, messages=[{"role": "system", "content": system}, {"role": "user", "content": prompt}], temperature=0)
@@ -67,7 +79,7 @@ def decide(role: str, system: str, prompt: str, schema: dict, log: Path, private
     receipt = {
         "model": model,
         "completion": v.id,
-        "signer": {"algo": v.signature.signer.signing_algo, "key": v.signature.signer.signing_address},
+        "signer": {"algo": v.signature.signer.signing_algo, "address": v.signature.signer.signing_address},
         "signed_text": v.signature.signed_text,
         "signature": v.signature.signature,
         "tdx": m.tcb_status,

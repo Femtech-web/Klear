@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { LiveValue } from "@/components/ui/LiveValue";
 import { Card, Pill, Section } from "@/components/ui/primitives";
 import { Hash, TxLink } from "@/components/ui/Tx";
@@ -53,7 +53,8 @@ export default async function FactoryPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 06"
+        heading="h1"
+        eyebrow="Live factory checks"
         title="Anyone can create a strategy. Nobody can change one."
         lede="The factory creates each strategy's judge in one transaction, with no key, so its code and its investor's mandate are final from the first block. It is locked itself, and it keeps the public registry guardians read."
       >

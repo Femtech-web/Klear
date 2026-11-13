@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
+import { PROOF_GROUPS } from "@/components/site/nav-items";
 import { ArrowRight } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
 import { Pill, Section } from "@/components/ui/primitives";
@@ -25,7 +26,6 @@ const KIND_TONE: Record<Kind, "neutral" | "ok" | "ai" | "warn"> = {
 };
 
 interface Item {
-  href: string;
   kind: Kind;
   title: string;
   claim: string;
@@ -40,9 +40,8 @@ export default async function ProofPage() {
   const rescues = Object.keys(timeline.strategies).length;
   const passed = drillRuns.filter((r) => r.ok).length;
 
-  const items: Item[] = [
-    {
-      href: "/proof/rescue",
+  const items: Record<(typeof PROOF_GROUPS)[number]["links"][number]["href"], Item> = {
+    "/proof/rescue": {
       kind: "Recorded run",
       title: "The live rescue",
       claim:
@@ -52,8 +51,7 @@ export default async function ProofPage() {
         ["2 chains", "Hyperliquid and Base, judged on NEAR"],
       ],
     },
-    {
-      href: "/proof/deleverage",
+    "/proof/deleverage": {
       kind: "Recorded run",
       title: "The early cut",
       claim:
@@ -63,8 +61,7 @@ export default async function ProofPage() {
         ["0.01 → 0.0011", "ETH, the investor's 0.2x target"],
       ],
     },
-    {
-      href: "/proof/replay",
+    "/proof/replay": {
       kind: "Dataset",
       title: "The AI replay",
       claim: `${t.agents} real AI traders from Alpha Arena, replayed fill by fill through Klear's rules. The rebuild matches Hyperliquid's own equity points.`,
@@ -73,19 +70,17 @@ export default async function ProofPage() {
         [`${t.rescued} of ${t.agents}`, "would have hit the floor"],
       ],
     },
-    {
-      href: "/proof/contracts",
+    "/proof/contracts": {
       kind: "Live read",
       title: "The locked contracts",
       claim:
         "Every judge and the factory have no access keys, and run exactly the code built from this repository. Read from NEAR as you load the page.",
       facts: [
-        [String(contracts.length), "contracts checked just now"],
-        ["0", "keys that could change any of them"],
+        [String(contracts.length), "contracts in the live check"],
+        [locked.ok ? (locked.value ? "Verified" : "Mismatch") : "Unavailable", "access keys and deployed code"],
       ],
     },
-    {
-      href: "/proof/attacks",
+    "/proof/attacks": {
       kind: "Recorded run",
       title: "Try to break it",
       claim:
@@ -95,8 +90,7 @@ export default async function ProofPage() {
         [String(breakChallenges.length), "challenges you can try yourself"],
       ],
     },
-    {
-      href: "/proof/factory",
+    "/proof/factory": {
       kind: "Live read",
       title: "The factory",
       claim:
@@ -106,19 +100,17 @@ export default async function ProofPage() {
         ["6", "checks any reader can run on a strategy"],
       ],
     },
-    {
-      href: "/proof/drill",
+    "/proof/drill": {
       kind: "Live, daily",
       title: "The daily drill",
       claim:
         "A real strategy fails on purpose every day and is rescued: by a visitor in the open window, else by Klear's own guardian.",
       facts: [
-        [String(drillRuns.length), drillRuns.length === 1 ? "cycle recorded" : "cycles recorded"],
+        [String(drillRuns.length), drillRuns.length === 1 ? "attempt recorded" : "attempts recorded"],
         [`${passed} of ${drillRuns.length || 0}`, "ended rescued"],
       ],
     },
-    {
-      href: "/proof/mainnet",
+    "/proof/mainnet": {
       kind: "Mainnet",
       title: "Mainnet privacy",
       claim:
@@ -128,73 +120,67 @@ export default async function ProofPage() {
         ["hidden", "the recipient and its balance; not the amount"],
       ],
     },
-  ];
+  };
 
   return (
     <Section
-      eyebrow="Proof"
-      title="Everything we claim, and how to check it"
-      lede="Eight pieces of evidence, in the order to read them. Each is a transaction you can open, a dataset you can rebuild, or a read of the chains made as you load the page. Nothing here is a mockup."
+      heading="h1"
+      title="Proof"
+      lede="Open the recorded transactions, explore the replay dataset, or check the contracts against live chain reads."
     >
-      <div className="mb-10 flex flex-wrap items-center gap-3 rounded-lg border border-line bg-surface px-5 py-4 shadow-soft">
+      <div className="mb-9 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-line py-4 text-sm">
+        <Link
+          href="/judges"
+          className="inline-flex min-h-8 items-center gap-2 font-semibold text-accent no-underline hover:underline"
+        >
+          Start the judge’s walkthrough <ArrowRight size={15} />
+        </Link>
         <LiveValue
           read={locked}
-          render={(ok) =>
-            ok ? (
-              <Pill tone="ok" mark="check" live>
-                locked, checked just now
-              </Pill>
-            ) : (
-              <Pill tone="no" mark="cross">
-                a contract is not as built
-              </Pill>
-            )
-          }
+          render={(ok) => (
+            <Pill tone={ok ? "ok" : "no"} mark={ok ? "check" : "cross"}>
+              {ok ? "Contracts verified on NEAR" : "Contract check found a mismatch"}
+            </Pill>
+          )}
+          fallback={() => <span className="text-ink-3">Live contract check unavailable</span>}
         />
-        <p className="m-0 text-sm text-ink-2">
-          {contracts.length} contracts on NEAR testnet: no access keys, and deployed code equal to the source build.{" "}
-          <Link href="/proof/contracts" className="font-medium text-accent no-underline">
-            See each one
-          </Link>
-        </p>
       </div>
 
-      <ol className="m-0 grid list-none gap-5 p-0 md:grid-cols-2">
-        {items.map((it, i) => (
-          <li key={it.href} className={i === 0 ? "md:col-span-2" : undefined}>
-            <Link
-              href={it.href}
-              className="group flex h-full flex-col rounded-lg border border-line bg-surface p-6 text-ink no-underline shadow-soft transition duration-300 ease-calm hover:-translate-y-0.5 hover:border-line-strong hover:shadow-lift"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <span className="font-mono text-sm text-ink-3">{String(i + 1).padStart(2, "0")}</span>
-                <Pill tone={KIND_TONE[it.kind]}>{it.kind}</Pill>
-              </div>
-              <h2 className="mt-4 font-display text-[1.6rem] tracking-[-0.015em]">{it.title}</h2>
-              <p className="mt-2 max-w-[62ch] text-ink-2">{it.claim}</p>
-              <div className="mt-auto pt-6">
-                <ul className="m-0 grid list-none grid-cols-2 gap-4 border-t border-line p-0 pt-5">
-                  {it.facts.map(([v, l]) => (
-                    <li key={l}>
-                      <span className="block font-display text-[1.45rem] font-medium tabular-nums tracking-[-0.02em]">
-                        {v}
-                      </span>
-                      <span className="text-sm text-ink-3">{l}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
-                Open
-                <ArrowRight
-                  size={15}
-                  className="transition-transform duration-300 ease-calm group-hover:translate-x-[3px]"
-                />
-              </span>
-            </Link>
-          </li>
+      <div className="grid gap-10 md:gap-14">
+        {PROOF_GROUPS.map((group) => (
+          <section key={group.title}>
+            <h2 className="mb-4 text-h2">{group.title}</h2>
+            <ul className="grid gap-3 md:grid-cols-2">
+              {group.links.map(({ href }) => {
+                const item = items[href];
+                return (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="group flex h-full flex-col rounded-md border border-line bg-surface p-5 text-ink no-underline hover:border-accent"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <Pill tone={KIND_TONE[item.kind]}>{item.kind}</Pill>
+                        <ArrowRight size={18} className="shrink-0 text-accent" />
+                      </div>
+                      <h3 className="mt-3 text-[1.4rem] group-hover:text-accent">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-2">{item.claim}</p>
+                      <ul className="mt-4 grid grid-cols-2 gap-3 border-t border-line pt-3">
+                        {item.facts.map(([value, label]) => (
+                          <li key={label} className="min-w-0">
+                            <span className="block font-display text-lg font-semibold tabular-nums">{value}</span>
+                            <span className="block text-xs text-ink-3">{label}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
         ))}
-      </ol>
+      </div>
     </Section>
   );
 }

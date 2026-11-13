@@ -26,6 +26,7 @@ export default async function AgentPage({ params }: PageProps<"/proof/replay/[ad
   return (
     <>
       <Section
+        heading="h1"
         eyebrow={competitionName(a.competition)}
         title={`${modelName(a.model)}: ${usd(a.initial)} to ${usd(a.final)}`}
       >

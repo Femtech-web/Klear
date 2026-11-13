@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { JudgePath, type PathStep } from "@/components/judges/JudgePath";
-import { Check, Cross } from "@/components/ui/icons";
+import { ArrowRight, Check, Cross } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
-import { Card, Eyebrow, Pill, Section } from "@/components/ui/primitives";
+import { LinkButton, Pill, Section } from "@/components/ui/primitives";
 import { TableScroll } from "@/components/ui/TableScroll";
 import { TxLink } from "@/components/ui/Tx";
 import { accessKeys } from "@/lib/chain/near";
@@ -312,52 +312,71 @@ export default async function JudgesPage() {
 
   return (
     <>
-      <Section
-        eyebrow="For judges"
-        title="Judge Klear in the order that matters"
-        lede="Five minutes for the essentials, forty-five if you run a rescue yourself. Each step has a check: a transaction you can open, a dataset you can rebuild, or a read of the chains made as this page loaded."
-      >
-        <div className="flex flex-wrap items-center gap-3">
-          <LiveValue
-            read={locked}
-            render={(ok) => (
-              <Pill tone={ok ? "ok" : "no"} mark={ok ? "check" : "cross"} live={ok}>
-                {ok ? `${contracts.length} contracts locked, checked just now` : "a contract is not as built"}
-              </Pill>
-            )}
-          />
-          <Pill tone="neutral">NEAR testnet · Hyperliquid testnet · Base Sepolia</Pill>
-          <Pill tone="neutral">not audited</Pill>
-        </div>
+      <section className="border-b border-line bg-canvas-tint py-10 md:py-14">
+        <div className="page grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-14">
+          <div>
+            <p className="mb-2 text-sm font-semibold text-accent">For judges</p>
+            <h1 className="text-h1">Judge Klear in the order that matters</h1>
+            <p className="mt-4 max-w-measure text-ink-2">
+              The investor sets rules in a keyless NEAR contract. The AI proposes trades, and the judge signs only what
+              fits. If the AI fails, anyone can bring the money home and gets paid once it arrives.
+            </p>
+            <p className="mt-3 max-w-measure text-sm text-ink-2">
+              Chain Signatures let the judge control accounts on Hyperliquid and Base. Read MPC verifies what happened
+              on each chain.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <LinkButton href="#review-path">Open the walkthrough</LinkButton>
+              <LinkButton href="/proof" variant="secondary">
+                Browse proof
+              </LinkButton>
+            </div>
+          </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {[
-            [
-              "The problem",
-              "An AI agent can trade. Giving it money means giving it the keys: it can lose everything, or simply stop, and nobody can step in without the same keys.",
-            ],
-            [
-              "What Klear does",
-              "The investor's rules live in a NEAR contract with no keys, the only thing that can sign for the strategy's accounts on Hyperliquid and Base. The AI proposes; the judge signs only what fits. If the AI fails, anyone can bring the money home, and is paid only once it arrives.",
-            ],
-            [
-              "Why it needs NEAR",
-              "Chain Signatures let one locked contract control accounts on two other chains. Read MPC lets it verify what happened there. Neither needs a bridge, an oracle we run, or a key anyone holds.",
-            ],
-          ].map(([h, p]) => (
-            <Card key={h}>
-              <Eyebrow>{h}</Eyebrow>
-              <p className="m-0 text-[0.98rem] text-ink-2">{p}</p>
-            </Card>
-          ))}
+          <section aria-labelledby="essentials" className="rounded-lg border border-line bg-surface p-5 md:p-6">
+            <h2 id="essentials" className="text-h2">
+              Start with the essentials
+            </h2>
+            <ul className="mt-3">
+              {[
+                ["/proof/rescue#delivery-and-payout", "Follow a rescue", "See the delivery and the guardian payout."],
+                ["/proof/contracts", "Verify the locked contracts", "Check access keys and deployed code on NEAR."],
+                ["/proof/replay", "Explore the AI replay", "See where a loss floor changed the outcome."],
+              ].map(([href, label, detail]) => (
+                <li key={href} className="border-t border-line">
+                  <Link
+                    href={href}
+                    className="flex items-center justify-between gap-3 py-3 text-ink no-underline hover:text-accent"
+                  >
+                    <span className="text-sm">
+                      <strong className="font-semibold">{label}</strong>
+                      <span className="block text-ink-2">{detail}</span>
+                    </span>
+                    <ArrowRight size={16} className="shrink-0 text-accent" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-2">
+              <LiveValue
+                read={locked}
+                render={(ok) => (
+                  <Pill tone={ok ? "ok" : "no"} mark={ok ? "check" : "cross"}>
+                    {ok ? `${contracts.length} contracts verified on NEAR` : "Contract check found a mismatch"}
+                  </Pill>
+                )}
+                fallback={() => <span className="text-sm text-ink-3">Live contract check unavailable</span>}
+              />
+            </div>
+          </section>
         </div>
-      </Section>
+      </section>
 
-      <Section tight eyebrow="The path" title="Eight steps, in order">
+      <Section id="review-path" tight title="Full walkthrough">
         <JudgePath steps={steps} />
       </Section>
 
-      <Section tight eyebrow="Every claim" title="One line each, with its check">
+      <Section id="claims" tight title="Claims and checks">
         <TableScroll label="Claims and their checks">
           <table className="w-full border-collapse text-left text-sm">
             <thead className="text-ink-3">
@@ -378,7 +397,7 @@ export default async function JudgesPage() {
         </TableScroll>
       </Section>
 
-      <Section tight eyebrow="Honestly" title="What this does not show">
+      <Section id="limits" tight title="Scope and limits">
         <ul className="m-0 grid list-none gap-3 p-0 md:grid-cols-2">
           {[
             "Everything runs on testnets with test funds, except the one mainnet privacy test. Nothing here is audited.",

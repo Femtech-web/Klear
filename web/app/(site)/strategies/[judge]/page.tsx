@@ -4,6 +4,7 @@ import { ConnectNear } from "@/components/flows/ConnectNear";
 import { RescueFlow } from "@/components/flows/RescueFlow";
 import { StrategyActions } from "@/components/flows/StrategyActions";
 import { notFound } from "next/navigation";
+import { SiteLink } from "@/components/site/SiteLink";
 import { PhasePill } from "@/components/strategies/PhasePill";
 import { Check, Cross } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
@@ -170,15 +171,68 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
   // Not in the registry and no judge answers there: nothing to inspect. An RPC failure is shown as such, not as a 404.
   if (x.entry.ok && !entry && !x.glance.ok && !x.strategy.ok && !x.code.ok) notFound();
 
+  const strategy = x.strategy.ok ? x.strategy.value : null;
+  const verified =
+    entry &&
+    x.keys.ok &&
+    x.keys.value === 0 &&
+    x.code.ok &&
+    x.factoryJudgeCode.ok &&
+    x.code.value === x.factoryJudgeCode.value &&
+    x.derived.ok &&
+    x.leg.ok &&
+    x.vault.ok &&
+    strategy?.investor &&
+    same(x.leg.value.controller, x.derived.value.leg) &&
+    same(x.vault.value.controller, x.derived.value.vault) &&
+    same(x.leg.value.payout, strategy.investor) &&
+    same(x.vault.value.payout, strategy.investor);
+
   return (
-    <Section eyebrow="Inspect a strategy, live" title={entry?.label ?? judge} lede={<Hash value={judge} />}>
+    <Section
+      heading="h1"
+      eyebrow="Inspect a strategy, live"
+      title={entry?.label ?? judge}
+      lede={<Hash value={judge} />}
+    >
+      <div className="mb-4 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold">
+        <SiteLink href="#verify-and-fund" className="inline-flex min-h-10 items-center hover:text-accent">
+          Verify and fund
+        </SiteLink>
+        <SiteLink href="#investor-controls" className="inline-flex min-h-10 items-center hover:text-accent">
+          Strategy controls
+        </SiteLink>
+      </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <Card raised>
-          <h2 className="mb-1 font-sans text-lg font-semibold">What to check before trusting it</h2>
+          <h2 id="verify-and-fund" className="mb-1 font-sans text-lg font-semibold">
+            Verify and fund
+          </h2>
           <p className="mb-3 text-sm text-ink-3">
             Each line is read from NEAR, HyperEVM and Base when you load this page.
           </p>
           <Checks x={x} />
+          <div className="mt-4 border-t border-line pt-4">
+            <h3 className="text-base">Funding addresses</h3>
+            {verified && strategy ? (
+              <dl className="mt-2 grid gap-3 text-sm">
+                <div>
+                  <dt className="text-ink-2">USDC margin · Hyperliquid testnet</dt>
+                  <dd>
+                    <Hash value={strategy.leg} />
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-ink-2">WETH · Base Sepolia</dt>
+                  <dd>
+                    <Hash value={strategy.vault} />
+                  </dd>
+                </div>
+              </dl>
+            ) : (
+              <p className="mt-2 text-sm text-ink-2">Complete deployment and confirm every check before funding.</p>
+            )}
+          </div>
         </Card>
         <div className="grid content-start gap-6">
           <Card>
@@ -238,7 +292,9 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
         </div>
       </div>
       <Card className="mt-6">
-        <h2 className="mb-1 font-sans text-lg font-semibold">Act on it</h2>
+        <h2 id="investor-controls" className="mb-1 font-sans text-lg font-semibold">
+          Strategy controls
+        </h2>
         <p className="mb-4 text-sm text-ink-3">
           With a NEAR testnet wallet. Every action is a transaction the judge checks; this page only asks your wallet to
           sign it.
@@ -253,7 +309,7 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
           </section>
           <section aria-labelledby="investor-h">
             <h3 id="investor-h" className="mb-3 font-sans text-base font-semibold">
-              The investor, and the reward pool
+              Investor controls and reward pool
             </h3>
             <StrategyActions
               judge={judge}

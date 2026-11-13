@@ -6,45 +6,58 @@
  * Nothing in a component hard-codes a color, a radius or a shadow.
  */
 @theme {
-  --color-canvas: #f7f7f4;
-  --color-canvas-tint: #efefea;
-  --color-surface: #ffffff;
-  --color-surface-2: #f2f2ee;
-  --color-ink: #0e1116;
-  --color-ink-2: #3d4450;
-  --color-ink-3: #5b6270;
-  --color-line: rgb(14 17 22 / 0.08);
-  --color-line-strong: rgb(14 17 22 / 0.15);
-  --color-accent: #0b6e66;
-  --color-accent-ink: #ffffff;
-  --color-accent-soft: #e3f1ee;
+  --color-canvas: light-dark(#f7f7f4, #0b0d0f);
+  --color-canvas-tint: light-dark(#efefea, #101316);
+  --color-surface: light-dark(#ffffff, #131619);
+  --color-surface-2: light-dark(#f2f2ee, #1a1e22);
+  --color-ink: light-dark(#0e1116, #eceef1);
+  --color-ink-2: light-dark(#3d4450, #b4bac3);
+  --color-ink-3: light-dark(#5b6270, #8d949f);
+  --color-line: light-dark(rgb(14 17 22 / 0.08), rgb(236 238 241 / 0.08));
+  --color-line-strong: light-dark(rgb(14 17 22 / 0.15), rgb(236 238 241 / 0.14));
+  --color-accent: light-dark(#0b6e66, #5fd6c4);
+  --color-accent-ink: light-dark(#ffffff, #052521);
+  --color-rescue-panel: light-dark(#13201f, #172421);
+  --color-night: #0a1212;
+  --color-night-ink: #f5f7f4;
+  --color-night-muted: #ccd6d2;
+  --color-night-action: #afdbc9;
+  --color-accent-soft: light-dark(#e3f1ee, rgb(95 214 196 / 0.12));
   /* The accent on an ink panel (which inverts in dark mode). */
-  --color-accent-on-ink: #5fd6c4;
-  --color-ok: #0b6e66;
-  --color-ok-soft: #e3f1ee;
-  --color-no: #b42318;
-  --color-no-soft: #fdecea;
-  --color-warn: #8f5408;
-  --color-warn-soft: #f9eedb;
-  --color-ai: #4f46e5;
-  --color-ai-soft: #eef0fe;
-  --color-chart-real: #b42318;
-  --color-chart-keel: #0b6e66;
-  --color-chart-grid: rgb(14 17 22 / 0.07);
+  --color-accent-on-ink: light-dark(#5fd6c4, #0b6e66);
+  --color-ok: light-dark(#0b6e66, #5fd6c4);
+  --color-ok-soft: light-dark(#e3f1ee, rgb(95 214 196 / 0.12));
+  --color-no: light-dark(#b42318, #f97a6b);
+  --color-no-soft: light-dark(#fdecea, rgb(249 122 107 / 0.13));
+  --color-warn: light-dark(#8f5408, #f2c063);
+  --color-warn-soft: light-dark(#f9eedb, rgb(242 192 99 / 0.13));
+  --color-ai: light-dark(#4f46e5, #a5b4fc);
+  --color-ai-soft: light-dark(#eef0fe, rgb(165 180 252 / 0.13));
+  --color-chart-real: light-dark(#b42318, #f97a6b);
+  --color-chart-keel: light-dark(#0b6e66, #5fd6c4);
+  --color-chart-grid: light-dark(rgb(14 17 22 / 0.07), rgb(236 238 241 / 0.07));
 
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-xl: 26px;
 
-  --shadow-soft: 0 1px 2px rgb(14 17 22 / 0.05), 0 1px 1px rgb(14 17 22 / 0.03);
-  --shadow-lift: 0 18px 40px -22px rgb(14 17 22 / 0.26), 0 2px 8px rgb(14 17 22 / 0.05);
+  --shadow-soft:
+    0 1px 2px light-dark(rgb(14 17 22 / 0.05), rgb(0 0 0 / 0.4)),
+    0 1px 1px light-dark(rgb(14 17 22 / 0.03), transparent);
+  --shadow-lift:
+    0 18px 40px -22px light-dark(rgb(14 17 22 / 0.26), rgb(0 0 0 / 0.7)),
+    0 2px 8px light-dark(rgb(14 17 22 / 0.05), rgb(0 0 0 / 0.3));
 
   --container-page: 70rem;
   --container-measure: 64ch;
 
   --text-display: clamp(2.5rem, 1.5rem + 3.8vw, 4.1rem);
   --text-display--line-height: 1.02;
+  --text-hero: clamp(2.8rem, 1.35rem + 4.2vw, 5.45rem);
+  --text-hero--line-height: 0.99;
+  --text-feature: clamp(1.95rem, 1.45rem + 1.8vw, 3.15rem);
+  --text-feature--line-height: 1.05;
   --text-h1: clamp(2rem, 1.45rem + 2.2vw, 2.9rem);
   --text-h1--line-height: 1.06;
   --text-h2: clamp(1.55rem, 1.25rem + 1.1vw, 2rem);
@@ -56,7 +69,6 @@
 
   --animate-draw: draw 1.6s var(--ease-calm) 0.15s forwards;
   --animate-fade-in: fade-in 0.6s var(--ease-calm) forwards;
-  --animate-flow: flow 1.6s linear infinite;
   --animate-ping-soft: ping-soft 2.2s var(--ease-calm) infinite;
 
   @keyframes draw {
@@ -67,11 +79,6 @@
   @keyframes fade-in {
     to {
       opacity: 1;
-    }
-  }
-  @keyframes flow {
-    to {
-      stroke-dashoffset: -22;
     }
   }
   @keyframes ping-soft {
@@ -102,39 +109,6 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-/* The dark palette: unlayered, so it overrides the theme layer. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --color-canvas: #0b0d0f;
-    --color-canvas-tint: #101316;
-    --color-surface: #131619;
-    --color-surface-2: #1a1e22;
-    --color-ink: #eceef1;
-    --color-ink-2: #b4bac3;
-    --color-ink-3: #8d949f;
-    --color-line: rgb(236 238 241 / 0.08);
-    --color-line-strong: rgb(236 238 241 / 0.14);
-    --color-accent: #5fd6c4;
-    --color-accent-ink: #052521;
-    --color-accent-soft: rgb(95 214 196 / 0.12);
-    --color-accent-on-ink: #0b6e66;
-    --color-ok: #5fd6c4;
-    --color-ok-soft: rgb(95 214 196 / 0.12);
-    --color-no: #f97a6b;
-    --color-no-soft: rgb(249 122 107 / 0.13);
-    --color-warn: #f2c063;
-    --color-warn-soft: rgb(242 192 99 / 0.13);
-    --color-ai: #a5b4fc;
-    --color-ai-soft: rgb(165 180 252 / 0.13);
-    --color-chart-real: #f97a6b;
-    --color-chart-keel: #5fd6c4;
-    --color-chart-grid: rgb(236 238 241 / 0.07);
-    --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4);
-    --shadow-lift: 0 24px 48px -24px rgb(0 0 0 / 0.7), 0 2px 8px rgb(0 0 0 / 0.3);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -148,7 +122,19 @@
 
 @layer base {
   :root {
+    color-scheme: light dark;
+    scroll-padding-top: 5rem;
+  }
+  :root[data-theme="light"] {
     color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+  @media (width < 48rem) {
+    :root {
+      scroll-padding-top: 7rem;
+    }
   }
   html {
     -webkit-text-size-adjust: 100%;
@@ -185,7 +171,7 @@
     text-underline-offset: 3px;
   }
   :focus-visible {
-    @apply rounded-sm outline-none ring-3 ring-accent/35;
+    @apply outline-2 outline-offset-3 outline-accent;
   }
   ::selection {
     background: color-mix(in srgb, var(--color-accent) 22%, transparent);
@@ -205,6 +191,88 @@
       animation: rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+.home-hero {
+  min-height: 35rem;
+}
+
+.home-intro {
+  padding-block: clamp(3.3rem, 7vw, 7rem) 13rem;
+}
+
+.home-art {
+  height: 17rem;
+}
+
+.home-image {
+  object-position: 55% 56%;
+}
+
+/* Keep the copy legible as the image crop changes across viewport widths. */
+.home-scrim {
+  background: linear-gradient(
+    to bottom,
+    var(--color-night) 0 calc(100% - 17rem),
+    color-mix(in srgb, var(--color-night) 74%, transparent) calc(100% - 14rem),
+    transparent calc(100% - 6rem)
+  );
+}
+
+@media (width >= 48rem) {
+  .home-art {
+    height: auto;
+  }
+
+  .home-intro {
+    min-height: min(42rem, 80vh);
+    justify-content: center;
+    padding-block: 5rem;
+  }
+
+  .home-image {
+    object-position: 58% 54%;
+  }
+
+  .home-scrim {
+    background: linear-gradient(
+      90deg,
+      var(--color-night) 0%,
+      color-mix(in srgb, var(--color-night) 93%, transparent) 21%,
+      color-mix(in srgb, var(--color-night) 76%, transparent) 46%,
+      color-mix(in srgb, var(--color-night) 16%, transparent) 74%,
+      transparent 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-image {
+    animation: arrive-image 1.7s var(--ease-calm) both;
+  }
+
+  .home-intro {
+    animation: settle-intro 600ms var(--ease-calm) both;
+  }
+
+  @keyframes settle-intro {
+    from {
+      transform: translateY(9px);
+    }
+  }
+
+  .rescue-chapter {
+    animation: rise 260ms var(--ease-calm) both;
+  }
+
+  @keyframes arrive-image {
+    from {
+      transform: scale(1.055);
+    }
+    to {
+      transform: scale(1);
     }
   }
 }

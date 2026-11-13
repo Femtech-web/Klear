@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { useMemo, useSyncExternalStore } from "react";
 import { ArrowRight, Check } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
@@ -83,7 +83,7 @@ export function JudgePath({ steps }: { steps: PathStep[] }) {
                 <span
                   className={cn(
                     "grid size-5 flex-none place-items-center rounded-full border font-mono text-[0.66rem]",
-                    done.includes(s.id) ? "border-accent bg-accent text-canvas" : "border-line-strong text-ink-3",
+                    done.includes(s.id) ? "border-accent bg-accent text-accent-ink" : "border-line-strong text-ink-3",
                   )}
                 >
                   {done.includes(s.id) ? <Check size={11} /> : i + 1}
@@ -100,7 +100,7 @@ export function JudgePath({ steps }: { steps: PathStep[] }) {
         {steps.map((s, i) => {
           const isDone = done.includes(s.id);
           return (
-            <li key={s.id} id={s.id} className="scroll-mt-28">
+            <li key={s.id} id={s.id}>
               <article
                 className={cn(
                   "rounded-lg border bg-surface p-6 shadow-soft transition-colors duration-300",

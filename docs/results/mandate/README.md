@@ -36,11 +36,27 @@ Swaps and withdrawals only; a USD budget of $5 a day and $10 a week; at most 10 
 | Withdraw 1 USDC to any other account | **`policy_destination_denied`** |
 | Swap 1 USDC while frozen | **refused `wallet_frozen`**: "The owner froze this agent" |
 
-## Not yet run
+## With money in it: a sealed AI trades, a stranger is refused, the exit goes home
 
-A funded swap by the AI under its grant, and the exit: a withdrawal that can only reach the investor. The account
-takes deposits of Base USDC at `0x9Bc049CE61BdA83Cb60fABc27BCdaB8Dd5704d47` (2 USDC, until 2026-11-17); HyperCore
-USDC is refused as a deposit origin (`unsupported_token`).
+The user funded the account with 3 USDC from Bybit (Base [`0x77782100…`](https://basescan.org/tx/0x77782100fa6262a51570d186eea6b6f1fc85cf2b1705c898dd5f1aed74fb2fc7)
+to the account's deposit address). The investor is the user: the owner set the only destinations to the user's own
+addresses first.
+
+| Step | Signed by | Result |
+|---|---|---|
+| Withdrawals only to the user's Base address and NEAR wallet (policy revision 4) | the MPC network, [`6jpSWfMf…`](https://testnet.nearblocks.io/txns/6jpSWfMffK8BYYKfBs7HXX5igRSTvhA1grKhsqNGYtUp) | SUCCESS; a destinations-only change needs no chain transaction |
+| **The AI decides, sealed**: "swap 1 USDC for NEAR", following the investor's private strategy | the model's TEE (`z-ai/glm-5.3-flash`, receipt `fc11ce69…` in [run.jsonl](run.jsonl)) | the decision verified against the TEE's attestation before it ran |
+| The swap, under the AI's grant | the API, intent `DMe99wgR…` | **1 USDC → 0.2831 NEAR, `confidential: true`**: on `intents.far`, not on public NEAR |
+| A live withdrawal of 0.5 USDC to a stranger (`0x…dEaD`), with the AI's own grant | | **refused `403 policy_destination_denied`**; nothing moved |
+| **The exit**: the owner revokes the AI's grant | the MPC network, [`BayziXHq…`](https://testnet.nearblocks.io/txns/BayziXHqc43y49R71BZARTqANHMzas3sBkJYxGxzNNr7) | SUCCESS; the AI's token is refused at once ("a live owner grant" required) |
+| The owner grants the exit | the MPC network, [`3AGpuKgH…`](https://testnet.nearblocks.io/txns/3AGpuKgHBEJyWZy3dsJY5Kq7uDdazHA3y8jhCQszMKk5) | SUCCESS |
+| Everything home | the exit grant | **1.9952 USDC at the user's Base address** ([`0xbedb8b57…`](https://basescan.org/tx/0xbedb8b57436c3a1866a7c9d958f1610bf164f95d53ecd2a346bc1ef3cc9ee639)); **0.2831 NEAR at `poorcheese6608.near`**; the account is empty |
+
+The policy charged $3.99 of its $5 daily budget (the swap and both withdrawals). Public on their own chains: the
+deposit from Bybit and the two arrivals. Not on any public chain: the balance in between, the swap, and the account
+that held them. The sealed receipt of this decision is not on a public chain either (no judge sits in this path);
+it is in [run.jsonl](run.jsonl) and the swap's audit note, and `agents/verify_sealed.py` checks the same receipts
+when a manager commits them through a judge ([docs/results/sealed](../sealed/README.md)).
 
 ## What is private, and what is not
 

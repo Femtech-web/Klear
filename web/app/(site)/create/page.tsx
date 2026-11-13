@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { CreateWizard } from "@/components/flows/CreateWizard";
-import { Card, Section } from "@/components/ui/primitives";
+import { Section } from "@/components/ui/primitives";
 import { factory } from "@/lib/data/live";
 
 export const metadata: Metadata = {
@@ -15,19 +15,16 @@ export default async function CreatePage() {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <Section
-      eyebrow="Create a strategy"
-      title="Your rules, locked before any money moves"
-      lede={
-        <>
-          Every address is predicted first, so you can check them before signing anything. The judge is created in one
-          NEAR transaction with no key, so neither you nor we can change it afterwards. Testnet only.{" "}
-          <Link href="/proof/factory">How the factory works</Link>
-        </>
-      }
+      heading="h1"
+      title="Create a strategy"
+      lede="Set the rules and verify the predicted addresses before signing. The NEAR transaction creates the judge. Deployment and funding come afterwards."
     >
-      <Card raised>
+      <Link href="/investor" className="mb-6 inline-flex min-h-9 items-center text-sm font-semibold hover:text-accent">
+        Back to investor workspace
+      </Link>
+      <div className="max-w-4xl rounded-lg border border-line bg-surface p-4 sm:p-7">
         <CreateWizard factory={factory.factory} nonce={nonce} />
-      </Card>
+      </div>
     </Section>
   );
 }

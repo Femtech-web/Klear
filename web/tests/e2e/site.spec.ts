@@ -3,6 +3,8 @@ import { expect, test } from "@playwright/test";
 
 const PAGES = [
   "/",
+  "/investor",
+  "/try",
   "/judges",
   "/how",
   "/rules",
@@ -35,13 +37,23 @@ for (const path of PAGES) {
     page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
     page.on("pageerror", (e) => errors.push(e.message));
 
-    const res = await page.goto(path, { waitUntil: "networkidle" });
+    // Keep the wallet panel's background poll deterministic while the page still renders its live server reads.
+    if (path === "/practice" || path.startsWith("/strategies/")) {
+      await page.route("**/api/keel/strategy?judge=*", (route) =>
+        route.fulfill({
+          json: {
+            status: { mode: "active" },
+            job: null,
+            rescue: { perp: "open", spot: "open", exitNonce: null, sweepNonce: null },
+            payouts: [],
+          },
+        }),
+      );
+    }
+    const res = await page.goto(path, { waitUntil: "domcontentloaded" });
     expect(res?.status()).toBe(200);
     await expect(page.locator("h1, h2").first()).toBeVisible();
     await expect(page.getByText("Testnet.", { exact: false }).first()).toBeVisible();
-
-    expect(foreign, "the browser should only ever talk to this site").toEqual([]);
-    expect(errors).toEqual([]);
 
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow, "nothing wider than the viewport").toBeLessThanOrEqual(1);
@@ -64,6 +76,8 @@ for (const path of PAGES) {
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
       .analyze();
     expect(axe.violations.map((v) => `${v.id}: ${v.nodes.length} × ${v.help}`)).toEqual([]);
+    expect(foreign, "the browser should only ever talk to this site").toEqual([]);
+    expect(errors).toEqual([]);
   });
 }
 
@@ -91,4 +105,123 @@ test("an unknown page is a 404 with a way home", async ({ page }) => {
   const res = await page.goto("/no-such-page");
   expect(res?.status()).toBe(404);
   await expect(page.getByRole("link", { name: /back home/i })).toBeVisible();
+});
+
+test("the navbar theme follows the device and remembers a manual choice across documents", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/");
+  const toggle = page.getByRole("button", { name: "Dark mode" });
+  const html = page.locator("html");
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await toggle.click();
+  await expect(html).toHaveCSS("color-scheme", "dark");
+
+  await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Practice" }).click();
+  await expect(html).toHaveCSS("color-scheme", "dark");
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await toggle.click();
+  await page.reload();
+  await expect(html).toHaveCSS("color-scheme", "light");
+});
+
+test("the wallet picker reached from the homepage loads its icons and opens a sandbox under the wallet CSP", async ({
+  page,
+}) => {
+  await page.route("https://raw.githubusercontent.com/near/near-cli-connect/**", (route) =>
+    route.fulfill({
+      contentType: "text/javascript",
+      body: `window.selector.ready({
+        signIn: ({ network }) => {
+          if (network !== "testnet") throw new Error("Expected testnet");
+          const button = document.createElement("button");
+          button.textContent = "Approve";
+          document.body.prepend(button);
+          return new Promise((resolve) => {
+            button.addEventListener("click", () => resolve([{ accountId: "klear-wallet-test.testnet" }]));
+            window.selector.ui.showIframe();
+          });
+        },
+      });`,
+    }),
+  );
+  const violations: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") violations.push(message.text());
+  });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const [walletDocument] = await Promise.all([
+    page.waitForResponse(
+      (response) => response.url().endsWith("/practice") && response.request().isNavigationRequest(),
+    ),
+    page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Practice" }).click(),
+  ]);
+  expect(walletDocument.headers()["content-security-policy"]).toContain("frame-src 'self'");
+  const trigger = page.getByRole("button", { name: "Connect a NEAR testnet wallet" });
+  await trigger.focus();
+  await page.keyboard.press("Enter");
+  const picker = page.getByRole("dialog", { name: "Connect a NEAR testnet wallet" });
+  await expect(picker).toBeVisible();
+  await expect
+    .poll(() =>
+      picker
+        .locator("img")
+        .evaluateAll(
+          (icons) =>
+            icons.filter((icon) => icon instanceof HTMLImageElement && icon.complete && icon.naturalWidth > 0).length,
+        ),
+    )
+    .toBe(4);
+  const axe = await new AxeBuilder({ page })
+    .include("dialog[open]")
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
+  expect(axe.violations.map((violation) => violation.id)).toEqual([]);
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+
+  await page.keyboard.press("Enter");
+  await picker.getByRole("button", { name: /NEAR CLI/ }).click();
+  const sandbox = page.locator('iframe[sandbox="allow-scripts"]');
+  await expect(sandbox).toBeVisible();
+  await expect(page.locator(".hot-connector-popup .modal-container")).toHaveCSS("opacity", "1");
+  await sandbox.contentFrame().getByRole("button", { name: "Approve", exact: true }).click();
+  await expect(page.getByText("klear-wallet-test.testnet", { exact: true })).toBeVisible();
+  expect(violations).toEqual([]);
+
+  const [proofDocument] = await Promise.all([
+    page.waitForResponse((response) => response.url().endsWith("/proof") && response.request().isNavigationRequest()),
+    page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Proof", exact: true }).click(),
+  ]);
+  expect(proofDocument.headers()["content-security-policy"]).toContain("frame-src 'none'");
+});
+
+test("Try it leads to recorded receipts, investor setup, and the live drill", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("main").getByRole("link", { name: "Try it", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Try Klear" })).toBeVisible();
+  await page.getByRole("link", { name: /See the walkthrough/ }).click();
+  const walkthrough = page.getByRole("region", { name: "Recorded rescue walkthrough" });
+  const next = walkthrough.getByRole("button", { name: "Next step" });
+  await expect(walkthrough.getByRole("heading", { name: "The AI trades", exact: true })).toBeVisible();
+  await next.click();
+  await expect(walkthrough.getByRole("heading", { name: "The rescue opens" })).toBeVisible();
+  await next.click();
+  await expect(walkthrough.getByRole("heading", { name: "The funds return" })).toBeVisible();
+  await next.click();
+  await expect(walkthrough.getByRole("heading", { name: "The guardian gets paid" })).toBeVisible();
+  await walkthrough.getByText("Recorded evidence", { exact: true }).click();
+  await expect(walkthrough.getByRole("list", { name: "Recorded evidence" }).getByRole("link")).toHaveCount(2);
+  await walkthrough.getByRole("button", { name: "Replay from the start" }).click();
+  await expect(walkthrough.getByRole("heading", { name: "The AI trades", exact: true })).toBeVisible();
+  await page.getByRole("link", { name: /See investor setup/ }).click();
+  await expect(page.getByRole("heading", { name: "From setup to exit" })).toBeVisible();
+  await page.getByRole("link", { name: "Start testnet setup" }).click();
+  await expect(page.getByRole("heading", { name: "Create a strategy" })).toBeVisible();
+  await page.goto("/try");
+  await page.getByRole("link", { name: /Open the live drill/ }).click();
+  await expect(page.getByRole("heading", { name: "Rescue a strategy yourself" })).toBeVisible();
+  const attempts = page.getByRole("region", { name: "Drill attempts" });
+  await expect(attempts.getByRole("columnheader")).toHaveCount(3);
+  expect(await attempts.evaluate((region) => region.scrollWidth - region.clientWidth)).toBeLessThanOrEqual(1);
 });

@@ -1,10 +1,9 @@
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { KeelMark } from "@/components/ui/icons";
-import { HeaderHeight } from "./HeaderHeight";
-import { Nav } from "./Nav";
-import { cn } from "@/lib/cn";
+import { JudgesLink, Nav } from "./Nav";
+import { ThemeToggle } from "./ThemeToggle";
 import { config } from "@/lib/config";
-import { JUDGES, LEARN, NAV, PROOF } from "./nav-items";
+import { LEARN, NAV, PROOF } from "./nav-items";
 
 function Brand({ size = 26 }: { size?: number }) {
   return (
@@ -18,20 +17,29 @@ function Brand({ size = 26 }: { size?: number }) {
 export function Header() {
   return (
     <>
-      <p className="bg-ink px-4 py-1.5 text-center text-sm tracking-[0.01em] text-canvas">
-        <strong className="font-semibold">Testnet.</strong> Every rescue on this site ran on public testnets with test
-        funds. Nothing here is audited.
+      <p className="border-b border-line bg-canvas-tint px-4 py-1.5 text-center text-xs text-ink-2">
+        <strong className="font-semibold">Testnet.</strong> Rescues use test funds.{" "}
+        <Link href="/trust#limits" className="underline">
+          Read the limits
+        </Link>
       </p>
-      <HeaderHeight />
-      <header className="sticky top-0 z-20 border-b border-line bg-canvas/80 backdrop-blur-md backdrop-saturate-150">
-        <div className="page flex flex-col gap-2 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0">
-          <div className="flex items-center justify-between gap-4">
+      <a
+        href="#main"
+        className="sr-only z-30 rounded-sm bg-surface px-4 py-2 text-accent focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+      >
+        Skip to content
+      </a>
+      <header className="sticky top-0 z-20 border-b border-line bg-canvas">
+        <div className="page grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 py-2 md:grid-cols-[1fr_auto_1fr] md:gap-x-6 md:py-3">
+          <div className="justify-self-start">
             <Brand />
-            <JudgesLink className="inline-flex md:hidden" />
           </div>
-          <div className="flex min-w-0 items-center gap-3">
+          <div className="col-span-2 row-start-2 md:col-span-1 md:col-start-2 md:row-start-1">
             <Nav />
-            <JudgesLink className="hidden md:inline-flex" />
+          </div>
+          <div className="col-start-2 row-start-1 flex items-center gap-2 justify-self-end md:col-start-3">
+            <JudgesLink />
+            <ThemeToggle />
           </div>
         </div>
       </header>
@@ -39,26 +47,12 @@ export function Header() {
   );
 }
 
-/** `className` sets its display, so the header can show one copy per breakpoint. */
-function JudgesLink({ className }: { className: string }) {
-  return (
-    <Link
-      href={JUDGES.href}
-      className={cn(
-        "h-9 flex-none items-center rounded-full bg-ink px-4 text-sm font-medium text-canvas no-underline shadow-soft transition duration-300 ease-calm hover:-translate-y-px",
-        className,
-      )}
-    >
-      {JUDGES.label}
-    </Link>
-  );
-}
-
 const COLUMNS = [
   {
     title: "Use it",
     links: [
-      ...NAV.filter((n) => n.href !== "/proof" && n.href !== "/how"),
+      ...NAV.filter((n) => n.href !== "/proof"),
+      { href: "/rules", label: "Your rules" },
       { href: "/create", label: "Create a strategy" },
       { href: "/strategies/practice.keel-factory-bcf915.testnet", label: "Inspect a strategy" },
     ],

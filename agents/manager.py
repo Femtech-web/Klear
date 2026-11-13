@@ -76,12 +76,17 @@ def main() -> None:
         if a.sealed:
             from keel_agents import sealed  # needs agents/requirements-sealed.txt
             d, receipt = sealed.decide("manager", system, prompt, SCHEMA, log, private)
-            print(f"    sealed: {receipt['model']} in a TEE (TDX {receipt['tdx']}, GPU {receipt['gpu']}), signer {receipt['signer']['key'][:16]}…")
+            print(f"    sealed: {receipt['model']} in a TEE (TDX {receipt['tdx']}, GPU {receipt['gpu']}), signer {receipt['signer']['address'][:16]}…")
         else:
             d = llm.decide("manager", system, prompt, SCHEMA, log)
-        print(f"[{i}] AI: {d['action']} {d['size_eth']} @ {d['limit_price']}: {d['reason']}")
+        print(f"[{i}] AI: {d['action']} {d['size_eth']} @ {d['limit_price']}: {'(reasoning sealed)' if a.sealed else d['reason']}")
         if d["action"] == "hold":
-            llm.note(log, "manager", "held")
+            if receipt:  # a sealed hold is committed on chain too, in the heartbeat's arguments
+                hb = chain.heartbeat(sealed=receipt)
+                llm.note(log, "manager", "held", tx=hb.tx, error=hb.error)
+                print(f"    hold committed on chain: {hb.tx}")
+            else:
+                llm.note(log, "manager", "held")
         else:
             is_buy = d["action"] == "buy"
             sz, px = lots(d["size_eth"]), valid_limit(d["limit_price"], is_buy)

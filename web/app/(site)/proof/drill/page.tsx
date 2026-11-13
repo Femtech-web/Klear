@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteLink as Link } from "@/components/site/SiteLink";
 import { DrillTable } from "@/components/drill/DrillTable";
 import { Card, LinkButton, Section } from "@/components/ui/primitives";
 import { config } from "@/lib/config";
@@ -34,7 +34,8 @@ export default function DrillPage() {
   return (
     <>
       <Section
-        eyebrow="Proof · 07"
+        heading="h1"
+        eyebrow="Daily testnet rescue"
         title="It fails every day, on purpose, and is rescued"
         lede="A rescue that worked once could be luck. The practice strategy runs the whole failure and the whole rescue as a daily cycle, on the same locked judge, and records each one, failures included."
       >
@@ -57,12 +58,17 @@ export default function DrillPage() {
         </div>
       </Section>
 
-      <Section tight eyebrow="Every cycle" title="The record">
+      <Section
+        id="drill-record"
+        tight
+        title="Drill attempts"
+        lede="A cycle can have more than one attempt. The record includes failed attempts."
+      >
         <DrillTable />
         <p className="mt-6 max-w-measure text-sm text-ink-3">
           The drill runs on GitHub Actions (agents/drill.py, daily at {String(config.drill.utcHour).padStart(2, "0")}:
           {String(config.drill.utcMinute).padStart(2, "0")} UTC), and each cycle&apos;s record is committed back to the
-          repository. A cycle that fails is recorded with the step and the reason. Each cycle&apos;s full step log is in{" "}
+          repository. A failed attempt is recorded with the step and the reason. The full logs are in{" "}
           <a href={`${config.repo}/tree/main/docs/results/drill`} target="_blank" rel="noreferrer">
             docs/results/drill
           </a>
