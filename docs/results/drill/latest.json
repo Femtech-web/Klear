@@ -1,10 +1,10 @@
 {
- "cycle": 1,
+ "cycle": 2,
  "judge": "practice.keel-factory-bcf915.testnet",
- "started": 1794520099,
- "ended": 1794521321,
+ "started": 1794561703,
+ "ended": 1794563923,
  "ok": false,
- "error": "g7.sh perp d1794520099-m0 keel-practice-53ee75.testnet: Error: error sending request for url (https://rpc.hyperliquid-testnet.xyz/evm)\n\nContext:\n- Error #0: client error (Connect)\n- Error #1: dns error\n- Error #2: failed to lookup address information: nodename nor servname provided, or not known\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py\", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py\", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+ "error": "g7.sh snapshot c-1794563921: Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import json,sys;r=json.load(sys.stdin);print(r[\"transactionHash\"]) if r[\"status\"]==\"0x1\" else sys.exit(\"reverted: \"+r[\"transactionHash\"])\n                                                                          ~^^^^^^^^^^\nKeyError: 'status'",
  "rescuer": null,
  "mode": "active",
  "trigger": null,
@@ -12,53 +12,104 @@
  "deliveries": [],
  "steps": [
   {
-   "at": 1794520107,
-   "step": "heartbeat",
-   "tx": "7nh2jYtsouSmdMq8ZhidG3bWcnCC4HhLWZLbz9nQnDmy",
+   "at": 1794561709,
+   "step": "rearm",
+   "tx": "6e4xkbMEMaTvjRFxoXBTAsXCyx7Ea8BH3nPoVekyVPnX",
    "refused": null,
    "outcome": null
   },
   {
-   "at": 1794520118,
-   "step": "fund",
-   "out": "leg: 4.9 USDC | vault: 4000000000000000 WETH wei"
+   "at": 1794561714,
+   "step": "heartbeat",
+   "tx": "7nNLKtBnc5CFututZVpMZxbq6nHPHLb2FFG4GBzm6x5k",
+   "refused": null,
+   "outcome": null
   },
   {
-   "at": 1794520121,
+   "at": 1794561727,
+   "step": "fund",
+   "out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"
+  },
+  {
+   "at": 1794561728,
    "step": "spot-probe",
    "waiting": "Base finality, about 25 minutes"
   },
   {
-   "at": 1794520416,
+   "at": 1794562022,
    "step": "heartbeat",
-   "tx": "6zNmakFtsZgd9EFhMieYuRqzC6fun3kKoXei8hqZN5P5",
+   "tx": "8WWYs4xQb41AkZrC2CsKXj4Wojk4rPioLEZboaHkGsqf",
    "refused": null,
    "outcome": null
   },
   {
-   "at": 1794520722,
+   "at": 1794562327,
    "step": "heartbeat",
-   "tx": "CPTmni4Ybw5wREcqpW3iLTAHYhtEJvrR8fehbMdLMEdC",
+   "tx": "9xEBFiUe2N2tSPMW3KsRcvmxEJwvs6X4ZtJ68DgwMjYj",
    "refused": null,
    "outcome": null
   },
   {
-   "at": 1794521027,
+   "at": 1794562631,
    "step": "heartbeat",
-   "tx": "FFD6UYjWaBp5K8bzerPJzXviB4hBo13X82HUdENdMQ59",
+   "tx": "23upWHkza1qx6cMMMihxtbftyza6pmm1JaaT5W4YFu48",
    "refused": null,
    "outcome": null
   },
   {
-   "at": 1794521317,
+   "at": 1794562791,
    "step": "spot-attested",
-   "evidence": "base:0x0067b8453ba33ce05f5079e8b11e64cfb4d378a6e85da4d48202d3760775b529:1"
+   "evidence": "base:0x05e9e383c0f0fcf0f29b29ea2a25c01db89c6ec73278e0b9cc5e338d0f5b78a4:2"
   },
   {
-   "at": 1794521320,
+   "at": 1794562844,
+   "step": "open-short",
+   "tx": "9Tn3ccDPJ9NGAg2ErepkDMtL4ZtHjN9JuXGP4wA4QEzV",
+   "refused": null,
+   "outcome": {
+    "outcome": "sign",
+    "job_id": 0,
+    "order": {
+     "nonce": 3,
+     "is_buy": false,
+     "limit_px": 191120000000,
+     "sz": 600000,
+     "reduce_only": false,
+     "cloid": "234442088153721449988536992564156615870",
+     "deadline": 1794563137
+    },
+    "digest": "0x203127353361bf5a17f04b8589a0275b0aee9dfa0d0651e57032472c62215f84"
+   }
+  },
+  {
+   "at": 1794562853,
+   "step": "relayed-short",
+   "tx": "0x7fe4ffa7fd066913a29d1b2f3702aab755db51f3c2d51ddacf8451c98e81bd62",
+   "fill": {
+    "queued_l1": 772350253,
+    "seen_l1": 772350292,
+    "blocks": 39,
+    "szi": -60,
+    "entry_ntl": 11505600,
+    "seconds": 0.4
+   }
+  },
+  {
+   "at": 1794562854,
+   "step": "manager-silent",
+   "last_heartbeat": 1794562837
+  },
+  {
+   "at": 1794563761,
+   "step": "rescue-due",
+   "reason": "manager silent",
+   "grace_s": 600.0
+  },
+  {
+   "at": 1794563922,
    "step": "failed",
-   "error": "g7.sh perp d1794520099-m0 keel-practice-53ee75.testnet: Error: error sending request for url (https://rpc.hyperliquid-testnet.xyz/evm)\n\nContext:\n- Error #0: client error (Connect)\n- Error #1: dns error\n- Error #2: failed to lookup address information: nodename nor servname provided, or not known\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py\", line 293, in load\n    return loads(fp.read(),\n           ^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py\", line 338, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+   "error": "g7.sh snapshot c-1794563921: Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import json,sys;r=json.load(sys.stdin);print(r[\"transactionHash\"]) if r[\"status\"]==\"0x1\" else sys.exit(\"reverted: \"+r[\"transactionHash\"])\n                                                                          ~^^^^^^^^^^\nKeyError: 'status'"
   }
  ],
- "log": "cycle-1794520099.jsonl"
+ "log": "cycle-1794561703.jsonl"
 }

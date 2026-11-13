@@ -1,5 +1,20 @@
 [
  {
+  "cycle": 2,
+  "started": 1794561703,
+  "ended": 1794563923,
+  "ok": false,
+  "error": "KeyError: 'status'",
+  "rescuer": null,
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": "6e4xkbMEMaTvjRFxoXBTAsXCyx7Ea8BH3nPoVekyVPnX",
+   "short": "9Tn3ccDPJ9NGAg2ErepkDMtL4ZtHjN9JuXGP4wA4QEzV"
+  }
+ },
+ {
   "cycle": 1,
   "started": 1794520099,
   "ended": 1794521321,
