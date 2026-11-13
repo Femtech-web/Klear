@@ -1,0 +1,14 @@
+{"at": 1794561709, "role": "drill", "kind": "rearm", "tx": "6e4xkbMEMaTvjRFxoXBTAsXCyx7Ea8BH3nPoVekyVPnX", "refused": null, "outcome": null}
+{"at": 1794561714, "role": "drill", "kind": "heartbeat", "tx": "7nNLKtBnc5CFututZVpMZxbq6nHPHLb2FFG4GBzm6x5k", "refused": null, "outcome": null}
+{"at": 1794561727, "role": "drill", "kind": "fund", "out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}
+{"at": 1794561728, "role": "drill", "kind": "spot-probe", "waiting": "Base finality, about 25 minutes"}
+{"at": 1794562022, "role": "drill", "kind": "heartbeat", "tx": "8WWYs4xQb41AkZrC2CsKXj4Wojk4rPioLEZboaHkGsqf", "refused": null, "outcome": null}
+{"at": 1794562327, "role": "drill", "kind": "heartbeat", "tx": "9xEBFiUe2N2tSPMW3KsRcvmxEJwvs6X4ZtJ68DgwMjYj", "refused": null, "outcome": null}
+{"at": 1794562631, "role": "drill", "kind": "heartbeat", "tx": "23upWHkza1qx6cMMMihxtbftyza6pmm1JaaT5W4YFu48", "refused": null, "outcome": null}
+{"at": 1794562791, "role": "drill", "kind": "spot-attested", "evidence": "base:0x05e9e383c0f0fcf0f29b29ea2a25c01db89c6ec73278e0b9cc5e338d0f5b78a4:2"}
+{"at": 1794562844, "role": "drill", "kind": "open-short", "tx": "9Tn3ccDPJ9NGAg2ErepkDMtL4ZtHjN9JuXGP4wA4QEzV", "refused": null, "outcome": {"outcome": "sign", "job_id": 0, "order": {"nonce": 3, "is_buy": false, "limit_px": 191120000000, "sz": 600000, "reduce_only": false, "cloid": "234442088153721449988536992564156615870", "deadline": 1794563137}, "digest": "0x203127353361bf5a17f04b8589a0275b0aee9dfa0d0651e57032472c62215f84"}}
+{"at": 1794562853, "role": "drill", "kind": "relayed-short", "tx": "0x7fe4ffa7fd066913a29d1b2f3702aab755db51f3c2d51ddacf8451c98e81bd62", "fill": {"queued_l1": 772350253, "seen_l1": 772350292, "blocks": 39, "szi": -60, "entry_ntl": 11505600, "seconds": 0.4}}
+{"at": 1794562854, "role": "drill", "kind": "manager-silent", "last_heartbeat": 1794562837}
+{"at": 1794563761, "role": "drill", "kind": "rescue-due", "reason": "manager silent", "grace_s": 600.0}
+{"at": 1794563768, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794563761-perp-log.json"}
+{"at": 1794563922, "role": "drill", "kind": "failed", "error": "g7.sh snapshot c-1794563921: Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import json,sys;r=json.load(sys.stdin);print(r[\"transactionHash\"]) if r[\"status\"]==\"0x1\" else sys.exit(\"reverted: \"+r[\"transactionHash\"])\n                                                                          ~^^^^^^^^^^\nKeyError: 'status'"}
