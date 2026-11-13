@@ -1,0 +1,5 @@
+{"at": 1794602744, "role": "drill", "kind": "rearm", "tx": "9rFjgoZAxXqsMuEzb3Q32SXe6ssmN5CakHqxESCK9vB7", "refused": null, "outcome": null}
+{"at": 1794602749, "role": "drill", "kind": "heartbeat", "tx": "8k1pwRMqUwqhv8n99SDqxipu4HeCpvPobjGkoWGsVRaT", "refused": null, "outcome": null}
+{"at": 1794602756, "role": "drill", "kind": "fund-retry", "error": "scripts/testnet/practice.sh fund: relayer spot to perp: {\"status\": \"err\", \"response\": \"Insufficient balance for token transfer\"}"}
+{"at": 1794602783, "role": "drill", "kind": "fund-retry", "error": "scripts/testnet/practice.sh fund: relayer spot to perp: {\"status\": \"err\", \"response\": \"Insufficient balance for token transfer\"}"}
+{"at": 1794602809, "role": "drill", "kind": "failed", "error": "scripts/testnet/practice.sh fund: relayer spot to perp: {\"status\": \"err\", \"response\": \"Insufficient balance for token transfer\"}"}
