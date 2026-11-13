@@ -75,9 +75,9 @@ export function Footer() {
               </li>
             ))}
             <li>
-              <a href={`${config.repo}/tree/main/agents`} className={link}>
+              <Link href="/agents" className={link}>
                 Agent guide
-              </a>
+              </Link>
             </li>
             <li>
               <a href={config.repo} target="_blank" rel="noreferrer" className={link}>

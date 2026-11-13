@@ -50,7 +50,7 @@ export function DrillTable({ limit }: { limit?: number }) {
                 </td>
                 <td className={spacing}>
                   <Pill tone={r.ok ? "ok" : "no"} mark={r.ok ? "check" : "cross"}>
-                    {r.ok ? "Rescued" : "Attempt failed"}
+                    {r.ok ? "Rescued" : compact ? "Failed" : "Attempt failed"}
                   </Pill>
                   {!compact && r.error && <p className="mt-1 min-w-44 text-sm text-ink-3">{r.error}</p>}
                 </td>

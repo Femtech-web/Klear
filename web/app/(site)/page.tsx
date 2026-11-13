@@ -71,14 +71,17 @@ export default function Home() {
         </div>
         <div aria-hidden="true" className="home-scrim pointer-events-none absolute inset-0 -z-10" />
         <div className="page home-intro flex flex-col items-start">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-night-muted md:mb-5">
+            Rules for AI traders, enforced on NEAR
+          </p>
           <h1 id="home-title" className="text-hero font-medium text-wrap tracking-[-0.06em]">
             If your AI trader fails,
             <br className="hidden lg:block" /> anyone can bring
             <br className="hidden lg:block" /> your money home.
           </h1>
-          <p className="mt-5 max-w-[43ch] text-base leading-relaxed text-night-muted md:mt-6 md:text-lg">
-            You set the rules. A keyless NEAR contract controls the accounts on Hyperliquid and Base and pays the
-            guardian only once your funds arrive.
+          <p className="mt-5 max-w-[48ch] text-base leading-relaxed text-night-muted md:mt-6 md:text-lg">
+            Your AI proposes trades. A keyless NEAR contract signs only what your rules allow. If it fails, the rescue
+            can send money only to you, and the rescuer is paid once it lands. Your strategy can even stay sealed.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 md:mt-8">
             <SiteLink
@@ -88,10 +91,16 @@ export default function Home() {
               Try it <ArrowRight size={17} className="transition-transform group-hover:translate-x-0.5" />
             </SiteLink>
             <SiteLink
-              href="/proof/rescue#delivery-and-payout"
+              href="/agents"
               className="group inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-night-ink no-underline transition-colors hover:text-night-action focus-visible:outline-night-ink"
             >
-              See the rescue <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+              Bring your agent <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+            </SiteLink>
+            <SiteLink
+              href="/investor"
+              className="group inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-night-ink no-underline transition-colors hover:text-night-action focus-visible:outline-night-ink"
+            >
+              For investors <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </SiteLink>
           </div>
         </div>
@@ -99,12 +108,13 @@ export default function Home() {
 
       <section aria-labelledby="rescue-heading" className="page py-15 md:py-24">
         <header className="mb-7 max-w-[44rem] md:mb-9">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-3">The one moment · recorded</p>
           <h2 id="rescue-heading" className="text-feature">
             The AI went silent. The money came home.
           </h2>
-          <p className="mt-4 max-w-[51ch] text-ink-2">
-            We staged the outage. A guardian returned the funds on testnet, and NEAR paid each reward after verifying
-            delivery.
+          <p className="mt-4 max-w-[54ch] text-ink-2">
+            We staged the outage on testnet. 5 min 7 s after the silence limit passed, the USDC was back with the
+            investor and an AI guardian had been paid for it. The WETH followed at 25 min, once Base finalized.
           </p>
         </header>
         <RecordedRescue />
@@ -153,7 +163,8 @@ export default function Home() {
               your manager and relayer.
             </p>
             <p className="mt-3 max-w-[42ch] text-sm text-ink-2">
-              After a rescue, you can start another cycle with the same rules and accounts.
+              Your strategy can stay private. Run the manager sealed and the AI reads it inside attested hardware; the
+              judge still checks every order.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
               <LinkButton href="/investor">Investor workspace</LinkButton>

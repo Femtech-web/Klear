@@ -135,8 +135,10 @@ print(json.dumps({"name":name,"config":c,"label":name}))' "$policy" "$name" "$le
       sign-as "$CREATOR" network-config testnet sign-with-access-key-file "$(key "$CREATOR")" send > "$OUT/$name/create.txt" 2>&1 || true
     plain "$OUT/$name/create.txt" | grep -E "Transaction ID|panicked|Error" | head -2
     read -r perp szd maxsz band basis <<< "$(leg_args "$policy")"
-    echo "KeelLeg:   $(send_tx "$HYPER" "$DEPLOYER_HYPER" "deployLeg(bytes32,address,address,uint32,uint8,uint64,uint16,uint16)" "$salt" "$controller" "$investor" "$perp" "$szd" "$maxsz" "$band" "$basis")"
-    echo "KeelVault: $(send_tx "$BASE" "$DEPLOYER_BASE" "deployVault(bytes32,address,address)" "$salt" "$vault_controller" "$investor")"
+    tx=$(send_tx "$HYPER" "$DEPLOYER_HYPER" "deployLeg(bytes32,address,address,uint32,uint8,uint64,uint16,uint16)" "$salt" "$controller" "$investor" "$perp" "$szd" "$maxsz" "$band" "$basis")
+    echo "KeelLeg:   $tx"
+    tx=$(send_tx "$BASE" "$DEPLOYER_BASE" "deployVault(bytes32,address,address)" "$salt" "$vault_controller" "$investor")
+    echo "KeelVault: $tx"
     "$0" verify "$name"
     ;;
   verify)

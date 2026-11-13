@@ -69,7 +69,11 @@ testnet and once on mainnet (see `docs/results/`).
   and sealed, then signs only readable grant changes on a trigger; a stranger cut the AI off on the investor's exit.
 - **Recorded runs of an off-the-shelf agent** (`agents/agent_run.py`, `docs/results/agent-runs`): Claude Code, with only
   Klear's MCP servers and its own NEAR account, finds the strategy that needs a rescue, checks it, rescues it and is
-  paid. `wait_for_rescue` added to the local MCP server.
+  paid. `wait_for_rescue` added to the local MCP server. Three runs: two paid 0.15 NEAR each (practice; deleverage,
+  right after a sealed trade, where the agent recovered from a refused open on its own), one failed on our RPC query.
+- The manager relays an approved order as soon as the MPC signature reaches the judge (it retries for up to 40 s
+  instead of trying once after 4 s), and `relay_order` fails with the script's output when nothing was relayed.
+- The drill's compact table on `/practice` no longer overflows a 360 px phone.
 - **Renamed from Keel to Klear.** Everything deployed before the rename keeps its name (`keel-*` accounts,
   `KeelLeg`, `KeelVault`, `KeelDeployer`): those contracts are locked, and their source stays byte-for-byte so the
   published hashes still match.

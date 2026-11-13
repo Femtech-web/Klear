@@ -17,8 +17,11 @@ audited. Commands are view calls that need no account unless marked.
   the judge signs only what fits. If the AI fails, anyone can bring the money home, and is paid only once the
   investor's address shows it arrived.
 - **Private, and still provable.** The strategy can stay sealed: the AI decides in a TEE on NEAR AI Cloud and
-  leaves a signed receipt on chain. Money can sit in a confidential NEAR Intents account whose owner key only NEAR's
-  MPC network holds, tested on mainnet with real funds.
+  leaves a signed receipt on chain, and NEAR itself verifies the TEE's quote and that receipt. Money can sit in a
+  confidential NEAR Intents account owned through MPC by a locked Klear contract, tested on mainnet with real funds.
+- **The whole flow, in order:** lock the rules, the AI trades under them, risk is cut early, a trigger opens the way
+  home, anyone runs the rescue, paid only on arrival, rearm ([README: How it works](README.md#how-it-works), the
+  site's `/how`).
 - **Why NEAR.** Chain Signatures let one locked contract control accounts on two other chains; Read MPC lets it
   verify what happened there before acting. No bridge, no oracle we run, no key anyone holds. NEAR AI Cloud and
   NEAR Intents add the private parts, and the same MPC network owns the confidential account.
@@ -115,7 +118,9 @@ cut the AI off on the investor's exit, and it refused without a trigger ([docs/r
 ### 7. Rescue it yourself (about 45 min, optional)
 
 An agent nobody wrote for Klear already has: Claude Code, with only Klear's MCP tools and a faucet account, rescued
-the practice strategy and was paid 0.15 NEAR, its full transcript recorded ([docs/results/agent-runs](docs/results/agent-runs/README.md)).
+the practice strategy and then the deleverage strategy, and was paid 0.15 NEAR each time. On the second, the judge
+refused its first open while a sealed order was still live, and the agent worked out why and retried. Every
+transcript is recorded ([docs/results/agent-runs](docs/results/agent-runs/README.md)).
 The hosted MCP server needs nothing installed: `claude mcp add --transport http klear https://klear-near.vercel.app/api/mcp`.
 
 
@@ -150,17 +155,28 @@ absolute paths); the archived sources rebuild to the deployed hashes at the orig
 [docs/trust-model.md](docs/trust-model.md): what "no keys" means and does not mean, what NEAR's MPC network is
 trusted for, and what could still go wrong.
 
-## What this does not show
+## Scope and limits
 
-- One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.
-- NEAR's MPC network is trusted to sign and verify honestly; the trust model says where that applies.
-- The replay is a counterfactual: Klear's rules applied to real fills, with the closing cost modelled.
-- The daily drill and the courier run on GitHub Actions, with our testnet keys. The courier only pays gas; it cannot change anything the
-  judge signs.
-- The AI manager is Claude through its CLI, with no tools, or in sealed mode an open model in a TEE on NEAR AI Cloud;
-  every decision is logged, and a sealed one's prompt stays with the investor.
-- Mainnet: two privacy tests with a few dollars of the user's own. A private payout
-  ([docs/results/mainnet](docs/results/mainnet/README.md)): 2.799671 USDC into a NEAR Intents confidential balance,
-  hiding the recipient and its balance, not the amount. A confidential mandate
-  ([docs/results/mandate](docs/results/mandate/README.md)): the confidential ledger is access control, not
-  cryptography, and its policy is enforced by the provider's backend, not by a Klear contract.
+1. **Where it runs.** Testnets with test funds, except two authorized mainnet privacy tests with a few dollars of
+   the user's own. Nothing here is audited.
+2. **What it trades.** One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.
+3. **What you trust.** NEAR's MPC network to sign only for the judge and to verify logs honestly, and Hyperliquid
+   to report and execute truthfully ([docs/trust-model.md](docs/trust-model.md)).
+4. **Who runs the AI.** The manager is Claude with no tools, or in sealed mode an open model in a TEE on NEAR AI
+   Cloud. A TEE flaw could leak the strategy, never move money: the judge decides every order.
+5. **What the judge does not check yet.** NEAR verifies sealed receipts in a separate locked contract
+   (`klear-tee`); the judge itself does not yet require one before it signs an order.
+6. **What stays with a provider.** In a confidential mandate the ledger's operators can read the balance (access
+   control, not cryptography), and the Agent API's backend enforces the policy. The private payout
+   ([docs/results/mainnet](docs/results/mainnet/README.md)) hides the recipient and its balance, not the amount.
+7. **Who keeps the drill going.** The daily drill and its courier run on GitHub Actions with our testnet keys. The
+   courier only pays gas; it cannot change what the judge signs.
+8. **What the replay is.** A counterfactual: Klear's rules applied to real AI traders' fills, with the closing cost
+   modelled, not trades Klear made.
+
+## Roadmap
+
+Next: a judge that signs a sealed manager's order only with a receipt NEAR verified, and more recorded agent runs.
+Then: an external audit and mainnet with deposit caps, and the confidential mandate brought under the judge. Later:
+more markets and chains, and a guardian network that alerts the moment any rescue opens
+([README: Roadmap](README.md#roadmap)).

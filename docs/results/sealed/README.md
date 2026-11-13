@@ -63,10 +63,25 @@ later prove what the AI was told and what it answered.
 | Each order (side, size, price) | public: the judge must check it, and Hyperliquid executes it |
 | The investor's funds | bounded by the judge, as before: a TEE failure could leak the strategy, never move money |
 
+## A sealed trade, signed (agent run 3)
+
+On the next cycle the strategy said to trade: the sealed AI decided to **buy 0.006 ETH at 1925.9** ("reasoning
+sealed" in every public log). The judge checked the order like any other and had it signed by NEAR's MPC network:
+[`9xm2NKDq…`](https://testnet.nearblocks.io/txns/9xm2NKDq7oEfbiqLUXDi42QCEDDjPZLoGVvgEBvBp2MA) (nonce 5), with the
+TEE's receipt in `propose_order`'s arguments. NEAR then verified that receipt against the proven TEE key:
+[`DghS9e82…`](https://testnet.nearblocks.io/txns/DghS9e82hk8kcy2SQ465JtShFpbZXHWmFXCe6gDzfbSP) on `klear-tee`
+([tee](../tee/README.md)).
+
+**It did not fill.** The manager's relay of the signed order failed on a HyperEVM send, and the script hid the failure
+(`echo "relayed $(send_tx …)"` exits 0). The order was relayed by hand a minute later
+(`0x2d94eb28…`), by when the best ask (1926.7) was above its limit, so the immediate-or-cancel order expired
+unfilled; the position stayed flat. Fixed: a failed send now stops the script, and the manager retries the relay for
+up to 40 s. The investor then exited, and an off-the-shelf agent rescued the strategy
+([agent run 3](../agent-runs/README.md)).
+
 ## What this does not show
 
-- A **sealed trade**: the market did not meet the strategy during the run. The path is the same with the receipt in
-  `propose_order`.
+- A **filled** sealed trade: one was decided, signed and verified on NEAR, but expired unfilled (above).
 - **Independent provenance of the model image**: the SDK reports `deployment_provenance: not_checked`; we trust NEAR
   AI's attested measurement, not a reproducible build of the model server.
 - Two earlier attempts are in the record: one refused `stale-evidence` (the machine slept for six hours between the

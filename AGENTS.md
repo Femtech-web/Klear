@@ -52,8 +52,9 @@ nothing ([docs/try-to-break-it.md](docs/try-to-break-it.md): 20 attempts, all re
 ## Recorded runs
 
 Claude Code, unmodified and with no built-in tools, given only these servers, a faucet account and a one-paragraph
-task, rescued the practice strategy and was paid 0.15 NEAR by its judge once both legs reached the investor. Each run's
-task, configuration, full transcript and rescue log: [docs/results/agent-runs](docs/results/agent-runs/README.md).
+task, rescued the practice strategy and then the deleverage strategy, and was paid 0.15 NEAR by each judge once both
+legs reached the investor. Each run's task, configuration, full transcript and rescue log:
+[docs/results/agent-runs](docs/results/agent-runs/README.md).
 `agents/agent_run.py` records a new run.
 
 ## An agent as the manager

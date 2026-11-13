@@ -4,15 +4,17 @@
 
 # Klear
 
-### When your AI trader fails, anyone can bring your money home.
-**And they are paid only when it lands.**
+**Rules for AI traders, enforced on NEAR.** Your AI trades but never holds a key.
 
-[Live site](https://klear-near.vercel.app) · [For judges](JUDGES.md) · [For AI agents](AGENTS.md) · [The live rescue](docs/results/g7/README.md) · [Rescue it yourself](docs/practice.md) · [Private, and provable](#private-and-still-provable) · [The AI replay](docs/results/replay/README.md) · [Try to break it](docs/try-to-break-it.md)
+### When your AI trader fails, anyone can bring your money home.
+**The money can only go to you, and they are paid only when it lands.**
+
+[Live site](https://klear-near.vercel.app) · [The recorded rescue](docs/results/g7/README.md) · [For judges](JUDGES.md) · [For AI agents](AGENTS.md) · [Rescue it yourself](docs/practice.md)
 
 [![CI](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml)
 [![Drill](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0b6e66)](LICENSE)
-![Tests](https://img.shields.io/badge/tests-217%20passing-0b6e66)
+![Tests](https://img.shields.io/badge/tests-310%20passing-0b6e66)
 ![Locked](https://img.shields.io/badge/contracts-locked%20·%200%20keys-0b6e66)
 ![NEAR](https://img.shields.io/badge/NEAR-Chain%20Signatures%20·%20Read%20MPC%20·%20NEAR%20AI%20·%20Intents-0d1b2e)
 
@@ -108,8 +110,11 @@ The rescue itself signs with the agent's own NEAR account, so it runs locally (`
 
 **It has been done by an agent nobody wrote for it.** Claude Code, unmodified, with no built-in tools, only Klear's
 MCP servers, a faucet account and one paragraph of instructions, found the practice strategy's open rescue, ran the
-six checks, rescued it, and was paid 0.15 NEAR once both legs reached the investor. Every run is recorded with its
-full transcript, including the one that failed on our RPC ([docs/results/agent-runs](docs/results/agent-runs/README.md)).
+six checks, rescued it, and was paid 0.15 NEAR once both legs reached the investor. It did it again on the
+deleverage strategy right after a sealed trade: the judge refused its first open while that order was live, and it
+worked out why from the hosted server, retried after the order expired, and was paid 0.15 NEAR. Every run is
+recorded with its full transcript, including the one that failed on our RPC
+([docs/results/agent-runs](docs/results/agent-runs/README.md)).
 
 ## The live rescue
 
@@ -197,6 +202,34 @@ contract signs them only during setup, for the investor ([docs/privacy.md](docs/
 
 ## How it works
 
+One strategy, from setup to payout. The privacy options sit where they apply.
+
+1. **Lock the rules.** The investor sets order size, price band, leverage cap, loss floor, warning level, silence
+   limit and payout addresses. The factory creates a NEAR judge with no keys, locked from birth, and two accounts
+   only it can sign for: `KeelLeg` on Hyperliquid (the position) and `KeelVault` on Base (the spot asset). Anyone
+   can check a strategy before trusting it (six checks, [factory](docs/results/factory/README.md)).
+2. **Trade under them.** The AI manager only proposes. The judge checks each order on state NEAR's MPC network
+   verified from both chains, and has the network sign only what fits ([a live refusal](docs/results/g7/README.md)).
+   *Private:* in sealed mode the AI reads the strategy inside a TEE, and NEAR verifies the hardware and the
+   decision's signed receipt ([sealed](docs/results/sealed/README.md), [tee](docs/results/tee/README.md)).
+3. **Cut risk early.** Past the warning level or the leverage cap, anyone may trim the position back to target,
+   with the order the judge plans ([deleverage](docs/results/delever/README.md)).
+4. **A trigger opens the way home.** The loss floor, a manager silent past the investor's limit, or the investor
+   saying stop.
+5. **Anyone runs the rescue:** a person, a bot or an AI agent over MCP. The judge plans every order: a reduce-only
+   close and a sweep on Hyperliquid, the vault's exit on Base, all to the investor's fixed addresses. A courier
+   pays the EVM gas ([a stranger](docs/results/visitor/README.md), [an agent](docs/results/agent-runs/README.md)).
+6. **Paid on arrival.** Each leg's reward is paid only once NEAR verifies the money at the investor's address: the
+   USDC within minutes, the WETH once Base finalizes ([the live rescue](#the-live-rescue)). *Private:* the reward
+   can land in a confidential balance ([private payout](docs/results/mainnet/README.md)).
+7. **Rearm.** The investor starts the next cycle with the same rules and accounts.
+
+*Private end to end (mainnet):* the money can also sit in a confidential NEAR Intents account with the mandate as
+its policy, owned by a locked Klear contract through MPC. On a trigger, anyone can cut the AI off there, and the
+exit pays only the investor ([mandate](docs/results/mandate/README.md), [owner](docs/results/owner/README.md)).
+
+Under the hood:
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/architecture-dark.png">
   <img src="docs/assets/architecture-light.png" width="100%" alt="Klear's architecture. Top: the investor sets the rules and may request an exit; the AI manager may only propose orders; guardians may open and settle a rescue on a trigger and receive a reward after delivery. Middle: on NEAR testnet, the judge, a contract with no keys, holds the rules, decides on verified evidence and pays on delivery; the factory creates each judge locked from birth; the MPC network signs only for the judge (Chain Signatures) and verifies EVM logs (Read MPC). On Hyperliquid testnet, KeelLeg runs only orders the judge signed and reports snapshots; HyperCore holds the position and margin. On Base Sepolia, KeelVault holds the spot asset and can exit only to the investor. Bottom: money only ever moves to the investor's own addresses, by sweep and exit.">
@@ -218,7 +251,7 @@ contract signs them only during setup, for the investor ([docs/privacy.md](docs/
 |---|---|---|---|
 | **The mandate** | Order size, price band, leverage on a conservative cross-chain liquidation value, a loss floor; the judge refuses anything outside them | [engine/mandate.rs](crates/keel-core/src/engine/mandate.rs), [the live refusal](docs/results/g7/README.md) | live |
 | **Early deleverage** | Below the investor's warning level, or when prices push leverage past the cap, anyone may cut the position back to a target, before the floor is ever reached | [the live cut](docs/results/delever/README.md), [engine/deleverage.rs](crates/keel-core/src/engine/deleverage.rs) | live once: 0.01 ETH cut to the 0.2x target, 0.1 NEAR paid on proof |
-| **The rescue** | On the floor, the investor's request or a silent manager: reduce-only close, sweep and vault exit to the investor, each leg paid only on proof of arrival | [the live rescue](#the-live-rescue), [docs/rescue.md](docs/rescue.md) | live, six times (two G7 runs, the drill, a stranger, two exits of the deleverage strategy) |
+| **The rescue** | On the floor, the investor's request or a silent manager: reduce-only close, sweep and vault exit to the investor, each leg paid only on proof of arrival | [the live rescue](#the-live-rescue), [docs/rescue.md](docs/rescue.md) | live, eight times (two G7 runs, the drill, a stranger, two exits of the deleverage strategy, two by Claude Code) |
 | **Rearm** | After a rescue the investor restarts the same strategy, same rules and accounts, next cycle | `rearm` on the judge | live (the drill) |
 | **The factory** | Anyone creates a strategy in one transaction; its judge is locked from birth, its EVM accounts land at CREATE2 addresses fixed in advance | [docs/results/factory](docs/results/factory/README.md) | live, locked |
 | **Inspection** | Six checks before trusting any strategy: factory-made, no keys, the factory's code, both accounts controlled only by the judge's MPC keys, payouts only to the investor | `/strategies/<judge>`, `inspect_strategy`, `factory.sh verify` | live |
@@ -294,6 +327,17 @@ own equity points. With a 3x leverage cap and a floor 30% down:
 - **Testnets and an unaudited codebase.** Everything above runs on testnets with test funds, except two
   authorized mainnet privacy tests with a few dollars of the user's own. Nothing here is audited.
 
+## Roadmap
+
+| When | What |
+|---|---|
+| Next | **Sealed orders only with a receipt:** a judge that signs a sealed manager's order only if NEAR has verified its TEE receipt (`klear-tee` is live and locked). |
+| Next | **More recorded agent runs:** off-the-shelf agents rescuing for pay on every daily drill window, each with its transcript. |
+| Then | **An audit, then mainnet with caps:** an external review of the judge, the factory and the two accounts, then mainnet strategies with deposit limits. |
+| Then | **The confidential mandate under the judge:** a rescue that also brings money home from a confidential account, through its locked owner, paid on proven arrival. |
+| Later | **More markets and chains:** more Hyperliquid perpetuals, and spot vaults on other chains NEAR's MPC network can both read and sign for. |
+| Later | **A guardian network:** alerts the moment any strategy's rescue opens, so people and agents compete to bring money home first. |
+
 ## For judges
 
 [JUDGES.md](JUDGES.md) is the order to check Klear in, five minutes for the essentials, with the transaction or
@@ -302,7 +346,7 @@ command behind every claim. The site's `/judges` page runs the same checks live.
 ## Run it from source
 
 ```bash
-make test        # Rust rules and engine, Foundry, end to end through the judge, both NEAR contracts
+make test        # Rust rules and engine, Foundry, end to end through the judge, all four NEAR contracts
 make replay      # the Alpha Arena replay (make replay-fetch refreshes the fills)
 make factory     # the judge and the factory (cargo-near), with their sha256
 make web-test    # the site: lint, types, unit tests, Playwright with a WCAG 2.2 AA audit
@@ -314,8 +358,9 @@ make web-test    # the site: lint, types, unit tests, Playwright with a WCAG 2.2
 | Foundry: `KeelLeg`, `KeelVault`, `KeelDeployer` | 43 |
 | End to end through the judge (Foundry + `keel-judge`) | 9 |
 | NEAR contracts: the judge and the factory | 18 |
-| Site: unit tests | 27 |
-| Site: every page, light, dark and mobile, with an accessibility audit | 63 |
+| NEAR contracts: `klear-tee` and `klear-owner` | 10 |
+| Site: unit tests | 33 |
+| Site: every page, light, dark and mobile, with an accessibility audit | 140 |
 
 Requires Rust, Foundry, Python 3 and Node.js. Keys never enter the repository (`.secrets/`, `.env`, a
 gitleaks pre-commit hook in `.githooks/`, and a secret scan in CI).
@@ -336,6 +381,22 @@ gitleaks pre-commit hook in `.githooks/`, and a secret scan in CI).
 Klear was called Keel until 2026-11-13. What was deployed before then keeps that name (`keel-*` accounts,
 `KeelLeg`, `KeelVault`, `KeelDeployer`): it is locked, so it cannot be renamed, and the code that built it stays as
 it was so its hashes still match.
+
+## Hackathon
+
+- **Tracks:** DeFi (primary): AI trading under rules on Hyperliquid and Base, with a way home anyone can run.
+  It also fits Agent Economy (agents earn rescue rewards over MCP, paid only on proof) and Privacy & Private AI (a
+  sealed strategy verified on NEAR; a confidential mandate on mainnet).
+- **NEAR, for what only it does here:** Chain Signatures (one keyless contract signs for accounts on two other
+  chains), Read MPC (it verifies HyperEVM and Base logs before acting), contracts with no access keys (rules nobody
+  can change), NEAR AI Cloud (sealed decisions, their TDX quote checked by NEAR's DCAP verifier), and NEAR Intents
+  with the Agent API (a confidential mandate and a private payout).
+- **Built during the hackathon:** every commit is from 2026-11-12 on; the hackathon ran 2026-11-01 to 11-14.
+- **AI-assisted:** written with Claude Code. The design, the rules and every decision on scope were reviewed by the
+  author.
+- **Business model (proposed, not built):** investors fund each strategy's rescue rewards themselves; Klear would
+  charge a flat fee per strategy created through the factory and a small share of each reward paid. Nothing is
+  charged on testnet.
 
 ## Repository
 

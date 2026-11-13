@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { SiteLink } from "@/components/site/SiteLink";
 import { TxLink } from "@/components/ui/Tx";
+import { transactionOutcome } from "@/components/ui/transaction-outcome";
 import { utc } from "@/lib/format";
 import { attest, confirmExit, openFlatten, settle, type Tx } from "@/lib/keel/calls";
 import { parseGlance, rescueDue, type Glance } from "@/lib/keel/glance";
 import { ConnectNear } from "./ConnectNear";
-import { Button } from "./StrategyActions";
+import { Button, Result } from "./StrategyActions";
 import { returned, useNearAccount, useTx } from "./useNear";
 
 /**
@@ -96,6 +97,7 @@ export function RescueFlow({
   const [exitKey, setExitKey] = useState<string | null>(null);
   const [exitLog, setExitLog] = useState<unknown>(null);
   const [note, setNote] = useState<string | null>(null);
+  const [acting, setActing] = useState(false);
   const [history, setHistory] = useState<{ what: string; hash: string | null }[]>([]);
   const { state: tx, run } = useTx();
 
@@ -104,6 +106,7 @@ export function RescueFlow({
       const response = await fetch(`/api/keel/strategy?judge=${judge}`, { cache: "no-store" });
       if (!response.ok) throw new Error("Strategy unavailable");
       const fresh = await response.json();
+      parseGlance(fresh.status);
       setState({ ...fresh, at: Date.now() });
       setReadFailed(false);
     } catch {
@@ -127,10 +130,15 @@ export function RescueFlow({
     const nonce = state?.rescue.exitNonce;
     if (step !== "wait-exit" || nonce == null) return;
     const poll = async () => {
-      const r = await fetch(`/api/keel/evidence?judge=${judge}&kind=exit&nonce=${nonce}`, { cache: "no-store" });
-      const j = await r.json();
-      if (j.log) setExitLog(j.log);
-      setNote(j.waiting ?? null);
+      try {
+        const r = await fetch(`/api/keel/evidence?judge=${judge}&kind=exit&nonce=${nonce}`, { cache: "no-store" });
+        if (!r.ok) throw new Error("Exit evidence unavailable");
+        const j = await r.json();
+        if (j.log) setExitLog(j.log);
+        setNote(j.waiting ?? null);
+      } catch {
+        setNote("Base evidence is unavailable. The next check will run shortly; no signature is needed while waiting.");
+      }
     };
     const first = setTimeout(() => void poll(), 0);
     const t = setInterval(() => void poll(), 30000);
@@ -143,7 +151,7 @@ export function RescueFlow({
   const sign = async (what: string, t: Tx) => {
     setNote(null);
     const r = await run(t);
-    if (r.kind === "done") setHistory((h) => [...h, { what, hash: r.hash }]);
+    if (r.kind === "done" && transactionOutcome(r) === "confirmed") setHistory((h) => [...h, { what, hash: r.hash }]);
     if (r.kind === "refused" && RETRY.test(r.reason))
       setNote(
         "Not yet: HyperCore needs a few hundred blocks to act on a signed order. Attest a newer snapshot in a minute and settle again.",
@@ -159,10 +167,10 @@ export function RescueFlow({
       return null;
     }
     const r = await sign("Attested a KeelLeg snapshot", attest(judge, "hyperevm", j.log));
-    return r.kind === "done" ? j.key : null;
+    return transactionOutcome(r) === "confirmed" ? j.key : null;
   };
 
-  const act = async () => {
+  const perform = async () => {
     if (step === "attest-open" || step === "attest-settle") setPerp(await snapshot());
     if (step === "open" || step === "settle") {
       const spot = await (await fetch(`/api/keel/evidence?judge=${judge}&kind=spot`, { cache: "no-store" })).json();
@@ -171,7 +179,7 @@ export function RescueFlow({
         step === "open" ? "Opened the rescue" : "Settled",
         step === "open" ? openFlatten(judge, perp!, spot.key) : settle(judge, perp!, spot.key),
       );
-      if (r.kind === "done") {
+      if (r.kind === "done" && transactionOutcome(r) === "confirmed") {
         const out = returned(r.outcome);
         if (out)
           setNote(
@@ -186,18 +194,37 @@ export function RescueFlow({
           cache: "no-store",
         })
       ).json();
+      if (!j.log || !j.key) return setNote(j.waiting ?? j.error ?? "No finalized Base exit evidence yet.");
       const r = await sign("Attested the vault's exit", attest(judge, "base", j.log));
-      if (r.kind === "done") setExitKey(j.key);
+      if (transactionOutcome(r) === "confirmed") setExitKey(j.key);
     }
     if (step === "confirm" && exitKey) {
       const r = await sign("Confirmed the exit", confirmExit(judge, exitKey));
-      if (r.kind === "done") setExitKey(null);
+      if (transactionOutcome(r) === "confirmed") setExitKey(null);
+    }
+  };
+
+  const act = async () => {
+    if (acting || readFailed || !state || transactionOutcome(tx) === "uncertain") return;
+    if (Date.now() - state.at > 30000) {
+      setReadFailed(true);
+      void refresh();
+      return;
+    }
+    setActing(true);
+    try {
+      await perform();
+    } catch {
+      setNote("Fresh evidence could not be loaded. Check the live state again before signing.");
+      setReadFailed(true);
+    } finally {
+      setActing(false);
     }
   };
 
   const mine = (state?.payouts ?? []).filter((p) => p.agent === me);
   const current = STEPS.findIndex((s) => s.id === step);
-  const readiness = practiceWindow ? practiceReadiness(state, glance, readFailed, practiceWindow) : null;
+  const readiness = practiceReadiness(state, glance, readFailed, practiceWindow);
 
   return (
     <div className="grid gap-5">
@@ -215,11 +242,18 @@ export function RescueFlow({
           {!readiness.open && (
             <SiteLink
               href="/try#recorded-rescue"
-              className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold underline hover:text-accent"
+              className="mt-2 flex min-h-11 w-fit items-center text-sm font-semibold underline hover:text-accent"
             >
               Rehearse the rescue without a wallet
             </SiteLink>
           )}
+          <button
+            type="button"
+            onClick={() => void refresh()}
+            className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold underline"
+          >
+            Check live state again
+          </button>
         </div>
       )}
       {connect && <ConnectNear nonce={nonce} />}
@@ -230,7 +264,7 @@ export function RescueFlow({
             {STEPS.map((s, i) => (
               <li
                 key={s.id}
-                className={`grid grid-cols-[28px_1fr] gap-3 rounded-md px-3 py-2.5 ${s.id === step ? "bg-surface-2 ring-1 ring-line-strong" : current > i || step === "done" ? "opacity-60" : "opacity-45"}`}
+                className={`grid grid-cols-[28px_1fr] gap-3 rounded-md px-3 py-2.5 ${s.id === step ? "bg-surface-2 ring-1 ring-line-strong" : "text-ink-2"}`}
                 aria-current={s.id === step ? "step" : undefined}
               >
                 <span className="font-mono text-sm text-ink-3">{String(i + 1).padStart(2, "0")}</span>
@@ -243,16 +277,26 @@ export function RescueFlow({
           </ol>
           {["attest-open", "open", "attest-settle", "settle", "attest-exit", "confirm"].includes(step) && (
             <div>
-              <Button disabled={tx.kind === "signing"} onClick={() => void act()}>
-                {tx.kind === "signing" ? "Waiting for your wallet…" : STEPS[current]?.title}
+              <p className="mb-3 text-xs text-ink-2">
+                Sign on NEAR testnet. Attesting evidence attaches 1 yoctoNEAR; other rescue actions attach 0 NEAR. Your
+                wallet quotes gas. The courier relays the judge’s orders on HyperEVM and Base. A confirmed signature
+                alone does not establish delivery.
+              </p>
+              <Button
+                disabled={
+                  acting || readFailed || !state || tx.kind === "signing" || transactionOutcome(tx) === "uncertain"
+                }
+                onClick={() => void act()}
+              >
+                {tx.kind === "signing"
+                  ? "Waiting for your wallet…"
+                  : acting
+                    ? "Loading fresh evidence…"
+                    : STEPS[current]?.title}
               </Button>
             </div>
           )}
-          {tx.kind === "refused" && (
-            <p role="alert" className="m-0 text-sm text-no">
-              The judge refused: {tx.reason}
-            </p>
-          )}
+          <Result state={tx} judge={judge} />
           {note && (
             <p role="status" className="m-0 text-sm text-ink-2">
               {note}
@@ -286,16 +330,27 @@ export function RescueFlow({
   );
 }
 
-function practiceReadiness(state: State | null, g: Glance | null, readFailed: boolean, window: string) {
+function practiceReadiness(state: State | null, g: Glance | null, readFailed: boolean, window?: string) {
   if (readFailed)
     return {
       title: "Live status unavailable",
       detail: "The judge could not be reached. Check again shortly.",
       open: false,
     };
-  if (!state || !g) return { title: "Checking the judge", detail: `Scheduled rescue window ${window}.`, open: false };
+  if (!state || !g)
+    return {
+      title: "Checking the judge",
+      detail: window ? `Scheduled rescue window ${window}.` : "Reading the current strategy state from NEAR testnet.",
+      open: false,
+    };
   if (g.mode === "flattened")
-    return { title: "Rescue complete", detail: "The next cycle starts at the daily drill.", open: false };
+    return {
+      title: "Rescue complete",
+      detail: window
+        ? "The next cycle starts at the daily drill."
+        : "The investor can fund and rearm the strategy for a new cycle.",
+      open: false,
+    };
   if (g.mode === "frozen")
     return {
       title: "Strategy frozen",
@@ -317,7 +372,9 @@ function practiceReadiness(state: State | null, g: Glance | null, readFailed: bo
   }
   return {
     title: "No rescue is due",
-    detail: `The scheduled window is ${window}. The judge opens the rescue when its trigger is met.`,
+    detail: window
+      ? `The scheduled window is ${window}. The judge opens the rescue when its trigger is met.`
+      : "The judge opens a rescue when the investor requests an exit or an attested trigger is met.",
     open: false,
   };
 }

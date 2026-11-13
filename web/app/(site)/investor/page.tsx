@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import { SiteLink } from "@/components/site/SiteLink";
-import { ArrowRight, External } from "@/components/ui/icons";
-import { LiveValue } from "@/components/ui/LiveValue";
+import { ArrowRight } from "@/components/ui/icons";
 import { LinkButton } from "@/components/ui/primitives";
-import { Hash } from "@/components/ui/Tx";
-import { config } from "@/lib/config";
 import { factory } from "@/lib/data/live";
-import { read } from "@/lib/keel/live";
-import { entries } from "@/lib/keel/registry";
+import { Suspense } from "react";
+import { LiveStrategyDirectory } from "@/components/strategies/LiveStrategyDirectory";
 
 export const metadata: Metadata = {
   title: "Investor workspace",
@@ -52,9 +49,7 @@ const privateOptions = [
   },
 ] as const;
 
-export default async function InvestorPage() {
-  const list = await read(entries);
-
+export default function InvestorPage() {
   return (
     <div className="page py-10 md:py-15">
       <header className="max-w-measure">
@@ -76,6 +71,27 @@ export default async function InvestorPage() {
           Inspect the practice strategy without a wallet <ArrowRight size={16} />
         </SiteLink>
       </header>
+
+      <section id="manage" aria-labelledby="manage-title" className="mt-10 border-t border-line pt-7 md:mt-12">
+        <div className="mb-5 max-w-measure">
+          <h2 id="manage-title" className="text-h2">
+            Your next step
+          </h2>
+          <p className="mt-2 text-sm text-ink-2">
+            Find a strategy by your investor account, or return to one saved here. Its live state points you to setup,
+            an open rescue, or the completed cycle.
+          </p>
+        </div>
+        <Suspense
+          fallback={
+            <p role="status" className="min-h-40 py-6 text-sm text-ink-2">
+              Reading live strategies from NEAR testnet…
+            </p>
+          }
+        >
+          <LiveStrategyDirectory />
+        </Suspense>
+      </section>
 
       <div className="mt-9 grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.7fr)] lg:gap-16">
         <section aria-labelledby="setup-title">
@@ -110,14 +126,9 @@ export default async function InvestorPage() {
             <SiteLink href="/rules" className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold">
               Try the rules simulator <ArrowRight size={14} />
             </SiteLink>
-            <a
-              href={`${config.repo}/tree/main/agents`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold"
-            >
-              Manager and relayer setup <External size={14} />
-            </a>
+            <SiteLink href="/agents" className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold">
+              Manager and relayer setup <ArrowRight size={14} />
+            </SiteLink>
           </div>
         </aside>
       </div>
@@ -142,60 +153,6 @@ export default async function InvestorPage() {
             </li>
           ))}
         </ul>
-      </section>
-
-      <section id="manage" aria-labelledby="manage-title" className="mt-10 border-t border-line pt-7 md:mt-14">
-        <h2 id="manage-title" className="text-h2">
-          Find a strategy
-        </h2>
-        <p className="mt-2 max-w-measure text-sm text-ink-2">
-          Choose from the public registry. On the strategy page, connect the investor’s NEAR wallet to request an exit
-          or start a new cycle after a rescue.
-        </p>
-        <div className="mt-4 rounded-md border border-line bg-surface">
-          <LiveValue
-            read={list}
-            render={(strategies) =>
-              strategies.length ? (
-                <ul className="divide-y divide-line">
-                  {[...strategies].reverse().map(({ judge, label }) => (
-                    <li
-                      key={judge}
-                      className="grid min-w-0 gap-2 p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center"
-                    >
-                      <div className="min-w-0">
-                        <h3 className="font-sans text-sm font-semibold tracking-normal">{label || judge}</h3>
-                        <div className="mt-0.5 text-sm text-ink-3">
-                          <Hash value={judge} />
-                        </div>
-                      </div>
-                      <SiteLink
-                        href={`/strategies/${judge}#setup-progress`}
-                        aria-label={`Open strategy: ${label || judge}`}
-                        className="inline-flex min-h-9 items-center gap-2 justify-self-start text-sm font-semibold text-accent no-underline hover:underline"
-                      >
-                        Open strategy <ArrowRight size={15} />
-                      </SiteLink>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="p-4 text-sm text-ink-2">The registry has no strategies yet.</p>
-              )
-            }
-            fallback={() => (
-              <p className="grid justify-items-start gap-1 p-4 text-sm text-ink-2">
-                The live registry is unavailable right now.
-                <SiteLink
-                  href={`/strategies/${factory.practice.judge}#investor-controls`}
-                  className="inline-flex min-h-9 items-center gap-2 font-semibold text-accent"
-                >
-                  Open the practice strategy <ArrowRight size={15} />
-                </SiteLink>
-              </p>
-            )}
-          />
-        </div>
       </section>
     </div>
   );

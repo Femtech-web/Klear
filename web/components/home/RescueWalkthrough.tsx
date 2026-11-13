@@ -31,6 +31,14 @@ export function RescueWalkthrough({ chapters, rehearsal }: { chapters: RescueCha
   const last = active === chapters.length - 1;
 
   useEffect(() => {
+    const pause = () => {
+      if (document.hidden) setPlaying(false);
+    };
+    document.addEventListener("visibilitychange", pause);
+    return () => document.removeEventListener("visibilitychange", pause);
+  }, []);
+
+  useEffect(() => {
     if (!playing || last) return;
     const timer = window.setTimeout(() => {
       setActive(active + 1);

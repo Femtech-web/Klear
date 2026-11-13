@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/judges",
     "/investor",
+    "/agents",
     "/try",
     "/how",
     "/rules",

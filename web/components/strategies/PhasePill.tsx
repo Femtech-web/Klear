@@ -1,5 +1,5 @@
 import { Pill, type Tone } from "@/components/ui/primitives";
-import { rescueDue, type Glance, type Phase } from "@/lib/keel/registry";
+import { rescueDue, type Glance, type Phase } from "@/lib/keel/glance";
 
 const LABEL: Record<Phase, [string, Tone]> = {
   watching: ["active", "neutral"],

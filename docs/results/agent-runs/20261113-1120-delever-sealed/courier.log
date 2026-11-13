@@ -1,0 +1,12 @@
+  courier snapshot: {'file': 'docs/results/delever/c-1794566492-perp-log.json'}
+  courier spot-probe: {}
+  courier snapshot: {'file': 'docs/results/delever/c-1794566655-perp-log.json'}
+  courier relayed-sweep: {'key': '6', 'tx': '0x6682de54eca3f3ee081b2dcbc1572d6c8a1f77cbcb8e02a01b58d32fc0fe12d5'}
+  courier relayed-exit: {'key': '2', 'tx': '0xec800c8adb590ff229323956f761d814610df461964777516485773fe64dd780'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794566828-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794566996-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794567153-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794567318-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794567485-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794567661-perp-log.json'}
+  courier spot-attested: {'out': ['base:0x415ca50028be6986205522acffbc1dacdae55a02457ad105b4acc7237f005a7c:47']}

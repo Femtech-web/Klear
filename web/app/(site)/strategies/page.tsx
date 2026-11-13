@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { SiteLink as Link } from "@/components/site/SiteLink";
-import { PhasePill } from "@/components/strategies/PhasePill";
+import { Suspense } from "react";
+import { DirectoryUnavailable, StrategyDirectory } from "@/components/strategies/StrategyDirectory";
 import { ArrowRight } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
-import { Card, LinkButton, Section, Stat } from "@/components/ui/primitives";
-import { Hash } from "@/components/ui/Tx";
+import { LinkButton, Section, Stat } from "@/components/ui/primitives";
 import { factory } from "@/lib/data/live";
-import { ago, near, utc } from "@/lib/format";
-import { phase, registry, type Listed } from "@/lib/keel/registry";
+import { phase } from "@/lib/keel/registry";
+import { getDirectorySnapshot } from "@/components/strategies/directory-snapshot";
 import { accessKeyCount } from "@/lib/chain/near";
 import { read } from "@/lib/keel/live";
 
@@ -17,51 +17,11 @@ export const metadata: Metadata = {
     "Every Klear strategy created through the factory, read live from NEAR testnet, and which ones need a rescue now.",
 };
 
-function Row({ item }: { item: Listed }) {
-  const { entry, glance } = item;
-  return (
-    <li className="grid gap-4 border-b border-line py-5 last:border-0 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto] md:items-center">
-      <div className="min-w-0">
-        <p className="m-0 font-sans text-lg font-semibold">{entry.label}</p>
-        <div className="mt-1 text-sm text-ink-2">
-          <Hash value={entry.judge} />
-        </div>
-        <p className="m-0 mt-1 text-sm text-ink-3">
-          created {utc(entry.createdAt * 1000)} by <code className="font-mono">{entry.creator}</code>
-        </p>
-      </div>
-      <LiveValue
-        read={glance}
-        render={(g) => (
-          <div className="grid gap-1.5 text-sm text-ink-2">
-            <span>
-              <PhasePill phase={phase(g)} glance={g} />
-            </span>
-            <span className="tabular-nums">
-              cycle {g.cycle + 1} · pool {near(g.poolYocto)}
-              {g.manager && g.heartbeatS > 0 && <> · manager seen {ago(g.lastHeartbeat)} ago</>}
-            </span>
-            {g.job && (
-              <span>
-                {g.job.kind} job by <code className="font-mono">{g.job.agent}</code>
-              </span>
-            )}
-          </div>
-        )}
-      />
-      <Link
-        href={`/strategies/${entry.judge}`}
-        className="group inline-flex items-center gap-1.5 justify-self-start text-sm font-medium text-accent no-underline md:justify-self-end"
-      >
-        Inspect
-        <ArrowRight size={15} className="transition-transform duration-300 ease-calm group-hover:translate-x-[3px]" />
-      </Link>
-    </li>
-  );
-}
-
 export default async function StrategiesPage() {
-  const [list, factoryKeys] = await Promise.all([registry(), read(() => accessKeyCount(factory.factory))]);
+  const [{ list, at }, factoryKeys] = await Promise.all([
+    getDirectorySnapshot(),
+    read(() => accessKeyCount(factory.factory)),
+  ]);
   const due = list.ok ? list.value.filter((x) => x.glance.ok && phase(x.glance.value) === "rescue-due").length : 0;
   return (
     <>
@@ -90,24 +50,25 @@ export default async function StrategiesPage() {
             note={factoryKeys.ok && factoryKeys.value === 0 ? "locked: its code is final" : undefined}
           />
         </div>
-        <Card>
-          <LiveValue
-            read={list}
-            render={(items) =>
-              items.length ? (
-                <ul className="m-0 list-none p-0">
-                  {items.map((item) => (
-                    <Row key={item.entry.judge} item={item} />
-                  ))}
-                </ul>
-              ) : (
-                <p className="m-0 text-ink-2">No strategy has been created yet.</p>
-              )
-            }
-          />
-        </Card>
-        <div className="mt-10 grid grid-cols-1 gap-6 rounded-lg border border-line bg-surface p-6 shadow-soft md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:p-8">
-          <div>
+        <LiveValue
+          read={list}
+          fallback={() => <DirectoryUnavailable />}
+          render={(items) => (
+            <Suspense fallback={<p className="py-6 text-ink-2">Loading strategy filters…</p>}>
+              <StrategyDirectory
+                practiceJudge={factory.practice.judge}
+                deleverJudge={factory.delever.judge}
+                items={items}
+                at={at}
+              />
+            </Suspense>
+          )}
+        />
+        <details className="mt-8 rounded-lg border border-line bg-surface p-5">
+          <summary className="min-h-11 cursor-pointer py-2 text-sm font-semibold">
+            Prefer to create from the command line?
+          </summary>
+          <div className="mt-3 mb-5 max-w-measure">
             <h2 className="font-display text-[1.5rem] tracking-[-0.015em]">Create one</h2>
             <p className="mt-2 text-ink-2">
               One NEAR transaction creates the judge, locked from birth, with your mandate; two deployments put its
@@ -136,7 +97,7 @@ export default async function StrategiesPage() {
               "  scripts/testnet/factory.sh create <name> <policy.json> <your-evm-address> <you>.testnet <pool-NEAR>",
             ].join("\n")}
           </pre>
-        </div>
+        </details>
         <p className="mt-6 max-w-measure text-sm text-ink-3">
           Factory <code className="font-mono">{factory.factory}</code> on NEAR testnet. Every judge it creates runs code
           with sha256 <code className="font-mono">{factory.judgeCodeSha256.slice(0, 16)}…</code>; the inspection page

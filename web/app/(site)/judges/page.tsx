@@ -60,6 +60,71 @@ function Recorded({ children, txs = [] }: { children: React.ReactNode; txs?: { c
   );
 }
 
+const LIMITS = [
+  [
+    "Where it runs.",
+    "Testnets with test funds, except two authorized mainnet privacy tests with a few dollars of the user's own. Nothing here is audited.",
+  ],
+  ["What it trades.", "One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg."],
+  [
+    "What you trust.",
+    "NEAR's MPC network to sign only for the judge and to verify logs honestly, and Hyperliquid to report and execute truthfully. The trust model says exactly where.",
+  ],
+  [
+    "Who runs the AI.",
+    "The manager is Claude with no tools, or in sealed mode an open model in a TEE on NEAR AI Cloud. A TEE flaw could leak the strategy, never move money: the judge decides every order.",
+  ],
+  [
+    "What the judge does not check yet.",
+    "NEAR verifies sealed receipts in a separate locked contract; the judge itself does not yet require one before it signs an order.",
+  ],
+  [
+    "What stays with a provider.",
+    "In a confidential mandate, the ledger's operators can read the balance, and the Agent API's backend enforces the policy.",
+  ],
+  [
+    "Who keeps the drill going.",
+    "The daily drill and its courier run on GitHub Actions with our testnet keys. The courier only pays gas; it cannot change what the judge signs.",
+  ],
+  [
+    "What the replay is.",
+    "A counterfactual: Klear's rules applied to real AI traders' fills, with the closing cost modelled, not trades Klear made.",
+  ],
+] as const;
+
+const ROADMAP = [
+  [
+    "Next",
+    "Sealed orders only with a receipt.",
+    "A judge that signs a sealed manager's order only if NEAR has verified its TEE receipt (the verifying contract is live and locked).",
+  ],
+  [
+    "Next",
+    "More recorded agent runs.",
+    "Off-the-shelf agents rescuing for pay on every daily drill window, each run recorded with its transcript.",
+  ],
+  [
+    "Then",
+    "An audit, then mainnet with caps.",
+    "An external review of the judge, the factory and the two accounts, then mainnet strategies with deposit limits.",
+  ],
+  [
+    "Then",
+    "The confidential mandate under the judge.",
+    "A rescue that also brings money home from a confidential account, through its locked owner, paid on proven arrival.",
+  ],
+  [
+    "Later",
+    "More markets and chains.",
+    "More Hyperliquid perpetuals, and spot vaults on other chains NEAR's MPC network can both read and sign for.",
+  ],
+  [
+    "Later",
+    "A guardian network.",
+    "Alerts the moment any strategy's rescue opens, so people and agents compete to bring money home first.",
+  ],
+] as const;
+
 export default async function JudgesPage() {
   const t = totals(HEADLINE.cap, HEADLINE.floor);
   const errors = replay.agents
@@ -465,21 +530,30 @@ export default async function JudgesPage() {
         </TableScroll>
       </Section>
 
-      <Section id="limits" tight title="Scope and limits">
-        <ul className="m-0 grid list-none gap-3 p-0 md:grid-cols-2">
-          {[
-            "Everything runs on testnets with test funds, except two authorized mainnet privacy tests with a few dollars of the user's own. Nothing here is audited.",
-            "One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.",
-            "NEAR's MPC network is trusted to sign and to verify honestly; that trust is NEAR's, not ours, and it is stated in the trust model.",
-            "The daily drill and its courier run on GitHub Actions with our testnet keys. The courier only pays gas: it cannot change anything the judge signs.",
-            "The replay is a counterfactual: Klear's rules applied to real fills, with the closing cost modelled, not trades Klear made.",
-            "The AI manager is Claude through its CLI, with no tools, or in sealed mode an open model in a TEE on NEAR AI Cloud; every decision is logged, and a sealed one's prompt stays with the investor.",
-          ].map((x) => (
-            <li key={x} className="border-t border-line pt-3 text-ink-2">
-              {x}
+      <Section id="scope" tight title="Scope and limits">
+        <ol className="m-0 grid max-w-measure list-none gap-4 p-0">
+          {LIMITS.map(([title, text], i) => (
+            <li key={title} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-t border-line pt-4">
+              <span className="font-mono text-sm text-ink-3">{String(i + 1).padStart(2, "0")}</span>
+              <p className="m-0 text-ink-2">
+                <span className="font-semibold text-ink">{title}</span> {text}
+              </p>
             </li>
           ))}
-        </ul>
+        </ol>
+      </Section>
+
+      <Section id="roadmap" tight title="Roadmap">
+        <ol className="m-0 grid max-w-measure list-none gap-4 p-0">
+          {ROADMAP.map(([when, title, text]) => (
+            <li key={title} className="grid gap-1 border-t border-line pt-4 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-3">
+              <span className="text-sm font-semibold text-ink-3">{when}</span>
+              <p className="m-0 text-ink-2">
+                <span className="font-semibold text-ink">{title}</span> {text}
+              </p>
+            </li>
+          ))}
+        </ol>
         <p className="mt-6 text-sm text-ink-3">
           The same guide, as a file: <a href={`${config.repo}/blob/main/JUDGES.md`}>JUDGES.md</a>.
         </p>

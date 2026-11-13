@@ -12,9 +12,9 @@
 # The real-network steps are in docs/testnet-runbook.md and scripts/testnet/g7.sh.
 
 SHELL := /bin/bash
-.PHONY: test rust evm e2e build judge judge-test factory factory-test live-read keys status replay replay-fetch web web-test release drill drill-install rescue
+.PHONY: test rust evm e2e build judge judge-test factory factory-test privacy-test live-read keys status replay replay-fetch web web-test release drill drill-install rescue
 
-test: rust evm e2e judge-test factory-test
+test: rust evm e2e judge-test factory-test privacy-test
 
 judge:
 	cd contracts/near-keel && ../../node_modules/.bin/cargo-near near build non-reproducible-wasm
@@ -29,6 +29,11 @@ factory: judge
 
 factory-test: judge
 	cd contracts/near-keel-factory && cargo test -q
+
+# klear-tee (sealed decisions verified on NEAR) and klear-owner (the confidential mandate's locked owner).
+privacy-test:
+	cd contracts/klear-tee && cargo test -q
+	cd contracts/klear-owner && cargo test -q
 
 build:
 	cargo build -q -p keel-core

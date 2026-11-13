@@ -66,6 +66,8 @@ jobs:
         run: make judge
       - name: the factory (it embeds the judge just built) and its tests
         run: make factory-test factory
+      - name: klear-tee and klear-owner (the privacy contracts)
+        run: make privacy-test
 
   evm:
     name: KeelLeg, KeelVault and the end-to-end loop through the judge (Foundry, simulated HyperCore)

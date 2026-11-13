@@ -42,7 +42,7 @@ export default function AgentsPage() {
       heading="h1"
       eyebrow="Recorded testnet run"
       title="An AI agent nobody wrote for Klear rescued it, and was paid"
-      lede="Claude Code, unmodified, with no built-in tools: only Klear's MCP servers, a NEAR account from the faucet, and one paragraph of instructions. It found the strategy whose rescue was due, checked it, rescued it, and the judge paid it 0.15 NEAR once both legs reached the investor."
+      lede="Claude Code, unmodified, with no built-in tools: only Klear's MCP servers, a NEAR account from the faucet, and one paragraph of instructions. It found the strategy whose rescue was due, checked it, rescued it, and the judge paid it 0.15 NEAR once both legs reached the investor. It has now done this on two strategies."
     >
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
         <Card raised>
@@ -80,9 +80,13 @@ export default function AgentsPage() {
           <Card>
             <h2 className="mb-3 font-sans text-lg font-semibold">Recorded as it happened</h2>
             <p className="m-0 text-sm text-ink-2">
-              The first run failed: every attempt crashed on our own HyperEVM log query, and the agent reported it was
-              not paid. After the fix it ran again. Its session dropped once on an API error mid-wait, and a second
-              session followed the same rescue to the end. Every transcript is published.
+              Three runs. The first failed on our own HyperEVM log query, and the agent said it was not paid. The second
+              was paid after its session dropped once mid-wait.
+            </p>
+            <p className="mt-2 text-sm text-ink-2">
+              In the third, on a strategy that had just made a sealed trade, the judge refused its first open: the order
+              was still live. It read the log, asked the hosted server, retried once the order expired, and was paid
+              0.15 NEAR. Every transcript is published.
             </p>
           </Card>
           <Card>

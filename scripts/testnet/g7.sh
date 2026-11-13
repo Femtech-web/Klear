@@ -167,8 +167,8 @@ case "${1:-}" in
     usdc=${2:?usdc}; wei=${3:?weth wei}
     .tools/venv/bin/python -I scripts/testnet/relayer.py to-perp "$usdc" >/dev/null
     .tools/venv/bin/python -I scripts/testnet/relayer.py send-perp-usdc "$G7_LEG" "$usdc" >/dev/null
-    echo "wrap ETH:     $(send_tx "$BASE" "$WETH" "deposit()" --value "$wei")"
-    echo "WETH -> vault: $(send_tx "$BASE" "$WETH" "transfer(address,uint256)" "$G7_VAULT" "$wei")"
+    tx=$(send_tx "$BASE" "$WETH" "deposit()" --value "$wei"); echo "wrap ETH:     $tx"
+    tx=$(send_tx "$BASE" "$WETH" "transfer(address,uint256)" "$G7_VAULT" "$wei"); echo "WETH -> vault: $tx"
     echo "vault WETH: $(weth_of "$G7_VAULT")"
     .tools/venv/bin/python -I scripts/testnet/relayer.py balances "$G7_LEG" | tail -8
     ;;
@@ -261,7 +261,8 @@ print(json.dumps(c))' "$policy" "$WETH" "$G7_INVESTOR")
     tuple=$(python3 -I -c 'import json,sys;o=json.loads(sys.argv[1])["order"];print("(%s,%s,%s,%s,%s,%s,%s)"%(o["nonce"],str(o["is_buy"]).lower(),o["limit_px"],o["sz"],str(o["reduce_only"]).lower(),o["cloid"],o["deadline"]))' "$rec")
     read -r v r s <<< "$(vrs "$rec")"
     before=$(cast call "$G7_LEG" 'readPosition(address)(int64,uint64,uint64,uint64)' "$G7_LEG" --rpc-url "$HYPER" | head -1)
-    echo "relayed $(send_tx "$HYPER" "$G7_LEG" "order((uint64,bool,uint64,uint64,bool,uint128,uint64),uint8,bytes32,bytes32)" "$tuple" "$v" "$r" "$s")"
+    tx=$(send_tx "$HYPER" "$G7_LEG" "order((uint64,bool,uint64,uint64,bool,uint128,uint64),uint8,bytes32,bytes32)" "$tuple" "$v" "$r" "$s")
+    echo "relayed $tx"
     python3 -I scripts/testnet/watch.py "$G7_LEG" "$before" 60
     ;;
   relay-sweep)
@@ -269,7 +270,8 @@ print(json.dumps(c))' "$policy" "$WETH" "$G7_INVESTOR")
     echo "$rec" > "$OUT/record-sweep-$2.json"
     read -r n ntl wei dl <<< "$(fields "$rec" sweep nonce usd_ntl usdc_wei deadline)"
     read -r v r s <<< "$(vrs "$rec")"
-    echo "sweep relayed $(send_tx "$HYPER" "$G7_LEG" "sweep(uint64,uint64,uint64,uint64,uint8,bytes32,bytes32)" "$n" "$ntl" "$wei" "$dl" "$v" "$r" "$s")"
+    tx=$(send_tx "$HYPER" "$G7_LEG" "sweep(uint64,uint64,uint64,uint64,uint8,bytes32,bytes32)" "$n" "$ntl" "$wei" "$dl" "$v" "$r" "$s")
+    echo "sweep relayed $tx"
     ;;
   relay-exit)
     rec=$(record "exit:${2:?vault nonce}"); [ "$rec" != "null" ] || { echo "no exit signature yet" >&2; exit 1; }

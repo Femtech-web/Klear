@@ -123,7 +123,10 @@ class Chain:
     def relay_order(self, key: str) -> dict:
         out = self.run("relay-order", key)
         js = [l for l in out.splitlines() if l.startswith("{")]
-        return {"tx": re.search(r"relayed (0x[0-9a-f]+)", out).group(1), "fill": json.loads(js[-1]) if js else None}
+        sent = re.search(r"relayed (0x[0-9a-f]+)", out)
+        if not sent:
+            raise RuntimeError(f"relay-order {key}: {out.strip()[-240:]}")
+        return {"tx": sent.group(1), "fill": json.loads(js[-1]) if js else None}
 
     def relay_sweep(self, nonce: int) -> str:
         return re.search(r"(0x[0-9a-f]{64})", self.run("relay-sweep", str(nonce))).group(1)

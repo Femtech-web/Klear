@@ -6,6 +6,8 @@ import { StrategyActions } from "@/components/flows/StrategyActions";
 import { notFound } from "next/navigation";
 import { SiteLink } from "@/components/site/SiteLink";
 import { PhasePill } from "@/components/strategies/PhasePill";
+import { SavedStrategy } from "@/components/strategies/SavedStrategy";
+import { DeploymentResume } from "@/components/strategies/DeploymentResume";
 import { SetupProgress } from "@/components/strategies/SetupProgress";
 import { Check, Cross } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
@@ -196,6 +198,24 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
       title={entry?.label ?? judge}
       lede={<Hash value={judge} />}
     >
+      {judge === factory.practice.judge && (
+        <p className="mb-5 max-w-measure text-sm text-ink-2">
+          Scheduled testnet drill. Klear deliberately stops this strategy’s manager to open a rescue.{" "}
+          <SiteLink href="/proof/drill" className="underline">
+            See the drill record
+          </SiteLink>
+          .
+        </p>
+      )}
+      {judge === factory.delever.judge && (
+        <p className="mb-5 max-w-measure text-sm text-ink-2">
+          Klear-operated testnet strategy used for the recorded deleverage.{" "}
+          <SiteLink href="/proof/deleverage" className="underline">
+            See the run and its limits
+          </SiteLink>
+          .
+        </p>
+      )}
       <div className="mb-4 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold">
         <SiteLink href="#verify-and-fund" className="inline-flex min-h-10 items-center hover:text-accent">
           Verify and fund
@@ -204,7 +224,13 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
           Strategy controls
         </SiteLink>
       </div>
-      <SetupProgress x={x} verified={Boolean(verified)} />
+      <div className="mb-5 flex flex-wrap items-center gap-3">
+        <SavedStrategy judge={judge} />
+        <SiteLink href="/investor#manage" className="inline-flex min-h-11 items-center text-sm text-ink-2 underline">
+          Return to investor workspace
+        </SiteLink>
+      </div>
+      <SetupProgress x={x} verified={Boolean(verified)} judge={judge} />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <Card raised>
           <h2 id="verify-and-fund" className="mb-1 font-sans text-lg font-semibold">
@@ -214,6 +240,20 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
             Each line is read from NEAR, HyperEVM and Base when you load this page.
           </p>
           <Checks x={x} />
+          {!verified &&
+            entry &&
+            x.keys.ok &&
+            x.keys.value === 0 &&
+            x.code.ok &&
+            x.factoryJudgeCode.ok &&
+            x.code.value === x.factoryJudgeCode.value &&
+            x.derived.ok && (
+              <DeploymentResume
+                judge={judge}
+                legController={x.derived.value.leg}
+                vaultController={x.derived.value.vault}
+              />
+            )}
           <div className="mt-4 border-t border-line pt-4">
             <h3 className="text-base">Funding addresses</h3>
             {verified && strategy ? (

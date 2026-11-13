@@ -1,0 +1,48 @@
+├  Unsigned transaction:
+│    signer_id:    klear-mandate-92fc7f.testnet
+│    receiver_id:  klear-tee-4746e3.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  verify_receipt
+│                       args:         {
+│                                       "signature": "a8463bcc7fea06dcde0eb64b87d592ae284dd1570319a3cfa0abe824263081d4d1e7544639827466ac699065666a3a5d54999a82372da3b33e34506d47e09b01",
+│                                       "signed_text": "z-ai/glm-5.3-flash:1824633f9f2b6c8f105f71d3fe726785ff58a31917f14f4bdacc8798a21f60d1:f4687a0cfd6e3d6cf3d33fa7b53d5108261c6ae6ed9ac31e81092cfc0e199c51",
+│                                       "signing_key": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z
+│    Signature:  ed25519:4e5VJSJLxPanHsUvxXWrbUYi8tdEqfZtuAKXst2Ujup8PDwtDRXRs3btLqnXZYkmtChBHB87MSuaJiCH9LXrqupA
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 2.5 Tgas
+│    Transaction fee: 0.0002264279440176 NEAR
+│    Transaction ID: DghS9e82hk8kcy2SQ465JtShFpbZXHWmFXCe6gDzfbSP
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/DghS9e82hk8kcy2SQ465JtShFpbZXHWmFXCe6gDzfbSP
+│     [0m
+├  Function execution logs:
+│    [36mLogs [klear-tee-4746e3.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "model": "z-ai/glm-5.3-flash",
+  "signed_text": "z-ai/glm-5.3-flash:1824633f9f2b6c8f105f71d3fe726785ff58a31917f14f4bdacc8798a21f60d1:f4687a0cfd6e3d6cf3d33fa7b53d5108261c6ae6ed9ac31e81092cfc0e199c51",
+  "signer": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff",
+  "verified_at_ns": 1794566597174819943,
+  "verified_by": "klear-mandate-92fc7f.testnet"
+}
+
+
+The "verify_receipt" call to <klear-tee-4746e3.testnet> on behalf of <klear-mandate-92fc7f.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction klear-tee-4746e3.testnet verify_receipt json-args '{"signed_text": "z-ai/glm-5.3-flash:1824633f9f2b6c8f105f71d3fe726785ff58a31917f14f4bdacc8798a21f60d1:f4687a0cfd6e3d6cf3d33fa7b53d5108261c6ae6ed9ac31e81092cfc0e199c51", "signature": "a8463bcc7fea06dcde0eb64b87d592ae284dd1570319a3cfa0abe824263081d4d1e7544639827466ac699065666a3a5d54999a82372da3b33e34506d47e09b01", "signing_key": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff"}' prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as klear-mandate-92fc7f.testnet network-config testnet sign-with-access-key-file /Users/mac/work/web3/near/keel/.secrets/near/klear-mandate-92fc7f.testnet.json send[39m
+

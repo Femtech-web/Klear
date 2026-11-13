@@ -94,8 +94,16 @@ def main() -> None:
             llm.note(log, "manager", "judge-verdict", proposal={"side": d["action"], "sz": sz, "limit_px": px}, tx=c.tx, refused=c.error, outcome=c.outcome)
             print(f"    judge: {c.error or c.outcome['outcome']} ({c.tx})")
             if c.ok and c.outcome and c.outcome["outcome"] == "sign":
-                time.sleep(4)
-                r = chain.relay_order(f"0:{c.outcome['order']['nonce']}")
+                # The MPC signature reaches the judge seconds after the call, and a HyperEVM send can fail: retry
+                # until relayed (a repeat of a landed order is refused by its nonce).
+                for attempt in range(10):
+                    time.sleep(4)
+                    try:
+                        r = chain.relay_order(f"0:{c.outcome['order']['nonce']}")
+                        break
+                    except RuntimeError:
+                        if attempt == 9:
+                            raise
                 llm.note(log, "relayer", "relayed", **r)
                 print(f"    relayed {r['tx']}: {r['fill']}")
         if i + 1 < a.cycles:
