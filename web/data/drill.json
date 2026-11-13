@@ -1,5 +1,44 @@
 [
  {
+  "cycle": 3,
+  "started": 1794568151,
+  "ended": 1794572001,
+  "ok": true,
+  "error": null,
+  "rescuer": "guardian.keel-practice-53ee75.testnet",
+  "trigger": "manager-silent",
+  "payouts": [
+   {
+    "agent": "guardian.keel-practice-53ee75.testnet",
+    "yocto": "100000000000000000000000",
+    "reason": "perp"
+   },
+   {
+    "agent": "guardian.keel-practice-53ee75.testnet",
+    "yocto": "50000000000000000000000",
+    "reason": "spot"
+   }
+  ],
+  "deliveries": [
+   {
+    "leg": "perp",
+    "amount": "346442100",
+    "chain": "hyperevm",
+    "tx": "0xabc9358ca429df9fb3adf9606cc2ae67469f4d8feaf743483b10e1228ebacd35"
+   },
+   {
+    "leg": "spot",
+    "amount": "4000000000000000",
+    "chain": "base",
+    "tx": "0x9ba37800c3100681187c39a2bedd25ff55c076c687b77ce67ab86be063c5c566"
+   }
+  ],
+  "txs": {
+   "rearm": "4jKCzfBQAtVddLVuDXBuBBGHpsbmkehRKbYaNKG3Mk9X",
+   "short": "AcyCRWyZX1runa2toKjMSfwTxXWarYnQQ7D5fDNCJ6Bz"
+  }
+ },
+ {
   "cycle": 2,
   "started": 1794561703,
   "ended": 1794563923,
