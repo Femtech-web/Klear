@@ -5,3 +5,76 @@
 [15:52:57] deleverage run 1 of 8
 [15:53:03] rearm: {"tx": "EkGjteiarDaC2YESXJLRQ7FtmRVvcbUEZhTmqz14uHzr", "refused": null}
 [15:53:34] fund: {"out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}
+[16:12:37] spot-attested: {"evidence": "base:0x9f9fb81a817f235eec4f576c49309d64616746a4c79d44a7b02a349408e82167:13"}
+[16:12:43] request-exit: {"out": ["Transaction ID: 4DYvxX6HcVyHku2pbiG6WEp5ebdZr3mzX9nrCtT2RHTw"]}
+[16:12:44] agent-start: {"servers": ["klear-local", "klear"], "agent": "klear-agent-0f366c.testnet"}
+[16:41:22] agent-done: {"code": 0, "minutes": 28.6, "paid": [{"job_id": 6, "agent": "klear-agent-0f366c.testnet", "amount": "100000000000000000000000", "reason": "perp"}, {"job_id": 6, "agent": "klear-agent-0f366c.testnet", "amount": "50000000000000000000000", "r
+[16:41:22] run 20261113-1552: exit 0, paid 2 leg(s)
+[16:41:24] deleverage run 2 of 8
+[16:41:32] rearm: {"tx": "ENvmhL328ZpwUGqsp9PKD8cbMtmGGBmYNGvLE325UuC3", "refused": null}
+[16:42:13] fund: {"out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}
+[16:42:15] spot-attested: {"evidence": "base:0x1faf5cb2c32af8ffae4a45733f416f36ed98a02da6857d626acfb21e4ce8f037:14"}
+[16:42:21] request-exit: {"out": ["Transaction ID: GLVyxARrPjMtvNN858d9AP1jR5uZvd57ET5dURCygW4d"]}
+[16:42:23] agent-start: {"servers": ["klear-local", "klear"], "agent": "klear-agent-0f366c.testnet"}
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py", line 1344, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1336, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1382, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1331, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1091, in _send_output
+    self.send(msg)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1035, in send
+    self.connect()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1470, in connect
+    super().connect()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1001, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socket.py", line 841, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/net.py", line 38, in _getaddrinfo
+    raise socket.gaierror(socket.EAI_NONAME, f"{host}: no address from the system resolver or 1.1.1.1") from None
+socket.gaierror: [Errno 8] test.rpc.fastnear.com: no address from the system resolver or 1.1.1.1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/mac/work/web3/near/keel/agents/agent_run.py", line 134, in <module>
+    main()
+  File "/Users/mac/work/web3/near/keel/agents/agent_run.py", line 127, in main
+    paid = [x for x in chain.strategy()["payouts"][paid_before:] if x["agent"] == a.agent]
+                       ^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/chain.py", line 148, in strategy
+    return self.view("get_strategy")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/chain.py", line 142, in view
+    r = post_json(NEAR_RPC, body)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/net.py", line 54, in post_json
+    return json.load(urllib.request.urlopen(req, timeout=timeout, context=_CTX))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py", line 1392, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/urllib/request.py", line 1347, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 8] test.rpc.fastnear.com: no address from the system resolver or 1.1.1.1>
+[20:27:11] run 20261113-1641: exit 1, paid 0 leg(s)
+[20:27:11] stopping: that run failed or was not paid

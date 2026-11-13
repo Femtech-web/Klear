@@ -55,3 +55,20 @@
 {"at": 1794576279, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794576272-perp-log.json"}
 {"at": 1794576443, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794576436-perp-log.json"}
 {"at": 1794576608, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794576600-perp-log.json"}
+{"at": 1794582769, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794582763-perp-log.json"}
+{"at": 1794582769, "role": "courier", "kind": "spot-probe"}
+{"at": 1794582837, "role": "courier", "kind": "relayed-sweep", "key": "10", "tx": "0xababc64a0f7e187304f5091429f47791363c271b938adf5b5d5764354ff59976"}
+{"at": 1794582840, "role": "courier", "kind": "relayed-exit", "key": "4", "tx": "0x1f00990cbf3c13261131ed59607acee3f5ccb7846957736b5aa26b16fd8bc374"}
+{"at": 1794582945, "role": "courier", "kind": "tick-failed", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794582982, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794582975-perp-log.json"}
+{"at": 1794583145, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794583138-perp-log.json"}
+{"at": 1794583308, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794583301-perp-log.json"}
+{"at": 1794583568, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794583560-perp-log.json"}
+{"at": 1794583799, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794583787-perp-log.json"}
+{"at": 1794584008, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794584000-perp-log.json"}
+{"at": 1794584008, "role": "courier", "kind": "spot-attested", "out": ["base:0x1faf5cb2c32af8ffae4a45733f416f36ed98a02da6857d626acfb21e4ce8f037:14"]}
+{"at": 1794584460, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794584451-perp-log.json"}
+{"at": 1794584460, "role": "courier", "kind": "spot-probe"}
+{"at": 1794584550, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794584542-perp-log.json"}
+{"at": 1794584550, "role": "courier", "kind": "spot-probe"}
+{"at": 1794585370, "role": "courier", "kind": "tick-failed", "error": "<urlopen error [Errno 8] test.rpc.fastnear.com: no address from the system resolver or 1.1.1.1>"}

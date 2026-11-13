@@ -1,0 +1,5 @@
+{"at": 1794584492, "role": "agent-run", "kind": "rearm", "tx": "ENvmhL328ZpwUGqsp9PKD8cbMtmGGBmYNGvLE325UuC3", "refused": null}
+{"at": 1794584533, "role": "agent-run", "kind": "fund", "out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}
+{"at": 1794584535, "role": "agent-run", "kind": "spot-attested", "evidence": "base:0x1faf5cb2c32af8ffae4a45733f416f36ed98a02da6857d626acfb21e4ce8f037:14"}
+{"at": 1794584541, "role": "agent-run", "kind": "request-exit", "out": ["Transaction ID: GLVyxARrPjMtvNN858d9AP1jR5uZvd57ET5dURCygW4d"]}
+{"at": 1794584543, "role": "agent-run", "kind": "agent-start", "servers": ["klear-local", "klear"], "agent": "klear-agent-0f366c.testnet"}

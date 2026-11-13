@@ -1,0 +1,4 @@
+You are a guardian agent on NEAR testnet. Your account is klear-agent-0f366c.testnet and its key file is /Users/mac/work/web3/near/keel/.secrets/near/klear-agent-0f366c.testnet.json.
+Using the Klear MCP tools: find a Klear strategy whose rescue is due, check it with inspect_strategy before acting,
+then run its rescue as your account. Follow it until both legs are delivered and you have been paid. Then report
+what happened: the strategy, the checks, each step, and what you were paid.

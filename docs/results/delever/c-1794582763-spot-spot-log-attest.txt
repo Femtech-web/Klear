@@ -1,0 +1,64 @@
+├  Unsigned transaction:
+│    signer_id:    keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  attest
+│                       args:         {
+│                                       "chain": "base",
+│                                       "log": {
+│                                         "address": "0x104d138c0f09e899e12a3aa49dc67e5a6768b773",
+│                                         "blockHash": "0x7b7f781fe5bb653a8a879a4aba498310a6d858d34d4d358a3fdf8c1c1bc2fea4",
+│                                         "blockNumber": "0x379a802",
+│                                         "blockTimestamp": "0x6af728f3",
+│                                         "data": "0x000000000000000000000000000000000000000000000000000e35fa931a0000000000000000000000000000000000000000000000000000000000000379a802000000000000000000000000000000000000000000000000000000006af728f3632d313739343538323736332d73706f74000000000000000000000000000000",
+│                                         "logIndex": "0xe",
+│                                         "removed": false,
+│                                         "topics": [
+│                                           "0x2bd3e38a1c6aed238c688414f6919db3a3533a99f0c51942438603c49641b8e6",
+│                                           "0x000000000000000000000000104d138c0f09e899e12a3aa49dc67e5a6768b773",
+│                                           "0x0000000000000000000000004200000000000000000000000000000000000006"
+│                                         ],
+│                                         "transactionHash": "0x1faf5cb2c32af8ffae4a45733f416f36ed98a02da6857d626acfb21e4ce8f037",
+│                                         "transactionIndex": "0x5"
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      1 yoctoNEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A53Zv5KE5WF1ww5QsDhcvenvDkLYGC1TQnsTCrj9Qf7V
+│    Signature:  ed25519:43yAaZ2pNy72dCtYVHRjWFtRcMNzWe86SvR8scyLpNaESDVkoDcZSXXW9miULy5ygCKwndJrEZJE4tzxLWndXY4n
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 16.2 Tgas
+│    Transaction fee: 0.0015269349180333 NEAR
+│    Transaction ID: 4iYPpyu4exNae59w13XkExLT9ekqcN3xLL1Nf96Z5YBB
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/4iYPpyu4exNae59w13XkExLT9ekqcN3xLL1Nf96Z5YBB
+│     [0m
+├  Function execution logs:
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      verify_foreign_transaction: predecessor=AccountId("delever.keel-factory-bcf915.testnet"), request=VerifyForeignTransactionRequestArgs { request: Base(EvmRpcRequest { tx_id: EvmTxId([31, 175, 92, 178, 195, 42, 248, 255, 174, 74, 69, 115, 63, 65, 111, 54, 237, 152, 160, 45, 166, 133, 125, 98, 106, 207, 178, 30, 76, 232, 240, 55]), extractors: BoundedVec { inner: [Log { log_index: 14 }], witness: PossiblyEmpty(()) }, finality: Finalized }), domain_id: DomainId(3), payload_version: V1, expected_payload_hash: Some(Hash256([31, 240, 212, 84, 189, 103, 114, 139, 183, 63, 189, 110, 41, 129, 111, 92, 189, 33, 223, 64, 186, 8, 101, 255, 21, 78, 18, 106, 237, 104, 119, 251])) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m
+│      attested base:0x1faf5cb2c32af8ffae4a45733f416f36ed98a02da6857d626acfb21e4ce8f037:14 for keel-delever-7953ec.testnet
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+true
+
+
+The "attest" call to <delever.keel-factory-bcf915.testnet> on behalf of <keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet attest json-args '{"chain": "base", "log": {"address": "0x104d138c0f09e899e12a3aa49dc67e5a6768b773", "topics": ["0x2bd3e38a1c6aed238c688414f6919db3a3533a99f0c51942438603c49641b8e6", "0x000000000000000000000000104d138c0f09e899e12a3aa49dc67e5a6768b773", "0x0000000000000000000000004200000000000000000000000000000000000006"], "data": "0x000000000000000000000000000000000000000000000000000e35fa931a0000000000000000000000000000000000000000000000000000000000000379a802000000000000000000000000000000000000000000000000000000006af728f3632d313739343538323736332d73706f74000000000000000000000000000000", "blockHash": "0x7b7f781fe5bb653a8a879a4aba498310a6d858d34d4d358a3fdf8c1c1bc2fea4", "blockNumber": "0x379a802", "blockTimestamp": "0x6af728f3", "transactionHash": "0x1faf5cb2c32af8ffae4a45733f416f36ed98a02da6857d626acfb21e4ce8f037", "transactionIndex": "0x5", "logIndex": "0xe", "removed": false}}' prepaid-gas '300.0 Tgas' attached-deposit '1 yoctoNEAR' sign-as keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-delever-7953ec.testnet.json send[39m
+
