@@ -2,7 +2,7 @@
 
 Authorized by the user, funded by the user (3 USDC from their own Hyperliquid account). One real swap through
 NEAR Intents' 1Click API with `confidentiality: "basic"`: USDC on HyperCore into a **confidential** USDC balance on
-NEAR Intents, owned by Keel's test account `143fa266…c87c` (its key is in `.secrets/near-mainnet/`).
+NEAR Intents, owned by Klear's test account `143fa266…c87c` (its key is in `.secrets/near-mainnet/`).
 
 ## What happened
 
@@ -25,7 +25,7 @@ NEAR Intents, owned by Keel's test account `143fa266…c87c` (its key is in `.se
 | **What that account holds afterwards** (public `intents.near` reports 0) | **no** |
 
 So Confidential Intents, as exercised here, hides the **recipient and its balance**, not the amount in flight or
-the sender on the source chain. For Keel this fits the post-rescue design in `docs/privacy.md`: a rescue's payout
+the sender on the source chain. For Klear this fits the post-rescue design in `docs/privacy.md`: a rescue's payout
 can land in a balance that no public reader can attribute to the investor, while the rescue itself stays fully
 verifiable on public chains.
 

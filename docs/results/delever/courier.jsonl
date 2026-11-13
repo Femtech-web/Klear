@@ -1,0 +1,13 @@
+{"at": 1794527371, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794527362-perp-log.json"}
+{"at": 1794527371, "role": "courier", "kind": "spot-probe"}
+{"at": 1794527445, "role": "courier", "kind": "relayed-order", "key": "2:2", "tx": "0xf3928651e58c0eb69b5ab42ad9c785d10353dd8ab1d0d17ff6e87d8dd04d2c4b"}
+{"at": 1794527448, "role": "courier", "kind": "relayed-exit", "key": "0", "tx": "0x78243f8e6fd5c02b047d49cc055b92672ef02a24e0d002bacab09d320a693c2e"}
+{"at": 1794527547, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794527541-perp-log.json"}
+{"at": 1794527709, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794527703-perp-log.json"}
+{"at": 1794527823, "role": "courier", "kind": "relayed-sweep", "key": "3", "tx": "0x97ea13ff8450bb4ab38298396fb71beb441eec26338ef87603f162a200f8a9b7"}
+{"at": 1794527865, "role": "courier", "kind": "tick-failed", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794527902, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794527896-perp-log.json"}
+{"at": 1794528066, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794528058-perp-log.json"}
+{"at": 1794528231, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794528221-perp-log.json"}
+{"at": 1794528406, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794528391-perp-log.json"}
+{"at": 1794528568, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794528562-perp-log.json"}

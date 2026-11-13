@@ -4,7 +4,8 @@ import { Card, LinkButton, Pill, Section } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: "Trust",
-  description: "What “no keys” means and does not mean: who can do what, what Keel relies on, and what could go wrong.",
+  description:
+    "What “no keys” means and does not mean: who can do what, what Klear relies on, and what could go wrong.",
 };
 
 const POWERS = [
@@ -97,7 +98,7 @@ export default function TrustPage() {
         tight
         eyebrow="Privacy"
         title="Public by default. Private where it can be proven."
-        lede="Keel's protections need public, verifiable balances, so a strategy's positions are public. Where your money goes after a rescue can be private: we tested it on mainnet with real funds."
+        lede="Klear's protections need public, verifiable balances, so a strategy's positions are public. Where your money goes after a rescue can be private: we tested it on mainnet with real funds."
       >
         <TableScroll label="What a confidential payout hides">
           <table className="w-full min-w-[560px] border-collapse text-[0.95rem]">
@@ -133,7 +134,7 @@ export default function TrustPage() {
         </p>
       </Section>
 
-      <Section id="limits" tight eyebrow="What Keel relies on" title="And what it would cost if each failed">
+      <Section id="limits" tight eyebrow="What Klear relies on" title="And what it would cost if each failed">
         <div className="grid gap-4 md:grid-cols-2">
           {RELIES.map(([what, risk, bound]) => (
             <Card key={what}>

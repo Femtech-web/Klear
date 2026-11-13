@@ -1,6 +1,6 @@
 # A live deleverage (2026-11-12)
 
-The claim: a Keel judge can cut a manager's risk early, before the floor, and pays whoever does it only when the
+The claim: a Klear judge can cut a manager's risk early, before the floor, and pays whoever does it only when the
 cut is proven. The test: a strategy created through the factory, `delever.keel-factory-bcf915.testnet` (locked
 from birth, judge v3.1 `2aeaaf8b…`), with this mandate ([policy.json](policy.json)):
 
@@ -26,7 +26,27 @@ $11.7 with ETH at $1,967: above the floor, under the warning level. The run is
 | Attest a settled snapshot, settle | [`4ZyynvDu…`](https://testnet.nearblocks.io/txns/4ZyynvDuUMbVw6pktcHvjpMDhvWioQm3pciVHewTfbMg), [`52X2qJsZ…`](https://testnet.nearblocks.io/txns/52X2qJsZPjz3oQamskBcRNYAv7hFJEByT7DCm956Dxe3) | **saw 0.0011 ETH, at the target: `repaired`, 0.1 NEAR paid to the guardian**; the strategy is active again |
 
 From the second open to the reward: 70 seconds. The cut cost $0.046 in fees and realized loss. After it, the
-strategy holds 0.0011 ETH on $3.85 of margin, and the manager trades on under the same mandate.
+strategy holds 0.0011 ETH on $3.85 of margin, active again, until the investor's exit below.
+
+## Afterwards: the investor's exit
+
+The same night, the investor took the money home through the same strategy, with the tools a stranger uses: the
+guardian ran `agents/rescue.py --judge delever.keel-factory-bcf915.testnet` with only its NEAR key, and the courier
+(`agents/courier.py`) paid the EVM gas. Record: [exit.jsonl](exit.jsonl).
+
+| Step | Transaction | What the judge did |
+|---|---|---|
+| The investor asks to exit | [`4BP3Mz89…`](https://testnet.nearblocks.io/txns/4BP3Mz89YzK7Sou8ASWNJkjjsQcTtazRezeCePQUf8AM) | recorded the request: a rescue is now open to anyone |
+| The guardian opens the rescue | [`n7L3dSrQ…`](https://testnet.nearblocks.io/txns/n7L3dSrQmEbqgWrxNe4mNh2mu38sd3yg6NMWKRPtMLg) | signed a reduce-only close of the 0.0011 ETH and the vault's exit to the investor |
+| (the courier relays both) | HyperEVM `0xf3928651…`, Base `0x78243f8e…` | the close filled: HyperCore accepted a reduce-only order under its $10 minimum because it closed the whole position |
+| Settle | [`FZ2RQyHm…`](https://testnet.nearblocks.io/txns/FZ2RQyHmNQdWsQSqdduvxuZ9icVaWB9pWWhvkfH81gSK) | saw the position closed; signed the sweep of the margin (relayed `0x97ea13ff…`) |
+| Settle | [`FSDAK16U…`](https://testnet.nearblocks.io/txns/FSDAK16UoGr6Lev4Snss4QpPepbpudUa5kn5qvJcdGSa) | **3.835446 USDC seen at the investor's HyperCore address; 0.1 NEAR paid** |
+| Attest the vault's `Exited` log, confirm | [`CPBi87E7…`](https://testnet.nearblocks.io/txns/CPBi87E7XNKXbbHfL4BcLzRCu5yCwnowqHu8NBQznUHB), [`Ft9q52ow…`](https://testnet.nearblocks.io/txns/Ft9q52owg4mv6ck8hgyFx7f2ZYZTSkmqAABjT1ZK1Vsy) | **0.004 WETH proven at the investor's Base address; 0.05 NEAR paid**; the strategy is closed (`flattened`) |
+
+Two interruptions, both recorded: the guardian's process stopped once on a HyperEVM RPC node that had not yet
+seen the block another node named (`invalid block height`, now retried), and on restart it tried to open the
+rescue again and was refused `evidence-reused` ([`A9re29rR…`](https://testnet.nearblocks.io/txns/A9re29rRv5BUkTU8HaPAWWZQzpcM7XEcAhDsG4S47Xdn)).
+`agents/guardian.py` now resumes its own open job instead.
 
 ## What this shows
 
@@ -43,4 +63,4 @@ strategy holds 0.0011 ETH on $3.85 of margin, and the manager trades on under th
 
 - `leverage-drift` (prices pushing leverage past the cap with no order) is the other trigger; it is covered by the
   engine and judge tests, not run live.
-- The guardian here is a Keel account, not a stranger; the rescue's stranger run is in [visitor](../visitor/README.md).
+- The guardian here is a Klear account, not a stranger; the rescue's stranger run is in [visitor](../visitor/README.md).

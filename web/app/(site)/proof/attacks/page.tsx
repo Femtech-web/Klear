@@ -7,7 +7,7 @@ import { breakChallenges, deployment, liveAttacks } from "@/lib/data/live";
 export const metadata: Metadata = {
   title: "Try to break it",
   description:
-    "Sixteen ways to attack a locked Keel judge holding real testnet funds, how to try each, and what happened when we did.",
+    "Sixteen ways to attack a locked Klear judge holding real testnet funds, how to try each, and what happened when we did.",
 };
 
 export default function BreakPage() {

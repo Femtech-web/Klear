@@ -1,4 +1,4 @@
-//! Replays Alpha Arena's AI agents' real Hyperliquid history through Keel's mandate rules.
+//! Replays Alpha Arena's AI agents' real Hyperliquid history through Klear's mandate rules.
 //!
 //!   cargo run -p keel-replay --release -- [fixtures/replay/raw] [docs/results/replay]
 //!
@@ -72,10 +72,10 @@ fn markdown(reports: &[Report]) -> String {
     let refused: usize = reports.iter().map(|r| r.leverage[c].refused).sum();
     let errors: Vec<f64> = reports.iter().filter_map(validation_error).collect();
 
-    let _ = writeln!(s, "# Alpha Arena, replayed through Keel\n");
+    let _ = writeln!(s, "# Alpha Arena, replayed through Klear\n");
     let _ = writeln!(s, "In Alpha Arena Season 1.5, AI models each traded $10,000 of real money on Hyperliquid. Their wallets are");
     let _ = writeln!(s, "public. We pulled every fill, funding payment and transfer of all {} agents from Hyperliquid's public API,", reports.len());
-    let _ = writeln!(s, "rebuilt each account fill by fill, and applied Keel's mandate with the same functions the NEAR judge uses");
+    let _ = writeln!(s, "rebuilt each account fill by fill, and applied Klear's mandate with the same functions the NEAR judge uses");
     let _ = writeln!(s, "(`keel_core::rules`). Policy reported here: **a 3x leverage cap and a floor 30% under the starting value**.\n");
     let _ = writeln!(s, "## What it shows\n");
     let _ = writeln!(s, "- The {} agents started with {} and ended with {}, after {} of losses across the losing agents.", reports.len(), usd(start), usd(end), usd(lost));
@@ -88,7 +88,7 @@ fn markdown(reports: &[Report]) -> String {
         let _ = writeln!(s, "- **Reconstruction check:** against Hyperliquid's own account-value points, the median error is {:.1}% of the stake (per agent; worst {:.1}%).", 100.0 * e[e.len() / 2], 100.0 * e[e.len() - 1]);
     }
     let _ = writeln!(s, "\n## Per agent (3x cap, floor at 70%)\n");
-    let _ = writeln!(s, "| Model | Competition | Start | End (real) | Max lev. | Mean lev. | Refused at 3x | Floor broke | Investor with Keel | Saved |");
+    let _ = writeln!(s, "| Model | Competition | Start | End (real) | Max lev. | Mean lev. | Refused at 3x | Floor broke | Investor with Klear | Saved |");
     let _ = writeln!(s, "|---|---|---|---|---|---|---|---|---|---|");
     let mut sorted: Vec<&Report> = reports.iter().collect();
     sorted.sort_by(|a, b| (a.final_usd - a.initial_usd).total_cmp(&(b.final_usd - b.initial_usd)));
@@ -124,7 +124,7 @@ fn markdown(reports: &[Report]) -> String {
     let _ = writeln!(s, "- **Leverage:** at every fill that adds exposure, gross notional of all positions after it against equity before it,");
     let _ = writeln!(s, "  checked with `rules::within_leverage`, the judge's own check. Reductions are never refused.");
     let _ = writeln!(s, "- **Floor:** equity after every event, checked with `rules::below_floor`; the rescue returns the value at the first breach");
-    let _ = writeln!(s, "  less `rules::close_cost_usd6` (half a 100 bp band plus 5 bp, Keel's live policy).\n");
+    let _ = writeln!(s, "  less `rules::close_cost_usd6` (half a 100 bp band plus 5 bp, Klear's live policy).\n");
     let _ = writeln!(s, "## Limits (read before quoting a number)\n");
     let _ = writeln!(s, "- **Two separate questions, not one simulation.** The refusals are counted on the real path; we do not re-simulate what");
     let _ = writeln!(s, "  the agent would have done instead. The floor rescue follows the real path up to the trigger and stops there.");

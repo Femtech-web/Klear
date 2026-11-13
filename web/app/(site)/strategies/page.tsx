@@ -14,7 +14,7 @@ import { read } from "@/lib/keel/live";
 export const metadata: Metadata = {
   title: "Strategies",
   description:
-    "Every Keel strategy created through the factory, read live from NEAR testnet, and which ones need a rescue now.",
+    "Every Klear strategy created through the factory, read live from NEAR testnet, and which ones need a rescue now.",
 };
 
 function Row({ item }: { item: Listed }) {
@@ -68,7 +68,7 @@ export default async function StrategiesPage() {
       <Section
         eyebrow="The factory's registry, read live"
         title="Every strategy, and which one needs a guardian now"
-        lede="Anyone can create a Keel strategy through the factory, and each judge it creates is locked from birth. A guardian scans this list: when an investor has asked to exit, or a manager has gone silent under a mandate that says exit, anyone may run the rescue, and the judge pays whoever delivers."
+        lede="Anyone can create a Klear strategy through the factory, and each judge it creates is locked from birth. A guardian scans this list: when an investor has asked to exit, or a manager has gone silent under a mandate that says exit, anyone may run the rescue, and the judge pays whoever delivers."
       >
         <div className="mb-10 grid gap-8 sm:grid-cols-3">
           <Stat value={list.ok ? list.value.length : "?"} label="strategies created" />

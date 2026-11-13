@@ -1,4 +1,4 @@
-"""One live deleverage: Keel's early risk cut, before the floor, on a strategy created through the factory.
+"""One live deleverage: Klear's early risk cut, before the floor, on a strategy created through the factory.
 
     python3 agents/delever_demo.py
 

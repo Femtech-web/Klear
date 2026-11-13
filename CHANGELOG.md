@@ -17,9 +17,9 @@ testnet and once on mainnet (see `docs/results/`).
 - **Alpha Arena replay**: 32 AI agents' real Hyperliquid history through `keel_core::rules`.
 - **Site** (`web/`): Next.js, Tailwind, TypeScript; every chain read server-side; WCAG 2.2 AA in light, dark and
   mobile.
-- **Live**: four rescues on testnet (an AI manager's outage with an AI guardian; the investor's own exit with a
-  human guardian; the practice strategy, by its drill and by a stranger), 20 bypass attempts refused, and a
-  confidential payout path on mainnet.
+- **Live**: five rescues on testnet (an AI manager's outage with an AI guardian; the investor's own exit with a
+  human guardian; the practice strategy, by its drill and by a stranger; the deleverage strategy's exit, with a
+  stranger's tools), 20 bypass attempts refused, and a confidential payout path on mainnet.
 - **Judge v3.1** (wasm sha256 `2aeaaf8b…`): a deleverage job (an early cut back to the investor's target leverage,
   before the floor), the investor's `rearm` after a rescue, `fund_pool`, a one-call `status` view, and delivery
   timestamps per cycle. The two v3 judges of the live run stay as they are: they are locked.
@@ -46,3 +46,8 @@ testnet and once on mainnet (see `docs/results/`).
 - **An internal security review** (`docs/security-review.md`; not an audit).
 - **The site**: product and proof as separate sections, a judges' guide with live checks, Instrument Sans and Geist,
   a neutral palette that passes WCAG 2.2 AA in light and dark, and layouts checked at 360 px.
+- **Renamed from Keel to Klear.** Everything deployed before the rename keeps its name (`keel-*` accounts,
+  `KeelLeg`, `KeelVault`, `KeelDeployer`): those contracts are locked, and their source stays byte-for-byte so the
+  published hashes still match.
+- A guardian whose process stops mid-rescue resumes its own open job (`agents/guardian.py`), and HyperEVM reads
+  retry a node that has not yet seen a block another node named.

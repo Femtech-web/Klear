@@ -8,9 +8,9 @@ import { JUDGES, LEARN, NAV, PROOF } from "./nav-items";
 
 function Brand({ size = 26 }: { size?: number }) {
   return (
-    <Link href="/" aria-label="Keel, home" className="inline-flex items-center gap-2.5 text-ink no-underline">
+    <Link href="/" aria-label="Klear, home" className="inline-flex items-center gap-2.5 text-ink no-underline">
       <KeelMark size={size} className="text-accent" />
-      <span className="font-display text-[1.45rem] font-semibold tracking-tight">Keel</span>
+      <span className="font-display text-[1.45rem] font-semibold tracking-tight">Klear</span>
     </Link>
   );
 }

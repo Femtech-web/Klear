@@ -1,6 +1,6 @@
-# Keel architecture
+# Klear architecture
 
-Keel lets an investor give an AI agent (or a person) authority to manage money without giving it control
+Klear lets an investor give an AI agent (or a person) authority to manage money without giving it control
 of the money. Every trade must fit the investor's rules, and when the manager fails, anyone can move what is
 left to the investor's fixed addresses and is paid only when it arrives.
 

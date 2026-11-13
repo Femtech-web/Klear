@@ -20,7 +20,7 @@ from keel_agents.units import readable
 
 DATA_RELAYER = "agent.keel-8f2f34.testnet"  # attests evidence; holds no role in the mandate
 
-SYSTEM = """You are the AI portfolio manager of a Keel strategy on Hyperliquid testnet (test funds only).
+SYSTEM = """You are the AI portfolio manager of a Klear strategy on Hyperliquid testnet (test funds only).
 You manage one ETH perpetual position for an investor, who also holds ETH (as WETH on Base) in the
 same strategy. A NEAR smart contract (the judge) enforces the investor's mandate and signs your order
 only if it fits: one immediate-or-cancel limit order at a time, at most {max_order} ETH per order, a

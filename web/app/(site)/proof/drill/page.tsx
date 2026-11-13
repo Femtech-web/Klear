@@ -7,7 +7,7 @@ import { config } from "@/lib/config";
 export const metadata: Metadata = {
   title: "The daily drill",
   description:
-    "A real Keel strategy fails on purpose every day and is rescued, on testnet. Every cycle, with its transactions.",
+    "A real Klear strategy fails on purpose every day and is rescued, on testnet. Every cycle, with its transactions.",
 };
 
 const CYCLE = [

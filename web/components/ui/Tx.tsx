@@ -4,7 +4,7 @@ import { CopyButton } from "./CopyButton";
 
 const CHAIN_LABEL: Record<Chain, string> = { near: "NEAR", base: "Base", hyperevm: "HyperEVM" };
 
-/** A transaction on one of Keel's chains, linked to its explorer. */
+/** A transaction on one of Klear's chains, linked to its explorer. */
 export function TxLink({ chain, id }: { chain: Chain; id: string }) {
   return (
     <a

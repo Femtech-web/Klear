@@ -1,7 +1,7 @@
 # Trust model
 
 "The judge has no keys" means nobody can change its code or its mandate. It does **not** mean nobody can
-affect the funds. This is everything a Keel strategy relies on, what each failure would cost, and how to
+affect the funds. This is everything a Klear strategy relies on, what each failure would cost, and how to
 check each claim yourself.
 
 ## Who can do what
@@ -21,11 +21,11 @@ In the live G7 run the AI process holds only a NEAR function-call key whose on-c
 
 | Component | If it fails or lies | Bound |
 |---|---|---|
-| **NEAR Chain Signatures MPC** (`v1.signer-prod.testnet`) | A colluding signing threshold could sign anything for the judge's derived keys, so it could take the funds. If it stops, nothing is signed: no trades, and no rescue until it returns | This is the custody assumption; Keel adds no other key. No vendor or TEE holds a key |
+| **NEAR Chain Signatures MPC** (`v1.signer-prod.testnet`) | A colluding signing threshold could sign anything for the judge's derived keys, so it could take the funds. If it stops, nothing is signed: no trades, and no rescue until it returns | This is the custody assumption; Klear adds no other key. No vendor or TEE holds a key |
 | **Read MPC** (`verify_foreign_transaction`, Finalized) | A colluding threshold, or the RPC providers its nodes query, could confirm a log that never happened | A false "below floor" only sends funds to the investor early. A false delivery could pay a guardian for nothing (bounded by the reward pool). A false snapshot could let one manager order through that the on-chain KeelLeg band and size checks still bound |
 | **Judge code** (keel-core + near-keel) | A bug could sign something the rules meant to refuse | 98 local tests; the wasm hash is reproducible from source (`be140d65…`). **Not audited** |
 | **KeelLeg / KeelVault** | A bug could misroute an action | The only outflows are to immutable payouts; 39 Foundry tests. **Not audited** |
-| **Hyperliquid** (HyperCore, precompiles, CoreWriter) | Wrong precompile data misleads every decision; the exchange can liquidate or ADL | Snapshots are cross-checked against the API in `make live-read`; liquidation shows up as a position change Keel never signed (voided, never paid) |
+| **Hyperliquid** (HyperCore, precompiles, CoreWriter) | Wrong precompile data misleads every decision; the exchange can liquidate or ADL | Snapshots are cross-checked against the API in `make live-read`; liquidation shows up as a position change Klear never signed (voided, never paid) |
 | **Base** (sequencer, WETH contract) | Liveness delays the spot leg; a frozen token blocks it | The legs are independent; the exit spends nothing until it succeeds |
 | **NEAR itself** | If it halts, nothing happens; the strategy fails closed for trading and stalls the rescue | — |
 

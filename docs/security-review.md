@@ -2,7 +2,7 @@
 
 **This is not an audit.** It is the review we ran on our own code before asking anyone to trust it, written
 down so a reader can see what was checked, what was found, and what is still open. Nobody independent has
-reviewed Keel. Everything runs on testnets.
+reviewed Klear. Everything runs on testnets.
 
 Date: 2026-11-12. Scope: the judge (`contracts/near-keel`, `crates/keel-core`), the factory
 (`contracts/near-keel-factory`), the EVM contracts (`contracts/evm/src`), the agents and scripts that sign
@@ -49,7 +49,7 @@ client.
 - **`reentrancy-balance` in `KeelVault.exit`.** The balance is read before the token call. The nonce advances
   before the call (checks-effects-interactions), so re-entering `exit` needs a fresh judge signature, and the
   judge signs only for the configured spot token. `Exited` records the amount *sent*: a fee-on-transfer token
-  would deliver less than it says. Keel's spot leg is WETH; such tokens are out of scope.
+  would deliver less than it says. Klear's spot leg is WETH; such tokens are out of scope.
 - **`incorrect-equality` (`amount == 0`)**: intended, an empty vault has nothing to exit.
 - **`missing-zero-check` on `token`**: the token is bound by the judge's signature, and a call to an address
   without code reverts at `balanceOf`.
@@ -77,7 +77,7 @@ strategy is useless rather than dangerous to anyone who checks, which is why the
 On `/practice`, `/create` and `/strategies/<judge>`, NEAR Connect fetches the chosen wallet's code from its
 publisher and runs it in a sandboxed iframe (scripts only, no same-origin access). The Content-Security-Policy
 on those pages allows exactly the wallets' hosts and NEAR's RPC; every other page allows the site alone. The
-wallet code is the wallet's, as on any NEAR app; Keel pins which wallets are offered, not their code.
+wallet code is the wallet's, as on any NEAR app; Klear pins which wallets are offered, not their code.
 
 ### Dependencies
 

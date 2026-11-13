@@ -18,13 +18,13 @@ import { parseGlance, phase, rescueDue } from "@/lib/keel/registry";
 export const metadata: Metadata = {
   title: "Rescue it yourself",
   description:
-    "A real Keel strategy on testnet fails every day on purpose. Rescue it with a NEAR testnet account and get paid by its judge.",
+    "A real Klear strategy on testnet fails every day on purpose. Rescue it with a NEAR testnet account and get paid by its judge.",
 };
 
 const WINDOW = drillWindowUtc(config.drill);
 
 const STEPS = [
-  { title: "Get the code", cmd: `git clone ${config.repo} && cd Keel && npm ci` },
+  { title: "Get the code", cmd: `git clone ${config.repo} && cd Klear && npm ci` },
   {
     title: "Make a NEAR testnet account (free; the faucet funds it)",
     cmd: "npx near account create-account sponsor-by-faucet-service <you>.testnet autogenerate-new-keypair save-to-legacy-keychain network-config testnet create",
@@ -81,7 +81,7 @@ export default async function PracticePage() {
         title="Rescue a strategy yourself"
         lede={
           <>
-            Reading about a rescue is not the same as running one. A real Keel strategy on testnet fails every day on
+            Reading about a rescue is not the same as running one. A real Klear strategy on testnet fails every day on
             purpose: its manager opens a position and goes silent, and the investor&apos;s mandate says a silent manager
             means exit. From {WINDOW} anyone may rescue it, and its judge pays whoever delivers.
           </>

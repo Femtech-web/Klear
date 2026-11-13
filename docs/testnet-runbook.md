@@ -1,4 +1,4 @@
-# Keel-0 on testnet: the simple version
+# Klear-0 on testnet: the simple version
 
 Everything here is testnet: free tokens with no value. No mainnet money is used.
 

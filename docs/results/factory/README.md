@@ -1,7 +1,7 @@
 # The factory, live on testnet
 
-Self-serve strategies: anyone creates a Keel strategy in one NEAR transaction plus two EVM deployments, and
-nobody (the creator, the factory, the Keel team) can change its judge afterwards. The factory also keeps the
+Self-serve strategies: anyone creates a Klear strategy in one NEAR transaction plus two EVM deployments, and
+nobody (the creator, the factory, the Klear team) can change its judge afterwards. The factory also keeps the
 public registry guardians and the site read to discover strategies.
 
 | | |

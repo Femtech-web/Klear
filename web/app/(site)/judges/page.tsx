@@ -18,7 +18,7 @@ import { inspect, phase, rescueDue } from "@/lib/keel/registry";
 export const metadata: Metadata = {
   title: "For judges",
   description:
-    "Judge Keel in the order that matters: the problem, the locked contracts, a live rescue, the attacks, and a rescue you run yourself.",
+    "Judge Klear in the order that matters: the problem, the locked contracts, a live rescue, the attacks, and a rescue you run yourself.",
 };
 
 const same = (a: string, b: string) => a.toLowerCase() === b.toLowerCase();
@@ -108,7 +108,7 @@ export default async function JudgesPage() {
       id: "problem",
       title: "The problem, in real money",
       minutes: "2 min",
-      see: `${t.agents} AI models that traded $10,000 each on Hyperliquid in Alpha Arena, replayed fill by fill through Keel's rules.`,
+      see: `${t.agents} AI models that traded $10,000 each on Hyperliquid in Alpha Arena, replayed fill by fill through Klear's rules.`,
       proves: `The risk is real, and rules change outcomes: with a floor 30% down, ${t.rescued} of ${t.agents} would have been stopped, and investors would have kept ${usd(t.better)} more.`,
       check: (
         <Recorded>
@@ -208,7 +208,7 @@ export default async function JudgesPage() {
       proves:
         "The numbers on this site come from this code: the replay reproduces byte for byte, and the judge builds to its deployed hash.",
       commands: [
-        `git clone ${config.repo} && cd Keel`,
+        `git clone ${config.repo} && cd Klear`,
         "make test                      # Rust rules, Foundry, end to end through the judge, both NEAR contracts",
         "make replay && git diff --exit-code docs/results/replay",
         "make factory                   # prints the judge's and the factory's sha256",
@@ -314,7 +314,7 @@ export default async function JudgesPage() {
     <>
       <Section
         eyebrow="For judges"
-        title="Judge Keel in the order that matters"
+        title="Judge Klear in the order that matters"
         lede="Five minutes for the essentials, forty-five if you run a rescue yourself. Each step has a check: a transaction you can open, a dataset you can rebuild, or a read of the chains made as this page loaded."
       >
         <div className="flex flex-wrap items-center gap-3">
@@ -337,7 +337,7 @@ export default async function JudgesPage() {
               "An AI agent can trade. Giving it money means giving it the keys: it can lose everything, or simply stop, and nobody can step in without the same keys.",
             ],
             [
-              "What Keel does",
+              "What Klear does",
               "The investor's rules live in a NEAR contract with no keys, the only thing that can sign for the strategy's accounts on Hyperliquid and Base. The AI proposes; the judge signs only what fits. If the AI fails, anyone can bring the money home, and is paid only once it arrives.",
             ],
             [
@@ -385,7 +385,7 @@ export default async function JudgesPage() {
             "One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.",
             "NEAR's MPC network is trusted to sign and to verify honestly; that trust is NEAR's, not ours, and it is stated in the trust model.",
             "The daily drill and its courier run on GitHub Actions with our testnet keys. The courier only pays gas: it cannot change anything the judge signs.",
-            "The replay is a counterfactual: Keel's rules applied to real fills, with the closing cost modelled, not trades Keel made.",
+            "The replay is a counterfactual: Klear's rules applied to real fills, with the closing cost modelled, not trades Klear made.",
             "The AI manager is Claude through its CLI, with no tools; its decisions and prompts are logged with each run.",
           ].map((x) => (
             <li key={x} className="border-t border-line pt-3 text-ink-2">

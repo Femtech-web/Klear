@@ -1,17 +1,17 @@
 # Rescue a strategy yourself
 
-Keel's claim is that **anyone** can rescue an investor's money, without anyone's permission, and be paid
+Klear's claim is that **anyone** can rescue an investor's money, without anyone's permission, and be paid
 for it by a contract that checks the money arrived. The practice strategy lets you test that claim
 instead of reading about it.
 
 ## The practice strategy
 
-A real Keel strategy on testnet, created through the [factory](results/factory/README.md) like any other:
+A real Klear strategy on testnet, created through the [factory](results/factory/README.md) like any other:
 
 | | |
 |---|---|
 | Judge | `practice.keel-factory-bcf915.testnet` (0 access keys; code = the factory's `judge_code_hash()`) |
-| Hyperliquid leg | KeelLeg `0xa34e83D5ea3baCdFBc1C30FcDA3032AeD7830Bc7` (about 4.9 testnet USDC of margin) |
+| Hyperliquid leg | KeelLeg `0xa34e83D5ea3baCdFBc1C30FcDA3032AeD7830Bc7` (about 3.5 testnet USDC of margin) |
 | Base leg | KeelVault `0xE35805727DA624b5f233CdE4a3d039522Db8bC1C` (0.004 WETH on Base Sepolia) |
 | The investor's mandate | at most 2x leverage, a $3 floor, and **if the manager is silent for 15 minutes, exit** |
 | Rewards | 0.1 NEAR for delivering the Hyperliquid leg, 0.05 NEAR for the Base leg, each paid only on delivery |
@@ -27,7 +27,7 @@ cycle is recorded in [`results/drill`](results/drill) and committed back, which 
 
 1. **Re-arm.** If the last cycle ended in a rescue, the investor's account starts the next one (`rearm`: same
    mandate, same accounts, next cycle).
-2. **Fund.** The relayer tops the KeelLeg up to 4.9 USDC and the vault up to 0.004 WETH.
+2. **Fund.** The relayer tops the KeelLeg up to 3.5 USDC and the vault up to 0.004 WETH.
 3. **Trade, then fall silent.** The manager, signing with a function-call key that can only call
    `propose_order` and `heartbeat`, opens a 0.006 ETH short. Then it stops sending heartbeats.
 4. **The rescue is due**, about 40 minutes after the start (the manager's 15 minutes plus Base finality for the
@@ -39,7 +39,7 @@ cycle is recorded in [`results/drill`](results/drill) and committed back, which 
 You need Node 20+, Python 3.10+ and a NEAR testnet account. The faucet creates and funds one for free.
 
 ```bash
-git clone https://github.com/Femtech-web/Keel && cd Keel && npm ci
+git clone https://github.com/Femtech-web/Klear && cd Klear && npm ci
 npx near account create-account sponsor-by-faucet-service <you>.testnet autogenerate-new-keypair \
   save-to-legacy-keychain network-config testnet create
 make rescue ACCOUNT=<you>.testnet
@@ -47,7 +47,7 @@ make rescue ACCOUNT=<you>.testnet
 
 The second command saves your key to `~/.near-credentials/testnet/<you>.testnet.json`. NEAR's CLI signs with it
 locally, and it never leaves your machine. `make rescue` waits for the window if it is not open yet. It runs
-`agents/rescue.py` (in its own small Python environment), which drives the same `Rescuer` Keel's guardian uses,
+`agents/rescue.py` (in its own small Python environment), which drives the same `Rescuer` Klear's guardian uses,
 signed by your account.
 
 ## What you sign, and what the judge checks
@@ -95,7 +95,7 @@ practice accounts' testnet keys and the relayer's keystore, made from a clone th
 
 ```bash
 tar czf - .secrets/near/*keel-practice-53ee75.testnet.json .secrets/evm/relayer .secrets/evm/relayer.password \
-  | base64 | gh secret set KEEL_DRILL_SECRETS -R Femtech-web/Keel
+  | base64 | gh secret set KEEL_DRILL_SECRETS -R Femtech-web/Klear
 ```
 
 The workflow unpacks them only for the run (never printed) and deletes them after. Set the repository variable

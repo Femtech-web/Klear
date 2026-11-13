@@ -9,7 +9,7 @@ import { pct, usd } from "@/lib/format";
 export const metadata: Metadata = {
   title: "AI replay",
   description:
-    "32 AI models traded $10,000 each of real money on Hyperliquid. Their real trades, replayed through Keel's rules.",
+    "32 AI models traded $10,000 each of real money on Hyperliquid. Their real trades, replayed through Klear's rules.",
 };
 
 export default function ReplayPage() {
@@ -22,8 +22,8 @@ export default function ReplayPage() {
     <>
       <Section
         eyebrow="Proof · 03 · Alpha Arena, replayed"
-        title="What Keel would have done with 32 AI traders' real money"
-        lede="In Alpha Arena Season 1.5, AI models each traded $10,000 of real money on Hyperliquid, from public wallets. We replayed every one of their fills through Keel's rules, using the same code the NEAR judge runs."
+        title="What Klear would have done with 32 AI traders' real money"
+        lede="In Alpha Arena Season 1.5, AI models each traded $10,000 of real money on Hyperliquid, from public wallets. We replayed every one of their fills through Klear's rules, using the same code the NEAR judge runs."
       >
         <div className="grid gap-px overflow-hidden rounded-xl border border-line bg-line shadow-soft sm:grid-cols-2 lg:grid-cols-4">
           <div className="bg-surface p-6">
@@ -66,7 +66,7 @@ export default function ReplayPage() {
                       </div>
                       {f.rescue ? (
                         <Pill tone={f.saved >= 0 ? "ok" : "warn"}>
-                          {f.saved >= 0 ? `+${usd(f.saved)}` : `−${usd(-f.saved)}`} with Keel
+                          {f.saved >= 0 ? `+${usd(f.saved)}` : `−${usd(-f.saved)}`} with Klear
                         </Pill>
                       ) : (
                         <Pill tone="neutral">floor never broke</Pill>

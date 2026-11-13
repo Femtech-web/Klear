@@ -1,9 +1,9 @@
-"""Rescue a Keel strategy yourself (the practice strategy by default), with nothing but a NEAR testnet account.
+"""Rescue a Klear strategy yourself (the practice strategy by default), with nothing but a NEAR testnet account.
 
     python3 agents/rescue.py --account you.testnet [--key path/to/you.testnet.json] [--judge <judge>] [--wait]
 
 When the practice strategy's manager goes silent (docs/practice.md has the daily window), the judge lets
-anyone rescue it. This runs the same rescue as Keel's own guardian, signed by your account: you attest
+anyone rescue it. This runs the same rescue as Klear's own guardian, signed by your account: you attest
 the evidence, open the rescue, settle it, and confirm the vault's exit. The judge pays your account for
 each leg it sees delivered to the investor. The courier pays the EVM gas (snapshots and relaying what the
 judge signed); it cannot change anything you or the judge decide.
@@ -137,7 +137,7 @@ def main() -> None:
         print(f"{st['job']['agent']} is rescuing it right now; you may take over once their job expires "
               f"({time.strftime('%H:%M UTC', time.gmtime(st['job']['expires_at']))}).")
         return
-    print(f"Rescuing {chain.judge} as {a.account}: the manager is silent and the investor's mandate says exit.")
+    print(f"Rescuing {chain.judge} as {a.account}: {registry.due(st) or 'an exit is already under way'}.")
     paid_before = len(chain.strategy()["payouts"])
     Rescuer(chain, a.account, chain.out / "rescue.jsonl").run()
     paid = [p for p in chain.strategy()["payouts"][paid_before:] if p["agent"] == a.account]

@@ -19,7 +19,7 @@ const json = (body: unknown, status = 200) =>
 async function accounts(judge: string): Promise<{ leg: string; vault: string }> {
   const s = await view(judge, "get_strategy");
   const c = isRecord(s) && isRecord(s.config) ? s.config : null;
-  if (!c || typeof c.leg !== "string" || typeof c.spot_account !== "string") throw new Error("not a Keel judge");
+  if (!c || typeof c.leg !== "string" || typeof c.spot_account !== "string") throw new Error("not a Klear judge");
   return { leg: c.leg, vault: c.spot_account };
 }
 

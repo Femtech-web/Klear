@@ -17,7 +17,7 @@ const day = (ms: number) =>
 const label = "font-sans text-[11px] tabular-nums";
 
 /**
- * An agent's real equity (server-rendered SVG, no chart library), the investor's floor, and where Keel
+ * An agent's real equity (server-rendered SVG, no chart library), the investor's floor, and where Klear
  * would have stepped in. Everything plotted is from the replay; nothing is smoothed.
  */
 export function EquityChart({ agent, floor, legend = true }: { agent: Agent; floor: number; legend?: boolean }) {
@@ -88,7 +88,7 @@ export function EquityChart({ agent, floor, legend = true }: { agent: Agent; flo
             text: `real ${usd(agent.final)}`,
             cls: "fill-chart-real",
           },
-          ...(r ? [{ y: y(r.returned) + 4, text: `Keel ${usd(r.returned)}`, cls: "fill-chart-keel" }] : []),
+          ...(r ? [{ y: y(r.returned) + 4, text: `Klear ${usd(r.returned)}`, cls: "fill-chart-keel" }] : []),
         ]).map((l) => (
           <text key={l.text} x={W - PAD.right + 8} y={l.y} className={`${label} ${l.cls} font-semibold`}>
             {l.text}
@@ -123,7 +123,7 @@ export function EquityChart({ agent, floor, legend = true }: { agent: Agent; flo
           </span>
           {r && (
             <span className="inline-flex items-center gap-2">
-              <i className="h-[3px] w-[18px] rounded-sm bg-chart-keel" /> What a Keel rescue would have returned
+              <i className="h-[3px] w-[18px] rounded-sm bg-chart-keel" /> What a Klear rescue would have returned
             </span>
           )}
         </figcaption>

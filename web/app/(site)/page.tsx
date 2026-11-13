@@ -75,7 +75,7 @@ export default async function Home() {
           <div>
             <p className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface py-1.5 pl-1.5 pr-3 text-sm text-ink-2 shadow-soft">
               <b className="rounded-full bg-accent-soft px-2.5 py-0.5 font-semibold text-accent">New</b>
-              {t.agents} real AI traders, replayed through Keel
+              {t.agents} real AI traders, replayed through Klear
             </p>
             <h1 className="text-display tracking-[-0.03em]">
               When your AI trader fails, <em className="not-italic text-accent">anyone</em> can bring your money home.
@@ -102,7 +102,7 @@ export default async function Home() {
           <div className="bg-surface p-6">
             <Stat
               value={`+${usd(t.better)}`}
-              label={`back to investors, had Keel guarded ${t.agents} real AI traders`}
+              label={`back to investors, had Klear guarded ${t.agents} real AI traders`}
               note="Alpha Arena Season 1.5, replayed fill by fill"
             />
             <Link href="/proof/replay" className={proofLink}>
@@ -188,14 +188,14 @@ export default async function Home() {
         <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="mb-4 font-display text-[1.65rem] leading-snug tracking-[-0.015em]">
-              With a floor 30% down, Keel would have stepped in{" "}
+              With a floor 30% down, Klear would have stepped in{" "}
               {rescueDay <= 1 ? "within its first day" : `on day ${rescueDay}`} and returned{" "}
               <span className="text-accent">{usd(rescue.returned)}</span>.
             </p>
             <p className="text-ink-2">
               In Alpha Arena, AI models traded $10,000 each on Hyperliquid, at up to{" "}
-              {Math.round(Math.max(...byLoss.map((a) => a.maxLeverage)))}x leverage. Across all {t.agents}, a Keel floor
-              would have left investors {usd(t.better)} better off. It would have been worse for {t.worse}, which
+              {Math.round(Math.max(...byLoss.map((a) => a.maxLeverage)))}x leverage. Across all {t.agents}, a Klear
+              floor would have left investors {usd(t.better)} better off. It would have been worse for {t.worse}, which
               recovered later, and we show those too.
             </p>
             <div className="mt-8">

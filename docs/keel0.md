@@ -1,11 +1,11 @@
-# Keel-0: feasibility and decision (2026-11-12)
+# Klear-0: feasibility and decision (2026-11-12)
 
 ## Decision
 
-**Keel works end to end on real testnets, including the on-chain payout.**
+**Klear works end to end on real testnets, including the on-chain payout.**
 - **Real-network gate (2026-11-12):** G1–G4 passed. G5 (Base) passed for attestation; the Base spot leg inside the paid loop still needs Base Sepolia gas. See [Real-network results](#real-network-results-2026-11-12).
 - **Recommendation:** build it as a hackathon entry, framed as "pay-on-proof keepers for asynchronous venues". Before submission: lock the judge account, put the spot leg on Base, and record the demo.
-- **Confidential Keel (B):** rejected. Build Standard Keel (A), and make no privacy claims.
+- **Confidential Klear (B):** rejected. Build Standard Klear (A), and make no privacy claims.
 
 ### What is actually distinct
 
@@ -21,7 +21,7 @@ Hyperliquid is not atomic from a contract.
 - The EVM transaction succeeds regardless. The simulation tests show all of these cases.
 - A ripcord-style keeper on Hyperliquid would be paid for orders that filled nothing.
 
-**Keel's invariant** has two parts.
+**Klear's invariant** has two parts.
 
 *The repair reward is paid once, if and only if all of the following hold:*
 
@@ -58,12 +58,12 @@ Hyperliquid is not atomic from a contract.
 | **DLTX V1** (repo source) | No: `order` is execution-key only. The fallback is exit: owner, or anyone after 7 days via `beginExitStopped`. | No rewards | Yes (HyperCore) | Yes: their docs admit a compromised operator can zero the short |
 | **Lambda** | No | No: fills unproven, no reconciliation, Hyperliquid leg not live on testnet | Claimed, not shown | n/a |
 | **Index Coop ripcord** | Yes, bounded | No: pays on call | No: atomic only | Manager sets parameters |
-| **Keel** | Yes, bounded, and repair cannot become flatten | Yes: attested post-delay snapshot, once | Yes: nonce + `D_max` settlement rule | None: MPC key under the judge's rules |
+| **Klear** | Yes, bounded, and repair cannot become flatten | Yes: attested post-delay snapshot, once | Yes: nonce + `D_max` settlement rule | None: MPC key under the judge's rules |
 
 **Why NEAR, honestly:**
 - If both legs lived on Hyperliquid, a HyperEVM-only contract could do all of this with precompile reads, and NEAR would add nothing.
 - NEAR earns its place only for a **cross-chain hedge**: spot on Base, perp on Hyperliquid, judged by one neutral contract through Read MPC, and controlled by a key that belongs to no one.
-- Keel-0's real gate tests the hard half, the Hyperliquid leg. The Base probe is gate G5.
+- Klear-0's real gate tests the hard half, the Hyperliquid leg. The Base probe is gate G5.
 
 **Defensibility:** this is a precise, testable design claim, not a moat. DLTX has the primitives (bounded orders, precompile reads) and could add permissionless repair in weeks.
 
@@ -75,9 +75,9 @@ The discrepancy is unresolved, and that is what blocks a final verdict on DLTX.
 
 The check: take the addresses on `docs.dltx.org/contract-addresses`, then compare `eth_getCode` on each stated chain against a build of the repo at `dd0f96651` (ignoring metadata and immutables).
 - **Code matches:** the README is stale, and the comparison above holds.
-- **Code differs:** a newer, unpublished version is live. If it adds third-party repair, Keel's distinction is gone and Keel should be rejected.
+- **Code differs:** a newer, unpublished version is live. If it adds third-party repair, Klear's distinction is gone and Klear should be rejected.
 
-## Confidential Keel (B) vs Standard Keel (A): choose A
+## Confidential Klear (B) vs Standard Klear (A): choose A
 
 What leaks, from the code that exists here:
 
@@ -94,7 +94,7 @@ Judgement on B:
 - **Repair parameters can't stay private.** OutLayer could hold the policy, but its output (the order) reveals the policy. Its "is it broken?" interface is an oracle that leaks the policy anyway.
 - **It adds trust.** In Encore, an on-chain OutLayer result trusted `worker.outlayer.testnet`'s full-access keys unless the TDX quote was verified on-chain. That contradicts "verified by anyone".
 - **The one real privacy property is narrow.** Funding through Confidential Intents can unlink the *owner's* NEAR identity from the strategy. It cannot unlink the two legs from each other, because the judge's config names both.
-- **That property is a deployment choice**, already offered by NEAR's confidential perps. It is not a Keel capability, and Keel should not market it as one.
+- **That property is a deployment choice**, already offered by NEAR's confidential perps. It is not a Klear capability, and Klear should not market it as one.
 
 ## What was built (all local, all simulation unless marked live)
 
@@ -126,7 +126,7 @@ Facts established along the way:
 
 ## The real-network gate
 
-| Gate | Must prove | Kills Keel if |
+| Gate | Must prove | Kills Klear if |
 |---|---|---|
 | G1 attest | `verify_foreign_transaction` (domain 3, HyperEvm, Finalized) resolves for a KeelLeg `Snapshot` log with **our** `expected_payload_hash`, and the decoded `szi` equals the API at that block | nodes never sign our hash (format mismatch), or finality or timeouts make attestation unusable |
 | G2 authority | An MPC signature from `sign` (path `keel/<id>/hyperevm`, domain 0) over the judge's digest is accepted by the deployed KeelLeg, relayed by an unrelated EOA paying gas | KeelLeg cannot be controlled by a derived key |
@@ -157,7 +157,7 @@ Submission without execution, observed on the real venue (EVM transaction succee
 
 Design changes the network forced (all now in code and tests):
 1. **The band is anchored to the mark price, plus a basis cap.**
-   - Testnet ETH's book trades about 3.9% under its oracle; mainnet diverges during exactly the stress Keel exists for.
+   - Testnet ETH's book trades about 3.9% under its oracle; mainnet diverges during exactly the stress Klear exists for.
    - With an oracle-anchored band, no sell could ever cross.
    - v1 (`0x336c…f2f1`, oracle-anchored) is superseded by v2 (`0xf447…88a5`), with a mark band and a 5% basis cap. The cap is a testnet setting; mainnet would use about 1–2%.
    - The judge refuses to plan while the observed basis exceeds the policy cap, and voids, rather than freezes, a job caught by it. It charges the observed basis to the loss budget.
@@ -172,7 +172,7 @@ Funding facts:
 
 - **No rate limit.** KeelLeg caps each order but not the number of orders. A compromised judge or MPC can lose `b + fee` per trade, repeatedly. A per-window notional cap is not built.
 - **Reduce-only buy prices** are not verified ex post; they rely on HyperCore enforcing the IOC limit. Short increases are checked via `entryNtl`.
-- **The Base half of a flatten** is an instruction (`spot_sell`, with `minOut`). Keel-0 does not sign Base transactions.
+- **The Base half of a flatten** is an instruction (`spot_sell`, with `minOut`). Klear-0 does not sign Base transactions.
 - **The judge account is not locked yet.** It still has a full-access key (in `.secrets/`), so "no human key can make KeelLeg trade" holds only until that key is deleted. Deleting it is irreversible and is the owner's call.
 - **The paid run's spot leg was a HyperEVM test token**, not Base. Base attestation itself works (G5), but the Base leg inside the paid loop is not done.
 - **`D_max` rests on 8 samples** (max 78 blocks) on a quiet testnet. Mainnet values need a distribution under load.

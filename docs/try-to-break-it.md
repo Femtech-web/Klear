@@ -1,6 +1,6 @@
 # Try to break it
 
-Keel's claims are only worth what survives people trying to break them. The live judges below are **locked**
+Klear's claims are only worth what survives people trying to break them. The live judges below are **locked**
 (no access keys) and hold real testnet funds, so every attempt here is a real transaction against the real
 thing. If any of these succeeds, that is a bug: please open an issue with the transaction.
 

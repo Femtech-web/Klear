@@ -1,6 +1,6 @@
 """The daily drill: the practice strategy fails on purpose and is rescued, every step a real transaction.
 
-    python3 agents/drill.py [--grace 0] [--usdc 4.9] [--weth-wei 4000000000000000] [--size 0.006]
+    python3 agents/drill.py [--grace 0] [--usdc 3.5] [--weth-wei 4000000000000000] [--size 0.006]
 
 1. Re-arm: if the last cycle ended in a rescue, the investor starts the next one (same mandate, same accounts).
 2. Fund: the relayer tops both legs up. It is also the practice payout, so every rescue pays it back.
@@ -258,7 +258,7 @@ class Drill:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--grace", type=float, default=0, help="seconds a rescue stays open to anyone before the drill's guardian acts")
-    ap.add_argument("--usdc", type=float, default=4.9)
+    ap.add_argument("--usdc", type=float, default=3.5)
     ap.add_argument("--weth-wei", type=int, default=4 * 10**15)
     ap.add_argument("--size", type=float, default=0.006, help="ETH; Hyperliquid's minimum order is 10 USD")
     raise SystemExit(0 if Drill(ap.parse_args()).run() else 1)

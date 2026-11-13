@@ -1,6 +1,6 @@
 # For judges
 
-Keel lets investors give AI agents authority to manage their money, without giving them unrestricted control.
+Klear lets investors give AI agents authority to manage their money, without giving them unrestricted control.
 This is the order to check it in. Five minutes covers the essentials; forty-five if you rescue a strategy
 yourself. The site's `/judges` page is the same guide, with each live check run as the page loads.
 
@@ -11,7 +11,7 @@ audited. Commands are view calls that need no account unless marked.
 
 - **The problem.** Giving an AI agent money means giving it the keys. In Alpha Arena's Season 1.5, 30 of 32 AI
   models that traded $10,000 each on Hyperliquid ended with less.
-- **What Keel does.** The investor's rules live in a NEAR contract with no keys (the judge), the only thing
+- **What Klear does.** The investor's rules live in a NEAR contract with no keys (the judge), the only thing
   that can make NEAR's MPC network sign for the strategy's accounts on Hyperliquid and Base. The AI proposes;
   the judge signs only what fits. If the AI fails, anyone can bring the money home, and is paid only once the
   investor's address shows it arrived.
@@ -22,7 +22,7 @@ audited. Commands are view calls that need no account unless marked.
 
 ### 1. The problem, in real money (2 min)
 
-[docs/results/replay](docs/results/replay/README.md): 32 Alpha Arena agents replayed fill by fill through Keel's
+[docs/results/replay](docs/results/replay/README.md): 32 Alpha Arena agents replayed fill by fill through Klear's
 rules. With a 3x leverage cap and a floor 30% down, 23 would have been stopped and investors would have kept
 **$56,772** more; it would have been worse for 3, which recovered later. The rebuild matches Hyperliquid's own
 equity points within a median 1.3% of the stake. Rebuild it: `make replay && git diff --exit-code docs/results/replay`.
@@ -86,7 +86,7 @@ means exit. From 14:40 to 17:40 UTC anyone may rescue it, and the judge pays who
 transactions from your own free account:**
 
 ```bash
-git clone https://github.com/Femtech-web/Keel && cd Keel && npm ci
+git clone https://github.com/Femtech-web/Klear && cd Klear && npm ci
 npx near account create-account sponsor-by-faucet-service <you>.testnet autogenerate-new-keypair \
   save-to-legacy-keychain network-config testnet create
 make rescue ACCOUNT=<you>.testnet
@@ -116,7 +116,7 @@ trusted for, and what could still go wrong.
 
 - One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.
 - NEAR's MPC network is trusted to sign and verify honestly; the trust model says where that applies.
-- The replay is a counterfactual: Keel's rules applied to real fills, with the closing cost modelled.
+- The replay is a counterfactual: Klear's rules applied to real fills, with the closing cost modelled.
 - The daily drill and the courier run on GitHub Actions, with our testnet keys. The courier only pays gas; it cannot change anything the
   judge signs.
 - The AI manager is Claude through its CLI, with no tools; every prompt and decision is logged with its run.

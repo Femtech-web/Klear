@@ -1,16 +1,16 @@
-//! Keel's mandate applied to a real history, with the same functions the judge uses
+//! Klear's mandate applied to a real history, with the same functions the judge uses
 //! (`keel_core::rules`). Two separate questions, never mixed into one counterfactual:
 //! - **Leverage:** at each fill that adds exposure, would the judge have signed it? The path is the real one;
 //!   we only count what the mandate would have refused.
 //! - **Floor:** walking the real path, when does the liquidation value first fall below the floor, and what
-//!   would a rescue then have returned? After that point the real agent kept trading; Keel would have stopped.
+//!   would a rescue then have returned? After that point the real agent kept trading; Klear would have stopped.
 
 use crate::book::Book;
 use crate::history::{History, Kind};
 use keel_core::rules;
 use serde::Serialize;
 
-/// Keel's live policy: the rescue closes at half of a 100 bp band plus a 5 bp fee.
+/// Klear's live policy: the rescue closes at half of a 100 bp band plus a 5 bp fee.
 pub const BAND_BP: u16 = 100;
 pub const FEE_BP: u16 = 5;
 

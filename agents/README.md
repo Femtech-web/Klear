@@ -15,11 +15,11 @@ everything, and anyone may relay what it signed.
 ## For AI agents: the MCP server
 
 `agents/mcp_server.py` gives any MCP client (Claude Code, Claude Desktop, your own agent) the guardian's view of
-Keel, and the rescue itself:
+Klear, and the rescue itself:
 
 ```bash
 .tools/venv/bin/pip install -r agents/requirements.txt
-claude mcp add keel -- .tools/venv/bin/python agents/mcp_server.py      # from the repository's root
+claude mcp add klear -- .tools/venv/bin/python agents/mcp_server.py      # from the repository's root
 ```
 
 | Tool | Does |

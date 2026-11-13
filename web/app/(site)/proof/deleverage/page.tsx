@@ -109,7 +109,7 @@ export default function DeleveragePage() {
             <h2 className="mb-3 font-sans text-lg font-semibold">What it does not show</h2>
             <p className="m-0 text-sm text-ink-2">
               The other trigger, prices pushing leverage past the cap with no order, is covered by the engine and judge
-              tests, not run live. The guardian here is a Keel account; a stranger&apos;s run is the rescue&apos;s.
+              tests, not run live. The guardian here is a Klear account; a stranger&apos;s run is the rescue&apos;s.
             </p>
           </Card>
         </div>

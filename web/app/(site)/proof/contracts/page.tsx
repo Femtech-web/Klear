@@ -12,7 +12,7 @@ import type { Chain } from "@/lib/format";
 export const metadata: Metadata = {
   title: "Locked contracts",
   description:
-    "Every locked Keel contract on NEAR testnet, read live: keys, code against the source build, state, deliveries and payouts.",
+    "Every locked Klear contract on NEAR testnet, read live: keys, code against the source build, state, deliveries and payouts.",
 };
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Keel's design tokens, as Tailwind theme variables: every utility (bg-surface, text-ink-2, rounded-lg,
+ * Klear's design tokens, as Tailwind theme variables: every utility (bg-surface, text-ink-2, rounded-lg,
  * shadow-lift, animate-draw…) resolves to one of these, and the dark palette below flips them all at once.
  * Nothing in a component hard-codes a color, a radius or a shadow.
  */

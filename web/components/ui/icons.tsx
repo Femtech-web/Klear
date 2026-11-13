@@ -1,5 +1,5 @@
 /**
- * Keel's icon set: a handful of line icons drawn on one 24px grid with one stroke, used only where an icon
+ * Klear's icon set: a handful of line icons drawn on one 24px grid with one stroke, used only where an icon
  * says something words would say slower. No decorative or "AI" glyphs.
  */
 type P = { size?: number; className?: string; title?: string };

@@ -38,7 +38,7 @@ export function utc(ms: number): string {
 
 export type Chain = "near" | "base" | "hyperevm";
 
-/** An explorer link for a transaction on one of the chains Keel uses. */
+/** An explorer link for a transaction on one of the chains Klear uses. */
 export function txUrl(chain: Chain, tx: string): string {
   const base = config.explorers[chain];
   return chain === "near" ? `${base}/txns/${tx}` : `${base}/tx/${tx}`;

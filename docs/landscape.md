@@ -1,12 +1,12 @@
 # Landscape: who already does what
 
-Bounding what a manager or an agent may do is **not** new, and Keel does not claim it is. The table shows
+Bounding what a manager or an agent may do is **not** new, and Klear does not claim it is. The table shows
 where each comparable system stops. Facts are from each project's public docs as of 2026-11-12; items we
 could not verify are marked.
 
 | System | Bounds the manager before it acts | Exit without the manager | Proof the investor got the money | Venues |
 |---|---|---|---|---|
-| **Keel** | yes: size, band, leverage on attested liquidation value, floor | yes: anyone, on a verified trigger (floor, investor request, chosen manager-silence) | yes: the reward is paid per leg only on attested arrival (vault receipt; payout's HyperCore balance) | Hyperliquid perp + Base, judged on NEAR |
+| **Klear** | yes: size, band, leverage on attested liquidation value, floor | yes: anyone, on a verified trigger (floor, investor request, chosen manager-silence) | yes: the reward is paid per leg only on attested arrival (vault receipt; payout's HyperCore balance) | Hyperliquid perp + Base, judged on NEAR |
 | Hyperliquid vaults | no: the leader trades freely | each depositor withdraws for themselves (after a lockup, and possibly delayed while positions are open); the leader cannot take deposits | n/a (one venue) | Hyperliquid |
 | Enzyme | yes: asset and adapter whitelists, disallowed assets, redemption rules (no leverage policy found) | investors redeem themselves | n/a (one chain) | EVM |
 | Zodiac Roles (Safe) | yes: per-function, per-argument permissions for an address (used for AI agents) | the Safe's owners | n/a | EVM |
@@ -20,11 +20,11 @@ could not verify are marked.
 | "Mandate" projects (Saber1Y/Mandate on BOT Chain, mandates.ai, the ERC spend-mandate proposal, AP2 mandates) | spend or payment mandates for agents | not the focus | n/a | various |
 | Hackathon peers (near-sentinel, Checkpoint__V2, NEARFirewall) | agent safety / spending controls on NEAR | not seen | not seen | NEAR |
 
-## Where Keel is different
+## Where Klear is different
 
 1. **The rescue pays on proof of delivery, across an asynchronous venue and an L2.** Every exit in the table
    either relies on each user acting alone, or pays on the call itself (sound only when execution is atomic).
-   On Hyperliquid, submission is not execution; Keel pays only when a later attested snapshot shows the USDC
+   On Hyperliquid, submission is not execution; Klear pays only when a later attested snapshot shows the USDC
    at the investor's address and a Base receipt shows the asset arrived.
 2. **The trigger is the investor's choice and is verified.** A floor on cross-chain liquidation value, the
    investor's own request, or a manager silent past a heartbeat window the investor opted into.
@@ -34,5 +34,5 @@ could not verify are marked.
 ## Where others are ahead
 
 - Enzyme, Zodiac Roles and Turnkey are audited, in production, and far broader in what they can express.
-- The Agent API offers confidentiality Keel does not (`docs/privacy.md`).
-- Hyperliquid vaults have real liquidity and users; Keel is a testnet system and **not audited**.
+- The Agent API offers confidentiality Klear does not (`docs/privacy.md`).
+- Hyperliquid vaults have real liquidity and users; Klear is a testnet system and **not audited**.

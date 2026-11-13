@@ -8,7 +8,7 @@ import { factory } from "@/lib/data/live";
 export const metadata: Metadata = {
   title: "Create a strategy",
   description:
-    "Create a Keel strategy from your browser: a judge locked from birth, and accounts on Hyperliquid and Base that only it controls.",
+    "Create a Klear strategy from your browser: a judge locked from birth, and accounts on Hyperliquid and Base that only it controls.",
 };
 
 export default async function CreatePage() {

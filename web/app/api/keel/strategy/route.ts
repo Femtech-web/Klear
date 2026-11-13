@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   if (!ACCOUNT.test(judge)) return json({ error: "judge: not a NEAR account" }, 400);
   try {
     const [s, status] = await Promise.all([view(judge, "get_strategy"), view(judge, "status")]);
-    if (!isRecord(s) || !isRecord(s.rescue) || !isRecord(status)) return json({ error: "not a Keel judge" }, 404);
+    if (!isRecord(s) || !isRecord(s.rescue) || !isRecord(status)) return json({ error: "not a Klear judge" }, 404);
     const r = s.rescue;
     const job = isRecord(s.job) ? s.job : null;
     const attempt = job && isRecord(job.attempt) && isRecord(job.attempt.order) ? job.attempt.order : null;

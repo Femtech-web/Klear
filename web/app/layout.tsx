@@ -10,7 +10,7 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", dis
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
-  title: { default: "Keel: when your AI trader fails, anyone can bring your money home", template: "%s · Keel" },
+  title: { default: "Klear: when your AI trader fails, anyone can bring your money home", template: "%s · Klear" },
   description:
     "An AI trades within rules it cannot change, held by a NEAR contract with no keys. If it fails, anyone can bring the money home across chains, and is paid only when it lands.",
 };

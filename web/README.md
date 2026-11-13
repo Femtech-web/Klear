@@ -1,6 +1,6 @@
-# Keel: the site
+# Klear: the site
 
-The consumer site for Keel (Next.js App Router, React, Tailwind CSS, TypeScript strict). Every chain read happens on
+The consumer site for Klear (Next.js App Router, React, Tailwind CSS, TypeScript strict). Every chain read happens on
 the server and is cached for at most 30 seconds, so the browser talks to nothing but this site; the
 Content-Security-Policy says so (`connect-src 'self'`) and the browser tests check it.
 

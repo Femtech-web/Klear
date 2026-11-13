@@ -14,11 +14,11 @@ import argparse
 import json
 import time
 
-from keel_agents import llm, market
+from keel_agents import evm, llm, market
 from keel_agents.units import readable
 from keel_agents.chain import Chain
 
-SYSTEM = """You are an independent guardian for a Keel strategy (test funds only). An AI manager trades for an
+SYSTEM = """You are an independent guardian for a Klear strategy (test funds only). An AI manager trades for an
 investor under a mandate enforced by a NEAR contract (the judge). You cannot move funds anywhere except the
 investor's fixed addresses, and you are paid only after the investor's addresses show the assets arrived.
 The judge has verified the trigger below on attested cross-chain evidence. Decide whether to start the rescue
@@ -26,6 +26,12 @@ now. Act when the trigger reflects the investor's own choice or a real risk; exp
 
 SCHEMA = {"type": "object", "properties": {"act": {"type": "boolean"}, "reason": {"type": "string"}}, "required": ["act", "reason"]}
 RETRY = ("snapshot-not-settled", "attempt-not-resolved", "stale-evidence")
+
+
+def exited(chain: Chain, nonce: int) -> str | None:
+    """The Base transaction that already carried the vault's exit `nonce`, if one did."""
+    found = evm.logs(evm.BASE, chain.state["G7_VAULT"], evm.EXITED, 6 * 3600, ["0x" + format(nonce, "064x")], head="latest")
+    return found[-1]["transactionHash"] if found else None
 
 
 class Rescuer:
@@ -70,10 +76,20 @@ class Rescuer:
         return call.outcome
 
     def run(self) -> None:
-        perp, spot = self.evidence()
-        out = self.step(self.chain.open(perp, spot, self.signer), "open")
-        if not out:
-            return
+        s = self.chain.strategy()
+        if (s.get("job") or {}).get("agent") == self.signer:
+            # Resuming our own job: it is already open; find the vault exit already relayed, if any, and go on.
+            r = s["rescue"]
+            print(f"  resuming job {s['job']['id']}: perp {r['perp']}, spot {r['spot']}")
+            out = {"perp": r["perp"]}
+            if r.get("exit") and r["spot"] == "open":
+                n = r["exit"]["nonce"]
+                self.exit_txs[n] = exited(self.chain, n) or self.chain.relay_exit(n)
+        else:
+            perp, spot = self.evidence()
+            out = self.step(self.chain.open(perp, spot, self.signer), "open")
+            if not out:
+                return
         while out.get("perp") == "open":
             time.sleep(25)
             perp, spot = self.evidence()

@@ -15,7 +15,7 @@ const NEARBLOCKS = "https://nearblocks.io/txns/";
 const STEPS = [
   [
     "A real quote",
-    "NEAR Intents' 1Click API quotes 3 USDC on HyperCore into a confidential USDC balance owned by Keel's test account, with confidentiality \"basic\".",
+    "NEAR Intents' 1Click API quotes 3 USDC on HyperCore into a confidential USDC balance owned by Klear's test account, with confidentiality \"basic\".",
   ],
   [
     "The send",
@@ -99,7 +99,7 @@ export default function MainnetPage() {
             <p className="mt-4 text-sm text-ink-2">
               So the rescue itself stays fully verifiable on public chains, while its payout can arrive in a balance no
               public reader can attribute to the investor. It does not hide the amount in flight or the sender on the
-              origin chain, and Keel does not claim it does.
+              origin chain, and Klear does not claim it does.
             </p>
           </Card>
         </div>

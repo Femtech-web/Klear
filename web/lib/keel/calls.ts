@@ -1,7 +1,7 @@
 import { crc32 } from "@/lib/keel/abi";
 
 /**
- * The NEAR transactions a wallet signs for Keel, as plain data (NEAR Connect's action format). Pure: no
+ * The NEAR transactions a wallet signs for Klear, as plain data (NEAR Connect's action format). Pure: no
  * wallet and no network here, so every call the site can ask a wallet to sign is visible in one file.
  */
 

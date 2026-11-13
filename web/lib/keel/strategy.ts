@@ -1,6 +1,6 @@
 import { isRecord } from "@/lib/chain/rpc";
 
-/** The parts of a Keel judge's `get_strategy` the site shows, narrowed from its JSON. */
+/** The parts of a Klear judge's `get_strategy` the site shows, narrowed from its JSON. */
 
 export type LegStatus = "open" | "delivered" | "empty" | "unverified";
 export type Trigger = "investor" | "floor" | "manager-silent" | "repair-exhausted";

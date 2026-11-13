@@ -1,11 +1,11 @@
-# Keel-0. Offline targets need no keys or network; testnet targets read .env and .secrets/.
+# Klear-0. Offline targets need no keys or network; testnet targets read .env and .secrets/.
 #   make test       Rust judge tests + Foundry SIMULATION tests + simulated end-to-end loop
 #   make live-read  read-only check of KeelLeg's read path against live HyperEVM testnet
 #   make keys       create the testnet NEAR account and EVM relayer key (prints addresses only)
 #   make status     what is funded and deployed, and what is still missing
 #   make judge      the NEAR judge contract (contracts/near-keel, cargo-near) and its unit tests
 #   make factory    the NEAR factory (contracts/near-keel-factory), which embeds the judge just built
-#   make replay     Alpha Arena's AI agents' real history through Keel's rules (cached; `replay-fetch` refreshes)
+#   make replay     Alpha Arena's AI agents' real history through Klear's rules (cached; `replay-fetch` refreshes)
 #   make web        sync the site's data from docs/results, then build it; `web-test` runs its unit and browser tests
 #   make drill      one cycle of the daily drill on the practice strategy (testnet; ~1 h); `drill-install` schedules it
 #   make rescue ACCOUNT=you.testnet   rescue the practice strategy yourself when it is due (docs/practice.md)

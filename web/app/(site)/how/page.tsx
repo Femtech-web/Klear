@@ -3,7 +3,8 @@ import { Card, LinkButton, Section } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
   title: "How it works",
-  description: "How Keel lets an AI manage money under your rules, and how anyone can bring it home when the AI fails.",
+  description:
+    "How Klear lets an AI manage money under your rules, and how anyone can bring it home when the AI fails.",
 };
 
 const FAQ = [

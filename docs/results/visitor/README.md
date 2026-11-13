@@ -1,6 +1,6 @@
 # A stranger's rescue (2026-11-12)
 
-The claim: anyone can rescue a Keel strategy, with no permission and nothing but a NEAR account, and the judge
+The claim: anyone can rescue a Klear strategy, with no permission and nothing but a NEAR account, and the judge
 pays them. The test: a NEAR testnet account created that evening from the faucet, `keel-visitor-19c0ef.testnet`,
 with no EVM gas and no role in the strategy, ran exactly the documented command:
 

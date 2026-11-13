@@ -11,7 +11,7 @@ import { allLocked, lockedContracts } from "@/lib/keel/proof";
 export const metadata: Metadata = {
   title: "Proof",
   description:
-    "Every claim Keel makes, with the transactions, datasets and live chain reads behind it, in the order to read them.",
+    "Every claim Klear makes, with the transactions, datasets and live chain reads behind it, in the order to read them.",
 };
 
 type Kind = "Recorded run" | "Dataset" | "Live read" | "Live, daily" | "Mainnet";
@@ -67,7 +67,7 @@ export default async function ProofPage() {
       href: "/proof/replay",
       kind: "Dataset",
       title: "The AI replay",
-      claim: `${t.agents} real AI traders from Alpha Arena, replayed fill by fill through Keel's rules. The rebuild matches Hyperliquid's own equity points.`,
+      claim: `${t.agents} real AI traders from Alpha Arena, replayed fill by fill through Klear's rules. The rebuild matches Hyperliquid's own equity points.`,
       facts: [
         [`+${usd(t.better)}`, "back to investors with a floor 30% down"],
         [`${t.rescued} of ${t.agents}`, "would have hit the floor"],
@@ -111,7 +111,7 @@ export default async function ProofPage() {
       kind: "Live, daily",
       title: "The daily drill",
       claim:
-        "A real strategy fails on purpose every day and is rescued: by a visitor in the open window, else by Keel's own guardian.",
+        "A real strategy fails on purpose every day and is rescued: by a visitor in the open window, else by Klear's own guardian.",
       facts: [
         [String(drillRuns.length), drillRuns.length === 1 ? "cycle recorded" : "cycles recorded"],
         [`${passed} of ${drillRuns.length || 0}`, "ended rescued"],

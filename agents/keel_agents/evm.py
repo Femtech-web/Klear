@@ -27,7 +27,8 @@ def rpc(url: str, method: str, params: list):
         r = post_json(url, {"jsonrpc": "2.0", "id": 1, "method": method, "params": params})
         if "error" not in r:
             return r["result"]
-        if "rate limited" not in str(r["error"]) or attempt == 5:
+        # A load-balanced node can lag the one that named the block ("invalid block height"): ask again.
+        if not any(t in str(r["error"]) for t in ("rate limited", "invalid block height")) or attempt == 5:
             raise RuntimeError(f"{method}: {r['error']}")
         time.sleep(5 * (attempt + 1))
 

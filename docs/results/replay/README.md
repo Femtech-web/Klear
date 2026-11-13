@@ -1,8 +1,8 @@
-# Alpha Arena, replayed through Keel
+# Alpha Arena, replayed through Klear
 
 In Alpha Arena Season 1.5, AI models each traded $10,000 of real money on Hyperliquid. Their wallets are
 public. We pulled every fill, funding payment and transfer of all 32 agents from Hyperliquid's public API,
-rebuilt each account fill by fill, and applied Keel's mandate with the same functions the NEAR judge uses
+rebuilt each account fill by fill, and applied Klear's mandate with the same functions the NEAR judge uses
 (`keel_core::rules`). Policy reported here: **a 3x leverage cap and a floor 30% under the starting value**.
 
 ## What it shows
@@ -15,7 +15,7 @@ rebuilt each account fill by fill, and applied Keel's mandate with the same func
 
 ## Per agent (3x cap, floor at 70%)
 
-| Model | Competition | Start | End (real) | Max lev. | Mean lev. | Refused at 3x | Floor broke | Investor with Keel | Saved |
+| Model | Competition | Start | End (real) | Max lev. | Mean lev. | Refused at 3x | Floor broke | Investor with Klear | Saved |
 |---|---|---|---|---|---|---|---|---|---|
 | GROK-4 | 3: SITUATIONAL AWARENESS | $10,000 | $325 | 19.9x | 8.7x | 6475/7220 (90%) | 2025-11-20 20:50 | $6,801 | $6,475 |
 | QWEN3-MAX | 3: SITUATIONAL AWARENESS | $9,994 | $1,232 | 20.0x | 5.9x | 5354/7485 (72%) | 2025-11-21 18:48 | $6,313 | $5,081 |
@@ -64,7 +64,7 @@ rebuilt each account fill by fill, and applied Keel's mandate with the same func
 - **Leverage:** at every fill that adds exposure, gross notional of all positions after it against equity before it,
   checked with `rules::within_leverage`, the judge's own check. Reductions are never refused.
 - **Floor:** equity after every event, checked with `rules::below_floor`; the rescue returns the value at the first breach
-  less `rules::close_cost_usd6` (half a 100 bp band plus 5 bp, Keel's live policy).
+  less `rules::close_cost_usd6` (half a 100 bp band plus 5 bp, Klear's live policy).
 
 ## Limits (read before quoting a number)
 

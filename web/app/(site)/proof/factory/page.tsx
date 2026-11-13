@@ -11,7 +11,7 @@ import { read } from "@/lib/keel/live";
 export const metadata: Metadata = {
   title: "The factory",
   description:
-    "Self-serve Keel strategies: a locked NEAR factory that creates each judge locked from birth, and EVM accounts at addresses fixed in advance.",
+    "Self-serve Klear strategies: a locked NEAR factory that creates each judge locked from birth, and EVM accounts at addresses fixed in advance.",
 };
 
 const STEPS = [

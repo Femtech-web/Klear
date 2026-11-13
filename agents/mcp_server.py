@@ -1,4 +1,4 @@
-"""Keel for AI agents, over MCP: find strategies that need a guardian, check one before trusting it, and run
+"""Klear for AI agents, over MCP: find strategies that need a guardian, check one before trusting it, and run
 its rescue with your own NEAR account.
 
     claude mcp add keel -- .tools/venv/bin/python agents/mcp_server.py      (from the repository's root)
@@ -23,9 +23,9 @@ READ = ToolAnnotations(readOnlyHint=True, openWorldHint=True)
 LOGS = ROOT / ".keel-visitor" / "mcp"
 
 server = MCPServer(
-    "keel",
+    "klear",
     instructions=(
-        "Keel strategies on NEAR testnet: an investor's rules in a keyless NEAR contract (the judge) that alone signs for "
+        "Klear strategies on NEAR testnet: an investor's rules in a keyless NEAR contract (the judge) that alone signs for "
         "the strategy's accounts on Hyperliquid and Base. When a strategy's manager fails, anyone may rescue it and is "
         "paid by the judge only after the investor's addresses show the money. Start with list_strategies; run "
         "inspect_strategy before acting on one."
@@ -35,7 +35,7 @@ server = MCPServer(
 
 @server.tool(annotations=READ)
 def list_strategies() -> list[dict]:
-    """Every strategy the Keel factory created: its mode, whether a rescue is due now and why, any open job, and its reward pool."""
+    """Every strategy the Klear factory created: its mode, whether a rescue is due now and why, any open job, and its reward pool."""
     return registry.strategies()
 
 

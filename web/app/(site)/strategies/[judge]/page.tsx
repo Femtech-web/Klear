@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/strategies/[judge
   const { judge } = await params;
   return {
     title: `Inspect ${judge}`,
-    description: `Live checks of the Keel strategy ${judge}: keys, code, controllers, payouts and state.`,
+    description: `Live checks of the Klear strategy ${judge}: keys, code, controllers, payouts and state.`,
   };
 }
 
@@ -68,7 +68,7 @@ function Checks({ x }: { x: Inspection }) {
   return (
     <ul className="m-0 list-none p-0">
       <Check1
-        label="Created by the Keel factory"
+        label="Created by the Klear factory"
         read={x.entry}
         pass={entry !== null}
         detail={

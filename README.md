@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="web/app/icon.svg" width="72" height="72" alt="Keel logo" />
+<img src="web/app/icon.svg" width="72" height="72" alt="Klear logo" />
 
-# Keel
+# Klear
 
 ### When your AI trader fails, anyone can bring your money home.
 **And they are paid only when it lands.**
 
 [For judges](JUDGES.md) · [The live rescue](docs/results/g7/README.md) · [Rescue it yourself](docs/practice.md) · [The AI replay](docs/results/replay/README.md) · [Try to break it](docs/try-to-break-it.md)
 
-[![CI](https://github.com/Femtech-web/Keel/actions/workflows/ci.yml/badge.svg)](https://github.com/Femtech-web/Keel/actions/workflows/ci.yml)
-[![Drill](https://github.com/Femtech-web/Keel/actions/workflows/drill.yml/badge.svg)](https://github.com/Femtech-web/Keel/actions/workflows/drill.yml)
+[![CI](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml)
+[![Drill](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0b6e66)](LICENSE)
 ![Tests](https://img.shields.io/badge/tests-217%20passing-0b6e66)
 ![Locked](https://img.shields.io/badge/contracts-locked%20·%200%20keys-0b6e66)
@@ -28,7 +28,7 @@ questions that matter when it goes wrong: **who stops it, and who brings the mon
 through your loss limit, or simply goes quiet, your money is stuck wherever it left it, on whichever chain,
 until someone with the keys acts. That someone is the AI, or its operator.
 
-**Keel turns that rescue into a job anyone can do, and pays for it only on proof of arrival.** The AI never
+**Klear turns that rescue into a job anyone can do, and pays for it only on proof of arrival.** The AI never
 holds a key; your rules do.
 
 1. **Your rules become a NEAR contract with no keys**, the judge: order size, price band, leverage, a loss
@@ -72,7 +72,7 @@ to anyone, and its judge pays whoever delivers. You need Node 20+, Python 3.10+ 
 account; no EVM gas, since a courier carries what the judge signs.
 
 ```bash
-git clone https://github.com/Femtech-web/Keel && cd Keel && npm ci
+git clone https://github.com/Femtech-web/Klear && cd Klear && npm ci
 npx near account create-account sponsor-by-faucet-service <you>.testnet autogenerate-new-keypair \
   save-to-legacy-keychain network-config testnet create
 make rescue ACCOUNT=<you>.testnet       # waits for the window, then rescues; prints what the judge paid you
@@ -94,7 +94,7 @@ which runs the rescue as the agent's own NEAR account. The judge decides every o
 agent with these tools can bring an investor's money home and do nothing else with it.
 
 ```bash
-claude mcp add keel -- .tools/venv/bin/python agents/mcp_server.py
+claude mcp add klear -- .tools/venv/bin/python agents/mcp_server.py
 ```
 
 ## The live rescue
@@ -149,7 +149,7 @@ strategy anyone can rescue ([the daily drill](docs/results/drill)).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/architecture-dark.png">
-  <img src="docs/assets/architecture-light.png" width="100%" alt="Keel's architecture. Top: the investor sets the rules and may request an exit; the AI manager may only propose orders; guardians may open and settle a rescue on a trigger and receive a reward after delivery. Middle: on NEAR testnet, the judge, a contract with no keys, holds the rules, decides on verified evidence and pays on delivery; the factory creates each judge locked from birth; the MPC network signs only for the judge (Chain Signatures) and verifies EVM logs (Read MPC). On Hyperliquid testnet, KeelLeg runs only orders the judge signed and reports snapshots; HyperCore holds the position and margin. On Base Sepolia, KeelVault holds the spot asset and can exit only to the investor. Bottom: money only ever moves to the investor's own addresses, by sweep and exit.">
+  <img src="docs/assets/architecture-light.png" width="100%" alt="Klear's architecture. Top: the investor sets the rules and may request an exit; the AI manager may only propose orders; guardians may open and settle a rescue on a trigger and receive a reward after delivery. Middle: on NEAR testnet, the judge, a contract with no keys, holds the rules, decides on verified evidence and pays on delivery; the factory creates each judge locked from birth; the MPC network signs only for the judge (Chain Signatures) and verifies EVM logs (Read MPC). On Hyperliquid testnet, KeelLeg runs only orders the judge signed and reports snapshots; HyperCore holds the position and margin. On Base Sepolia, KeelVault holds the spot asset and can exit only to the investor. Bottom: money only ever moves to the investor's own addresses, by sweep and exit.">
 </picture>
 
 - **Evidence in.** `KeelLeg` reads its own position, margin and the investor's balance from HyperCore and
@@ -162,13 +162,13 @@ strategy anyone can rescue ([the daily drill](docs/results/drill)).
 - **The way home.** On a trigger the judge plans every order itself (reduce-only, bounded loss), signs the
   sweep and the vault's exit to the investor's fixed addresses, and pays per leg on proof of arrival.
 
-## Everything Keel does
+## Everything Klear does
 
 | Feature | What it does | See it | Status |
 |---|---|---|---|
 | **The mandate** | Order size, price band, leverage on a conservative cross-chain liquidation value, a loss floor; the judge refuses anything outside them | [engine/mandate.rs](crates/keel-core/src/engine/mandate.rs), [the live refusal](docs/results/g7/README.md) | live |
 | **Early deleverage** | Below the investor's warning level, or when prices push leverage past the cap, anyone may cut the position back to a target, before the floor is ever reached | [the live cut](docs/results/delever/README.md), [engine/deleverage.rs](crates/keel-core/src/engine/deleverage.rs) | live once: 0.01 ETH cut to the 0.2x target, 0.1 NEAR paid on proof |
-| **The rescue** | On the floor, the investor's request or a silent manager: reduce-only close, sweep and vault exit to the investor, each leg paid only on proof of arrival | [the live rescue](#the-live-rescue), [docs/rescue.md](docs/rescue.md) | live, four times (two G7 runs, the drill, a stranger) |
+| **The rescue** | On the floor, the investor's request or a silent manager: reduce-only close, sweep and vault exit to the investor, each leg paid only on proof of arrival | [the live rescue](#the-live-rescue), [docs/rescue.md](docs/rescue.md) | live, five times (two G7 runs, the drill, a stranger, the deleverage strategy's exit) |
 | **Rearm** | After a rescue the investor restarts the same strategy, same rules and accounts, next cycle | `rearm` on the judge | live (the drill) |
 | **The factory** | Anyone creates a strategy in one transaction; its judge is locked from birth, its EVM accounts land at CREATE2 addresses fixed in advance | [docs/results/factory](docs/results/factory/README.md) | live, locked |
 | **Inspection** | Six checks before trusting any strategy: factory-made, no keys, the factory's code, both accounts controlled only by the judge's MPC keys, payouts only to the investor | `/strategies/<judge>`, `inspect_strategy`, `factory.sh verify` | live |
@@ -195,22 +195,22 @@ strategy anyone can rescue ([the daily drill](docs/results/drill)).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/replay-dark.png">
-  <img src="docs/assets/replay-light.png" width="100%" alt="Grok 4's real Alpha Arena account: $10,000 falling to $325 by December 12. A floor 30% down is crossed on the first day; a Keel rescue there would have returned $6,801.">
+  <img src="docs/assets/replay-light.png" width="100%" alt="Grok 4's real Alpha Arena account: $10,000 falling to $325 by December 12. A floor 30% down is crossed on the first day; a Klear rescue there would have returned $6,801.">
 </picture>
 
-Grok 4's real account in Alpha Arena: $10,000 to $325. A floor 30% down was crossed on its first day; a Keel
+Grok 4's real account in Alpha Arena: $10,000 to $325. A floor 30% down was crossed on its first day; a Klear
 rescue there would have returned $6,801. Every agent's chart: the site's `/proof/replay`.
 
-The 32 Alpha Arena agents' real Hyperliquid fills, replayed through Keel's rules
+The 32 Alpha Arena agents' real Hyperliquid fills, replayed through Klear's rules
 ([`crates/keel-replay`](crates/keel-replay)), rebuild each account to within a median 1.3% of Hyperliquid's
 own equity points. With a 3x leverage cap and a floor 30% down:
 
-| | Without Keel | With Keel |
+| | Without Klear | With Klear |
 |---|---:|---:|
 | What the 32 investors ended with | $176,849 | **$233,621** |
 | Agents stopped at the floor | – | 23 |
 | Opening fills refused by the cap | – | 69% |
-| Agents for whom Keel would have been worse | – | 3 (they recovered later; we show them too) |
+| Agents for whom Klear would have been worse | – | 3 (they recovered later; we show them too) |
 
 `make replay` reproduces every number byte for byte; CI checks that it still does.
 
@@ -239,7 +239,7 @@ own equity points. With a 3x leverage cap and a floor 30% down:
 
 ## For judges
 
-[JUDGES.md](JUDGES.md) is the order to check Keel in, five minutes for the essentials, with the transaction or
+[JUDGES.md](JUDGES.md) is the order to check Klear in, five minutes for the essentials, with the transaction or
 command behind every claim. The site's `/judges` page runs the same checks live.
 
 ## Run it from source
@@ -269,9 +269,14 @@ gitleaks pre-commit hook in `.githooks/`, and a secret scan in CI).
 |---|---|
 | Factory | [`keel-factory-bcf915.testnet`](https://testnet.nearblocks.io/address/keel-factory-bcf915.testnet), locked |
 | Practice strategy | [`practice.keel-factory-bcf915.testnet`](https://testnet.nearblocks.io/address/practice.keel-factory-bcf915.testnet), locked from birth |
+| Deleverage strategy | [`delever.keel-factory-bcf915.testnet`](https://testnet.nearblocks.io/address/delever.keel-factory-bcf915.testnet), locked from birth |
 | Live-run judges | [`keel-ai-76e036.testnet`](https://testnet.nearblocks.io/address/keel-ai-76e036.testnet), [`keel-human-c0caa7.testnet`](https://testnet.nearblocks.io/address/keel-human-c0caa7.testnet), locked |
 | KeelDeployer | HyperEVM `0x95555109cb864D3f285606254148432Ee3d5e6E9`, Base Sepolia `0xDdf09a571553C82854Ea7130379581F5581641ae` |
 | MPC network | `v1.signer-prod.testnet` (Chain Signatures, domain 0; Read MPC, domain 3) |
+
+Klear was called Keel until 2026-11-13. What was deployed before then keeps that name (`keel-*` accounts,
+`KeelLeg`, `KeelVault`, `KeelDeployer`): it is locked, so it cannot be renamed, and the code that built it stays as
+it was so its hashes still match.
 
 ## Repository
 
