@@ -83,7 +83,7 @@ const FAQ = [
   ],
   [
     "Does this work today?",
-    "On testnets, yes: eight live rescues across Hyperliquid and Base, two of them by an off-the-shelf AI agent, an early risk cut and a daily drill, all judged on NEAR. The privacy parts also ran on mainnet with a few dollars of real funds. It is not audited.",
+    "On testnets, yes: ten live rescues across Hyperliquid and Base, three of them by an off-the-shelf AI agent, an early risk cut and a daily drill, all judged on NEAR. The privacy parts also ran on mainnet with a few dollars of real funds. It is not audited.",
   ],
 ];
 

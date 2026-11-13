@@ -1,5 +1,8 @@
 import Image from "next/image";
-import { EquityChart } from "@/components/chart/EquityChart";
+import { Suspense } from "react";
+import { ReplayStory, type StoryAgent } from "@/components/chart/ReplayStory";
+import { NearParts } from "@/components/home/NearParts";
+import { Pulse, PulseFallback } from "@/components/home/Pulse";
 import { RecordedRescue } from "@/components/home/RecordedRescue";
 import { SiteLink } from "@/components/site/SiteLink";
 import { ArrowRight, KeelMark, Lock } from "@/components/ui/icons";
@@ -55,10 +58,42 @@ const privacy = [
   },
 ] as const;
 
+const judgeSteps = [
+  {
+    title: "Try to break it",
+    text: "Three real testnet transactions from a stranger's account. The locked judge refuses each one on chain.",
+    href: "/try#break-it",
+    link: "Break it, live",
+  },
+  {
+    title: "Check a strategy",
+    text: "Six checks a guardian runs before trusting one, read live from NEAR, Hyperliquid and Base.",
+    href: "/strategies/practice.keel-factory-bcf915.testnet",
+    link: "Run the checks",
+  },
+  {
+    title: "Follow a rescue",
+    text: "The AI goes silent, anyone brings the money home, and the judge pays only once it arrives.",
+    href: "/try",
+    link: "Replay the receipts",
+  },
+] as const;
+
 export default function Home() {
   const results = totals(HEADLINE.cap, HEADLINE.floor);
   const tradersDown = replay.agents.filter(({ initial, final }) => final < initial).length;
   const worst = byLoss[0];
+  const floor = worst.floors[HEADLINE.floor];
+  const story: StoryAgent | null = floor.rescue && {
+    model: modelName(worst.model),
+    start: worst.start,
+    end: worst.end,
+    initial: worst.initial,
+    final: worst.final,
+    curve: worst.curve,
+    floorPct: floor.pct,
+    rescue: floor.rescue,
+  };
 
   return (
     <>
@@ -105,6 +140,48 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section aria-labelledby="replay-title" className="border-y border-line bg-home-paper">
+        <div className="page py-15 md:py-24">
+          <header className="grid items-end gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12">
+            <div>
+              <p className="mb-3 text-sm text-ink-3">Alpha Arena · Replay of real fills</p>
+              <h2 id="replay-title" className="max-w-[17ch] text-feature">
+                {tradersDown} of {results.agents} AI traders ended with less.
+              </h2>
+            </div>
+            <p className="max-w-[46ch] text-sm leading-relaxed text-ink-2 md:text-base">
+              We replayed their fills with a leverage cap and a {100 - FLOORS[HEADLINE.floor]}% loss floor.{" "}
+              {results.worse} traders would have ended with less under those rules.
+            </p>
+          </header>
+          <div className="mt-7 grid overflow-hidden rounded-xl border border-line-strong bg-surface md:mt-9 md:grid-cols-[minmax(0,1fr)_minmax(0,2.3fr)]">
+            <dl className="grid gap-4 border-b border-line px-4 py-5 sm:grid-cols-2 sm:px-7 md:grid-cols-1 md:content-center md:gap-6 md:border-r md:border-b-0">
+              <div>
+                <dt className="text-sm text-ink-2">Actual trading</dt>
+                <dd className="mt-1 font-display text-stat tabular-nums">{usd(results.real)}</dd>
+              </div>
+              <div>
+                <dt className="text-sm text-ink-2">Replay with Klear’s rules</dt>
+                <dd className="mt-1 font-display text-stat tabular-nums">{usd(results.withKeel)}</dd>
+              </div>
+            </dl>
+            <div className="min-w-0 px-4 py-5 sm:p-7">
+              <h3 className="mb-3 text-base">
+                {modelName(worst.model)} · {usd(worst.initial)} to {usd(worst.final)}
+              </h3>
+              {story && <ReplayStory agent={story} />}
+            </div>
+          </div>
+          <SiteLink href="/proof/replay" className={`${textLink} mt-2`}>
+            Explore all {results.agents} traders <ArrowRight size={16} />
+          </SiteLink>
+        </div>
+      </section>
+
+      <Suspense fallback={<PulseFallback />}>
+        <Pulse />
+      </Suspense>
 
       <section aria-labelledby="rescue-heading" className="page py-15 md:py-24">
         <header className="mb-7 max-w-[44rem] md:mb-9">
@@ -197,44 +274,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="replay-title" className="border-y border-line bg-home-paper">
-        <div className="page py-15 md:py-24">
-          <header className="grid items-end gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12">
-            <div>
-              <p className="mb-3 text-sm text-ink-3">Alpha Arena · Replay of real fills</p>
-              <h2 id="replay-title" className="max-w-[17ch] text-feature">
-                {tradersDown} of {results.agents} AI traders ended with less.
-              </h2>
-            </div>
-            <p className="max-w-[46ch] text-sm leading-relaxed text-ink-2 md:text-base">
-              We replayed their fills with a leverage cap and a {100 - FLOORS[HEADLINE.floor]}% loss floor.{" "}
-              {results.worse} traders would have ended with less under those rules.
-            </p>
-          </header>
-          <div className="mt-7 grid overflow-hidden rounded-xl border border-line-strong bg-surface md:mt-9 md:grid-cols-[minmax(0,1fr)_minmax(0,2.3fr)]">
-            <dl className="grid gap-4 border-b border-line px-4 py-5 sm:grid-cols-2 sm:px-7 md:grid-cols-1 md:content-center md:gap-6 md:border-r md:border-b-0">
-              <div>
-                <dt className="text-sm text-ink-2">Actual trading</dt>
-                <dd className="mt-1 font-display text-stat tabular-nums">{usd(results.real)}</dd>
-              </div>
-              <div>
-                <dt className="text-sm text-ink-2">Replay with Klear’s rules</dt>
-                <dd className="mt-1 font-display text-stat tabular-nums">{usd(results.withKeel)}</dd>
-              </div>
-            </dl>
-            <div className="min-w-0 px-4 py-5 sm:p-7">
-              <h3 className="mb-3 text-base">
-                {modelName(worst.model)} · {usd(worst.initial)} to {usd(worst.final)}
-              </h3>
-              <EquityChart agent={worst} floor={HEADLINE.floor} />
-            </div>
-          </div>
-          <SiteLink href="/proof/replay" className={`${textLink} mt-2`}>
-            Explore all {results.agents} traders <ArrowRight size={16} />
-          </SiteLink>
-        </div>
-      </section>
-
       <section aria-labelledby="privacy-heading" className="page py-15 md:py-24">
         <div className="grid gap-6 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-15">
           <header>
@@ -268,33 +307,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-label="Use or verify Klear" className="page">
-        <div className="grid gap-3 md:grid-cols-2">
-          <div className="flex flex-col items-start rounded-xl bg-home-water p-6 sm:p-8">
-            <h2 className="text-h2">Try a rescue</h2>
-            <p className="mt-2 max-w-[37ch] text-sm text-ink-2">
-              Rehearse without a wallet, then join the daily testnet drill as a guardian.
-            </p>
-            <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
-              <LinkButton href="/try">Start rehearsal</LinkButton>
-              <SiteLink href="/practice" className={textLink}>
-                Live drill <ArrowRight size={16} />
-              </SiteLink>
-            </div>
-          </div>
-          <div className="flex flex-col items-start rounded-xl bg-home-paper p-6 sm:p-8">
-            <h2 className="text-h2">Verify the work</h2>
-            <p className="mt-2 max-w-[37ch] text-sm text-ink-2">
-              Check the contract controllers, the refused order, and the receipts behind the rescue.
-            </p>
-            <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
-              <LinkButton href="/judges" variant="secondary">
-                For judges
-              </LinkButton>
-              <SiteLink href="/proof" className={textLink}>
-                All evidence <ArrowRight size={16} />
-              </SiteLink>
-            </div>
+      <NearParts />
+
+      <section aria-labelledby="judges-heading" className="border-t border-line bg-home-paper">
+        <div className="page py-15 md:py-24">
+          <h2 id="judges-heading" className="max-w-[20ch] text-feature">
+            Judges: two minutes, no wallet.
+          </h2>
+          <ol className="m-0 mt-8 grid list-none gap-4 p-0 md:grid-cols-3">
+            {judgeSteps.map(({ title, text, href, link }, i) => (
+              <li key={title} className="flex flex-col rounded-lg border border-line bg-surface p-5 sm:p-6">
+                <span className="font-mono text-sm text-ink-3">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-2 text-xl">{title}</h3>
+                <p className="mt-2 text-sm text-ink-2">{text}</p>
+                <SiteLink href={href} className={`${textLink} mt-auto pt-3`}>
+                  {link} <ArrowRight size={16} />
+                </SiteLink>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <LinkButton href="/judges">The full guide</LinkButton>
+            <SiteLink href="/proof" className={textLink}>
+              All evidence <ArrowRight size={16} />
+            </SiteLink>
           </div>
         </div>
       </section>

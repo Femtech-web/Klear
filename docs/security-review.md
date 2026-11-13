@@ -146,3 +146,14 @@ provider's backend, not by a Klear contract.
   mainnet and this owner, with only the two plaintext grant actions accepted. Its EIP-712 digests are tested against
   a reference implementation on real API payloads. Locked after deploy. Open: a grant issued after a trigger can also
   swap within the policy's budget; withdrawals still reach only the investor.
+
+### The live attempts on /try (2026-11-13)
+
+- The server holds one key: a full-access key of a throwaway testnet account (`KLEAR_STRANGER_*`, 10 testnet NEAR).
+  It is not a role in any strategy: the judge refuses everything it sends, and a refused call changes nothing. Worst
+  case if it leaks: someone spends that account's testnet NEAR.
+- Only three fixed calls can be sent (`propose_order`, `request_exit`, a method that does not exist), to the practice
+  judge; the request picks one by id and supplies no arguments. Each costs about 0.00023 testnet NEAR, and repeat
+  clicks within 20 s reuse the last transaction per server instance.
+- The AI manager's key is deliberately not on the server: a leaked manager key could send heartbeats and hold off a
+  rescue.

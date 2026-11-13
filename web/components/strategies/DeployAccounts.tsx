@@ -1,5 +1,6 @@
 "use client";
 
+import { RefreshSetup } from "./RefreshSetup";
 import { useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/flows/StrategyActions";
 import { TxLink } from "@/components/ui/Tx";
@@ -13,16 +14,57 @@ export interface DeploymentCall {
 }
 const subscribe = () => () => {};
 
-export function DeployAccounts({ calls, judge }: { calls: DeploymentCall[]; judge: string }) {
+export function DeployAccounts({ calls }: { calls: DeploymentCall[] }) {
   const wallet = useSyncExternalStore(subscribe, hasEvmWallet, () => false);
   const [busy, setBusy] = useState(false);
   const [results, setResults] = useState<Record<string, { hash?: string; error?: string; uncertain?: boolean }>>({});
+  const deploy = async (call: DeploymentCall) => {
+    try {
+      const hash = await sendEvm(call.chain, call.to, call.data);
+      setResults((s) => ({ ...s, [call.chain]: { hash } }));
+      return true;
+    } catch (e) {
+      const error = e instanceof Error ? e.message : String(e);
+      setResults((s) => ({
+        ...s,
+        [call.chain]: { error, uncertain: !/user (rejected|denied)|rejected by user|reverted:/i.test(error) },
+      }));
+      return false;
+    }
+  };
   return (
     <div>
       <p className="text-sm text-ink-2">
         These predicted addresses match the judge’s locked configuration and had no deployed code on this read. Deploy
         with an EVM wallet funded for testnet gas, then reload to run the six checks.
       </p>
+      {wallet && (
+        <div className="mt-4">
+          <Button
+            disabled={
+              busy ||
+              calls.every((call) => Boolean(results[call.chain]?.hash)) ||
+              calls.some((call) => results[call.chain]?.uncertain)
+            }
+            onClick={() => {
+              if (busy) return;
+              setBusy(true);
+              void (async () => {
+                for (const call of calls) {
+                  if (results[call.chain]?.hash) continue;
+                  if (!(await deploy(call))) break;
+                }
+              })().finally(() => setBusy(false));
+            }}
+          >
+            {busy ? "Approve each deployment in your wallet…" : "Deploy remaining accounts"}
+          </Button>
+          <p className="mt-2 text-xs text-ink-2">
+            One wallet approval per chain. If a request fails or is cancelled, the sequence stops. Confirmed deployments
+            are skipped.
+          </p>
+        </div>
+      )}
       <ul className="mt-4 grid gap-4">
         {calls.map((call) => {
           const result = results[call.chain];
@@ -36,22 +78,9 @@ export function DeployAccounts({ calls, judge }: { calls: DeploymentCall[]; judg
                 <Button
                   disabled={busy || Boolean(result?.hash || result?.uncertain)}
                   onClick={() => {
+                    if (busy) return;
                     setBusy(true);
-                    void sendEvm(call.chain, call.to, call.data)
-                      .then(
-                        (hash) => setResults((s) => ({ ...s, [call.chain]: { hash } })),
-                        (e: unknown) => {
-                          const error = e instanceof Error ? e.message : String(e);
-                          setResults((s) => ({
-                            ...s,
-                            [call.chain]: {
-                              error,
-                              uncertain: !/user (rejected|denied)|rejected by user|reverted:/i.test(error),
-                            },
-                          }));
-                        },
-                      )
-                      .finally(() => setBusy(false));
+                    void deploy(call).finally(() => setBusy(false));
                   }}
                 >
                   {result?.hash ? "Deployment confirmed" : busy ? "Waiting for wallet / chain…" : "Deploy this account"}
@@ -88,12 +117,9 @@ export function DeployAccounts({ calls, judge }: { calls: DeploymentCall[]; judg
           );
         })}
       </ul>
-      <a
-        href={`/strategies/${judge}#verify-and-fund`}
-        className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold underline"
-      >
+      <RefreshSetup className="cursor-pointer mt-3 inline-flex min-h-11 items-center text-sm font-semibold underline">
         Reload and verify both accounts
-      </a>
+      </RefreshSetup>
     </div>
   );
 }

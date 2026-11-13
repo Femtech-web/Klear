@@ -167,6 +167,8 @@ test("the wallet picker reached from the homepage loads its icons and opens a sa
   await page.keyboard.press("Enter");
   const picker = page.getByRole("dialog", { name: "Connect a NEAR testnet wallet" });
   await expect(picker).toBeVisible();
+  await expect(picker.getByRole("button", { name: /Meteor Wallet/ })).toBeEnabled();
+  await expect(picker.getByRole("button", { name: /Intear Wallet/ })).toBeEnabled();
   await expect
     .poll(() =>
       picker
@@ -205,6 +207,9 @@ test("Try it leads to recorded receipts, investor setup, and the live drill", as
   await page.goto("/");
   await page.getByRole("main").getByRole("link", { name: "Try it", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Try Klear" })).toBeVisible();
+  // The live attempts render without sending anything; each button names its attempt.
+  await expect(page.getByRole("heading", { name: "Try to break it, live" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Try it: / })).toHaveCount(3);
   const walkthrough = page.getByRole("region", { name: "Recorded rescue walkthrough" });
   await expect(walkthrough.getByRole("heading", { name: "The AI trades", exact: true })).toBeVisible();
   await walkthrough.getByRole("button", { name: "Manager goes silent" }).click();
@@ -227,7 +232,7 @@ test("Try it leads to recorded receipts, investor setup, and the live drill", as
   await page.getByRole("link", { name: /See investor setup/ }).click();
   await expect(page.getByRole("heading", { name: "From setup to exit" })).toBeVisible();
   await page.getByRole("link", { name: "Inspect the practice strategy without a wallet" }).click();
-  await expect(page.getByRole("heading", { name: "Strategy setup" })).toBeVisible();
+  await expect(page.getByRole("list", { name: "Investor journey" })).toBeVisible();
   await page.goto("/investor");
   await page.getByRole("link", { name: "Start testnet setup" }).click();
   await expect(page.getByRole("heading", { name: "Create a strategy" })).toBeVisible();

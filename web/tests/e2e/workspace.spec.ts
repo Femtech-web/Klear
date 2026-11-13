@@ -58,6 +58,8 @@ test("a changed payout or mandate invalidates the address preview", async ({ pag
   await page.getByRole("textbox", { name: "Strategy name", exact: true }).fill("review-test");
   const payout = page.getByRole("textbox", { name: "Your EVM payout address", exact: true });
   await payout.fill(`0x${"a".repeat(40)}`);
+  const manager = page.getByRole("textbox", { name: "Manager’s NEAR account", exact: true });
+  await manager.fill("manager.testnet");
   const preview = page.getByRole("button", { name: "Preview addresses", exact: true });
   await preview.click();
   const review = page.getByRole("heading", { name: "Review and lock the judge" });
@@ -72,6 +74,12 @@ test("a changed payout or mandate invalidates the address preview", async ({ pag
   await expect(review).toHaveCount(0);
   await preview.click();
   await expect(review).toBeVisible();
+  await expect(page.getByText("3× maximum leverage", { exact: false })).toBeVisible();
+  await page.reload();
+  await expect(manager).toHaveValue("manager.testnet");
+  await expect(payout).toHaveValue(`0x${"b".repeat(40)}`);
+  await expect(review).toHaveCount(0);
+  await preview.click();
   await expect(page.getByText("3× maximum leverage", { exact: false })).toBeVisible();
 });
 
@@ -98,6 +106,7 @@ test("an existing judge links to live recovery and a failed preview offers anoth
   await page.goto("/create");
   await page.getByRole("textbox", { name: "Strategy name", exact: true }).fill("practice");
   await page.getByRole("textbox", { name: "Your EVM payout address", exact: true }).fill(`0x${"a".repeat(40)}`);
+  await page.getByRole("textbox", { name: "Manager’s NEAR account", exact: true }).fill("manager.testnet");
   const preview = page.getByRole("button", { name: "Preview addresses", exact: true });
   await preview.click();
   await expect(page.getByRole("main").getByRole("alert")).toHaveText("Preview temporarily unavailable");

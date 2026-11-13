@@ -12,6 +12,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "public/wallet-connectors/meteor.js", // Vendored wallet adapter; provenance and local changes are recorded beside it.
   ]),
 ]);
 

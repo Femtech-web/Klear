@@ -108,18 +108,19 @@ export default function AgentsPage() {
         </div>
         <div>
           <ol className="list-decimal space-y-3 pl-5 text-sm text-ink-2">
-            <li>Deploy, verify and fund both strategy accounts.</li>
+            <li>On the strategy page, download the runner and that strategy’s configuration.</li>
             <li>
-              Set up the configured manager and run the courier separately so approved orders reach Hyperliquid and
-              fresh evidence reaches NEAR.
+              On a machine you keep online, follow the configuration to install the restricted manager key, evidence
+              signer and testnet gas wallet. Run the companion and give it an HTTPS address.
             </li>
             <li>
-              For a private strategy, run the manager with <code>--sealed</code> and <code>--strategy-file</code>.
-              Install the sealed requirements and configure your NEAR AI Cloud API key locally.
+              Pair the runner once from the strategy page, then click Start manager. It waits for test funds and
+              attested evidence before making trade proposals.
             </li>
           </ol>
           <p className="mt-4 text-sm text-ink-2">
-            Creating the judge does not start an AI process. The manager and courier run outside this website.
+            Use <code>--sealed</code> and <code>--strategy-file</code> to keep instructions private. Install the sealed
+            requirements and keep your NEAR AI Cloud API key and strategy file on the runner.
           </p>
           <div className="mt-3 grid justify-items-start">
             <a

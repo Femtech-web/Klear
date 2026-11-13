@@ -74,6 +74,26 @@ testnet and once on mainnet (see `docs/results/`).
 - The manager relays an approved order as soon as the MPC signature reaches the judge (it retries for up to 40 s
   instead of trying once after 4 s), and `relay_order` fails with the script's output when nothing was relayed.
 - The drill's compact table on `/practice` no longer overflows a 360 px phone.
+- **The story in order:** the seven stages from setup to payout, with privacy where it applies, in the README's "How
+  it works", on `/how` and in `JUDGES.md`; the home hero's category line, subheader and three paths (try it, bring
+  your agent, for investors). Limits and a Roadmap in the README, on `/judges` and in `JUDGES.md`, and a Hackathon
+  section (tracks, NEAR features, libraries, AI assistance, a proposed business model).
+- `make test` and CI also run the `klear-tee` and `klear-owner` tests.
+- **A sealed trade, filled** (agent run 4, `docs/results/sealed`): the sealed AI bought 0.006 ETH, the judge signed it
+  with the TEE's receipt, it filled within seconds, and NEAR verified the receipt on `klear-tee`.
+- Agents: `wait_for_rescue` reports whether the rescue process is still `running`; `agent_run.py --resume` starts a
+  second session beside the first (`task-2.txt`, `transcript-2.jsonl`); `agents/agent_batch.py` runs recorded runs
+  back to back, after the daily drill. `g7.sh` no longer hides a failed send inside `echo`.
+- **The problem, played out under the hero** (`components/chart/ReplayStory.tsx`): Grok 4's real Alpha Arena account,
+  told twice: what the AI did ($10,000 to $325) and what the investor's 30% floor would have done (the floor breaks 24
+  hours in; a rescue brings $6,801 home). It plays when scrolled into view, with its own drawing for phones.
+- **The home page reads Klear live** (`components/home/Pulse.tsx`, `lib/keel/pulse.ts`): rescues paid on arrival and
+  NEAR paid to rescuers, summed from every judge's own payouts; the seven contracts' keys and code; whether a rescue
+  is open now. Also on the home page: what each part of NEAR does in Klear, with its proof, and a two-minute path
+  for judges with no wallet.
+- **Try to break it, live** (`/try`, `web/app/api/break`, `web/lib/chain/tx.ts`): with no wallet, a visitor sends
+  real testnet transactions from a stranger's account (trade, exit, rewrite the rules), and the locked judge refuses
+  each on chain. The server signs with Node's ed25519 and a borsh encoder; no new dependency.
 - **Renamed from Keel to Klear.** Everything deployed before the rename keeps its name (`keel-*` accounts,
   `KeelLeg`, `KeelVault`, `KeelDeployer`): those contracts are locked, and their source stays byte-for-byte so the
   published hashes still match.

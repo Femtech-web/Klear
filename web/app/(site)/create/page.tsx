@@ -17,7 +17,7 @@ export default async function CreatePage() {
     <Section
       heading="h1"
       title="Create a strategy"
-      lede="Set the rules and verify the predicted addresses before signing. The NEAR transaction creates the judge. Deployment and funding come afterwards."
+      lede="Choose your rules once. Then activate the accounts and connect a manager in one guided workspace. All funds here are testnet funds."
     >
       <Link href="/investor" className="mb-6 inline-flex min-h-9 items-center text-sm font-semibold hover:text-accent">
         Back to investor workspace

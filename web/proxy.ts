@@ -9,8 +9,12 @@ import { NextResponse, type NextRequest } from "next/server";
  */
 const WALLET_PAGES = /^\/(practice|create|strategies\/[^/]+)$/;
 const WALLET_HOSTS = [
-  "https://raw.githubusercontent.com", // the wallets' code (NEAR Connect's manifest points there)
-  "https://wallet.intear.tech",
+  "https://raw.githubusercontent.com/hot-dao/near-selector/refs/heads/main/repository/nightly.js",
+  "https://raw.githubusercontent.com/near/near-cli-connect/refs/heads/main/dist/near-cli.js",
+  "https://wallet.intear.tech/near-selector.js",
+  "https://mc.meteorwallet.app",
+  "wss://mc.meteorwallet.app",
+  "wss://logout-bridge-service.intear.tech",
   "https://test.rpc.fastnear.com",
   "https://rpc.testnet.fastnear.com",
   "https://archival-rpc.testnet.fastnear.com",
@@ -27,7 +31,7 @@ export function proxy(request: NextRequest) {
     `img-src 'self' data: blob:${wallet ? " https://raw.githubusercontent.com https://storage.herewallet.app" : ""}`,
     "font-src 'self'",
     `connect-src 'self'${wallet ? " " + WALLET_HOSTS.join(" ") : ""}${dev ? " ws: http://127.0.0.1:* http://localhost:*" : ""}`,
-    wallet ? "frame-src 'self'" : "frame-src 'none'",
+    wallet ? "frame-src 'self' https://wallet.intear.tech" : "frame-src 'none'",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",

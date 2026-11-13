@@ -13,24 +13,19 @@ export const metadata: Metadata = {
 
 const setup = [
   {
-    title: "Set the rules and create the judge",
+    title: "Set up",
     description:
-      "Choose the exit rules, rewards and payout address. Enter your manager’s NEAR account if it will trade. Signing on NEAR locks those choices.",
+      "Choose the payout address, manager and safety rules. Review and sign once on NEAR testnet to lock them.",
   },
   {
-    title: "Deploy both accounts",
+    title: "Activate",
     description:
-      "Use an EVM wallet or Foundry to deploy the HyperEVM trading account and the Base Sepolia vault at the predicted addresses.",
+      "Open your saved strategy. Approve deployment, let Klear verify the two accounts, then approve test funding from your wallet. Pair your runner once, then start and watch the manager from the strategy page.",
   },
   {
-    title: "Verify and fund",
+    title: "Manage",
     description:
-      "Check the controllers and payout address on the strategy page. Then fund the Hyperliquid leg with testnet USDC and the Base vault with testnet WETH.",
-  },
-  {
-    title: "Run the manager or request an exit",
-    description:
-      "Run the configured manager and a relayer outside the site so approved orders can reach the trading account. Run it sealed to keep your strategy private. To exit, sign with your investor wallet. A guardian then carries out the rescue.",
+      "Return to the same strategy to check balances and the judge’s status, request an exit and follow delivery.",
   },
 ] as const;
 
@@ -55,8 +50,8 @@ export default function InvestorPage() {
       <header className="max-w-measure">
         <h1 className="text-h1">Investor workspace</h1>
         <p className="mt-3 text-ink-2">
-          Creating a strategy locks your rules on NEAR. Before trading, deploy and fund both accounts, then start your
-          manager and relayer separately.
+          Set the rules, fund your test trading accounts and follow the strategy through to exit. Return to your
+          strategy page to pick up where you left off.
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <LinkButton href="/create">Start testnet setup</LinkButton>
@@ -120,7 +115,10 @@ export default function InvestorPage() {
           <ul className="mt-3 list-disc space-y-2 pl-4 text-sm text-ink-2">
             <li>A NEAR testnet wallet with funds for the judge’s storage and guardian rewards.</li>
             <li>An EVM payout address, plus testnet HYPE and Base Sepolia ETH for deployment gas.</li>
-            <li>Testnet USDC and WETH to fund the deployed accounts.</li>
+            <li>USDC in Hyperliquid testnet and WETH or additional test ETH on Base Sepolia.</li>
+            <li>
+              For AI trading, a NEAR testnet manager account and a runner. The supplied scripts require operator setup.
+            </li>
           </ul>
           <div className="mt-3 grid justify-items-start">
             <SiteLink href="/rules" className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold">

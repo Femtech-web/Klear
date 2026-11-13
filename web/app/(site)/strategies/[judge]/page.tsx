@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import { SiteLink } from "@/components/site/SiteLink";
 import { PhasePill } from "@/components/strategies/PhasePill";
 import { SavedStrategy } from "@/components/strategies/SavedStrategy";
-import { DeploymentResume } from "@/components/strategies/DeploymentResume";
 import { SetupProgress } from "@/components/strategies/SetupProgress";
 import { Check, Cross } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
@@ -240,20 +239,6 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
             Each line is read from NEAR, HyperEVM and Base when you load this page.
           </p>
           <Checks x={x} />
-          {!verified &&
-            entry &&
-            x.keys.ok &&
-            x.keys.value === 0 &&
-            x.code.ok &&
-            x.factoryJudgeCode.ok &&
-            x.code.value === x.factoryJudgeCode.value &&
-            x.derived.ok && (
-              <DeploymentResume
-                judge={judge}
-                legController={x.derived.value.leg}
-                vaultController={x.derived.value.vault}
-              />
-            )}
           <div className="mt-4 border-t border-line pt-4">
             <h3 className="text-base">Funding addresses</h3>
             {verified && strategy ? (
@@ -290,7 +275,8 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
                   <Fact label="Reward pool">{near(g.poolYocto)}</Fact>
                   {g.manager && (
                     <Fact label="Manager">
-                      <code className="font-mono text-sm">{g.manager}</code>, last seen {ago(g.lastHeartbeat)} ago
+                      <code className="break-all font-mono text-sm">{g.manager}</code>
+                      {g.lastHeartbeat > 0 && ` · judge check-in timer updated ${ago(g.lastHeartbeat)} ago`}
                     </Fact>
                   )}
                   {g.job && (

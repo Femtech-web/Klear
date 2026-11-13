@@ -1,0 +1,20 @@
+  courier snapshot: {'file': 'docs/results/delever/c-1794574201-perp-log.json'}
+  courier spot-probe: {}
+  courier relayed-order: {'key': '5:8', 'tx': '0xdb13a30ae1a8a59683a815bc8252e32a62d48d0322039c095e83a70e59539a1d'}
+  courier relayed-exit: {'key': '3', 'tx': '0xe350764fd22474ce3ed70d8a35a80675df828f6897fe38da7c065ba90035ca48'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794574376-perp-log.json'}
+  courier relayed-sweep: {'key': '9', 'tx': '0x702b4257ca94f9ec0394d1618c024c604ca69432973ab800404b7096b5f6e6fc'}
+  courier tick-failed: {'error': '12/lib/python3.12/json/decoder.py", line 356, in raw_decode\n    raise JSONDecodeError("Expecting value", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794574590-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794574753-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794574916-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794575081-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794575617-perp-log.json'}
+  courier spot-probe: {}
+  courier relay-exit-refused: {'key': '3', 'error': '12/lib/python3.12/json/decoder.py", line 356, in raw_decode\n    raise JSONDecodeError("Expecting value", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794575783-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794575945-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794576109-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794576272-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794576436-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/delever/c-1794576600-perp-log.json'}

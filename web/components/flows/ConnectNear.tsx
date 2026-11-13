@@ -2,22 +2,23 @@
 
 /* eslint-disable @next/next/no-img-element -- wallet icons are local files or embedded in the manifest. */
 import { useEffect, useId, useRef, useState } from "react";
-import { connect, disconnect, restore } from "@/lib/wallet/near";
+import { connect, connectionOptions, disconnect, restore } from "@/lib/wallet/near";
 import manifest from "@/lib/wallet/wallets.json";
 import { ArrowRight, Cross } from "@/components/ui/icons";
 import { useNearAccount } from "./useNear";
 
-const CONNECTIONS = [
-  { id: "nightly-wallet", detail: "Browser extension", available: true },
-  { id: "near-cli", detail: "Sign in from your terminal", available: true },
-  { id: "meteor-wallet", detail: "Requires external wallet services", available: false },
-  { id: "intear-wallet", detail: "Requires an external sign-in frame", available: false },
-].map((option) => ({ ...option, wallet: manifest.wallets.find(({ id }) => id === option.id)! }));
+const DETAILS: Record<string, string> = {
+  "nightly-wallet": "Browser extension",
+  "near-cli": "Sign in from your terminal",
+  "meteor-wallet": "Extension, web or mobile wallet",
+  "intear-wallet": "Connect securely with Intear",
+};
 
 export function ConnectNear({ nonce }: { nonce?: string }) {
   const account = useNearAccount();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [options, setOptions] = useState<{ id: string; name: string }[] | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const title = useId();
   const description = useId();
@@ -26,6 +27,7 @@ export function ConnectNear({ nonce }: { nonce?: string }) {
   const select = async (id: string) => {
     dialog.current?.close();
     setPending(true);
+    setError(null);
     try {
       await connect(nonce, id);
     } catch (e) {
@@ -61,6 +63,11 @@ export function ConnectNear({ nonce }: { nonce?: string }) {
             aria-disabled={pending}
             onClick={() => {
               if (pending) return;
+              setOptions(null);
+              connectionOptions(nonce).then(setOptions, () => {
+                setOptions([]);
+                setError("Wallet list unavailable. Close and try again.");
+              });
               setError(null);
               dialog.current?.showModal();
             }}
@@ -88,36 +95,44 @@ export function ConnectNear({ nonce }: { nonce?: string }) {
               </form>
             </div>
             <p id={description} className="mt-1 text-sm text-ink-2">
-              Choose a connection method.
+              Choose your wallet with a testnet account selected.
             </p>
             <ul className="mt-4 grid gap-2">
-              {CONNECTIONS.map(({ id, detail, available, wallet }) => {
-                const label = (
-                  <>
-                    <img src={wallet.icon} alt="" width={32} height={32} className="size-8 shrink-0 rounded-sm" />
-                    <span className="flex-1 text-left">
-                      <span className="block text-sm font-semibold">{wallet.name}</span>
-                      <span className="block text-xs text-ink-2">{detail}</span>
-                    </span>
-                  </>
-                );
-                const row = "flex min-h-14 w-full items-center gap-3 rounded-md border border-line px-3 py-2";
+              {error && (
+                <li className="py-3 text-sm text-no" role="alert">
+                  {error}
+                </li>
+              )}
+              {options === null && (
+                <li role="status" className="py-3 text-sm text-ink-2">
+                  Loading wallets…
+                </li>
+              )}
+              {!error && options?.length === 0 && (
+                <li className="py-3 text-sm text-ink-2">No compatible testnet wallet found.</li>
+              )}
+              {options?.map(({ id, name }) => {
+                const wallet = manifest.wallets.find((w) => w.id === id);
                 return (
                   <li key={id}>
-                    {available ? (
-                      <button
-                        type="button"
-                        onClick={() => void select(id)}
-                        className={`${row} cursor-pointer hover:border-accent hover:bg-accent-soft`}
-                      >
-                        {label} <ArrowRight size={16} className="shrink-0 text-accent" />
-                      </button>
-                    ) : (
-                      <div className={`${row} bg-surface-2 text-ink-3`}>
-                        {label}
-                        <span className="text-xs">Unavailable</span>
-                      </div>
-                    )}
+                    <button
+                      type="button"
+                      onClick={() => void select(id)}
+                      className="flex min-h-14 w-full cursor-pointer items-center gap-3 rounded-md border border-line px-3 py-2 hover:border-accent hover:bg-accent-soft"
+                    >
+                      <img
+                        src={wallet?.icon ?? "/icon.svg"}
+                        alt=""
+                        width={32}
+                        height={32}
+                        className="size-8 shrink-0 rounded-sm"
+                      />
+                      <span className="flex-1 text-left">
+                        <span className="block text-sm font-semibold">{name}</span>
+                        <span className="block text-xs text-ink-2">{DETAILS[id] ?? "Detected testnet wallet"}</span>
+                      </span>
+                      <ArrowRight size={16} className="shrink-0 text-accent" />
+                    </button>
                   </li>
                 );
               })}

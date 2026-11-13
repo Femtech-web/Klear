@@ -37,6 +37,12 @@ const STEPS: { title: string; body: string; tx?: string; tx2?: string }[] = [
     tx: "G1JbmpNRoXTjBV6V2nQSz5E7doJAyFhBD3vEkcLhzXY2",
     tx2: "YJ3JvkHU9973GuUi6B2jw4J2nWjY8RNmN4H5KR2GWVA",
   },
+  {
+    title: "A later cycle: a sealed trade, filled",
+    body: "With the market meeting the strategy, the sealed AI bought 0.006 ETH at 1929.8. The judge signed the order with the TEE's receipt in it, it filled on Hyperliquid within seconds (entry $11.55), and NEAR verified the receipt. An AI agent later closed it and brought the money home.",
+    tx: "9kZdLCQNAkZj6JMExpHmkG1XU2Ms8HeNKy1HXsMMPFrm",
+    tx2: "FQWtDbwkHFMfBnxv5U8hA6M9bj19xdmGbWX6u4CFQc45",
+  },
 ];
 
 const PRIVACY: [string, string, "ok" | "warn" | "neutral"][] = [

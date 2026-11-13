@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { BreakIt } from "@/components/flows/BreakIt";
 import { RecordedRescue } from "@/components/home/RecordedRescue";
 import { SiteLink } from "@/components/site/SiteLink";
 import { ArrowRight } from "@/components/ui/icons";
+import { TxLink } from "@/components/ui/Tx";
 
 export const metadata: Metadata = {
   title: "Try Klear",
@@ -41,6 +43,24 @@ export default function TryPage() {
       >
         Read the full testnet record <ArrowRight size={16} />
       </SiteLink>
+
+      <section aria-labelledby="break-it" className="mt-12 md:mt-16">
+        <h2 id="break-it" className="text-h2">
+          Try to break it, live
+        </h2>
+        <p className="mt-2 max-w-measure text-ink-2">
+          Each button sends a real transaction on NEAR testnet, from a stranger&rsquo;s account to the practice
+          strategy&rsquo;s locked judge. No wallet needed. A refused call changes nothing on chain.
+        </p>
+        <div className="mt-5">
+          <BreakIt />
+        </div>
+        <p className="mt-4 max-w-measure text-sm text-ink-2">
+          The AI&rsquo;s own key cannot do it either: its trade past the leverage cap was refused on chain{" "}
+          <TxLink chain="near" id="F8beikMXotPVh9ConjZWvtJZ8fGNisr9kmryi8wnUwfK" />. Twenty more attempts are in{" "}
+          <SiteLink href="/proof/attacks">the attack record</SiteLink>.
+        </p>
+      </section>
 
       <section aria-labelledby="try-next" className="mt-12 md:mt-16">
         <h2 id="try-next" className="mb-5 text-h2">

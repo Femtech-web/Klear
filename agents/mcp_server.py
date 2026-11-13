@@ -9,6 +9,7 @@ and every destination; an agent using these tools can bring the money home, neve
 """
 from __future__ import annotations
 
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -21,6 +22,18 @@ from keel_agents.chain import ROOT
 
 READ = ToolAnnotations(readOnlyHint=True, openWorldHint=True)
 LOGS = ROOT / ".keel-visitor" / "mcp"
+_procs: dict[str, subprocess.Popen] = {}
+
+
+def _running(log: Path) -> bool:
+    """Whether the rescue process behind this log is alive (it can stop if its machine restarts)."""
+    if str(log) in _procs:
+        return _procs[str(log)].poll() is None
+    try:
+        os.kill(int(log.with_suffix(".pid").read_text()), 0)
+        return True
+    except (OSError, ValueError):
+        return False
 
 server = MCPServer(
     "klear",
@@ -74,6 +87,8 @@ def start_rescue(judge: str, account: str, key_file: str = "") -> dict:
     if key_file:
         cmd += ["--key", str(Path(key_file).expanduser())]
     proc = subprocess.Popen(cmd, cwd=ROOT, stdout=log.open("a"), stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, start_new_session=True)
+    _procs[str(log)] = proc
+    log.with_suffix(".pid").write_text(str(proc.pid))
     return {"started": True, "pid": proc.pid, "log": str(log)}
 
 
@@ -90,16 +105,17 @@ def rescue_log(judge: str, account: str, lines: int = 40) -> str:
 def wait_for_rescue(judge: str, account: str, max_seconds: int = 300) -> dict:
     """Wait, up to max_seconds (at most 300: call it again to keep waiting), until the rescue started with start_rescue
     pays a leg or ends, then return where it stands and its log's last lines. A whole rescue takes about 25 minutes,
-    most of it Base finality."""
+    most of it Base finality. `running` is false if the rescue process has stopped: call start_rescue again, and it
+    resumes the job your account holds."""
     log = LOGS / f"{registry.account(judge)}.{registry.account(account)}.log"
     seen = log.stat().st_size if log.exists() else 0
     deadline = time.time() + max(15, min(max_seconds, 300))
     while time.time() < deadline:
         time.sleep(15)
         new = log.read_text()[seen:] if log.exists() else ""
-        if any(m in new for m in ("paid you", "No reward yet", "Traceback", "no rescue is due", "job ended")):
+        if any(m in new for m in ("paid you", "No reward yet", "Traceback", "no rescue is due", "job ended")) or not _running(log):
             break
-    return {"status": rescue_status(judge), "log": rescue_log(judge, account, 25)}
+    return {"running": _running(log), "status": rescue_status(judge), "log": rescue_log(judge, account, 25)}
 
 
 if __name__ == "__main__":

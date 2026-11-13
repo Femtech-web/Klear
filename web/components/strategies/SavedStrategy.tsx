@@ -31,6 +31,17 @@ export function useSavedStrategies(): string[] {
   }
 }
 
+export function rememberStrategy(judge: string) {
+  try {
+    const saved: unknown = JSON.parse(snapshot());
+    const ids = Array.isArray(saved) ? saved.filter((id): id is string => typeof id === "string") : [];
+    localStorage.setItem(KEY, JSON.stringify([...new Set([...ids, judge])]));
+    window.dispatchEvent(new Event(EVENT));
+  } catch {
+    /* Bookmarking remains available when browser storage is disabled. */
+  }
+}
+
 export function SavedStrategy({ judge }: { judge: string }) {
   const saved = useSavedStrategies();
   const active = saved.includes(judge);

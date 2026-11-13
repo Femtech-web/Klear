@@ -1,0 +1,10 @@
+[13:14:07] rearm: {"tx": "4ksA6HGoYvLNjD1dGk4hCuYbYPZjSRLJQrUS88yvyhwb", "refused": null}
+[13:14:38] fund: {"out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}
+[13:45:54] spot-attested: {"evidence": "base:0x95474ecaca8af120667f7268d7cdad7e77607bf31810a2b96ff0788879cf0091:0"}
+[13:47:40] sealed-manager: {"code": 0, "out": ["sealed: z-ai/glm-5.3-flash in a TEE (TDX UpToDate, GPU verified), signer 5a0210f2442c7935\u2026", "[0] AI: buy 0.006 @ 1929.8: (reasoning sealed)", "    judge: sign (9kZdLCQNAkZj6JMExpHmkG1XU2Ms8HeNKy1HXsMMPFrm)", "    
+[13:48:16] request-exit: {"out": ["Transaction ID: GBpdCjtbLCVJkzmDJcKeC6pKY5Vksz5unTKHMzwp9Yyj"]}
+[13:48:18] agent-start: {"servers": ["klear-local", "klear"], "agent": "klear-agent-0f366c.testnet"}
+[13:48:20] agent-done: {"code": 1, "minutes": 0.0, "paid": [], "turns": null, "report": ""}
+[13:50:02] agent-start: {"servers": ["klear-local", "klear"], "agent": "klear-agent-0f366c.testnet"}
+[14:13:39] agent-start: {"servers": ["klear-local", "klear"], "agent": "klear-agent-0f366c.testnet"}
+[14:30:42] agent-done: {"code": 0, "minutes": 17.1, "paid": [{"job_id": 5, "agent": "klear-agent-0f366c.testnet", "amount": "50000000000000000000000", "reason": "spot"}], "turns": 10, "report": "`).\n2. **Courier:** it sent the vault exit on Base (`0xe350764fd224

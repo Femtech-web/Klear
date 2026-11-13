@@ -4,3 +4,6 @@ data/
 test-results/
 playwright-report/
 next-env.d.ts
+
+# Vendored adapter: retain upstream formatting for review and hash comparison.
+public/wallet-connectors/meteor.js

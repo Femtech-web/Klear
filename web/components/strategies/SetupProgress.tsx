@@ -1,14 +1,20 @@
 import { SiteLink } from "@/components/site/SiteLink";
+import { RefreshSetup } from "./RefreshSetup";
 import { LiveValue } from "@/components/ui/LiveValue";
 import { Card } from "@/components/ui/primitives";
 import { erc20Balance } from "@/lib/chain/evm";
 import { isRecord, postJson } from "@/lib/chain/rpc";
 import { config } from "@/lib/config";
 import { deployment } from "@/lib/data/live";
-import { ago, units, usd } from "@/lib/format";
+import { units, usd, utc } from "@/lib/format";
+import { activationStep } from "@/lib/activation";
 import { read } from "@/lib/keel/live";
 import type { Inspection } from "@/lib/keel/registry";
 import { AccountMap } from "./AccountMap";
+import { DeploymentResume } from "./DeploymentResume";
+import { FundStrategy } from "./FundStrategy";
+import { ManagerRunner } from "./ManagerRunner";
+import { WorkflowNav } from "./WorkflowNav";
 
 async function hyperliquidEquity(user: string) {
   const result = await postJson(config.hyperliquidInfo, { type: "clearinghouseState", user });
@@ -28,118 +34,188 @@ export async function SetupProgress({ x, verified, judge }: { x: Inspection; ver
           read(() => erc20Balance(deployment.weth, strategy.vault)),
         ])
       : null;
-  const locked = x.keys.ok && x.keys.value === 0 && strategy;
-  const [equity, vault] = balances ?? [];
-  const bothBalancesKnown = equity?.ok && vault?.ok;
-  const hasFundsInBoth = bothBalancesKnown && equity.value > 0 && vault.value > 0n;
-  const active = glance?.mode === "active" && !glance.exitRequested && !(glance.silent && glance.exitOnSilence);
-  const next = !glance
-    ? ["Next · check the live strategy state", "#verify-and-fund", "Review live checks"]
-    : glance.mode === "flattened"
-      ? ["Next · review delivery before starting a new cycle", "#investor-controls", "Open new-cycle controls"]
-      : glance.mode === "frozen"
-        ? ["Strategy frozen · inspect its state", "#verify-and-fund", "Review live checks"]
-        : !verified
-          ? ["Next · verify both deployed accounts", "#verify-and-fund", "Review verification and funding"]
-          : !active
-            ? ["Next · follow the rescue", "#rescue-h", "Open rescue progress"]
-            : !bothBalancesKnown || !hasFundsInBoth
-              ? ["Next · review funding before trading", "#verify-and-fund", "Review verification and funding"]
-              : strategy?.manager
-                ? ["Next · check your manager and courier", "/agents#manager", "Open agent setup"]
-                : ["No manager configured", "#investor-controls", "Open investor controls"];
-  const steps = [
-    {
-      title: "Lock the mandate",
-      status: locked ? "No access keys on NEAR" : "Lock unverified",
-      detail: "The judge holds the rules and payout address.",
-    },
-    {
-      title: "Deploy and verify",
-      status: verified ? "Both accounts verified" : "Verification needed",
-      detail: (
-        <SiteLink href="#verify-and-fund" className="underline hover:text-accent">
-          Check code, controllers and payout addresses
-        </SiteLink>
-      ),
-    },
-    {
-      title: "Fund the accounts",
-      status: !balances
-        ? "Verify before funding"
-        : !bothBalancesKnown
-          ? "Balance check incomplete"
-          : hasFundsInBoth
-            ? "Funds visible on both chains"
-            : "Check funding before trading",
-      detail: balances ? (
-        <>
-          Hyperliquid equity <LiveValue read={balances[0]} render={(value) => usd(value, 2)} />
-          <br />
-          Base vault <LiveValue read={balances[1]} render={(value) => `${units(value, 18, 8)} WETH`} />
-        </>
-      ) : (
-        "Check the verified addresses before sending testnet funds."
-      ),
-    },
-    {
-      title: "Run your manager",
-      status: !strategy
-        ? "Manager unknown"
-        : !strategy.manager
-          ? "No manager configured"
-          : !active
-            ? "Check the strategy state"
-            : glance.lastHeartbeat > 0
-              ? `Last heartbeat ${ago(glance.lastHeartbeat)} ago`
-              : "No heartbeat observed",
-      detail: strategy?.manager ? (
-        <SiteLink href="/agents#manager" className="underline hover:text-accent">
-          Start the manager and relayer separately
-        </SiteLink>
-      ) : (
-        "You can request an exit with the investor wallet."
-      ),
-    },
-  ];
+  const funded = Boolean(balances?.[0].ok && balances[1].ok && balances[0].value > 0 && balances[1].value > 0n);
+  const step = activationStep({
+    verified,
+    funded,
+    mode: glance?.mode,
+    exitRequested: glance?.exitRequested,
+    silent: glance?.silent,
+    exitOnSilence: glance?.exitOnSilence,
+  });
+  const canDeploy =
+    x.entry.ok &&
+    x.entry.value &&
+    x.keys.ok &&
+    x.keys.value === 0 &&
+    x.code.ok &&
+    x.factoryJudgeCode.ok &&
+    x.code.value === x.factoryJudgeCode.value &&
+    x.derived.ok;
+  const firstCycleActivity =
+    glance && glance.cycle === 0 && x.entry.ok && x.entry.value && glance.lastHeartbeat > x.entry.value.createdAt;
+  const readyToManage = step === "manager" && (!strategy?.manager || (firstCycleActivity && !glance?.silent));
+  const managerSilent = glance?.mode === "active" && !glance.exitRequested && glance.silent && glance.exitOnSilence;
+  const canFund =
+    glance?.mode === "flattened" || (glance?.mode === "active" && !glance.exitRequested && !managerSilent);
+
+  const titles = {
+    deploy: "Deploy and verify your accounts.",
+    fund: "Add your test trading funds.",
+    manager: "Connect your manager.",
+    manage: "Follow this cycle through to delivery.",
+  };
 
   return (
     <Card className="mb-6">
-      <h2 id="setup-progress" className="mb-2 text-xl">
-        Strategy setup
-      </h2>
-      <div className="mb-5 max-w-measure border-l-2 border-accent pl-4 text-sm">
-        <p className="font-semibold">{next[0]}</p>
-        <SiteLink href={next[1]} className="inline-flex min-h-11 items-center text-ink-2 underline">
-          {next[2]}
-        </SiteLink>
+      <div id="setup-progress" className="scroll-mt-24">
+        <WorkflowNav current={step === "manage" || readyToManage ? "manage" : "activate"} />
       </div>
-      <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map(({ title, status, detail }) => (
-          <li key={title} className="min-w-0 border-t border-line-strong pt-3">
-            <h3 className="text-base">{title}</h3>
-            <p className="mt-1 text-sm font-medium">{status}</p>
-            <div className="mt-1 text-sm text-ink-2">{detail}</div>
-          </li>
-        ))}
+      <div className="mt-6 flex flex-wrap items-start justify-between gap-3">
+        <div className="max-w-measure">
+          <p className="text-xs font-semibold uppercase tracking-widest text-ink-3">Your next step</p>
+          <h2 className="mt-2 text-h2">
+            {readyToManage
+              ? "Monitor your strategy."
+              : managerSilent && step === "manage"
+                ? "The manager missed its check-in."
+                : titles[step]}
+          </h2>
+          <p className="mt-3 text-sm text-ink-2">
+            {readyToManage
+              ? "Use this page to check the accounts, follow any rescue and request an exit with your investor wallet."
+              : managerSilent && step === "manage"
+                ? "The silence rule is active. If you are still setting up, start the paired manager below and refresh after its first confirmed check-in. If you want to exit, review the rescue controls below."
+                : step === "deploy"
+                  ? "The NEAR judge already holds your rules. Deploy its two accounts next; Klear checks their controllers and payout addresses before enabling funding."
+                  : step === "fund"
+                    ? "The live checks pass. Add USDC for Hyperliquid and WETH for Base from your EVM wallet, then connect a manager if you configured one."
+                    : step === "manager"
+                      ? "Funds are visible on both chains. Connect the manager to these locked rules, then use this page to monitor and request an exit."
+                      : "Review the live state and investor controls below. Delivery and guardian rewards are confirmed separately for each chain."}
+          </p>
+        </div>
+        <RefreshSetup className="cursor-pointer inline-flex min-h-11 shrink-0 items-center rounded-full border border-line-strong px-4 text-xs font-semibold hover:bg-surface-2">
+          Refresh live checks
+        </RefreshSetup>
+      </div>
+      <ol className="mt-6 grid gap-3 border-t border-line pt-4 text-sm sm:grid-cols-3">
+        <li>
+          <span className="font-semibold">Accounts</span>
+          <p className="mt-1 text-ink-2">{verified ? "Six live checks pass" : "Deployment or verification needed"}</p>
+        </li>
+        <li>
+          <span className="font-semibold">Test funds</span>
+          <p className="mt-1 text-ink-2">
+            {!balances
+              ? "Available after verification"
+              : !balances[0].ok || !balances[1].ok
+                ? "Balance read incomplete"
+                : funded
+                  ? "Visible on both chains"
+                  : "Funding needed"}
+          </p>
+        </li>
+        <li>
+          <span className="font-semibold">Manager</span>
+          <p className="mt-1 text-ink-2">
+            {!strategy?.manager
+              ? "No manager configured"
+              : firstCycleActivity
+                ? "Manager activity recorded"
+                : "Check-in timer only"}
+            {glance?.lastHeartbeat ? ` · ${utc(glance.lastHeartbeat * 1000)}` : ""}
+          </p>
+        </li>
       </ol>
-      {strategy && (
-        <AccountMap
-          judge={judge}
-          leg={strategy.leg}
-          vault={strategy.vault}
-          payout={strategy.investor ?? "Payout unavailable"}
-          verified={verified}
-        />
+      {step === "deploy" &&
+        (canDeploy && x.derived.ok ? (
+          <DeploymentResume judge={judge} legController={x.derived.value.leg} vaultController={x.derived.value.vault} />
+        ) : (
+          <SiteLink
+            href="#verify-and-fund"
+            className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold underline"
+          >
+            Resolve the live verification checks
+          </SiteLink>
+        ))}
+      {balances && (
+        <div className="mt-5 flex flex-wrap gap-x-8 gap-y-2 rounded-md bg-surface-2 px-4 py-3 text-sm">
+          <p>
+            Hyperliquid equity{" "}
+            <strong>
+              <LiveValue read={balances[0]} render={(value) => usd(value, 2)} />
+            </strong>
+          </p>
+          <p>
+            Base vault{" "}
+            <strong>
+              <LiveValue read={balances[1]} render={(value) => `${units(value, 18, 8)} WETH`} />
+            </strong>
+          </p>
+        </div>
       )}
-      {glance?.mode === "flattened" && (
-        <p className="mt-4 border-t border-line pt-3 text-sm text-ink-2">
-          This cycle is complete.{" "}
-          <SiteLink href="#investor-controls" className="font-semibold underline hover:text-accent">
-            Rearm the strategy
-          </SiteLink>{" "}
-          to start a new cycle with the same rules and accounts.
+      {verified && strategy?.investor && canFund && (
+        <details open={step === "fund"} className="mt-4">
+          <summary className="min-h-11 cursor-pointer py-3 text-sm font-semibold">
+            {funded
+              ? "Add more test funds"
+              : glance?.mode === "flattened"
+                ? "Fund the next cycle before rearming"
+                : "Fund the trading account and vault"}
+          </summary>
+          <FundStrategy judge={judge} payout={strategy.investor} leg={strategy.leg} vault={strategy.vault} />
+        </details>
+      )}
+      {verified && strategy?.manager && (
+        <section
+          id="manager-runner"
+          className="mt-6 scroll-mt-24 border-t border-line pt-5"
+          aria-labelledby="manager-runner-title"
+        >
+          <h3 id="manager-runner-title" className="text-lg">
+            Manager connection
+          </h3>
+          <ManagerRunner
+            judge={judge}
+            manager={strategy.manager}
+            heartbeatSeconds={strategy.policy.heartbeatS}
+            canStart={glance?.mode === "active" && !glance.exitRequested && !glance.job}
+          />
+        </section>
+      )}
+      {verified && strategy && !strategy.manager && (
+        <p className="mt-4 border-t border-line pt-4 text-sm text-ink-2">
+          This setup was created for exit only. Create a strategy with a manager account to try AI trading.
         </p>
+      )}
+      {(step === "manage" || readyToManage) && (
+        <SiteLink
+          href="#investor-controls"
+          className="mt-4 inline-flex min-h-11 items-center rounded-full bg-ink px-5 text-sm font-semibold text-canvas"
+        >
+          {glance?.mode === "flattened"
+            ? "Review delivery and new-cycle controls"
+            : "Open monitoring and exit controls"}
+        </SiteLink>
+      )}
+      {strategy && (
+        <details className="mt-4 border-t border-line">
+          <summary className="min-h-11 cursor-pointer py-3 text-sm font-semibold">
+            Where your funds live and return
+          </summary>
+          <AccountMap
+            judge={judge}
+            leg={strategy.leg}
+            vault={strategy.vault}
+            payout={strategy.investor ?? "Payout unavailable"}
+            verified={verified}
+          />
+          <p className="mt-3 text-sm text-ink-2">
+            Positive balances show funding, not permission to trade. The judge still checks fresh evidence, limits and
+            exit conditions for every proposal.
+          </p>
+        </details>
       )}
     </Card>
   );

@@ -1,0 +1,81 @@
+├  Unsigned transaction:
+│    signer_id:    manager.keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  propose_order
+│                       args:         {
+│                                       "is_buy": true,
+│                                       "limit_px": 192980000000,
+│                                       "perp": "hyperevm:0x852ea13b0de921d134548845b59af445052591d5d18bee0824c7912194074bec:0",
+│                                       "sealed": {
+│                                         "answer_sha256": "f353a41a72d97dc3b9636fad1df672298e4a78eb48b7930db42c4e1bfd3b97dc",
+│                                         "completion": "282690a38a3d4e3d9a179edc843ef517",
+│                                         "gateway_tls": "attested",
+│                                         "gpu": "verified",
+│                                         "model": "z-ai/glm-5.3-flash",
+│                                         "prompt_sha256": "ad61205f9bec2ddaf2df72cb1933005482bbe4a6fc0db5b5ede5899ea59f845e",
+│                                         "signature": "5a1f0a4682176406fffe8cb3e793f621543c8af0740510d28bf09575800a422ee765a6e57b2a6440a39a75adf9f018b39588fece735398bfa7d557bb6e99660f",
+│                                         "signed_text": "z-ai/glm-5.3-flash:cd3495e6e63f630c40a8db17bccd88939ceadb18c7928e24b8193231e4cc974c:bc4429a3053baf2891c8b01e401a1a5993c9bcbbc09dd5b0e49d07aefedf2cf1",
+│                                         "signer": {
+│                                           "address": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff",
+│                                           "algo": "ed25519"
+│                                         },
+│                                         "tdx": "UpToDate"
+│                                       },
+│                                       "spot": "base:0x95474ecaca8af120667f7268d7cdad7e77607bf31810a2b96ff0788879cf0091:0",
+│                                       "sz": 600000
+│                                     }
+│                       gas:          120.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:CwmZDR9quD6CuuLyaVFi5NwXcgH5umiQ7ZWsRSv5MoYE
+│    Signature:  ed25519:28Xt5aULCzRRbW98N9tsMY3i2Y41qxSHfhGhenyqqJ3DUVKWharXYcQhHYoCaZeSLjowcPXBE9fGoBU5q4JVy86J
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 17.2 Tgas
+│    Transaction fee: 0.0016288662195347 NEAR
+│    Transaction ID: 9kZdLCQNAkZj6JMExpHmkG1XU2Ms8HeNKy1HXsMMPFrm
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/9kZdLCQNAkZj6JMExpHmkG1XU2Ms8HeNKy1HXsMMPFrm
+│     [0m
+├  Function execution logs:
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m
+│      {"outcome":"sign","job_id":0,"order":{"nonce":7,"is_buy":true,"limit_px":192980000000,"sz":600000,"reduce_only":false,"cloid":"224142947417688843003126397430704226756","deadline":1794574338},"digest":"0xa8b807ef3b684dc27ab8ba7a79040f66fef518f9e5e450b13231fda803cd2f92"}
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("delever.keel-factory-bcf915.testnet"), request=SignRequestArgs { path: "keel/1/hyperevm", payload: Ecdsa(BoundedVec { inner: [168, 184, 7, 239, 59, 104, 77, 194, 122, 184, 186, 122, 121, 4, 15, 102, 254, 245, 24, 249, 229, 228, 80, 177, 50, 49, 253, 168, 3, 205, 47, 146], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m
+│      signed 0:7
+│    [36mLogs [manager.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [manager.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "0xa8b807ef3b684dc27ab8ba7a79040f66fef518f9e5e450b13231fda803cd2f92",
+  "job_id": 0,
+  "order": {
+    "cloid": "224142947417688843003126397430704226756",
+    "deadline": 1794574338,
+    "is_buy": true,
+    "limit_px": 192980000000,
+    "nonce": 7,
+    "reduce_only": false,
+    "sz": 600000
+  },
+  "outcome": "sign"
+}
+
+
+The "propose_order" call to <delever.keel-factory-bcf915.testnet> on behalf of <manager.keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet propose_order json-args '{"perp": "hyperevm:0x852ea13b0de921d134548845b59af445052591d5d18bee0824c7912194074bec:0", "spot": "base:0x95474ecaca8af120667f7268d7cdad7e77607bf31810a2b96ff0788879cf0091:0", "is_buy": true, "sz": 600000, "limit_px": 192980000000, "sealed": {"model": "z-ai/glm-5.3-flash", "completion": "282690a38a3d4e3d9a179edc843ef517", "signer": {"algo": "ed25519", "address": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff"}, "signed_text": "z-ai/glm-5.3-flash:cd3495e6e63f630c40a8db17bccd88939ceadb18c7928e24b8193231e4cc974c:bc4429a3053baf2891c8b01e401a1a5993c9bcbbc09dd5b0e49d07aefedf2cf1", "signature": "5a1f0a4682176406fffe8cb3e793f621543c8af0740510d28bf09575800a422ee765a6e57b2a6440a39a75adf9f018b39588fece735398bfa7d557bb6e99660f", "tdx": "UpToDate", "gpu": "verified", "gateway_tls": "attested", "prompt_sha256": "ad61205f9bec2ddaf2df72cb1933005482bbe4a6fc0db5b5ede5899ea59f845e", "answer_sha256": "f353a41a72d97dc3b9636fad1df672298e4a78eb48b7930db42c4e1bfd3b97dc"}}' prepaid-gas '120.0 Tgas' attached-deposit '0 NEAR' sign-as manager.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/manager-fc.keel-delever-7953ec.testnet.json send[39m
+

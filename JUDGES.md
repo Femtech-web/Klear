@@ -79,6 +79,10 @@ no such log ([`4gcMUUad…`](https://testnet.nearblocks.io/txns/4gcMUUad8v7NE9jA
 no trigger, refused `flatten-not-triggered` ([`5x4Jez8V…`](https://testnet.nearblocks.io/txns/5x4Jez8V76ZiYWtFkeZWX1asSTHLTvmHhQ6SR5q7PNYK));
 the AI's own key calling `open_flatten`, rejected by NEAR before inclusion.
 
+**Or try it yourself, live, with no wallet:** the site's `/try` page ("Try to break it, live") sends a real testnet
+transaction from a stranger's account for each attempt (trade with the investor's money, pull the money out, rewrite
+the rules) and shows the judge's refusal with its NearBlocks link. A refused call changes nothing on chain.
+
 ### 5. Inspect a strategy like a guardian (1 min)
 
 The site's `/strategies/practice.keel-factory-bcf915.testnet` runs six checks live: created by the factory; no

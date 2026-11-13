@@ -79,9 +79,18 @@ unfilled; the position stayed flat. Fixed: a failed send now stops the script, a
 up to 40 s. The investor then exited, and an off-the-shelf agent rescued the strategy
 ([agent run 3](../agent-runs/README.md)).
 
+## A sealed trade, filled (agent run 4)
+
+The next cycle, with the relay fixed: the sealed AI decided to **buy 0.006 ETH at 1929.8** (reasoning sealed), the
+judge signed it ([`9kZdLCQN…`](https://testnet.nearblocks.io/txns/9kZdLCQNAkZj6JMExpHmkG1XU2Ms8HeNKy1HXsMMPFrm),
+the TEE's receipt in its arguments), and the manager relayed it at once: HyperEVM `0x9c0f8642…`, **filled**, a
+0.006 ETH long with an entry value of $11.5482, seen 63 L1 blocks after it was queued. NEAR verified the receipt
+against the proven TEE key: [`FQWtDbwk…`](https://testnet.nearblocks.io/txns/FQWtDbwkHFMfBnxv5U8hA6M9bj19xdmGbWX6u4CFQc45).
+The investor then asked to exit, and an off-the-shelf agent closed the long and brought both legs home
+([agent run 4](../agent-runs/README.md)).
+
 ## What this does not show
 
-- A **filled** sealed trade: one was decided, signed and verified on NEAR, but expired unfilled (above).
 - **Independent provenance of the model image**: the SDK reports `deployment_provenance: not_checked`; we trust NEAR
   AI's attested measurement, not a reproducible build of the model server.
 - Two earlier attempts are in the record: one refused `stale-evidence` (the machine slept for six hours between the

@@ -35,3 +35,23 @@
 {"at": 1794567503, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794567485-perp-log.json"}
 {"at": 1794567690, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794567661-perp-log.json"}
 {"at": 1794567784, "role": "courier", "kind": "spot-attested", "out": ["base:0x415ca50028be6986205522acffbc1dacdae55a02457ad105b4acc7237f005a7c:47"]}
+{"at": 1794574208, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794574201-perp-log.json"}
+{"at": 1794574208, "role": "courier", "kind": "spot-probe"}
+{"at": 1794574280, "role": "courier", "kind": "relayed-order", "key": "5:8", "tx": "0xdb13a30ae1a8a59683a815bc8252e32a62d48d0322039c095e83a70e59539a1d"}
+{"at": 1794574283, "role": "courier", "kind": "relayed-exit", "key": "3", "tx": "0xe350764fd22474ce3ed70d8a35a80675df828f6897fe38da7c065ba90035ca48"}
+{"at": 1794574388, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794574376-perp-log.json"}
+{"at": 1794574486, "role": "courier", "kind": "relayed-sweep", "key": "9", "tx": "0x702b4257ca94f9ec0394d1618c024c604ca69432973ab800404b7096b5f6e6fc"}
+{"at": 1794574559, "role": "courier", "kind": "tick-failed", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794574597, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794574590-perp-log.json"}
+{"at": 1794574760, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794574753-perp-log.json"}
+{"at": 1794574925, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794574916-perp-log.json"}
+{"at": 1794575088, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794575081-perp-log.json"}
+{"at": 1794575624, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794575617-perp-log.json"}
+{"at": 1794575624, "role": "courier", "kind": "spot-probe"}
+{"at": 1794575627, "role": "courier", "kind": "relay-exit-refused", "key": "3", "error": "12/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)"}
+{"at": 1794575789, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794575783-perp-log.json"}
+{"at": 1794575952, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794575945-perp-log.json"}
+{"at": 1794576116, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794576109-perp-log.json"}
+{"at": 1794576279, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794576272-perp-log.json"}
+{"at": 1794576443, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794576436-perp-log.json"}
+{"at": 1794576608, "role": "courier", "kind": "snapshot", "file": "docs/results/delever/c-1794576600-perp-log.json"}

@@ -30,3 +30,9 @@ docs/results/delever/courier.log
 docs/results/delever/exit.log
 docs/results/delever/sealed-console.log
 docs/results/agent-runs/console.log
+
+# Film production (footage, voice, renders): local only
+marketing/
+
+# macOS folder metadata
+.DS_Store

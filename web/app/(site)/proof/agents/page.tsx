@@ -80,13 +80,18 @@ export default function AgentsPage() {
           <Card>
             <h2 className="mb-3 font-sans text-lg font-semibold">Recorded as it happened</h2>
             <p className="m-0 text-sm text-ink-2">
-              Three runs. The first failed on our own HyperEVM log query, and the agent said it was not paid. The second
+              Four runs. The first failed on our own HyperEVM log query, and the agent said it was not paid. The second
               was paid after its session dropped once mid-wait.
             </p>
             <p className="mt-2 text-sm text-ink-2">
               In the third, on a strategy that had just made a sealed trade, the judge refused its first open: the order
               was still live. It read the log, asked the hosted server, retried once the order expired, and was paid
-              0.15 NEAR. Every transcript is published.
+              0.15 NEAR.
+            </p>
+            <p className="mt-2 text-sm text-ink-2">
+              In the fourth, after a sealed trade that filled, it closed the position. Our own session ended mid-rescue
+              and took its rescue process with it; a new session noticed the process was gone, restarted it, and was
+              paid 0.15 NEAR. Every transcript is published.
             </p>
           </Card>
           <Card>

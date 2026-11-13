@@ -18,6 +18,7 @@ Code's full transcript (`transcript.jsonl`, stream-json) and the rescue's log. R
 | [1](20261113-0957-practice) | practice (the daily drill's open window) | `list_strategies` → `inspect_strategy` → `rescue_status` → `start_rescue` → `wait_for_rescue`; restarted the rescue twice on its own | **nothing**: every attempt crashed on our HyperEVM log query (a 1,000-block range the public RPC times out on). The agent said so: "I didn't complete the rescue and wasn't paid … The rescue is still due and unclaimed." Fixed: 200-block ranges, retried. |
 | [2](20261113-1003-practice) | practice (same window, rescue still due) | `list_strategies` → `inspect_strategy` (6 of 6) → `start_rescue` → `rescue_status` → `wait_for_rescue`; its session then ended on an Anthropic API error (403) during a 15-minute wait. A second session, told so, followed the same rescue: `rescue_status` → `rescue_log` → `wait_for_rescue` ×3 | **0.15 NEAR**: 0.1 for the Hyperliquid leg once 3.535075 USDC reached the investor, 0.05 for the Base leg once 0.004 WETH did |
 | [3](20261113-1120-delever-sealed) | delever (its investor asked to exit, right after a sealed AI trade) | Used both servers, one session, 16 turns, 22 min. `list_strategies` → `inspect_strategy` (6 of 6) → `rescue_status` → `start_rescue`: **refused `attempt-not-resolved`**, because the sealed manager's order from a minute earlier was still open. On its own it read `rescue_log`, checked the hosted `rescue_status` and `how_to_rescue`, then started again once the order expired: opened → `wait_for_rescue` ×4 | **0.15 NEAR**: 0.1 once 3.5 USDC reached the investor, 0.05 once 0.004 WETH did |
+| [4](20261113-1314-delever-sealed) | delever (its investor asked to exit, right after a sealed AI trade that **filled**) | First session: `list_strategies` → `inspect_strategy` → `start_rescue` → `wait_for_rescue`, until our own machine's session ended and took the rescue process with it ("Connection closed"). A second session, told only that its last one ended: `list_strategies` (found the job it holds) → `rescue_status` → `rescue_log` → `wait_for_rescue` ×3, then it suspected the process "died with the last session", read `how_to_rescue` and called `start_rescue` again, which resumed its job | **0.15 NEAR**: 0.1 once 3.533388 USDC reached the investor (first session), 0.05 once 0.004 WETH did (second) |
 
 ## Run 2, on chain
 
@@ -48,15 +49,31 @@ The strategy had just traded under a sealed manager (its decision made in a TEE,
 From its report: "I chose no order, price or destination: the judge planned the orders and only sent money to the
 investor's fixed addresses. The courier paid the EVM gas."
 
+## Run 4, on chain
+
+| Step | Transaction |
+|---|---|
+| The sealed manager's trade, signed by the judge with the TEE's receipt in its arguments: buy 0.006 ETH at 1929.8 | [`9kZdLCQN…`](https://testnet.nearblocks.io/txns/9kZdLCQNAkZj6JMExpHmkG1XU2Ms8HeNKy1HXsMMPFrm) |
+| Relayed and **filled**: 0.006 ETH long, entry $11.5482, seen 63 L1 blocks after it was queued | HyperEVM `0x9c0f8642…` |
+| NEAR verifies that receipt against the proven TEE key (`klear-tee`) | [`FQWtDbwk…`](https://testnet.nearblocks.io/txns/FQWtDbwkHFMfBnxv5U8hA6M9bj19xdmGbWX6u4CFQc45) |
+| The investor asks to exit | [`GBpdCjtb…`](https://testnet.nearblocks.io/txns/GBpdCjtbLCVJkzmDJcKeC6pKY5Vksz5unTKHMzwp9Yyj) |
+| The agent opens the rescue (job 5); the judge closes the long, sweeps and exits the vault | [`FmXUsj4A…`](https://testnet.nearblocks.io/txns/FmXUsj4AhKGSqqwCsfDmmdVqR1tUADA2RrkeTxcVgEDp), Base `0xe350764f…` |
+| Settle: **3.533388 USDC at the investor, 0.1 NEAR to the agent** | [`KjK19FSs…`](https://testnet.nearblocks.io/txns/KjK19FSsguAHyZUPRoAYvyoWMiXnb39skq79WV6atr9) |
+| Confirm the vault's exit: **0.004 WETH at the investor, 0.05 NEAR to the agent** | [`AGj3PUT9…`](https://testnet.nearblocks.io/txns/AGj3PUT9buofMJogqMTzhpBKJt9ZoFv9AwM5rADpzewV) |
+
 ## What else these runs found
 
 - The daily drill on GitHub Actions crashed during this window: a courier transaction came back without a status
   field. The drill now logs a failed courier round and tries again, and `send_tx` fails with the reply instead. A
   local courier carried the gas for the rest of the window; anyone may run one.
 - `wait_for_rescue` now waits at most 5 minutes per call, so an agent's session never idles 15 minutes.
+- Run 4 showed that an agent cannot tell when the rescue process behind its log has stopped. `wait_for_rescue` now
+  returns `running`, and says to call `start_rescue` again, which resumes the job the agent holds.
+- Run 3's sealed order was signed but relayed late (a failed send hidden by the script), so it expired unfilled; with
+  the relay fixed, run 4's filled within seconds.
 
 ## What this does not show
 
-Three runs, not sixteen: two paid, one failed on our own RPC query (fixed), plus the stranger's manual rescue
+Four runs, not sixteen: three paid, one failed on our own RPC query (fixed), plus the stranger's manual rescue
 ([visitor](../visitor/README.md)). Each run needs a strategy whose rescue is due, and a Base exit takes about 25
 minutes to finalize, so runs are slow to repeat; `agents/agent_run.py` records each.

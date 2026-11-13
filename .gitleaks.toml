@@ -22,3 +22,7 @@ regexes = ['''^0x[0-9a-fA-F]{40}$''']
 description = "The public ed25519 signing key of NEAR AI Cloud's z-ai/glm-5.3-flash TEE, from its attestation report; sealed receipts carry it (docs/results/sealed)."
 regexTarget = "secret"
 regexes = ['''^5a0210f2442c79355784f9de021985429561da5bacc3a4424b01a[0-9a-f]{11}$''']
+
+[[allowlists]]
+description = "Meteor's published NEAR wallet connector, vendored from its SDK repository (source and upstream SHA-256 in web/public/wallet-connectors/README.md). Its minified code names key fields such as `this.mlDsa65Key`, which the generic rule takes for a secret."
+paths = ['''web/public/wallet-connectors/meteor\.js$''']
