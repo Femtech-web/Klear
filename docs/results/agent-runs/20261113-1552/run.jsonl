@@ -1,0 +1,2 @@
+{"at": 1794581583, "role": "agent-run", "kind": "rearm", "tx": "EkGjteiarDaC2YESXJLRQ7FtmRVvcbUEZhTmqz14uHzr", "refused": null}
+{"at": 1794581614, "role": "agent-run", "kind": "fund", "out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}

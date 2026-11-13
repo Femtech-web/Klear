@@ -1,1 +1,7 @@
 [14:17:10] waiting until 14:50 UTC
+[15:50:31] agent-start: {"servers": ["klear-local", "klear"], "agent": "klear-agent-0f366c.testnet"}
+[15:52:55] agent-done: {"code": 0, "minutes": 2.4, "paid": [], "turns": 12, "report": "practice:** up to 2x leverage, $3 floor; if the manager is silent for 15 minutes the money exits. Rewards are 0.10 NEAR for the Hyperliquid leg and 0.05 NEAR for the Base leg.\
+[15:52:55] run 20261113-1550-practice: exit 0, paid 0 leg(s)
+[15:52:57] deleverage run 1 of 8
+[15:53:03] rearm: {"tx": "EkGjteiarDaC2YESXJLRQ7FtmRVvcbUEZhTmqz14uHzr", "refused": null}
+[15:53:34] fund: {"out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}

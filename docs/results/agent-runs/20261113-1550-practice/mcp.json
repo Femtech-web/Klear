@@ -1,0 +1,14 @@
+{
+ "mcpServers": {
+  "klear-local": {
+   "command": "/Users/mac/work/web3/near/keel/.tools/venv/bin/python",
+   "args": [
+    "/Users/mac/work/web3/near/keel/agents/mcp_server.py"
+   ]
+  },
+  "klear": {
+   "type": "http",
+   "url": "https://klear-near.vercel.app/api/mcp"
+  }
+ }
+}

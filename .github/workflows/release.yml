@@ -2,7 +2,7 @@ name: release
 
 # On a version tag: the judge's wasm, the EVM contracts' ABIs and bytecode, the keel-judge CLI and the
 # replay for Linux and macOS, one SHA256SUMS over everything, build provenance, and a GitHub release whose
-# notes are the tag's section of CHANGELOG.md.
+# notes are docs/releases/<tag>.md, or else the tag's section of CHANGELOG.md.
 
 on:
   push:
@@ -82,8 +82,10 @@ jobs:
       - name: checksums and release notes
         run: |
           cd dist && sha256sum * > SHA256SUMS && cat SHA256SUMS && cd ..
-          awk -v tag="${GITHUB_REF_NAME}" '$0 ~ "^## " tag {on=1; next} /^## /{on=0} on' CHANGELOG.md > notes.md
-          test -s notes.md || { echo "CHANGELOG.md has no section for ${GITHUB_REF_NAME}"; exit 1; }
+          # The release's own notes (docs/releases/<tag>.md) when written, else the tag's CHANGELOG section.
+          if [ -f "docs/releases/${GITHUB_REF_NAME}.md" ]; then cp "docs/releases/${GITHUB_REF_NAME}.md" notes.md
+          else awk -v tag="${GITHUB_REF_NAME}" '$0 ~ "^## " tag {on=1; next} /^## /{on=0} on' CHANGELOG.md > notes.md; fi
+          test -s notes.md || { echo "no release notes for ${GITHUB_REF_NAME}"; exit 1; }
       # GitHub signs provenance only for public repositories on the Free plan.
       - uses: actions/attest-build-provenance@v1
         if: ${{ !github.event.repository.private }}
