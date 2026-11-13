@@ -11,7 +11,7 @@ import { Hash } from "@/components/ui/Tx";
 import { DrillTable } from "@/components/drill/DrillTable";
 import { view } from "@/lib/chain/near";
 import { config } from "@/lib/config";
-import { factory } from "@/lib/data/live";
+import { drillRuns, factory } from "@/lib/data/live";
 import { ago, drillWindowUtc, near } from "@/lib/format";
 import { read } from "@/lib/keel/live";
 import { parseGlance, phase, rescueDue } from "@/lib/keel/registry";
@@ -143,19 +143,19 @@ export default async function PracticePage() {
               Use a NEAR testnet account to sign each transaction. The courier pays the EVM gas while the window is
               open.
             </p>
-            <RescueFlow judge={judge} nonce={nonce} />
+            <RescueFlow judge={judge} nonce={nonce} practiceWindow={WINDOW} />
           </Card>
         </div>
-        <Link
-          href="/try#recorded-rescue"
-          className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold hover:text-accent"
-        >
-          Preview the rescue without a wallet <ArrowRight size={16} />
-        </Link>
       </Section>
 
       <Section tight title="Recent drill attempts" lede="A cycle can have more than one attempt.">
         <DrillTable limit={3} />
+        {drillRuns[0] && !drillRuns[0].ok && (
+          <p className="mt-4 max-w-measure text-sm text-ink-2">
+            The latest recorded attempt stopped before completing the drill. The full record includes the error and any
+            deliveries or payouts captured before it stopped.
+          </p>
+        )}
         <Link
           href="/proof/drill#drill-record"
           className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold hover:text-accent"

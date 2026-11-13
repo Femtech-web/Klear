@@ -1,0 +1,56 @@
+├  Unsigned transaction:
+│    signer_id:    klear-mandate-92fc7f.testnet
+│    receiver_id:  klear-owner-d48b38.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  sign_grant
+│                       args:         {
+│                                       "message": {
+│                                         "payload": "{\"agent_id\":\"565f214096c8b66791c70ce27c6c0ec4d62bf77c9cb50b8c433374c66bb76b2e\",\"credential\":\"521959b35d5ca1d95711d452975e36ca42f9bb5faa2736ed073531587faa9923\",\"domain\":\"near-intents-agent-api.agent-grant.v6\",\"expires_at_ms\":1795169746000,\"issued_at_ms\":1794564947565,\"label\":\"ai-manager\",\"network\":\"mainnet\",\"nonce\":\"319e07d9bfcd8ca9703553d8189e38ad3f4c2cec9e2c69325e061ed122e5ffbb\",\"owner\":{\"address\":\"0x9d2242150aac3c58cc56a99c59da8a71507c32bf\",\"chain_id\":8453,\"public_key\":\"0x6f456422aaea4aaaf16afa5888fd43705b546c06c4d149819cc7859058931b9b4400e4dde153c67b008b6e29ad8721d16d40f6351f8542e9d136844547a80634\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\",\"wallet_id\":\"136da700-6eca-4d03-8097-f8871297b3c2\"}",
+│                                         "purpose": "PROVE_OWNERSHIP",
+│                                         "recipient": "api.demo.agentsonintents.com"
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z
+│    Signature:  ed25519:2wJeBx11my9BehxWhPkh4f8joGsToHC3BrxTMJVUZrRVNVFZ5hjsAYscp9w6y3V5KEue6WrRC3ffY99NRpXmpJcQ
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 13.7 Tgas
+│    Transaction fee: 0.0012708385770763 NEAR
+│    Transaction ID: UNofGj4x1ug2Nure3LADck4tbrhrMTUxaWQDQEJd5v2
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/UNofGj4x1ug2Nure3LADck4tbrhrMTUxaWQDQEJd5v2
+│     [0m
+├  Function execution logs:
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("klear-owner-d48b38.testnet"), request=SignRequestArgs { path: "klear/mandate/1", payload: Ecdsa(BoundedVec { inner: [116, 132, 110, 140, 111, 238, 175, 76, 158, 138, 101, 57, 190, 237, 25, 226, 169, 244, 210, 99, 222, 207, 179, 143, 217, 80, 50, 28, 50, 137, 72, 101], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m
+│      signed 74846e8c6feeaf4c9e8a6539beed19e2a9f4d263decfb38fd950321c32894865 (setup grant)
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "74846e8c6feeaf4c9e8a6539beed19e2a9f4d263decfb38fd950321c32894865",
+  "signature": "0x9f0a846bf2a938f8e5f01d61591f526ddc61a8f7647d7ed8d87fa67254eb1432682285f9e1d441e0d78eb5ec8607baa62a998af56d11603e567249dd7f93187d1c",
+  "what": "setup grant"
+}
+
+
+The "sign_grant" call to <klear-owner-d48b38.testnet> on behalf of <klear-mandate-92fc7f.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction klear-owner-d48b38.testnet sign_grant json-args '{"message": {"payload": "{\"agent_id\":\"565f214096c8b66791c70ce27c6c0ec4d62bf77c9cb50b8c433374c66bb76b2e\",\"credential\":\"521959b35d5ca1d95711d452975e36ca42f9bb5faa2736ed073531587faa9923\",\"domain\":\"near-intents-agent-api.agent-grant.v6\",\"expires_at_ms\":1795169746000,\"issued_at_ms\":1794564947565,\"label\":\"ai-manager\",\"network\":\"mainnet\",\"nonce\":\"319e07d9bfcd8ca9703553d8189e38ad3f4c2cec9e2c69325e061ed122e5ffbb\",\"owner\":{\"address\":\"0x9d2242150aac3c58cc56a99c59da8a71507c32bf\",\"chain_id\":8453,\"public_key\":\"0x6f456422aaea4aaaf16afa5888fd43705b546c06c4d149819cc7859058931b9b4400e4dde153c67b008b6e29ad8721d16d40f6351f8542e9d136844547a80634\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\",\"wallet_id\":\"136da700-6eca-4d03-8097-f8871297b3c2\"}", "purpose": "PROVE_OWNERSHIP", "recipient": "api.demo.agentsonintents.com"}}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as klear-mandate-92fc7f.testnet network-config testnet sign-with-access-key-file /Users/mac/work/web3/near/keel/.secrets/near/klear-mandate-92fc7f.testnet.json send[39m
+

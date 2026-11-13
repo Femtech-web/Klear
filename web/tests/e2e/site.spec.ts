@@ -16,12 +16,15 @@ const PAGES = [
   "/proof",
   "/proof/rescue",
   "/proof/deleverage",
+  "/proof/agents",
   "/proof/replay",
   "/proof/replay/0x61f35978eb33bad00644bc9549850e7a7c65186e",
   "/proof/contracts",
   "/proof/attacks",
   "/proof/factory",
   "/proof/drill",
+  "/proof/sealed",
+  "/proof/mandate",
   "/proof/mainnet",
 ];
 
@@ -157,6 +160,7 @@ test("the wallet picker reached from the homepage loads its icons and opens a sa
     page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Practice" }).click(),
   ]);
   expect(walletDocument.headers()["content-security-policy"]).toContain("frame-src 'self'");
+  await page.waitForLoadState("load");
   const trigger = page.getByRole("button", { name: "Connect a NEAR testnet wallet" });
   await trigger.focus();
   await page.keyboard.press("Enter");
@@ -200,22 +204,30 @@ test("Try it leads to recorded receipts, investor setup, and the live drill", as
   await page.goto("/");
   await page.getByRole("main").getByRole("link", { name: "Try it", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Try Klear" })).toBeVisible();
-  await page.getByRole("link", { name: /See the walkthrough/ }).click();
   const walkthrough = page.getByRole("region", { name: "Recorded rescue walkthrough" });
-  const next = walkthrough.getByRole("button", { name: "Next step" });
   await expect(walkthrough.getByRole("heading", { name: "The AI trades", exact: true })).toBeVisible();
+  await walkthrough.getByRole("button", { name: "Manager goes silent" }).click();
+  await expect(walkthrough.getByRole("heading", { name: "Silence limit passes" })).toBeVisible();
+  const next = walkthrough.getByRole("button", { name: "Next step" });
   await next.click();
-  await expect(walkthrough.getByRole("heading", { name: "The rescue opens" })).toBeVisible();
+  await expect(walkthrough.getByRole("heading", { name: "The judge signs the exit" })).toBeVisible();
   await next.click();
-  await expect(walkthrough.getByRole("heading", { name: "The funds return" })).toBeVisible();
-  await next.click();
-  await expect(walkthrough.getByRole("heading", { name: "The guardian gets paid" })).toBeVisible();
-  await walkthrough.getByText("Recorded evidence", { exact: true }).click();
+  await expect(walkthrough.getByRole("heading", { name: "USDC delivery verified" })).toBeVisible();
+  await expect(walkthrough.getByRole("list", { name: "Recorded evidence" }).getByRole("link")).toHaveCount(2);
+  const scrubber = walkthrough.getByRole("slider", { name: "Scrub rescue milestones" });
+  await scrubber.press("End");
+  await expect(scrubber).toHaveAttribute("aria-valuetext", "25:17, WETH delivery verified");
   await expect(walkthrough.getByRole("list", { name: "Recorded evidence" }).getByRole("link")).toHaveCount(2);
   await walkthrough.getByRole("button", { name: "Replay from the start" }).click();
   await expect(walkthrough.getByRole("heading", { name: "The AI trades", exact: true })).toBeVisible();
+  await walkthrough.getByRole("button", { name: "Play rescue" }).click();
+  await expect(walkthrough.getByRole("heading", { name: "Silence limit passes" })).toBeVisible();
+  await walkthrough.getByRole("button", { name: "Pause replay" }).click();
   await page.getByRole("link", { name: /See investor setup/ }).click();
   await expect(page.getByRole("heading", { name: "From setup to exit" })).toBeVisible();
+  await page.getByRole("link", { name: "Inspect the practice strategy without a wallet" }).click();
+  await expect(page.getByRole("heading", { name: "Strategy setup" })).toBeVisible();
+  await page.goto("/investor");
   await page.getByRole("link", { name: "Start testnet setup" }).click();
   await expect(page.getByRole("heading", { name: "Create a strategy" })).toBeVisible();
   await page.goto("/try");
@@ -224,4 +236,31 @@ test("Try it leads to recorded receipts, investor setup, and the live drill", as
   const attempts = page.getByRole("region", { name: "Drill attempts" });
   await expect(attempts.getByRole("columnheader")).toHaveCount(3);
   expect(await attempts.evaluate((region) => region.scrollWidth - region.clientWidth)).toBeLessThanOrEqual(1);
+});
+
+test("an agent can use the hosted MCP server: handshake, tools, and a live inspection", async ({ request }) => {
+  const rpc = (id: number, method: string, params: object = {}) =>
+    request.post("/api/mcp", {
+      data: { jsonrpc: "2.0", id, method, params },
+      headers: { accept: "application/json, text/event-stream" },
+    });
+  const init = await (
+    await rpc(1, "initialize", {
+      protocolVersion: "2025-06-18",
+      capabilities: {},
+      clientInfo: { name: "e2e", version: "0" },
+    })
+  ).json();
+  expect(init.result.serverInfo.name).toBe("klear");
+  const tools = await (await rpc(2, "tools/list")).json();
+  expect(tools.result.tools.map((t: { name: string }) => t.name)).toContain("verify_sealed_receipt");
+  const inspected = await (
+    await rpc(3, "tools/call", {
+      name: "inspect_strategy",
+      arguments: { judge: "practice.keel-factory-bcf915.testnet" },
+    })
+  ).json();
+  expect(inspected.result.isError).toBe(false);
+  expect(inspected.result.structuredContent.checks).toHaveLength(6);
+  expect((await request.get("/api/mcp")).status()).toBe(405);
 });

@@ -3,6 +3,7 @@ import moment from "@/data/moment.json";
 import attacks from "@/data/attacks.json";
 import challenges from "@/data/challenges.json";
 import factoryData from "@/data/factory.json";
+import privacyData from "@/data/privacy.json";
 import drillData from "@/data/drill.json";
 import type { Chain } from "@/lib/format";
 
@@ -62,6 +63,12 @@ export const factory = factoryData as {
   practice: { judge: string; leg: string; vault: string; manager: string; guardian: string; investor: string };
   /** The strategy of the live deleverage (docs/results/delever). */
   delever: { judge: string; leg: string; vault: string };
+};
+
+/** The private parts' locked contracts (docs/results/tee, docs/results/owner). */
+export const privacy = privacyData as {
+  tee: { account: string; codeSha256: string };
+  owner: { account: string; codeSha256: string };
 };
 
 /** The daily drill's cycles on the practice strategy (docs/results/drill/runs.jsonl), newest first. */

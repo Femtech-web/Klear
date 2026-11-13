@@ -1,5 +1,5 @@
 import { accessKeyCount, codeHash } from "@/lib/chain/near";
-import { deployment, factory } from "@/lib/data/live";
+import { deployment, factory, privacy } from "@/lib/data/live";
 import { read, type Read } from "@/lib/keel/live";
 
 /** The locked contracts every claim rests on, and the live checks a reader can repeat. */
@@ -27,6 +27,12 @@ const CONTRACTS = () => [
   { role: "Factory (creates every new judge)", account: factory.factory, expected: factory.factoryCodeSha256 },
   { role: "Judge of the practice strategy", account: factory.practice.judge, expected: factory.judgeCodeSha256 },
   { role: "Judge of the deleverage run", account: factory.delever.judge, expected: factory.judgeCodeSha256 },
+  {
+    role: "TEE registry (sealed decisions verified on NEAR)",
+    account: privacy.tee.account,
+    expected: privacy.tee.codeSha256,
+  },
+  { role: "Owner of the confidential mandate", account: privacy.owner.account, expected: privacy.owner.codeSha256 },
 ];
 
 export async function lockedContracts(): Promise<Locked[]> {

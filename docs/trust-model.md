@@ -27,6 +27,8 @@ In the live G7 run the AI process holds only a NEAR function-call key whose on-c
 | **KeelLeg / KeelVault** | A bug could misroute an action | The only outflows are to immutable payouts; 39 Foundry tests. **Not audited** |
 | **Hyperliquid** (HyperCore, precompiles, CoreWriter) | Wrong precompile data misleads every decision; the exchange can liquidate or ADL | Snapshots are cross-checked against the API in `make live-read`; liquidation shows up as a position change Klear never signed (voided, never paid) |
 | **Base** (sequencer, WETH contract) | Liveness delays the spot leg; a frozen token blocks it | The legs are independent; the exit spends nothing until it succeeds |
+| **NEAR AI Cloud's TEE** (sealed strategy only) | A flaw in the enclave or in the attested model image could leak the investor's strategy, or an attested model could answer badly | The SDK checks the Intel TDX quote, the NVIDIA GPU evidence and the gateway's TLS binding before each decision, and NEAR's DCAP verifier checks the quote on chain (`klear-tee`); it can cost strategy secrecy, never funds: every order still goes through the judge. The model image's provenance is NEAR AI's attested measurement, not a build we reproduced |
+| **NEAR Intents' confidential ledger and the Agent API** (confidential mandate only) | The ledger is access control, not cryptography: its operators and Defuse can read balances, and 1Click's solvers see each intent; the account's policy is enforced by the API's backend and OutLayer, not by a Klear contract | Withdrawals reach only the investor's listed addresses; the owner key is held only by NEAR's MPC network |
 | **NEAR itself** | If it halts, nothing happens; the strategy fails closed for trading and stalls the rescue | — |
 
 ## What is checkable, and how
@@ -37,6 +39,7 @@ In the live G7 run the AI process holds only a NEAR function-call key whose on-c
 | Only the judge can act for the Hyperliquid account | `KeelLeg.controller()` equals the address of the MPC key derived for `(judge, "keel/1/hyperevm")` |
 | Only the judge can move the Base leg | `KeelVault.controller()` equals the MPC address for `(judge, "keel/1/spot")` |
 | Both legs can only pay the investor | `KeelLeg.payout()` and `KeelVault.payout()` are immutable and equal the investor's address |
+| A sealed decision came from an attested TEE, and is the one on chain | `python3 agents/verify_sealed.py <tx> <sender> --attestation` reads the receipt from the manager's transaction, verifies the TEE's signature, and checks its key against the model's attestation |
 | The AI holds no unrestricted key | the manager account's key list: the AI's key is FunctionCall-only (above) |
 | A guardian is paid only for delivery | the judge's `payouts` list names each leg; each `Delivery` cites the attested log that proves it |
 

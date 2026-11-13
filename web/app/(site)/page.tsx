@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { EquityChart } from "@/components/chart/EquityChart";
-import { RescueSummary } from "@/components/home/RescueSummary";
+import { RecordedRescue } from "@/components/home/RecordedRescue";
 import { SiteLink } from "@/components/site/SiteLink";
-import { ArrowRight } from "@/components/ui/icons";
+import { ArrowRight, KeelMark, Lock } from "@/components/ui/icons";
+import { LinkButton } from "@/components/ui/primitives";
+import { factory } from "@/lib/data/live";
 import { byLoss, FLOORS, HEADLINE, modelName, replay, totals } from "@/lib/data/replay";
 import { usd } from "@/lib/format";
 import lighthouse from "../../public/images/lighthouse.webp";
@@ -10,10 +12,47 @@ import lighthouse from "../../public/images/lighthouse.webp";
 const textLink =
   "group inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink no-underline transition-colors hover:text-accent";
 
-const workflow = [
-  ["Set the mandate", "Choose when to exit, where funds return and what a guardian earns."],
-  ["Deploy and fund", "Verify the judge and its accounts, then fund them on Hyperliquid and Base testnets."],
-  ["Trade or request an exit", "Run your manager separately. If an exit opens, a guardian can return the funds."],
+const safeguards = [
+  {
+    title: "Refuse a trade",
+    detail: "The NEAR judge checks size, price and leverage before it signs an order.",
+    href: "/rules",
+    link: "Try the rules",
+  },
+  {
+    title: "Cut risk early",
+    detail: "Anyone can trim the position if it crosses the warning level or leverage cap.",
+    href: "/proof/deleverage",
+    link: "See an early cut",
+  },
+  {
+    title: "Bring funds home",
+    detail:
+      "If the loss floor is reached, the manager goes silent under an exit rule, or the investor asks, anyone can carry out the exit.",
+    href: "/proof/rescue",
+    link: "Read the rescue record",
+  },
+] as const;
+
+const privacy = [
+  {
+    href: "/proof/sealed",
+    title: "Sealed strategy",
+    network: "Testnet",
+    text: "The AI reads the strategy inside attested hardware. Its signed decision leaves a public receipt.",
+  },
+  {
+    href: "/proof/mandate",
+    title: "Confidential mandate",
+    network: "Mainnet test",
+    text: "An AI traded inside a confidential NEAR Intents account. The provider enforces the policy and its operators can read the ledger.",
+  },
+  {
+    href: "/proof/mainnet",
+    title: "Private payout",
+    network: "Mainnet test",
+    text: "A rescue payout went into a confidential balance. The public receipts leave the recipient’s identity hidden.",
+  },
 ] as const;
 
 export default function Home() {
@@ -58,94 +97,193 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="rescue-heading" className="page py-12 md:py-20">
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-          <div>
-            <p className="mb-3 text-sm text-ink-3">Recorded testnet rescue</p>
-            <h2 id="rescue-heading" className="text-feature text-wrap">
-              The AI went silent. The money came home.
-            </h2>
-            <p className="mt-4 max-w-[39ch] text-ink-2">
-              The judge opened a rescue when the manager missed its check-ins. A guardian returned funds on both chains
-              and earned a reward for each delivery.
-            </p>
-          </div>
-          <RescueSummary />
-        </div>
+      <section aria-labelledby="rescue-heading" className="page py-15 md:py-24">
+        <header className="mb-7 max-w-[44rem] md:mb-9">
+          <h2 id="rescue-heading" className="text-feature">
+            The AI went silent. The money came home.
+          </h2>
+          <p className="mt-4 max-w-[51ch] text-ink-2">
+            We staged the outage. A guardian returned the funds on testnet, and NEAR paid each reward after verifying
+            delivery.
+          </p>
+        </header>
+        <RecordedRescue />
+        <SiteLink href="/proof/rescue" className={`${textLink} mt-2`}>
+          Read the full testnet record <ArrowRight size={16} />
+        </SiteLink>
       </section>
 
-      <section aria-labelledby="investor-heading" className="border-y border-line bg-canvas-tint">
-        <div className="page grid gap-7 py-12 md:py-20 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-          <div>
-            <h2 id="investor-heading" className="text-feature text-wrap">
-              Set your rules. Keep a way out.
+      <section aria-labelledby="rules-heading" className="border-y border-line bg-home-paper">
+        <div className="page py-15 md:py-24">
+          <header className="mx-auto max-w-[35rem] text-center">
+            <h2 id="rules-heading" className="text-feature">
+              The rules stay in force.
             </h2>
-            <p className="mt-4 max-w-[40ch] text-ink-2">
-              NEAR Chain Signatures let one keyless judge control both accounts. Read MPC verifies delivery before the
-              judge pays the guardian.
+            <p className="mx-auto mt-4 max-w-[44ch] text-ink-2">
+              The investor sets the limits. The judge enforces them as conditions change.
             </p>
-            <div className="mt-4 flex flex-wrap gap-x-5">
-              <SiteLink href="/investor" className={textLink}>
-                Investor workspace <ArrowRight size={16} />
-              </SiteLink>
-              <SiteLink href="/how" className={textLink}>
-                How it works <ArrowRight size={16} />
-              </SiteLink>
-            </div>
-          </div>
-          <ol className="divide-y divide-line border-y border-line">
-            {workflow.map(([title, text], i) => (
-              <li key={title} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 py-4">
-                <span aria-hidden="true" className="pt-0.5 font-mono text-xs tabular-nums text-ink-3">
-                  {String(i + 1).padStart(2, "0")}
+          </header>
+          <ol className="home-safeguards mt-8 grid gap-4 md:mt-12 md:grid-cols-3 md:gap-0">
+            {safeguards.map(({ title, detail, href, link }, index) => (
+              <li key={title} className="min-w-0 border-t border-line-strong py-5 md:py-6 md:pr-9 md:not-first:pl-7">
+                <span className="home-safeguard-mark" data-mark={index} aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
                 </span>
-                <div>
-                  <h3 className="text-lg">{title}</h3>
-                  <p className="mt-1 text-sm text-ink-2">{text}</p>
-                </div>
+                <h3 className="mt-5 text-xl md:text-[1.45rem]">{title}</h3>
+                <p className="mt-2 max-w-[35ch] text-sm leading-relaxed text-ink-2">{detail}</p>
+                <SiteLink href={href} className={`${textLink} mt-2`}>
+                  {link} <ArrowRight size={16} />
+                </SiteLink>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section aria-labelledby="replay-title" className="page py-12 md:py-20">
-        <div className="grid items-center gap-7 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+      <section aria-labelledby="investor-heading" className="page py-15 md:py-24">
+        <div className="grid gap-8 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-center md:gap-15">
           <div>
-            <p className="mb-3 text-sm text-ink-3">Alpha Arena replay</p>
-            <h2 id="replay-title" className="text-feature text-wrap">
-              {tradersDown} of {results.agents} AI traders ended with less.
+            <h2 id="investor-heading" className="text-feature">
+              Set up a strategy you can inspect.
             </h2>
             <p className="mt-4 max-w-[42ch] text-ink-2">
-              A {100 - FLOORS[HEADLINE.floor]}% loss floor would have left investors with {usd(results.withKeel)},
-              compared with {usd(results.real)} in actual trading. {results.worse} traders would have done worse under
-              the same rule.
+              Lock your rules and payout address on NEAR. Then deploy, verify and fund the two accounts before starting
+              your manager and relayer.
             </p>
-            <SiteLink href="/proof/replay" className={`${textLink} mt-3`}>
-              Explore the replay <ArrowRight size={16} />
-            </SiteLink>
+            <p className="mt-3 max-w-[42ch] text-sm text-ink-2">
+              After a rescue, you can start another cycle with the same rules and accounts.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <LinkButton href="/investor">Investor workspace</LinkButton>
+              <SiteLink href={`/strategies/${factory.practice.judge}#setup-progress`} className={textLink}>
+                Inspect an example <ArrowRight size={16} />
+              </SiteLink>
+            </div>
           </div>
-          <div className="min-w-0 border-y border-line py-5 sm:py-7">
-            <h3 className="mb-4 text-lg">
-              {modelName(worst.model)} · {usd(worst.initial)} to {usd(worst.final)}
-            </h3>
-            <EquityChart agent={worst} floor={HEADLINE.floor} />
-          </div>
+          <figure className="home-chain-map rounded-xl bg-home-water px-4 py-7 sm:px-8 sm:py-10">
+            <div className="mx-auto flex w-fit max-w-full items-center gap-3 rounded-full border border-line-strong bg-surface px-4 py-2.5 sm:px-5">
+              <KeelMark size={26} className="shrink-0 text-accent" />
+              <span className="text-sm font-semibold">Keyless NEAR judge</span>
+            </div>
+            <div className="home-chain-branch" aria-hidden="true" />
+            <div className="grid grid-cols-2 gap-2 sm:gap-4">
+              <div className="rounded-lg border border-line-strong bg-surface px-2 py-3 text-center sm:p-4">
+                <p className="text-sm font-semibold sm:text-base">Hyperliquid</p>
+                <p className="mt-1 text-xs text-ink-2">Position and margin</p>
+              </div>
+              <div className="rounded-lg border border-line-strong bg-surface px-2 py-3 text-center sm:p-4">
+                <p className="text-sm font-semibold sm:text-base">Base</p>
+                <p className="mt-1 text-xs text-ink-2">Asset vault</p>
+              </div>
+            </div>
+            <figcaption className="mx-auto mt-5 flex max-w-[37ch] items-start justify-center gap-2 text-center text-xs leading-relaxed text-ink-2 sm:text-sm">
+              <Lock size={15} className="mt-0.5 shrink-0 text-accent" /> Only the judge’s MPC keys control both
+              accounts.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
-      <section aria-labelledby="review-title" className="page">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-y border-line py-5">
-          <h2 id="review-title" className="text-xl">
-            Verify the contracts and the rescue.
-          </h2>
-          <div className="flex flex-wrap gap-x-5">
-            <SiteLink href="/judges" className={textLink}>
-              For judges <ArrowRight size={16} />
-            </SiteLink>
-            <SiteLink href="/proof" className={textLink}>
-              All evidence <ArrowRight size={16} />
-            </SiteLink>
+      <section aria-labelledby="replay-title" className="border-y border-line bg-home-paper">
+        <div className="page py-15 md:py-24">
+          <header className="grid items-end gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12">
+            <div>
+              <p className="mb-3 text-sm text-ink-3">Alpha Arena · Replay of real fills</p>
+              <h2 id="replay-title" className="max-w-[17ch] text-feature">
+                {tradersDown} of {results.agents} AI traders ended with less.
+              </h2>
+            </div>
+            <p className="max-w-[46ch] text-sm leading-relaxed text-ink-2 md:text-base">
+              We replayed their fills with a leverage cap and a {100 - FLOORS[HEADLINE.floor]}% loss floor.{" "}
+              {results.worse} traders would have ended with less under those rules.
+            </p>
+          </header>
+          <div className="mt-7 grid overflow-hidden rounded-xl border border-line-strong bg-surface md:mt-9 md:grid-cols-[minmax(0,1fr)_minmax(0,2.3fr)]">
+            <dl className="grid gap-4 border-b border-line px-4 py-5 sm:grid-cols-2 sm:px-7 md:grid-cols-1 md:content-center md:gap-6 md:border-r md:border-b-0">
+              <div>
+                <dt className="text-sm text-ink-2">Actual trading</dt>
+                <dd className="mt-1 font-display text-stat tabular-nums">{usd(results.real)}</dd>
+              </div>
+              <div>
+                <dt className="text-sm text-ink-2">Replay with Klear’s rules</dt>
+                <dd className="mt-1 font-display text-stat tabular-nums">{usd(results.withKeel)}</dd>
+              </div>
+            </dl>
+            <div className="min-w-0 px-4 py-5 sm:p-7">
+              <h3 className="mb-3 text-base">
+                {modelName(worst.model)} · {usd(worst.initial)} to {usd(worst.final)}
+              </h3>
+              <EquityChart agent={worst} floor={HEADLINE.floor} />
+            </div>
+          </div>
+          <SiteLink href="/proof/replay" className={`${textLink} mt-2`}>
+            Explore all {results.agents} traders <ArrowRight size={16} />
+          </SiteLink>
+        </div>
+      </section>
+
+      <section aria-labelledby="privacy-heading" className="page py-15 md:py-24">
+        <div className="grid gap-6 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-15">
+          <header>
+            <h2 id="privacy-heading" className="max-w-[17ch] text-feature">
+              What can stay private?
+            </h2>
+            <p className="mt-4 max-w-[40ch] text-ink-2">
+              Three demonstrations cover the strategy an AI reads, the balance it trades with, and the destination of a
+              rescue payout.
+            </p>
+          </header>
+          <ul className="divide-y divide-line border-y border-line-strong">
+            {privacy.map(({ href, title, network, text }) => (
+              <li key={href}>
+                <SiteLink
+                  href={href}
+                  className="group grid grid-cols-[minmax(0,1fr)_1rem] items-center gap-3 py-4 no-underline hover:text-accent md:py-5"
+                >
+                  <div>
+                    <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                      <h3 className="text-lg">{title}</h3>
+                      <span className="text-xs text-ink-3">{network}</span>
+                    </div>
+                    <p className="mt-1 max-w-[57ch] text-sm text-ink-2">{text}</p>
+                  </div>
+                  <ArrowRight size={16} className="text-accent transition-transform group-hover:translate-x-0.5" />
+                </SiteLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section aria-label="Use or verify Klear" className="page">
+        <div className="grid gap-3 md:grid-cols-2">
+          <div className="flex flex-col items-start rounded-xl bg-home-water p-6 sm:p-8">
+            <h2 className="text-h2">Try a rescue</h2>
+            <p className="mt-2 max-w-[37ch] text-sm text-ink-2">
+              Rehearse without a wallet, then join the daily testnet drill as a guardian.
+            </p>
+            <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
+              <LinkButton href="/try">Start rehearsal</LinkButton>
+              <SiteLink href="/practice" className={textLink}>
+                Live drill <ArrowRight size={16} />
+              </SiteLink>
+            </div>
+          </div>
+          <div className="flex flex-col items-start rounded-xl bg-home-paper p-6 sm:p-8">
+            <h2 className="text-h2">Verify the work</h2>
+            <p className="mt-2 max-w-[37ch] text-sm text-ink-2">
+              Check the contract controllers, the refused order, and the receipts behind the rescue.
+            </p>
+            <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5">
+              <LinkButton href="/judges" variant="secondary">
+                For judges
+              </LinkButton>
+              <SiteLink href="/proof" className={textLink}>
+                All evidence <ArrowRight size={16} />
+              </SiteLink>
+            </div>
           </div>
         </div>
       </section>

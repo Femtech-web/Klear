@@ -178,7 +178,8 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
               placeholder="agent.testnet"
             />
             <span className="text-xs text-ink-3">
-              Enter the account before signing if you plan to trade. Run the manager separately.
+              Enter the account before signing if you plan to trade. Run the manager separately; in{" "}
+              <Link href="/proof/sealed">sealed mode</Link> it decides inside a TEE and your strategy stays private.
             </span>
           </label>
         </div>
@@ -305,7 +306,7 @@ export function CreateWizard({ factory, nonce }: { factory: string; nonce?: stri
         <Stage n={5} title="Verify and fund the accounts" done={false}>
           <p className="m-0 text-sm text-ink-2">
             After both deployments, verify the accounts on the strategy page before sending testnet funds. Start your
-            manager and relayer separately when you’re ready to trade.
+            manager and relayer separately when you’re ready to trade, sealed if your strategy should stay private.
           </p>
           <Link
             href={`/strategies/${pred.judge}#verify-and-fund`}

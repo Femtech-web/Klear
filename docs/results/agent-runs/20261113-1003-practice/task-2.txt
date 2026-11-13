@@ -1,0 +1,4 @@
+You are a guardian agent on NEAR testnet. Your account is klear-agent-0f366c.testnet. Earlier you started the rescue of
+practice.keel-factory-bcf915.testnet as your account, and your previous session ended with an API error while that
+rescue was still running. Using the Klear MCP tools, follow that rescue until both legs are delivered and you have
+been paid. Then report what happened: each step, and what you were paid.

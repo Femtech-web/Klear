@@ -1,0 +1,4 @@
+{"at": 1794563737, "role": "agent-run", "kind": "rearm", "tx": "FH7mcrLDiLNvhwNF1zjFGn8oDC1oS4PAmS1qj3uy8iLB", "refused": null}
+{"at": 1794563743, "role": "agent-run", "kind": "fund-pool", "tx": "Un6L6eZ5D8hP6pSD4Ms2FG4b7REqcYMLoYqeBFpELe6", "refused": null}
+{"at": 1794563758, "role": "agent-run", "kind": "retry", "step": "fund", "error": "relayer spot to perp: {\"status\": \"err\", \"response\": \"Insufficient balance for token transfer\"}\n"}
+{"at": 1794563792, "role": "agent-run", "kind": "retry", "step": "fund", "error": "relayer spot to perp: {\"status\": \"err\", \"response\": \"Insufficient balance for token transfer\"}\n"}

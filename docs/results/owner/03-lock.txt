@@ -1,0 +1,28 @@
+├  Unsigned transaction:
+│    signer_id:    klear-owner-d48b38.testnet
+│    receiver_id:  klear-owner-d48b38.testnet
+│    actions:
+│       -- delete access key:  
+│                       public key:   ed25519:FWAK4bkTiEUMksScf4aQR6EQ69UCM7Cv6ZVnr3yAdC1w
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:FWAK4bkTiEUMksScf4aQR6EQ69UCM7Cv6ZVnr3yAdC1w
+│    Signature:  ed25519:5fv6KFonAA1KnoaNpw7WBsymTTp1F1LLfMkFPMXGfc6BhNYSjVDZ7rSHozJBEQLBiJZ7181kF3MTe1FZNw9NFmQc
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 0.630 Tgas
+│    Transaction fee: 0.000040601225 NEAR
+│    Transaction ID: AEL9NCAEV6aCbUKvgLP2K2kbMT1aWVxix3bKJ6xZXoiK
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/AEL9NCAEV6aCbUKvgLP2K2kbMT1aWVxix3bKJ6xZXoiK
+│     [0m
+
+
+Access key <ed25519:FWAK4bkTiEUMksScf4aQR6EQ69UCM7Cv6ZVnr3yAdC1w> for account <klear-owner-d48b38.testnet> has been successfully deleted.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near account delete-keys klear-owner-d48b38.testnet public-keys ed25519:FWAK4bkTiEUMksScf4aQR6EQ69UCM7Cv6ZVnr3yAdC1w network-config testnet sign-with-access-key-file .secrets/near/klear-owner-d48b38.testnet.json send[39m
+

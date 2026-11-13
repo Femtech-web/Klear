@@ -23,6 +23,30 @@ export function TxLink({ chain, id }: { chain: Chain; id: string }) {
   );
 }
 
+const MAINNET = {
+  near: { label: "NEAR mainnet", url: "https://nearblocks.io/txns/" },
+  base: { label: "Base mainnet", url: "https://basescan.org/tx/" },
+} as const;
+
+/** A mainnet transaction (the authorized privacy tests), linked to its explorer. */
+export function MainnetTxLink({ chain, id }: { chain: keyof typeof MAINNET; id: string }) {
+  return (
+    <a
+      href={MAINNET[chain].url + id}
+      target="_blank"
+      rel="noreferrer"
+      title={id}
+      className="inline-flex h-7 items-center gap-1.5 rounded-full border border-line bg-surface py-0 pl-1 pr-2.5 text-sm text-ink-2 no-underline transition-colors duration-300 hover:border-line-strong hover:text-ink"
+    >
+      <span className="inline-grid h-5 place-items-center rounded-full bg-warn-soft px-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.06em] text-warn">
+        {MAINNET[chain].label}
+      </span>
+      <code className="font-mono text-[0.92em]">{short(id, 6, 4)}</code>
+      <External size={13} />
+    </a>
+  );
+}
+
 /** A full hash or address that can be copied. */
 export function Hash({ value, display }: { value: string; display?: string }) {
   return (

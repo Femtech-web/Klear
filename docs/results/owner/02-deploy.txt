@@ -1,0 +1,46 @@
+├  Unsigned transaction:
+│    signer_id:    klear-owner-d48b38.testnet
+│    receiver_id:  klear-owner-d48b38.testnet
+│    actions:
+│       -- deploy code <CzEjX2Da3AYK99246Ls1hmqK2hRGoeJxJkTuyoMMyoDs> to a account <klear-owner-d48b38.testnet>
+│       -- function call:      
+│                       method name:  new
+│                       args:         {
+│                                       "heartbeat_s": 600,
+│                                       "investor": "klear-mandate-92fc7f.testnet",
+│                                       "manager": "klear-agent-0f366c.testnet",
+│                                       "mpc": "v1.signer-prod.testnet",
+│                                       "owner": "0x9d2242150aac3c58cc56a99c59da8a71507c32bf",
+│                                       "path": "klear/mandate/1"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:FWAK4bkTiEUMksScf4aQR6EQ69UCM7Cv6ZVnr3yAdC1w
+│    Signature:  ed25519:f3xHy8mqHCzDmHXH3nLvTGZxjxm3uFPwuqT5dcDmteEBxEgsv8BFdJp9LQ7J2ggosygKgY7t8koG37G2N3BUAqD
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 14.7 Tgas
+│    Transaction fee: 0.0014441978493089 NEAR
+│    Transaction ID: B5khaFcqWpEYXqZjEgZN8GZuE6qJCJ12SptpjUTe9J46
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/B5khaFcqWpEYXqZjEgZN8GZuE6qJCJ12SptpjUTe9J46
+│     [0m
+├  Function execution logs:
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+Contract code has been successfully deployed.
+The "new" call to <klear-owner-d48b38.testnet> on behalf of <klear-owner-d48b38.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract deploy klear-owner-d48b38.testnet use-file contracts/klear-owner/target/near/klear_owner.wasm with-init-call new json-args '{"investor":"klear-mandate-92fc7f.testnet","manager":"klear-agent-0f366c.testnet","heartbeat_s":600,"mpc":"v1.signer-prod.testnet","path":"klear/mandate/1","owner":"0x9d2242150aac3c58cc56a99c59da8a71507c32bf"}' prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' network-config testnet sign-with-access-key-file .secrets/near/klear-owner-d48b38.testnet.json send[39m
+

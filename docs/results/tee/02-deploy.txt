@@ -1,0 +1,41 @@
+├  Unsigned transaction:
+│    signer_id:    klear-tee-4746e3.testnet
+│    receiver_id:  klear-tee-4746e3.testnet
+│    actions:
+│       -- deploy code <CiJj5n392G6z1H8uA6LaeQcRfPPMab537DmTzDcoYXng> to a account <klear-tee-4746e3.testnet>
+│       -- function call:      
+│                       method name:  new
+│                       args:         {
+│                                       "dcap_verifier": "tee-verifier-2026-07-22.testnet"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:8iNxRgfCt9sBScW79xuyFqMxd4t3xPHSmWYr6X3gSSdf
+│    Signature:  ed25519:5DFKEmsbwc4y3fPU9zdaUf3cWrHsA5Uts7uv4dxEd7cpk2ekojD2Jq4eXx4QaGzD3xEznKWGXcRRj7BFHVccfTQh
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 14.9 Tgas
+│    Transaction fee: 0.001466468920731 NEAR
+│    Transaction ID: 3GCMdQRY4MvWp437jvxeZmnwhqdVHptPYLGppGf6788x
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/3GCMdQRY4MvWp437jvxeZmnwhqdVHptPYLGppGf6788x
+│     [0m
+├  Function execution logs:
+│    [36mLogs [klear-tee-4746e3.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-tee-4746e3.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+Contract code has been successfully deployed.
+The "new" call to <klear-tee-4746e3.testnet> on behalf of <klear-tee-4746e3.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract deploy klear-tee-4746e3.testnet use-file contracts/klear-tee/target/near/klear_tee.wasm with-init-call new json-args '{"dcap_verifier":"tee-verifier-2026-07-22.testnet"}' prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' network-config testnet sign-with-access-key-file .secrets/near/klear-tee-4746e3.testnet.json send[39m
+

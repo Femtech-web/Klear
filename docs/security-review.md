@@ -109,3 +109,40 @@ wallet code is the wallet's, as on any NEAR app; Klear pins which wallets are of
 3. The judge's Read MPC request encoding against the MPC contract's own (`expected_payload_hash`).
 4. `KeelLeg`'s CoreWriter action encoding against HyperCore's current action formats.
 5. The factory's refund path (above) on a deliberately failing creation.
+
+## Addendum, 2026-11-13: the private parts and the hosted MCP
+
+New code since the review, checked the same way (by hand, against what each piece may touch):
+
+- **Hosted MCP** (`web/lib/mcp/server.ts`, `web/app/api/mcp/route.ts`): read-only by construction; no tool signs,
+  and none takes a key. Every argument is validated before any chain read (NEAR account ids against the account
+  grammar, transaction hashes as base58), with unit tests for the refusals. A tool's failure returns `isError`, not a
+  stack. Rescues stay in the local server, which signs only with the key its user names.
+- **The mandate script** (`scripts/mainnet/mandate.py`): every owner signature is recovered locally and must equal
+  the owner before it is submitted; the API key is read from `.env` and never printed; grant tokens are written to
+  `.secrets/mandate/` with mode 600, and only their sha256 leaves the machine. Its records were scanned with
+  gitleaks; one false positive (a grant's commitment) was redacted in the record, and the script now stores only
+  status fields.
+- **The sealed path** (`agents/keel_agents/sealed.py`): an answer is used only after `verify_response` checks its
+  signature against the attested model key, and only `provider_tee` signatures count. The strategy and the AI's
+  reasoning go only to the git-ignored private record; the console prints "(reasoning sealed)". The receipt's
+  public key tripped gitleaks' generic rule; that exact key is allowlisted with its reason.
+- **DNS fallback** (`agents/keel_agents/net.py`): used only when the system resolver fails; it changes the address,
+  never the TLS check, which still verifies the certificate against the original host name.
+- **Shell retries** (`scripts/testnet/*.sh`): `curl --retry` wrote a rate-limited reply and the retried one into
+  the same output; `fetch()` now uses `--fail` and a temp file per call.
+
+Still open, as before: none of this is audited, and the confidential mandate's policy is enforced by the
+provider's backend, not by a Klear contract.
+
+### The two new contracts (2026-11-13)
+
+- **`contracts/klear-tee`**: anyone may call it, and nothing it records can be forged past NEAR's own checks: a signer
+  is recorded only from the DCAP verifier's callback, with report_data equal to exactly the key and the nonce, TCB
+  `UpToDate` and debug off; a receipt only if `ed25519_verify` passes against a recorded key for the same model.
+  Tests include the live receipt as a vector and an altered one. Locked after deploy.
+- **`contracts/klear-owner`**: before `seal`, only the investor can have anything signed (the trust step, stated in
+  the docs); after it, `sign_setup` is closed and `sign_grant` requires a trigger and a payload naming this agent,
+  mainnet and this owner, with only the two plaintext grant actions accepted. Its EIP-712 digests are tested against
+  a reference implementation on real API payloads. Locked after deploy. Open: a grant issued after a trigger can also
+  swap within the policy's budget; withdrawals still reach only the investor.

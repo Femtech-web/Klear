@@ -7,14 +7,14 @@
 ### When your AI trader fails, anyone can bring your money home.
 **And they are paid only when it lands.**
 
-[For judges](JUDGES.md) · [The live rescue](docs/results/g7/README.md) · [Rescue it yourself](docs/practice.md) · [The AI replay](docs/results/replay/README.md) · [Try to break it](docs/try-to-break-it.md)
+[Live site](https://klear-near.vercel.app) · [For judges](JUDGES.md) · [For AI agents](AGENTS.md) · [The live rescue](docs/results/g7/README.md) · [Rescue it yourself](docs/practice.md) · [Private, and provable](#private-and-still-provable) · [The AI replay](docs/results/replay/README.md) · [Try to break it](docs/try-to-break-it.md)
 
 [![CI](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml)
 [![Drill](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0b6e66)](LICENSE)
 ![Tests](https://img.shields.io/badge/tests-217%20passing-0b6e66)
 ![Locked](https://img.shields.io/badge/contracts-locked%20·%200%20keys-0b6e66)
-![NEAR](https://img.shields.io/badge/NEAR-Chain%20Signatures%20·%20Read%20MPC-0d1b2e)
+![NEAR](https://img.shields.io/badge/NEAR-Chain%20Signatures%20·%20Read%20MPC%20·%20NEAR%20AI%20·%20Intents-0d1b2e)
 
 </div>
 
@@ -64,6 +64,13 @@ investor's silence limit passed, the USDC was back in the investor's account and
 paid for it**; the WETH followed as soon as Base finalized ([the live rescue](#the-live-rescue)). Twenty
 attempts to cheat the locked judges were refused on chain.
 
+**And it can stay private without giving up proof.** An AI manager's edge is its strategy. In sealed mode the AI
+decides inside a TEE on NEAR AI Cloud with the strategy encrypted end to end: nobody reads it, the AI provider
+included, yet every decision leaves a signed receipt on chain and the judge still bounds every order. For money
+that should stay out of public view end to end, Klear ran a confidential account on mainnet, with real funds,
+whose rules are the mandate and whose owner key exists only inside NEAR's MPC network
+([private, and still provable](#private-and-still-provable)).
+
 ## Try it
 
 **Rescue a strategy yourself.** A real strategy on testnet fails every day on purpose: its manager goes
@@ -88,14 +95,21 @@ and what the judge checks at each step: [docs/practice.md](docs/practice.md).
 
 ### For AI agents
 
-Guarding is a job an agent can do. `agents/mcp_server.py` gives any MCP client the guardian's view and the
-rescue itself: `list_strategies`, `inspect_strategy` (the six checks), `rescue_status`, and `start_rescue`,
-which runs the rescue as the agent's own NEAR account. The judge decides every order and destination, so an
-agent with these tools can bring an investor's money home and do nothing else with it.
+Guarding is a job an agent can do, and the judge decides every order and destination, so an agent can bring an
+investor's money home and do nothing else with it. The hosted MCP server needs nothing installed; it lists and
+inspects strategies, reports rescues, and checks sealed receipts, and it holds no key:
 
 ```bash
-claude mcp add klear -- .tools/venv/bin/python agents/mcp_server.py
+claude mcp add --transport http klear https://klear-near.vercel.app/api/mcp
 ```
+
+The rescue itself signs with the agent's own NEAR account, so it runs locally (`start_rescue` in
+`agents/mcp_server.py`). Everything an agent needs, both servers and what it signs: [AGENTS.md](AGENTS.md).
+
+**It has been done by an agent nobody wrote for it.** Claude Code, unmodified, with no built-in tools, only Klear's
+MCP servers, a faucet account and one paragraph of instructions, found the practice strategy's open rescue, ran the
+six checks, rescued it, and was paid 0.15 NEAR once both legs reached the investor. Every run is recorded with its
+full transcript, including the one that failed on our RPC ([docs/results/agent-runs](docs/results/agent-runs/README.md)).
 
 ## The live rescue
 
@@ -145,6 +159,42 @@ Every step, with every transaction and the AI's own words: [docs/results/g7](doc
 The investor's own exit, rescued by hand, is the second run there. The same rescue now runs every day on a
 strategy anyone can rescue ([the daily drill](docs/results/drill)).
 
+## Private, and still provable
+
+Privacy usually costs proof: what nobody can see, nobody can check. Each private part of Klear keeps a check.
+
+| | What stays private | What is still proven | Status |
+|---|---|---|---|
+| **Sealed strategy** | The investor's strategy and the AI's reasoning: encrypted end to end to a model in a TEE on NEAR AI Cloud | The hardware (Intel TDX, NVIDIA GPU) is attested before each decision; the TEE's signed receipt goes on chain with the decision; **NEAR itself verifies the TDX quote and the receipt's signature** ([klear-tee](docs/results/tee/README.md)); the judge bounds every order | [live on testnet](docs/results/sealed/README.md) |
+| **Confidential mandate** | The balance, the AI's trades and the account itself: on NEAR Intents' confidential ledger | The policy is the mandate; the owner key exists only in NEAR's MPC network, and **a locked Klear contract is its only signer**: after setup it signs only readable grant changes, on a trigger ([klear-owner](docs/results/owner/README.md)) | [live on mainnet, real funds](docs/results/mandate/README.md) |
+| **Private payout** | Who received a rescue's payout, and what they hold after | The rescue itself stays on public chains, verified and paid on arrival | [mainnet test](docs/results/mainnet/README.md) |
+
+Check the sealed decision from the chain alone:
+
+```bash
+python3 agents/verify_sealed.py FBtEF756kZ4GiWpwzBiY2ixjZt9wniFce6Sojo1uDRE manager.keel-delever-7953ec.testnet --attestation
+# signature over z-ai/glm-5.3-flash:68c7a9b6…: valid (ed25519)
+# attestation now: TDX UpToDate, GPU verified, gateway TLS attested
+# the receipt's signing key is the attested TEE key of z-ai/glm-5.3-flash
+```
+
+The confidential mandate ran with 3 USDC of the user's own. The owner, through the MPC network, pointed every
+withdrawal at the user's addresses; a sealed AI swapped 1 USDC for NEAR inside the confidential balance; a
+withdrawal to a stranger with the AI's own grant was refused `policy_destination_denied`; then the owner revoked
+the AI's grant, its token was refused at once, and the exit returned 1.9952 USDC and 0.2831 NEAR to the user.
+
+Both go further on chain. **NEAR verifies the sealed decision itself:** a locked Klear contract had NEAR's DCAP
+verifier check the model's Intel TDX quote (bound to its signing key and a fresh nonce), then checked the receipt's
+signature with NEAR's ed25519; an altered copy was refused ([docs/results/tee](docs/results/tee/README.md)). **The
+confidential account's owner is a locked contract:** set up once and sealed, it then signs only grant revocations and
+grants it can read, on the investor's exit or the manager's silence. A stranger used it to cut the AI off and open
+an exit that can pay only the investor; without a trigger, and for another agent, it refused
+([docs/results/owner](docs/results/owner/README.md)).
+
+What it does not claim: the confidential ledger is access control, not cryptography (its operators can read it), and
+that account's policy is enforced by the provider's backend. Policy changes reach the owner encrypted, so the owner
+contract signs them only during setup, for the investor ([docs/privacy.md](docs/privacy.md)).
+
 ## How it works
 
 <picture>
@@ -190,8 +240,9 @@ strategy anyone can rescue ([the daily drill](docs/results/drill)).
   forged snapshot claiming a $1M account [was never attested](docs/try-to-break-it.md).
 - **Rules that nobody can change.** A NEAR account with no access keys is final. The factory creates every
   judge that way, from its first block, and lists it in a public registry guardians scan.
-- **Rescues that can be private.** A payout can land in a NEAR Intents confidential balance: a real mainnet
-  test showed the recipient hidden ([docs/results/mainnet](docs/results/mainnet/README.md)).
+- **Privacy that keeps its proof.** NEAR AI Cloud runs the AI's decisions in attested TEEs with the strategy
+  encrypted; NEAR Intents holds money confidentially under a policy; and the same MPC network that signs for the
+  judge can own that confidential account, so no person holds its key ([private, and still provable](#private-and-still-provable)).
 
 ## Proven on real AI history
 
@@ -221,7 +272,7 @@ own equity points. With a 3x leverage cap and a floor 30% down:
 - **Twenty attempts to cheat the live, locked judges, all refused on chain**: a forged snapshot, strangers
   posing as the investor or the manager, the AI's own key reaching for the rescue, replayed evidence, a second
   rescue ([docs/try-to-break-it.md](docs/try-to-break-it.md), with the command to repeat each).
-- **Five contracts locked**, each running exactly the code built from this repository
+- **Seven contracts locked**, each running exactly the code built from this repository
   ([hashes](docs/results/g7/code-hashes.txt), [factory](docs/results/factory/code-hashes.txt)).
 - **Any strategy can be inspected** before you trust it: no keys, the factory's code, controllers that are the
   judge's own MPC keys, payouts only to the investor (`/strategies/<judge>` runs all six live).
@@ -236,8 +287,12 @@ own equity points. With a 3x leverage cap and a floor 30% down:
   [docs/trust-model.md](docs/trust-model.md) says exactly where it applies.
 - **Hyperliquid's HyperCore** to report positions and balances truthfully through its precompiles, and to
   execute what `KeelLeg` sends.
-- **Testnets and an unaudited codebase.** Everything above runs on testnets with test funds, except one
-  authorized mainnet privacy test. Nothing here is audited.
+- **NEAR AI Cloud's TEE**, for the sealed strategy's secrecy only: a flaw could leak the strategy, never move
+  money, since the judge decides every order.
+- **The confidential ledger's operators and the Agent API's backend**, for a confidential mandate: they can read
+  the balance, and the backend enforces the policy.
+- **Testnets and an unaudited codebase.** Everything above runs on testnets with test funds, except two
+  authorized mainnet privacy tests with a few dollars of the user's own. Nothing here is audited.
 
 ## For judges
 
@@ -272,6 +327,8 @@ gitleaks pre-commit hook in `.githooks/`, and a secret scan in CI).
 | Factory | [`keel-factory-bcf915.testnet`](https://testnet.nearblocks.io/address/keel-factory-bcf915.testnet), locked |
 | Practice strategy | [`practice.keel-factory-bcf915.testnet`](https://testnet.nearblocks.io/address/practice.keel-factory-bcf915.testnet), locked from birth |
 | Deleverage strategy | [`delever.keel-factory-bcf915.testnet`](https://testnet.nearblocks.io/address/delever.keel-factory-bcf915.testnet), locked from birth |
+| TEE registry | [`klear-tee-4746e3.testnet`](https://testnet.nearblocks.io/address/klear-tee-4746e3.testnet), locked: sealed decisions verified on NEAR |
+| Confidential mandate owner | [`klear-owner-d48b38.testnet`](https://testnet.nearblocks.io/address/klear-owner-d48b38.testnet), locked: the only signer of a mainnet Agent API account's owner key |
 | Live-run judges | [`keel-ai-76e036.testnet`](https://testnet.nearblocks.io/address/keel-ai-76e036.testnet), [`keel-human-c0caa7.testnet`](https://testnet.nearblocks.io/address/keel-human-c0caa7.testnet), locked |
 | KeelDeployer | HyperEVM `0x95555109cb864D3f285606254148432Ee3d5e6E9`, Base Sepolia `0xDdf09a571553C82854Ea7130379581F5581641ae` |
 | MPC network | `v1.signer-prod.testnet` (Chain Signatures, domain 0; Read MPC, domain 3) |
@@ -284,6 +341,8 @@ it was so its hashes still match.
 
 | Path | What |
 |---|---|
+| `contracts/klear-tee/`, `contracts/klear-owner/` | The TEE registry (a sealed decision's TDX quote and signature verified on NEAR) and the confidential mandate's owner contract |
+| `AGENTS.md` | For AI agents and their operators: the hosted and local MCP servers, what an agent signs |
 | `contracts/near-keel/` | The judge: Read MPC attestation in, MPC signatures and rewards out |
 | `contracts/near-keel-factory/` | The factory: each judge locked from birth, and the public registry |
 | `contracts/evm/` | `KeelLeg` (Hyperliquid), `KeelVault` (Base), `KeelDeployer` (CREATE2); `test/sim/` **simulates** HyperCore |

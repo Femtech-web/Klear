@@ -14,6 +14,7 @@ export const PROOF_GROUPS = [
     links: [
       { href: "/proof/rescue", label: "Live rescue" },
       { href: "/proof/deleverage", label: "Early cut" },
+      { href: "/proof/agents", label: "An AI agent rescued it" },
       { href: "/proof/replay", label: "AI replay" },
       { href: "/proof/drill", label: "Daily drill" },
     ],
@@ -27,8 +28,12 @@ export const PROOF_GROUPS = [
     ],
   },
   {
-    title: "Mainnet",
-    links: [{ href: "/proof/mainnet", label: "Mainnet privacy" }],
+    title: "Privacy",
+    links: [
+      { href: "/proof/sealed", label: "Sealed strategy" },
+      { href: "/proof/mandate", label: "Confidential mandate" },
+      { href: "/proof/mainnet", label: "Private payout" },
+    ],
   },
 ] as const;
 

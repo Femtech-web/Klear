@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RecordedRescue } from "@/components/home/RecordedRescue";
 import { SiteLink as Link } from "@/components/site/SiteLink";
 import { JudgePath, type PathStep } from "@/components/judges/JudgePath";
 import { ArrowRight, Check, Cross } from "@/components/ui/icons";
@@ -102,6 +103,30 @@ export default async function JudgesPage() {
   const forged = attack("A forged snapshot");
   const restricted = attack("The AI's restricted key calls open_flatten");
   const paidPerp = step("ai", "Paid only when it arrived: 7.887");
+  const quickChecks = [
+    {
+      title: "Verify the controllers",
+      expected: "Both chain accounts should use the judge’s MPC-derived addresses.",
+      observed: (
+        <Result read={sixRead} pass={six[3] && six[4]}>
+          {six[3] && six[4] ? "Both controllers match the judge’s addresses." : "At least one controller differs."}
+        </Result>
+      ),
+      link: <Link href={`/strategies/${factory.practice.judge}#verify-and-fund`}>Inspect the practice strategy</Link>,
+    },
+    {
+      title: "Open the refused trade",
+      expected: "The manager’s key should be unable to sign an order beyond the leverage cap.",
+      observed: <Recorded txs={tooBig?.txs}>{tooBig?.code ? <code>{tooBig.code}</code> : "Recorded refusal"}</Recorded>,
+      link: <Link href="/proof/rescue#ai-rescue">Read the mandate and order</Link>,
+    },
+    {
+      title: "Trace delivery to payout",
+      expected: "Each reward should follow evidence of delivery to the investor.",
+      observed: <Recorded txs={paidPerp?.txs}>The judge verified the Hyperliquid delivery and paid that leg.</Recorded>,
+      link: <Link href="/proof/rescue#delivery-and-payout">Compare delivery and payout receipts</Link>,
+    },
+  ];
 
   const steps: PathStep[] = [
     {
@@ -297,6 +322,32 @@ export default async function JudgesPage() {
       ),
     },
     {
+      claim: "The strategy can stay sealed, and every decision is still proven.",
+      check: (
+        <span className="flex flex-wrap items-center gap-2">
+          <Pill tone="neutral">testnet</Pill>
+          <span className="text-ink-2">
+            The AI decided in a TEE with the strategy encrypted; its signed receipt is on chain, and{" "}
+            <code>agents/verify_sealed.py</code> checks it against the model&apos;s attestation.
+          </span>
+          <Link href="/proof/sealed">Details</Link>
+        </span>
+      ),
+    },
+    {
+      claim: "Money can sit in a confidential account no one holds the key to.",
+      check: (
+        <span className="flex flex-wrap items-center gap-2">
+          <Pill tone="warn">mainnet, real funds</Pill>
+          <span className="text-ink-2">
+            Owner signed only by NEAR&apos;s MPC network; a sealed AI swapped inside it, a stranger was refused, and the
+            exit returned 1.9952 USDC and 0.2831 NEAR to the user.
+          </span>
+          <Link href="/proof/mandate">Details</Link>
+        </span>
+      ),
+    },
+    {
       claim: "A rescue's payout can be private.",
       check: (
         <span className="flex flex-wrap items-center gap-2">
@@ -315,7 +366,7 @@ export default async function JudgesPage() {
       <section className="border-b border-line bg-canvas-tint py-10 md:py-14">
         <div className="page grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-14">
           <div>
-            <p className="mb-2 text-sm font-semibold text-accent">For judges</p>
+            <p className="mb-2 text-sm font-semibold text-ink-3">For judges</p>
             <h1 className="text-h1">Judge Klear in the order that matters</h1>
             <p className="mt-4 max-w-measure text-ink-2">
               The investor sets rules in a keyless NEAR contract. The AI proposes trades, and the judge signs only what
@@ -326,7 +377,7 @@ export default async function JudgesPage() {
               on each chain.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <LinkButton href="#review-path">Open the walkthrough</LinkButton>
+              <LinkButton href="#quick-checks">Start the two-minute review</LinkButton>
               <LinkButton href="/proof" variant="secondary">
                 Browse proof
               </LinkButton>
@@ -339,7 +390,7 @@ export default async function JudgesPage() {
             </h2>
             <ul className="mt-3">
               {[
-                ["/proof/rescue#delivery-and-payout", "Follow a rescue", "See the delivery and the guardian payout."],
+                ["#judge-replay", "Watch the recorded rescue", "Follow the delivery and guardian payout."],
                 ["/proof/contracts", "Verify the locked contracts", "Check access keys and deployed code on NEAR."],
                 ["/proof/replay", "Explore the AI replay", "See where a loss floor changed the outcome."],
               ].map(([href, label, detail]) => (
@@ -372,6 +423,23 @@ export default async function JudgesPage() {
         </div>
       </section>
 
+      <Section id="quick-checks" tight title="Three checks in two minutes">
+        <ol className="grid gap-3 md:grid-cols-3">
+          {quickChecks.map(({ title, expected, observed, link }) => (
+            <li key={title} className="flex min-w-0 flex-col rounded-lg border border-line bg-surface p-5">
+              <h3 className="text-lg">{title}</h3>
+              <p className="mt-2 text-sm text-ink-2">{expected}</p>
+              <div className="mt-3 text-sm">{observed}</div>
+              <div className="mt-auto pt-4 text-sm font-semibold text-accent underline">{link}</div>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section id="judge-replay" tight title="Replay the rescue">
+        <RecordedRescue />
+      </Section>
+
       <Section id="review-path" tight title="Full walkthrough">
         <JudgePath steps={steps} />
       </Section>
@@ -400,12 +468,12 @@ export default async function JudgesPage() {
       <Section id="limits" tight title="Scope and limits">
         <ul className="m-0 grid list-none gap-3 p-0 md:grid-cols-2">
           {[
-            "Everything runs on testnets with test funds, except the one mainnet privacy test. Nothing here is audited.",
+            "Everything runs on testnets with test funds, except two authorized mainnet privacy tests with a few dollars of the user's own. Nothing here is audited.",
             "One market: an ETH perpetual on Hyperliquid, with WETH on Base as the spot leg.",
             "NEAR's MPC network is trusted to sign and to verify honestly; that trust is NEAR's, not ours, and it is stated in the trust model.",
             "The daily drill and its courier run on GitHub Actions with our testnet keys. The courier only pays gas: it cannot change anything the judge signs.",
             "The replay is a counterfactual: Klear's rules applied to real fills, with the closing cost modelled, not trades Klear made.",
-            "The AI manager is Claude through its CLI, with no tools; its decisions and prompts are logged with each run.",
+            "The AI manager is Claude through its CLI, with no tools, or in sealed mode an open model in a TEE on NEAR AI Cloud; every decision is logged, and a sealed one's prompt stays with the investor.",
           ].map((x) => (
             <li key={x} className="border-t border-line pt-3 text-ink-2">
               {x}

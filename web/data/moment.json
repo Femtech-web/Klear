@@ -232,5 +232,31 @@
     }
    ]
   }
- }
+ },
+ "rescueClock": [
+  {
+   "seconds": 0,
+   "tx": null
+  },
+  {
+   "seconds": 53,
+   "tx": null
+  },
+  {
+   "seconds": 166,
+   "tx": "5hHHC9FzYFJNEW32j2A4nT6YEuZKky3Xt2mVThavXqKq"
+  },
+  {
+   "seconds": 242,
+   "tx": null
+  },
+  {
+   "seconds": 307,
+   "tx": "7pYXKcXGGdxXjKjR4qmYS8ANcVUYv2yg8LdGpGwN3KYR"
+  },
+  {
+   "seconds": 1517,
+   "tx": "2LFFGqVJ3xhfZcX7cBtmGnpLhHqFUZfrJtzv5WihVSoN"
+  }
+ ]
 }

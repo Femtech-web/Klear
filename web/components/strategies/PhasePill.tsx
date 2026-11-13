@@ -18,7 +18,7 @@ export function PhasePill({ phase, glance }: { phase: Phase; glance: Glance }) {
     <Pill tone={tone} live={phase === "rescue-due" || phase === "rescuing"}>
       {label}
       {phase === "rescue-due" && why && (
-        <span className="font-medium opacity-80">: {why === "investor" ? "the investor asked" : "manager silent"}</span>
+        <span className="font-medium">: {why === "investor" ? "the investor asked" : "manager silent"}</span>
       )}
     </Pill>
   );

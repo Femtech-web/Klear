@@ -1,0 +1,6 @@
+OWNER_CONTRACT=klear-owner-d48b38.testnet
+INVESTOR=klear-mandate-92fc7f.testnet
+MANAGER=klear-agent-0f366c.testnet
+STRANGER=guardian.keel-delever-7953ec.testnet
+OWNER_ADDRESS=0x9d2242150aac3c58cc56a99c59da8a71507c32bf
+AGENT_ID=565f214096c8b66791c70ce27c6c0ec4d62bf77c9cb50b8c433374c66bb76b2e

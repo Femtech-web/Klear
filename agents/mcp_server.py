@@ -1,7 +1,7 @@
 """Klear for AI agents, over MCP: find strategies that need a guardian, check one before trusting it, and run
 its rescue with your own NEAR account.
 
-    claude mcp add keel -- .tools/venv/bin/python agents/mcp_server.py      (from the repository's root)
+    claude mcp add klear-local -- .tools/venv/bin/python agents/mcp_server.py      (from the repository's root)
 
 The read tools only read the chains. `start_rescue` signs testnet transactions with the account and key file
 you name, through NEAR's CLI, on this machine: the same rescue as `make rescue`. The judge decides every order
@@ -84,6 +84,22 @@ def rescue_log(judge: str, account: str, lines: int = 40) -> str:
     if not log.exists():
         return "no rescue started for this judge and account"
     return "\n".join(log.read_text().splitlines()[-max(1, min(lines, 400)):])
+
+
+@server.tool(annotations=READ)
+def wait_for_rescue(judge: str, account: str, max_seconds: int = 300) -> dict:
+    """Wait, up to max_seconds (at most 300: call it again to keep waiting), until the rescue started with start_rescue
+    pays a leg or ends, then return where it stands and its log's last lines. A whole rescue takes about 25 minutes,
+    most of it Base finality."""
+    log = LOGS / f"{registry.account(judge)}.{registry.account(account)}.log"
+    seen = log.stat().st_size if log.exists() else 0
+    deadline = time.time() + max(15, min(max_seconds, 300))
+    while time.time() < deadline:
+        time.sleep(15)
+        new = log.read_text()[seen:] if log.exists() else ""
+        if any(m in new for m in ("paid you", "No reward yet", "Traceback", "no rescue is due", "job ended")):
+            break
+    return {"status": rescue_status(judge), "log": rescue_log(judge, account, 25)}
 
 
 if __name__ == "__main__":

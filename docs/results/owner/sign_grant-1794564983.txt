@@ -1,0 +1,41 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-delever-7953ec.testnet
+│    receiver_id:  klear-owner-d48b38.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  sign_grant
+│                       args:         {
+│                                       "message": {
+│                                         "payload": "{\"action\":\"revoke_grant\",\"agent_id\":\"565f214096c8b66791c70ce27c6c0ec4d62bf77c9cb50b8c433374c66bb76b2e\",\"domain\":\"near-intents-agent-api.owner-admin.v2\",\"expires_at_ms\":1794565277934,\"issued_at_ms\":1794564977934,\"network\":\"mainnet\",\"nonce\":\"e0163136ffa7d06d989a89e109ca3b6bbfdc62c5de03626fff72f5e6a989e3d3\",\"owner\":{\"address\":\"0x9d2242150aac3c58cc56a99c59da8a71507c32bf\",\"chain_id\":8453,\"public_key\":\"0x6f456422aaea4aaaf16afa5888fd43705b546c06c4d149819cc7859058931b9b4400e4dde153c67b008b6e29ad8721d16d40f6351f8542e9d136844547a80634\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"target_id\":\"e69136e48346096686cad2f10f40b96bdd26fa529052722dc2124496ca3ffc54\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\"}",
+│                                         "purpose": "PROVE_OWNERSHIP",
+│                                         "recipient": "api.demo.agentsonintents.com"
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:8KfDYgy9qUuoptMQ7gukgSxHt6aW3YWy2QJ9LoCfouc2
+│    Signature:  ed25519:4ba8CjCshNEDSbiX2ntE1aRwphpSipboAaN84rdfA4aSnxEy7RsFGGb9xuFNdA9i9GTwPmbbZ6Uu3r94MAdkwez3
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 1.9 Tgas
+│    Transaction fee: 0.0001602444746782 NEAR
+│    Transaction ID: BK9gu2nipcjsd5UM889XKLzg2hwcug6ovgxEudUfJ1NT
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/BK9gu2nipcjsd5UM889XKLzg2hwcug6ovgxEudUfJ1NT
+│     [0m
+├  Function execution logs:
+│    [31mLogs [klear-owner-d48b38.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction klear-owner-d48b38.testnet sign_grant json-args '{"message": {"payload": "{\"action\":\"revoke_grant\",\"agent_id\":\"565f214096c8b66791c70ce27c6c0ec4d62bf77c9cb50b8c433374c66bb76b2e\",\"domain\":\"near-intents-agent-api.owner-admin.v2\",\"expires_at_ms\":1794565277934,\"issued_at_ms\":1794564977934,\"network\":\"mainnet\",\"nonce\":\"e0163136ffa7d06d989a89e109ca3b6bbfdc62c5de03626fff72f5e6a989e3d3\",\"owner\":{\"address\":\"0x9d2242150aac3c58cc56a99c59da8a71507c32bf\",\"chain_id\":8453,\"public_key\":\"0x6f456422aaea4aaaf16afa5888fd43705b546c06c4d149819cc7859058931b9b4400e4dde153c67b008b6e29ad8721d16d40f6351f8542e9d136844547a80634\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"target_id\":\"e69136e48346096686cad2f10f40b96bdd26fa529052722dc2124496ca3ffc54\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\"}", "purpose": "PROVE_OWNERSHIP", "recipient": "api.demo.agentsonintents.com"}}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file /Users/mac/work/web3/near/keel/.secrets/near/guardian.keel-delever-7953ec.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: no trigger: the investor has not asked to exit and the manager is not silent")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

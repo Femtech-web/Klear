@@ -97,7 +97,7 @@ derive() {
   k=$(near_view "$MPC" derived_public_key "{\"path\":\"$1\",\"predecessor\":\"$G7_JUDGE\",\"domain_id\":0}" | tr -d '"')
   $JUDGE_BIN evm-address "$k" | python3 -I -c 'import json,sys;print(json.load(sys.stdin)["address"])'
 }
-send_tx() { local rpc=$1; shift; cast send "$@" --rpc-url "$rpc" "${RELAYER[@]}" --json | python3 -I -c 'import json,sys;r=json.load(sys.stdin);print(r["transactionHash"]) if r["status"]=="0x1" else sys.exit("reverted: "+r["transactionHash"])'; }
+send_tx() { local rpc=$1; shift; cast send "$@" --rpc-url "$rpc" "${RELAYER[@]}" --json | python3 -I -c 'import json,sys;r=json.load(sys.stdin);print(r["transactionHash"]) if r.get("status")=="0x1" else sys.exit("send failed: "+json.dumps(r)[:240])'; }
 finalized() { local bn; bn=$(cast receipt "$2" blockNumber --rpc-url "$1"); until [ "$(cast block finalized --field number --rpc-url "$1")" -ge "$bn" ]; do sleep_s 10; done; }
 receipt_log() { # <rpc> <tx> <emitter> [topic0]
   cast receipt "$2" --rpc-url "$1" --json | python3 -I -c '

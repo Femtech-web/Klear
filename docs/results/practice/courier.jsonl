@@ -13,3 +13,17 @@
 {"at": 1794522799, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794522792-perp-log.json"}
 {"at": 1794522966, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794522956-perp-log.json"}
 {"at": 1794523128, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794523121-perp-log.json"}
+{"at": 1794564489, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794564483-perp-log.json"}
+{"at": 1794564489, "role": "courier", "kind": "spot-probe"}
+{"at": 1794564630, "role": "courier", "kind": "relayed-order", "key": "3:4", "tx": "0x7d79b6c528fad63172cda867ea59895a08740a42616498540ce5828029d85b4f"}
+{"at": 1794564633, "role": "courier", "kind": "relayed-exit", "key": "2", "tx": "0x60b486f87ad83fb9bd496105a561eca0316bf440336895f5b959a87164599c56"}
+{"at": 1794564670, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794564663-perp-log.json"}
+{"at": 1794564769, "role": "courier", "kind": "relayed-sweep", "key": "5", "tx": "0x536855fd9221d0be32ab2a9f93ddd570722831d37fbf67e4f60256a9ba663a42"}
+{"at": 1794564848, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794564833-perp-log.json"}
+{"at": 1794565011, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794565004-perp-log.json"}
+{"at": 1794565177, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794565170-perp-log.json"}
+{"at": 1794565340, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794565333-perp-log.json"}
+{"at": 1794565520, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794565503-perp-log.json"}
+{"at": 1794565520, "role": "courier", "kind": "spot-failed", "out": ["scripts/testnet/g7.sh: line 305: syntax error near unexpected token `esac'"]}
+{"at": 1794565685, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794565675-perp-log.json"}
+{"at": 1794565865, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794565855-perp-log.json"}

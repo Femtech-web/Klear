@@ -1,0 +1,26 @@
+[package]
+name = "klear-owner"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Klear's owner contract for a confidential mandate: the only signer of a NEAR Intents Agent API account's owner key, through NEAR's MPC network; after setup it signs only grant revocations and grants it can read, on a trigger it checks"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = "5.17"
+hex = "0.4"
+
+[dev-dependencies]
+near-sdk = { version = "5.17", features = ["unit-testing"] }
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true
+
+[workspace]

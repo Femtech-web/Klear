@@ -57,6 +57,19 @@ testnet and once on mainnet (see `docs/results/`).
   and the exit (grant revoked, exit granted) sent everything to the user's own addresses.
 - Agents fall back to DNS over HTTPS when the local resolver drops a name, and every TLS client in the process uses
   certifi's bundle.
+- **A hosted MCP server** (`/api/mcp` on the site; `AGENTS.md`): read-only tools any agent reaches by URL
+  (`list_strategies`, `inspect_strategy`, `rescue_status`, `how_to_rescue`, `verify_sealed_receipt`), checked with the
+  official MCP client against live chain data; rescues still sign locally.
+- **The site shows the private parts**: `/proof/sealed` and `/proof/mandate`, a privacy section on the home page,
+  and the investor's private options on `/investor` and in the creation wizard.
+- **Sealed decisions verified on NEAR** (`contracts/klear-tee`, `klear-tee-4746e3.testnet`, locked): NEAR's DCAP
+  verifier checks the model's Intel TDX quote bound to its signing key and a fresh nonce, and the receipt's signature
+  is checked with NEAR's ed25519; an altered receipt is refused on chain.
+- **A locked owner for the confidential mandate** (`contracts/klear-owner`, `klear-owner-d48b38.testnet`): set up once
+  and sealed, then signs only readable grant changes on a trigger; a stranger cut the AI off on the investor's exit.
+- **Recorded runs of an off-the-shelf agent** (`agents/agent_run.py`, `docs/results/agent-runs`): Claude Code, with only
+  Klear's MCP servers and its own NEAR account, finds the strategy that needs a rescue, checks it, rescues it and is
+  paid. `wait_for_rescue` added to the local MCP server.
 - **Renamed from Keel to Klear.** Everything deployed before the rename keeps its name (`keel-*` accounts,
   `KeelLeg`, `KeelVault`, `KeelDeployer`): those contracts are locked, and their source stays byte-for-byte so the
   published hashes still match.

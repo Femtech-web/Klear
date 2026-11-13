@@ -1,0 +1,39 @@
+├  Unsigned transaction:
+│    signer_id:    investor.keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  rearm
+│                       args:         {}
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:7x1yTfSiXxK7S3LMeYU5mmERRaaDLJWfbmmLwYcP7dRa
+│    Signature:  ed25519:43cNsKw6BK5fAoToQEFRPo64cdUfbjGwHAEbG7rWomaKniNMDLXyaWbm1L8ELRr6nhvNUs3C38bL8caUqQUGZ49v
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 3.5 Tgas
+│    Transaction fee: 0.0003212056239041 NEAR
+│    Transaction ID: FH7mcrLDiLNvhwNF1zjFGn8oDC1oS4PAmS1qj3uy8iLB
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/FH7mcrLDiLNvhwNF1zjFGn8oDC1oS4PAmS1qj3uy8iLB
+│     [0m
+├  Function execution logs:
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m
+│      re-armed: cycle 2
+│    [36mLogs [investor.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "rearm" call to <delever.keel-factory-bcf915.testnet> on behalf of <investor.keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet rearm json-args {} prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as investor.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/investor.keel-delever-7953ec.testnet.json send[39m
+

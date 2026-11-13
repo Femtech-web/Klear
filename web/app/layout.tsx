@@ -9,7 +9,13 @@ const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swa
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL ?? "http://localhost:3000"),
+  // SITE_URL when set; on Vercel, the production domain it provides to every build.
+  metadataBase: new URL(
+    process.env.SITE_URL ??
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "http://localhost:3000"),
+  ),
   title: { default: "Klear: when your AI trader fails, anyone can bring your money home", template: "%s · Klear" },
   description:
     "A keyless NEAR contract lets anyone rescue an investor’s funds across Hyperliquid and Base, and pays the guardian only after delivery.",

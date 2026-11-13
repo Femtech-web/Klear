@@ -174,7 +174,7 @@ class Drill:
         self.courier = Courier(self.chain, self.ops, self.log)
         self.courier.last_spot = self.refresh_at  # the rescue's own probe counts as the courier's
         while time.time() - due < self.a.grace:
-            self.courier.tick()
+            self.carry()
             st = self.chain.status()
             if st["job"] and st["job"]["agent"] != self.guardian:
                 return self.watch_visitor(st["job"]["agent"])
@@ -182,6 +182,14 @@ class Drill:
         self.rescue_spot(p)
         Rescuer(self.chain, self.guardian, self.log).run()
         return self.guardian
+
+    def carry(self) -> None:
+        """One courier round. A failed one (an RPC hiccup) is logged and tried again next round, as courier.py's own
+        loop does: a courier that stalls costs a rescue time, never the drill."""
+        try:
+            self.courier.tick()
+        except Exception as e:  # noqa: BLE001
+            self.note("courier-retry", error=last_line(str(e)))
 
     def rescue_spot(self, p: dict) -> None:
         """Spot evidence for the rescue: the probe started when the manager fell silent, or (resuming) any
@@ -205,7 +213,7 @@ class Drill:
     def watch_visitor(self, agent: str) -> str:
         self.note("visitor-rescue", agent=agent)
         while self.chain.status()["mode"] != "flattened":
-            self.courier.tick()
+            self.carry()
             st = self.chain.status()
             if not st["job"] and st["mode"] == "active":
                 raise Failed(f"the rescue by {agent} ended unfinished")

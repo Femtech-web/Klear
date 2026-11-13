@@ -119,3 +119,36 @@ export async function inspect(judge: string): Promise<Inspection> {
     : list;
   return { entry, keys, code, factoryJudgeCode, glance, strategy, leg, vault, derived };
 }
+
+const same = (a: string, b: string) => a.toLowerCase() === b.toLowerCase();
+
+/** The six checks a guardian runs before trusting a strategy, from one inspection (as the strategy page shows them). */
+export function trustChecks(x: Inspection): { check: string; pass: boolean }[] {
+  const s = x.strategy.ok ? x.strategy.value : null;
+  const d = x.derived.ok ? x.derived.value : null;
+  return [
+    { check: "created by the Klear factory", pass: x.entry.ok && x.entry.value !== null },
+    { check: "the judge has no access keys", pass: x.keys.ok && x.keys.value === 0 },
+    {
+      check: "its code is the code the factory deploys",
+      pass: x.code.ok && x.factoryJudgeCode.ok && x.code.value === x.factoryJudgeCode.value,
+    },
+    {
+      check: "the Hyperliquid account obeys only this judge's MPC key",
+      pass: x.leg.ok && d !== null && same(x.leg.value.controller, d.leg),
+    },
+    {
+      check: "the Base vault obeys only this judge's MPC key",
+      pass: x.vault.ok && d !== null && same(x.vault.value.controller, d.vault),
+    },
+    {
+      check: "both accounts pay only the investor",
+      pass:
+        x.leg.ok &&
+        x.vault.ok &&
+        !!s?.investor &&
+        same(x.leg.value.payout, s.investor) &&
+        same(x.vault.value.payout, s.investor),
+    },
+  ];
+}

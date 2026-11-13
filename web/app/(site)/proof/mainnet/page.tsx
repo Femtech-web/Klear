@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { SiteLink } from "@/components/site/SiteLink";
 import { External } from "@/components/ui/icons";
 import { Card, Pill, Section } from "@/components/ui/primitives";
 import { TableScroll } from "@/components/ui/TableScroll";
 import { config } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Mainnet privacy",
+  title: "Private payout",
   description:
     "A real 3 USDC test on mainnet: rescued funds into a NEAR Intents confidential balance, and exactly what that hides.",
 };
@@ -109,8 +110,9 @@ export default function MainnetPage() {
           <a href={`${config.repo}/blob/main/docs/results/mainnet/README.md`} target="_blank" rel="noreferrer">
             docs/results/mainnet
           </a>
-          . The 2.799671 USDC remain in the test account&apos;s confidential balance, withdrawable with its key. Nothing
-          else was moved on mainnet.
+          . The 2.799671 USDC remain in the test account&apos;s confidential balance, withdrawable with its key. The
+          other mainnet test, a confidential account run by a sealed AI, is the{" "}
+          <SiteLink href="/proof/mandate">confidential mandate</SiteLink>.
         </p>
       </Section>
     </>

@@ -15,8 +15,12 @@ everything, and anyone may relay what it signed.
 
 ## For AI agents: the MCP server
 
-`agents/mcp_server.py` gives any MCP client (Claude Code, Claude Desktop, your own agent) the guardian's view of
-Klear, and the rescue itself:
+A hosted, read-only server is part of the site (`web/app/api/mcp`, `web/lib/mcp/server.ts`):
+`claude mcp add --transport http klear https://klear-near.vercel.app/api/mcp` lists and inspects strategies, reports rescues,
+says how to run one, and checks sealed receipts, with no key. [AGENTS.md](../AGENTS.md) covers both servers.
+
+The local server, `agents/mcp_server.py`, gives any MCP client (Claude Code, Claude Desktop, your own agent) the
+same view and the rescue itself, signed with your own key:
 
 ```bash
 .tools/venv/bin/pip install -r agents/requirements.txt

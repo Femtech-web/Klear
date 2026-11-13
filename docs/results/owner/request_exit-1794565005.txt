@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    klear-mandate-92fc7f.testnet
+│    receiver_id:  klear-owner-d48b38.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  request_exit
+│                       args:         {}
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z
+│    Signature:  ed25519:4pcEQNEXbeNZ1kYHASN934mu2mxi83c3AjtTaGZ2BVZY2LQ5HPdJEEAgdPomCHxjrWjP3r6BsY8NECySBL18CSRs
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 1.9 Tgas
+│    Transaction fee: 0.000161354929951 NEAR
+│    Transaction ID: 87d6eDvt3bhWFcsXrCJEXGH6sUEXnwtJCunJqVsorvP4
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/87d6eDvt3bhWFcsXrCJEXGH6sUEXnwtJCunJqVsorvP4
+│     [0m
+├  Function execution logs:
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "request_exit" call to <klear-owner-d48b38.testnet> on behalf of <klear-mandate-92fc7f.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction klear-owner-d48b38.testnet request_exit json-args {} prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as klear-mandate-92fc7f.testnet network-config testnet sign-with-access-key-file /Users/mac/work/web3/near/keel/.secrets/near/klear-mandate-92fc7f.testnet.json send[39m
+

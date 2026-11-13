@@ -1,0 +1,39 @@
+├  Unsigned transaction:
+│    signer_id:    klear-mandate-92fc7f.testnet
+│    receiver_id:  klear-tee-4746e3.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  verify_receipt
+│                       args:         {
+│                                       "signature": "399a6381bf0c8f0ed6c3ef6090cf291a31645ecb22236d0bc30adec2064ed66ce3da6276db994891854c976d6a5db12f0ccec6fcac2c92fb366041a9e0dfd50c",
+│                                       "signed_text": "z-ai/glm-5.3-flash:68c7a9b6ddcc5fb677a5b29fcaddf9ae13ae4df5bcbe2f326e6888f402fdde06:4f471218aab2827c1021eaba865904d42abdbf299c78be389bce18f258d75d90",
+│                                       "signing_key": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff"
+│                                     }
+│                       gas:          30.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z
+│    Signature:  ed25519:2oWb1xWXecvwS7E25WRQbZxcY6ih7PbbumBAwcCXZfyJm1G2jKk1MQvijqPi1vFvXE6mD19eiYReRZBoui7a78PQ
+│     [0m
+[31m├  ERROR Transaction failed
+│    Gas used: 2.2 Tgas
+│    Transaction fee: 0.0001880663166628 NEAR
+│    Transaction ID: 7g1XUBgJhcBN3YTmceoeynhNw5vnXsbosJo9Yb1Vwpcw
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/7g1XUBgJhcBN3YTmceoeynhNw5vnXsbosJo9Yb1Vwpcw
+│     [0m
+├  Function execution logs:
+│    [31mLogs [klear-tee-4746e3.testnet] (failed):[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction klear-tee-4746e3.testnet verify_receipt json-args '{"signed_text": "z-ai/glm-5.3-flash:68c7a9b6ddcc5fb677a5b29fcaddf9ae13ae4df5bcbe2f326e6888f402fdde06:4f471218aab2827c1021eaba865904d42abdbf299c78be389bce18f258d75d90", "signature": "399a6381bf0c8f0ed6c3ef6090cf291a31645ecb22236d0bc30adec2064ed66ce3da6276db994891854c976d6a5db12f0ccec6fcac2c92fb366041a9e0dfd50c", "signing_key": "5a0210f2442c79355784f9de021985429561da5bacc3a4424b01ac52b7e0caff"}' prepaid-gas '30.0 Tgas' attached-deposit '0 NEAR' sign-as klear-mandate-92fc7f.testnet network-config testnet sign-with-access-key-file .secrets/near/klear-mandate-92fc7f.testnet.json send[39m
+
+Error: 
+   0: [91mError: An error occurred during a `FunctionCall` action.
+      ExecutionError("Smart contract panicked: signature does not verify")[0m
+
+Location:
+   [35msrc/common.rs[0m:[35m1864[0m

@@ -12,8 +12,9 @@ BASE = "https://sepolia.base.org"
 # Log queries go where a public RPC answers wide ranges (sepolia.base.org caps them at 200 blocks, and Base
 # Sepolia makes a block every 0.2 s), in chunks of at most this many blocks; the next endpoint is tried when
 # one cannot be reached (some resolvers do not resolve publicnode).
+# HyperEVM's public RPC times out or rate-limits log queries over about 1,000 blocks; 200 answers.
 LOGS = {
-    HYPEREVM: ([HYPEREVM], 1000),
+    HYPEREVM: ([HYPEREVM], 200),
     BASE: (["https://base-sepolia.gateway.tenderly.co", "https://base-sepolia-rpc.publicnode.com"], 20000),
 }
 
@@ -27,8 +28,9 @@ def rpc(url: str, method: str, params: list):
         r = post_json(url, {"jsonrpc": "2.0", "id": 1, "method": method, "params": params})
         if "error" not in r:
             return r["result"]
-        # A load-balanced node can lag the one that named the block ("invalid block height"): ask again.
-        if not any(t in str(r["error"]) for t in ("rate limited", "invalid block height")) or attempt == 5:
+        # A load-balanced node can lag the one that named the block ("invalid block height"), and HyperEVM's RPC
+        # aborts a slow log query ("execution aborted (timeout = 5s)"): both pass on a second try.
+        if not any(t in str(r["error"]) for t in ("rate limited", "invalid block height", "execution aborted")) or attempt == 5:
             raise RuntimeError(f"{method}: {r['error']}")
         time.sleep(5 * (attempt + 1))
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TableScroll } from "@/components/ui/TableScroll";
+import { SiteLink } from "@/components/site/SiteLink";
 import { Card, LinkButton, Pill, Section } from "@/components/ui/primitives";
 
 export const metadata: Metadata = {
@@ -39,6 +40,16 @@ const RELIES = [
     "The worst cases: an early rescue (to you) or a guardian paid for nothing, up to the reward pool.",
   ],
   [
+    "NEAR AI Cloud's TEE (sealed strategy)",
+    "A flaw in the enclave, or in the attested model image, could leak the investor's strategy.",
+    "Never the money: the judge decides every order. Intel TDX and NVIDIA GPU evidence are checked before each decision.",
+  ],
+  [
+    "The confidential ledger (confidential mandate)",
+    "Its operators can read the balance, and the provider's backend enforces the account's policy.",
+    "Withdrawals reach only the investor, and the owner key is held only by NEAR's MPC network.",
+  ],
+  [
     "The code",
     "A bug could sign something the rules meant to refuse.",
     "98 tests, and the deployed code matches the published source. Not audited.",
@@ -49,6 +60,24 @@ const RELIES = [
     "The two legs move independently, and a failed move costs nothing and can be retried.",
   ],
 ];
+
+const PRIVATE_PARTS = [
+  [
+    "/proof/sealed",
+    "A sealed strategy",
+    "The AI decides inside a TEE with the strategy encrypted end to end. Each decision's signed receipt is on chain; the strategy never is.",
+  ],
+  [
+    "/proof/mandate",
+    "A confidential mandate",
+    "Money in a confidential account whose policy is the mandate, owned by a key only NEAR's MPC network holds. Tested on mainnet with real funds.",
+  ],
+  [
+    "/proof/mainnet",
+    "A private payout",
+    "A rescue's payout into a confidential balance: the recipient and its balance hidden, the amount in flight not.",
+  ],
+] as const;
 
 const PRIVACY: [string, boolean][] = [
   ["The send from the source account on Hyperliquid", false],
@@ -98,9 +127,22 @@ export default function TrustPage() {
         id="privacy"
         tight
         eyebrow="Privacy"
-        title="Public by default. Private where it can be proven."
-        lede="Klear's protections need public, verifiable balances, so a strategy's positions are public. Where your money goes after a rescue can be private: we tested it on mainnet with real funds."
+        title="Private where it can be proven."
+        lede="The judge's protections need public, verifiable positions. Around them, three things can stay private, and each was tested live: the strategy, the money in a confidential account, and where a rescue pays out."
       >
+        <ul className="mb-8 grid list-none gap-3 p-0 md:grid-cols-3">
+          {PRIVATE_PARTS.map(([href, title, text]) => (
+            <li key={href}>
+              <Card className="h-full">
+                <h3 className="text-lg">{title}</h3>
+                <p className="mt-1.5 text-sm text-ink-2">{text}</p>
+                <SiteLink href={href} className="mt-3 inline-block text-sm font-semibold">
+                  See the proof
+                </SiteLink>
+              </Card>
+            </li>
+          ))}
+        </ul>
         <TableScroll label="What a confidential payout hides">
           <table className="w-full min-w-[560px] border-collapse text-[0.95rem]">
             <thead>

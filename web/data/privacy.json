@@ -1,0 +1,10 @@
+{
+ "tee": {
+  "account": "klear-tee-4746e3.testnet",
+  "codeSha256": "ae05696617eedd68f0f3d323a1b560a1518fcdcd3fe84aafd7cf06cb8070a0a9"
+ },
+ "owner": {
+  "account": "klear-owner-d48b38.testnet",
+  "codeSha256": "b21a30b977803d2e28d84505a86e7722e05a7cd73a04fb7938f56652c6df9562"
+ }
+}

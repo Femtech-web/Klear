@@ -1,0 +1,14 @@
+  courier snapshot: {'file': 'docs/results/practice/c-1794564483-perp-log.json'}
+  courier spot-probe: {}
+  courier relayed-order: {'key': '3:4', 'tx': '0x7d79b6c528fad63172cda867ea59895a08740a42616498540ce5828029d85b4f'}
+  courier relayed-exit: {'key': '2', 'tx': '0x60b486f87ad83fb9bd496105a561eca0316bf440336895f5b959a87164599c56'}
+  courier snapshot: {'file': 'docs/results/practice/c-1794564663-perp-log.json'}
+  courier relayed-sweep: {'key': '5', 'tx': '0x536855fd9221d0be32ab2a9f93ddd570722831d37fbf67e4f60256a9ba663a42'}
+  courier snapshot: {'file': 'docs/results/practice/c-1794564833-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/practice/c-1794565004-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/practice/c-1794565170-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/practice/c-1794565333-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/practice/c-1794565503-perp-log.json'}
+  courier spot-failed: {'out': ["scripts/testnet/g7.sh: line 305: syntax error near unexpected token `esac'"]}
+  courier snapshot: {'file': 'docs/results/practice/c-1794565675-perp-log.json'}
+  courier snapshot: {'file': 'docs/results/practice/c-1794565855-perp-log.json'}

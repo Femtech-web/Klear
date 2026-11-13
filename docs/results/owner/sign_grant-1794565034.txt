@@ -1,0 +1,56 @@
+├  Unsigned transaction:
+│    signer_id:    guardian.keel-delever-7953ec.testnet
+│    receiver_id:  klear-owner-d48b38.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  sign_grant
+│                       args:         {
+│                                       "message": {
+│                                         "payload": "{\"agent_id\":\"565f214096c8b66791c70ce27c6c0ec4d62bf77c9cb50b8c433374c66bb76b2e\",\"credential\":\"59bf7cfa0cb352f63632d385c753d6c82fdb0bff4361087c48ed43cfdaf69bee\",\"domain\":\"near-intents-agent-api.agent-grant.v6\",\"expires_at_ms\":1795169823000,\"issued_at_ms\":1794565024252,\"label\":\"exit\",\"network\":\"mainnet\",\"nonce\":\"ddbf85b55cb058821703db14d88861a29797e39da4bd557bbd8afb90903a9a95\",\"owner\":{\"address\":\"0x9d2242150aac3c58cc56a99c59da8a71507c32bf\",\"chain_id\":8453,\"public_key\":\"0x6f456422aaea4aaaf16afa5888fd43705b546c06c4d149819cc7859058931b9b4400e4dde153c67b008b6e29ad8721d16d40f6351f8542e9d136844547a80634\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\",\"wallet_id\":\"136da700-6eca-4d03-8097-f8871297b3c2\"}",
+│                                         "purpose": "PROVE_OWNERSHIP",
+│                                         "recipient": "api.demo.agentsonintents.com"
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:8KfDYgy9qUuoptMQ7gukgSxHt6aW3YWy2QJ9LoCfouc2
+│    Signature:  ed25519:57dq4UNyLvGe1ZmndNAjGKobtvargFUdyRQgKvRQvgbDXTu6xjcfnojSHmCqdS7Tz7QB7MGvRKt6svv4DyZ1CEir
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 13.8 Tgas
+│    Transaction fee: 0.0012809980918647 NEAR
+│    Transaction ID: E6tDGGgtkAk6S2RYHmSFmZt1iSV626MaPiTQXUvDFtjv
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/E6tDGGgtkAk6S2RYHmSFmZt1iSV626MaPiTQXUvDFtjv
+│     [0m
+├  Function execution logs:
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("klear-owner-d48b38.testnet"), request=SignRequestArgs { path: "klear/mandate/1", payload: Ecdsa(BoundedVec { inner: [141, 99, 103, 69, 221, 68, 131, 163, 142, 109, 206, 196, 139, 198, 63, 234, 181, 123, 246, 59, 111, 97, 238, 230, 192, 211, 201, 18, 240, 12, 96, 224], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m
+│      signed 8d636745dd4483a38e6dcec48bc63feab57bf63b6f61eee6c0d3c912f00c60e0 (grant_issue on investor)
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [guardian.keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "8d636745dd4483a38e6dcec48bc63feab57bf63b6f61eee6c0d3c912f00c60e0",
+  "signature": "0xd43bdf05c8bf345a066c8926f628611bc679a7ba1bc45bf6d1006b7d13b5bf1c5f7f3d265c85dc73e642679a0f63b898bfc292c06cfe4ab1e99933aa4b7ebac91b",
+  "what": "grant_issue on investor"
+}
+
+
+The "sign_grant" call to <klear-owner-d48b38.testnet> on behalf of <guardian.keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction klear-owner-d48b38.testnet sign_grant json-args '{"message": {"payload": "{\"agent_id\":\"565f214096c8b66791c70ce27c6c0ec4d62bf77c9cb50b8c433374c66bb76b2e\",\"credential\":\"59bf7cfa0cb352f63632d385c753d6c82fdb0bff4361087c48ed43cfdaf69bee\",\"domain\":\"near-intents-agent-api.agent-grant.v6\",\"expires_at_ms\":1795169823000,\"issued_at_ms\":1794565024252,\"label\":\"exit\",\"network\":\"mainnet\",\"nonce\":\"ddbf85b55cb058821703db14d88861a29797e39da4bd557bbd8afb90903a9a95\",\"owner\":{\"address\":\"0x9d2242150aac3c58cc56a99c59da8a71507c32bf\",\"chain_id\":8453,\"public_key\":\"0x6f456422aaea4aaaf16afa5888fd43705b546c06c4d149819cc7859058931b9b4400e4dde153c67b008b6e29ad8721d16d40f6351f8542e9d136844547a80634\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\",\"wallet_id\":\"136da700-6eca-4d03-8097-f8871297b3c2\"}", "purpose": "PROVE_OWNERSHIP", "recipient": "api.demo.agentsonintents.com"}}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as guardian.keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file /Users/mac/work/web3/near/keel/.secrets/near/guardian.keel-delever-7953ec.testnet.json send[39m
+

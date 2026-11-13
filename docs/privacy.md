@@ -14,7 +14,9 @@ public: positions on Hyperliquid, balances on Base, and the judge's state, evide
 - **A sealed strategy** (testnet, 2026-11-13): the AI manager's prompt, with the investor's strategy, end-to-end
   encrypted to a model in a TEE on NEAR AI Cloud; each answer verified against Intel TDX and NVIDIA GPU attestation
   before it is used; its signed receipt committed on chain with the decision, and checkable by anyone with
-  `agents/verify_sealed.py` ([docs/results/sealed](results/sealed/README.md)). The live decision was a hold.
+  `agents/verify_sealed.py` ([docs/results/sealed](results/sealed/README.md)). The live decision was a hold. NEAR
+  verifies it too: a locked registry had NEAR's DCAP verifier prove the model's TDX quote and checked the receipt's
+  signature with NEAR's ed25519 ([docs/results/tee](results/tee/README.md)).
 
 ## The tension
 
@@ -54,9 +56,10 @@ balance cannot be attested that way, by definition. So no design gets both from 
 3. **A confidential mandate (mainnet only, partly built).** The Agent API holds the money confidentially and
    enforces the policy; the owner is an MPC-derived key, so no person can loosen it. Tested: every owner action
    signed by the MPC network. Found: policy changes carry the policy encrypted to OutLayer, so a contract cannot
-   check what it approves; a locked owner contract can safely sign only checkable intents (freeze one account,
-   revoke one grant) on triggers it can verify. Still to build: that contract in place of the keyed testnet
-   account that asks the MPC network today.
+   check what it approves (a freeze carries an encrypted policy update too). Built: `contracts/klear-owner`, a
+   locked owner that signs anything only during setup, for the investor, then only grant revocations and grants
+   (plaintext payloads it checks: this agent, mainnet, this owner), and only on the investor's exit or the
+   manager's silence ([docs/results/owner](results/owner/README.md)).
 
 ## Mainnet tests (authorized by the user)
 

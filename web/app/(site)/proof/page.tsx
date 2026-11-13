@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "Every claim Klear makes, with the transactions, datasets and live chain reads behind it, in the order to read them.",
 };
 
-type Kind = "Recorded run" | "Dataset" | "Live read" | "Live, daily" | "Mainnet";
+type Kind = "Recorded run" | "Dataset" | "Live read" | "Live, daily" | "Mainnet" | "Mainnet, real funds";
 
 const KIND_TONE: Record<Kind, "neutral" | "ok" | "ai" | "warn"> = {
   "Recorded run": "neutral",
@@ -23,6 +23,7 @@ const KIND_TONE: Record<Kind, "neutral" | "ok" | "ai" | "warn"> = {
   "Live read": "ok",
   "Live, daily": "ok",
   Mainnet: "warn",
+  "Mainnet, real funds": "warn",
 };
 
 interface Item {
@@ -59,6 +60,16 @@ export default async function ProofPage() {
       facts: [
         ["70 s", "from the cut opening to the reward"],
         ["0.01 → 0.0011", "ETH, the investor's 0.2x target"],
+      ],
+    },
+    "/proof/agents": {
+      kind: "Recorded run",
+      title: "An AI agent rescued it",
+      claim:
+        "Claude Code, unmodified, with only Klear's MCP tools and a faucet account, found a strategy whose rescue was due, checked it, rescued it and was paid once the money arrived.",
+      facts: [
+        ["0.15 NEAR", "paid to the agent, per leg delivered"],
+        ["6 of 6", "checks it ran before acting"],
       ],
     },
     "/proof/replay": {
@@ -110,9 +121,29 @@ export default async function ProofPage() {
         [`${passed} of ${drillRuns.length || 0}`, "ended rescued"],
       ],
     },
+    "/proof/sealed": {
+      kind: "Recorded run",
+      title: "Sealed strategy",
+      claim:
+        "The AI manager decides inside a TEE with the investor's strategy encrypted end to end. Each decision leaves a signed receipt on chain, and the judge still bounds every order.",
+      facts: [
+        ["TDX + GPU", "attestation verified before every decision"],
+        ["on chain", "the signed receipt, checkable by anyone"],
+      ],
+    },
+    "/proof/mandate": {
+      kind: "Mainnet, real funds",
+      title: "Confidential mandate",
+      claim:
+        "A confidential account whose rules are the mandate and whose owner key only NEAR's MPC network holds. A sealed AI traded in it, a stranger was refused, and the exit went home.",
+      facts: [
+        ["0 keys", "anyone holds for the owner"],
+        ["1.9952 + 0.2831", "USDC and NEAR back to the user"],
+      ],
+    },
     "/proof/mainnet": {
       kind: "Mainnet",
-      title: "Mainnet privacy",
+      title: "Private payout",
       claim:
         "Rescued funds can land in a NEAR Intents confidential balance: a real 3 USDC test shows exactly what that hides, and what it does not.",
       facts: [

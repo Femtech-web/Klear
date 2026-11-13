@@ -1,0 +1,60 @@
+├  Unsigned transaction:
+│    signer_id:    klear-mandate-92fc7f.testnet
+│    receiver_id:  klear-owner-d48b38.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  sign_setup
+│                       args:         {
+│                                       "message": {
+│                                         "chainId": "mainnet",
+│                                         "createdAt": "2026-11-13T10:14:57Z",
+│                                         "nonce": 1854845016,
+│                                         "ops": "[]",
+│                                         "out": "{\"after\":[],\"then\":[{\"receiver_id\":\"outlayer.near\",\"actions\":[{\"action\":\"function_call\",\"function_name\":\"store_wallet_policy\",\"args\":\"eyJ3YWxsZXRfcHVia2V5IjoiZWQyNTUxOTo5NjI0MTBmY2Q3Yzg2MjY0ODU3YTc3YTY1MzI0Yzk3ZWYwNDZiYjI1NjM0Mjc4MWVlM2YxOTk1ZjE2NjdjMDM2IiwiZW5jcnlwdGVkX2RhdGEiOiJBZElQcFJqc3VaN3hvaW5rWVE3MG85YTNHODNyUTBKaENSZ0hqMFN5MURWK1FYbjFZZUxLeWdnem8wMEpNclVzQU5QWk1tUTZScm9pZWowZkd6bVZMekVVQS9CYmY1Wng4TjkrU2k2UUpwb2lPalk0UXZkRzV6NGk5QlVLelB0MUJidFRONXNWY1c5b0xFRDBwb1Y3RkduWHpiQ1IvcEVvNHI4SlN0SmFjQ3ZjdUg2SzBiTGpUSGZJTVVZbXEwQk1zWmJrdkhqYmtKYnhhV2VWcndQL2Z0NWR5bDlNU04wcEl1VGtNSU9Db0k2RHcyMHpYWDhuR2FtUEttMHNPVzF5Y0FrZkNPNmxpcEpmNjROUFlBTzVsQU01eWtVdk53TDdQU3J4aTZ6ak9VaElacTJWUmprL1JjNU1TbU1KVTlmTTN2Uk1mK0hnWk00ZFdxTnZ1S1lTOXplSnVuYjdMOUlEYkRWY2hLdStrcEVlNXpxVnFoaFd2cFkyUGFBZmFmWERpejZBcWVhblZGSGRUQitPYTN6OTJYd2RiNWhPbWZsRlBVZ2NIWHArRllCSzF5UUdTSWpKVnVFczVUZHVXdE5jb0Z4UWtReklwZ3VIRDU1UlBBOEI3MnRBTzIwY290V3V6RVFIWkVFQ0NBa0hjUjZRTllGNmdoOThQcS9TQXJjOFVhUEF0akE0STgrczlGcEsvWjMxWTA1dkh1OG0vVDBWRFFTMzE3MUtpb2gvcDhWcmFmUGIrU2JJM2ZDa2NPdFlNck1EaWplVVRhRFo0OFh4cStWdnI1MERWWU5OT2RocXprd3RhbVVaT0U1bG4xZGQ3c1FYVGQ5Zkd3VnEzVTVpR2dJbWpnNGdvZjMyd1JPWEhFWjZrbnVydlFOV0E4bktYODBNNTQwRjY1Vkk1OGxpakRrUERHejhKcWRvczROTDB1RTYyNHVBQ0NFY1NremNEYmY4aFpHSWNVank0dzRNQjlwVS84cU5XOWtZL0hLQzQwbjJCeU0yM1dIUzJURUlMeWZFUHpWdVhLWUZuM0VGbHlpaDZFWU9DM0RiWEJXUVhLWENnZz09Iiwid2FsbGV0X3NpZ25hdHVyZSI6IjAyNGJlNDc2ZDlkYTYwNmQ3NGUyNWE5MWY4NWI1NWNlYWE3ODU4OTFlMmU1ZWNmZGM0NjM1NzRkYmIzOTRlOTE5ZjQzYjc1MjM4ZjA5MjBmMjA1NjhjNTRjN2Q2YTZiZjNiOTM3N2UxM2IxNGFjYWM4NmJhZDQ4NDliZjg2MzBiIiwidmVyc2lvbiI6MSwibG9ja2VkIjpmYWxzZSwidmFsaWRfdW50aWwiOjE3OTUxNjk3MjcsImFnZW50X3BvbGljeV9oYXNoIjoiZDkwM2ExYzVkYTBhYmQxM2Q3NTM4ZTkwYTUxNjUxZGE3MTIxODNhODExNzY1NDc5MDUyM2YzMjZjMDg2ZmJlMiIsInN0b3JhZ2VfcmVmdW5kX3RvIjoiY2Y0ZjQ2N2I2NGEzMjlkOGJmNmJiZGUwMzNkNGQwZDlhYzNjMTlhNGU4YzNlYzg1NTU0YTY2MGZiMjQzMjdhZSJ9\",\"deposit\":\"13310000000000000000000\",\"min_gas\":\"100000000000000\"}]}]}",
+│                                         "signerId": "0s408bc8bada21717f219a20874c44053b0523140d",
+│                                         "timeoutSecs": 600
+│                                       }
+│                                     }
+│                       gas:          300.0 Tgas
+│                       deposit:      0 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:DbzQPyBZd1wXar3cGq2gkY3RxKJX21xABzFXdnSAgV7z
+│    Signature:  ed25519:4wwBUvomMG4YuscBJXp8j8QbfNpt81w398VFxqcquc5zzVZ2cLXCGuHJwAeriXVJzZpmfCVDUTvca4GvKhuuQHVX
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 13.8 Tgas
+│    Transaction fee: 0.0012846599456116 NEAR
+│    Transaction ID: Fx5bKK9zDFCG8kwL3haUiH26o6toT5MrC6KemqZnHAbc
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/Fx5bKK9zDFCG8kwL3haUiH26o6toT5MrC6KemqZnHAbc
+│     [0m
+├  Function execution logs:
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [v1.signer-prod.testnet]:[39m
+│      sign: predecessor=AccountId("klear-owner-d48b38.testnet"), request=SignRequestArgs { path: "klear/mandate/1", payload: Ecdsa(BoundedVec { inner: [120, 125, 205, 176, 244, 215, 122, 205, 101, 152, 186, 33, 43, 80, 137, 237, 16, 30, 30, 26, 121, 80, 96, 47, 152, 98, 190, 176, 245, 81, 207, 216], witness: NonEmpty(()) }), domain_id: DomainId(0) }
+│    [36mLogs [v1.signer-prod.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-owner-d48b38.testnet]:[39m
+│      signed 787dcdb0f4d77acd6598ba212b5089ed101e1e1a7950602f9862beb0f551cfd8 (setup)
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [klear-mandate-92fc7f.testnet]:[39m   [2mNo logs[0m
+│     [0m
+
+Function execution return value (printed to stdout):
+{
+  "digest": "787dcdb0f4d77acd6598ba212b5089ed101e1e1a7950602f9862beb0f551cfd8",
+  "signature": "0x53bdb48bd2c45395699275543119fc18b511625f4fe12960827570e7bb39b2d3538f509582b83efcea0c1800502e898a2853b9aa2e2d0e07af4f2cccd3f4ff841c",
+  "what": "setup"
+}
+
+
+The "sign_setup" call to <klear-owner-d48b38.testnet> on behalf of <klear-mandate-92fc7f.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction klear-owner-d48b38.testnet sign_setup json-args '{"message": {"ops": "[]", "out": "{\"after\":[],\"then\":[{\"receiver_id\":\"outlayer.near\",\"actions\":[{\"action\":\"function_call\",\"function_name\":\"store_wallet_policy\",\"args\":\"eyJ3YWxsZXRfcHVia2V5IjoiZWQyNTUxOTo5NjI0MTBmY2Q3Yzg2MjY0ODU3YTc3YTY1MzI0Yzk3ZWYwNDZiYjI1NjM0Mjc4MWVlM2YxOTk1ZjE2NjdjMDM2IiwiZW5jcnlwdGVkX2RhdGEiOiJBZElQcFJqc3VaN3hvaW5rWVE3MG85YTNHODNyUTBKaENSZ0hqMFN5MURWK1FYbjFZZUxLeWdnem8wMEpNclVzQU5QWk1tUTZScm9pZWowZkd6bVZMekVVQS9CYmY1Wng4TjkrU2k2UUpwb2lPalk0UXZkRzV6NGk5QlVLelB0MUJidFRONXNWY1c5b0xFRDBwb1Y3RkduWHpiQ1IvcEVvNHI4SlN0SmFjQ3ZjdUg2SzBiTGpUSGZJTVVZbXEwQk1zWmJrdkhqYmtKYnhhV2VWcndQL2Z0NWR5bDlNU04wcEl1VGtNSU9Db0k2RHcyMHpYWDhuR2FtUEttMHNPVzF5Y0FrZkNPNmxpcEpmNjROUFlBTzVsQU01eWtVdk53TDdQU3J4aTZ6ak9VaElacTJWUmprL1JjNU1TbU1KVTlmTTN2Uk1mK0hnWk00ZFdxTnZ1S1lTOXplSnVuYjdMOUlEYkRWY2hLdStrcEVlNXpxVnFoaFd2cFkyUGFBZmFmWERpejZBcWVhblZGSGRUQitPYTN6OTJYd2RiNWhPbWZsRlBVZ2NIWHArRllCSzF5UUdTSWpKVnVFczVUZHVXdE5jb0Z4UWtReklwZ3VIRDU1UlBBOEI3MnRBTzIwY290V3V6RVFIWkVFQ0NBa0hjUjZRTllGNmdoOThQcS9TQXJjOFVhUEF0akE0STgrczlGcEsvWjMxWTA1dkh1OG0vVDBWRFFTMzE3MUtpb2gvcDhWcmFmUGIrU2JJM2ZDa2NPdFlNck1EaWplVVRhRFo0OFh4cStWdnI1MERWWU5OT2RocXprd3RhbVVaT0U1bG4xZGQ3c1FYVGQ5Zkd3VnEzVTVpR2dJbWpnNGdvZjMyd1JPWEhFWjZrbnVydlFOV0E4bktYODBNNTQwRjY1Vkk1OGxpakRrUERHejhKcWRvczROTDB1RTYyNHVBQ0NFY1NremNEYmY4aFpHSWNVank0dzRNQjlwVS84cU5XOWtZL0hLQzQwbjJCeU0yM1dIUzJURUlMeWZFUHpWdVhLWUZuM0VGbHlpaDZFWU9DM0RiWEJXUVhLWENnZz09Iiwid2FsbGV0X3NpZ25hdHVyZSI6IjAyNGJlNDc2ZDlkYTYwNmQ3NGUyNWE5MWY4NWI1NWNlYWE3ODU4OTFlMmU1ZWNmZGM0NjM1NzRkYmIzOTRlOTE5ZjQzYjc1MjM4ZjA5MjBmMjA1NjhjNTRjN2Q2YTZiZjNiOTM3N2UxM2IxNGFjYWM4NmJhZDQ4NDliZjg2MzBiIiwidmVyc2lvbiI6MSwibG9ja2VkIjpmYWxzZSwidmFsaWRfdW50aWwiOjE3OTUxNjk3MjcsImFnZW50X3BvbGljeV9oYXNoIjoiZDkwM2ExYzVkYTBhYmQxM2Q3NTM4ZTkwYTUxNjUxZGE3MTIxODNhODExNzY1NDc5MDUyM2YzMjZjMDg2ZmJlMiIsInN0b3JhZ2VfcmVmdW5kX3RvIjoiY2Y0ZjQ2N2I2NGEzMjlkOGJmNmJiZGUwMzNkNGQwZDlhYzNjMTlhNGU4YzNlYzg1NTU0YTY2MGZiMjQzMjdhZSJ9\",\"deposit\":\"13310000000000000000000\",\"min_gas\":\"100000000000000\"}]}]}", "nonce": 1854845016, "chainId": "mainnet", "signerId": "0s408bc8bada21717f219a20874c44053b0523140d", "createdAt": "2026-11-13T10:14:57Z", "timeoutSecs": 600}}' prepaid-gas '300.0 Tgas' attached-deposit '0 NEAR' sign-as klear-mandate-92fc7f.testnet network-config testnet sign-with-access-key-file /Users/mac/work/web3/near/keel/.secrets/near/klear-mandate-92fc7f.testnet.json send[39m
+

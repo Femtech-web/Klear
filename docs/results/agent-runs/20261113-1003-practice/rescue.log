@@ -1,0 +1,90 @@
+Rescuing practice.keel-factory-bcf915.testnet as klear-agent-0f366c.testnet: the manager is silent past the investor's limit.
+Traceback (most recent call last):
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 151, in <module>
+    main()
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 142, in main
+    Rescuer(chain, a.account, chain.out / "rescue.jsonl").run()
+  File "/Users/mac/work/web3/near/keel/agents/guardian.py", line 89, in run
+    perp, spot = self.evidence()
+                 ^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/guardian.py", line 43, in evidence
+    return self.chain.perp(f"g-{int(time.time())}", self.signer), self.chain.latest_spot()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 63, in perp
+    for log in reversed(evm.logs(evm.HYPEREVM, self.state["G7_LEG"], evm.SNAPSHOT, 600)):
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/evm.py", line 58, in logs
+    out += rpc(log_url, "eth_getLogs", params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/evm.py", line 32, in rpc
+    raise RuntimeError(f"{method}: {r['error']}")
+RuntimeError: eth_getLogs: {'code': -32000, 'message': 'execution aborted (timeout = 5s)'}
+Rescuing practice.keel-factory-bcf915.testnet as klear-agent-0f366c.testnet: the manager is silent past the investor's limit.
+Traceback (most recent call last):
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 151, in <module>
+    main()
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 142, in main
+    Rescuer(chain, a.account, chain.out / "rescue.jsonl").run()
+  File "/Users/mac/work/web3/near/keel/agents/guardian.py", line 89, in run
+    perp, spot = self.evidence()
+                 ^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/guardian.py", line 43, in evidence
+    return self.chain.perp(f"g-{int(time.time())}", self.signer), self.chain.latest_spot()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 63, in perp
+    for log in reversed(evm.logs(evm.HYPEREVM, self.state["G7_LEG"], evm.SNAPSHOT, 600)):
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/evm.py", line 58, in logs
+    out += rpc(log_url, "eth_getLogs", params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/evm.py", line 32, in rpc
+    raise RuntimeError(f"{method}: {r['error']}")
+RuntimeError: eth_getLogs: {'code': -32000, 'message': 'execution aborted (timeout = 5s)'}
+Rescuing practice.keel-factory-bcf915.testnet as klear-agent-0f366c.testnet: the manager is silent past the investor's limit.
+Traceback (most recent call last):
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 151, in <module>
+    main()
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 142, in main
+    Rescuer(chain, a.account, chain.out / "rescue.jsonl").run()
+  File "/Users/mac/work/web3/near/keel/agents/guardian.py", line 89, in run
+    perp, spot = self.evidence()
+                 ^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/guardian.py", line 43, in evidence
+    return self.chain.perp(f"g-{int(time.time())}", self.signer), self.chain.latest_spot()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/rescue.py", line 63, in perp
+    for log in reversed(evm.logs(evm.HYPEREVM, self.state["G7_LEG"], evm.SNAPSHOT, 600)):
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/evm.py", line 59, in logs
+    out += rpc(log_url, "eth_getLogs", params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mac/work/web3/near/keel/agents/keel_agents/evm.py", line 33, in rpc
+    raise RuntimeError(f"{method}: {r['error']}")
+RuntimeError: eth_getLogs: {'code': -32000, 'message': 'execution aborted (timeout = 5s)'}
+Rescuing practice.keel-factory-bcf915.testnet as klear-agent-0f366c.testnet: the manager is silent past the investor's limit.
+    waiting for the courier's next snapshot
+    waiting for the courier's next snapshot
+    waiting for the courier's next snapshot
+    waiting for the courier's next snapshot
+    waiting for the courier's next snapshot
+    waiting for the courier's next snapshot
+    waiting for the courier's next snapshot
+  open: rescue (GRJS45ritaPBNABBgcubpFXj3AF2EYG4xUbwLpcjFooD)
+    perp=open spot=open paid=[] done=False ended=None
+    waiting for the courier to relay the vault exit
+    waiting for the courier to relay the vault exit
+    relayed exit: {'tx': '0x60b486f87ad83fb9bd496105a561eca0316bf440336895f5b959a87164599c56'}
+    relayed order: {'tx': None, 'by': 'the courier'}
+    waiting for the courier's next snapshot
+  settle: rescue (38NrVzGWe9GLucuh3udLF46CjavYpad55MoCFWjyTSHg)
+    perp=open spot=open paid=[] done=False ended=None
+    relayed sweep: {'tx': 'the courier'}
+    waiting for the courier's next snapshot
+    waiting for the courier's next snapshot
+  settle: rescue (DWUmFFFmwvoeqcDQHWkxtkBMFULPnJw3WXXwGjXuhaKf)
+    perp=delivered spot=open paid=[{'job_id': 3, 'agent': 'klear-agent-0f366c.testnet', 'amount': '100000000000000000000000', 'reason': 'perp'}] done=False ended=None
+  waiting for Base finality of the vault exit 0x60b486f87ad83fb9bd496105a561eca0316bf440336895f5b959a87164599c56 (~20 min)
+  confirm-exit: rescue (A42tqkXXGY5jQvoCUoT1vqbzpLJJcX7syLgpQNdd9eag)
+    perp=delivered spot=delivered paid=[{'job_id': 3, 'agent': 'klear-agent-0f366c.testnet', 'amount': '50000000000000000000000', 'reason': 'spot'}] done=True ended=None
+The judge paid you 0.100 NEAR for the perp leg.
+The judge paid you 0.050 NEAR for the spot leg.

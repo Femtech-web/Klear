@@ -4,7 +4,8 @@ Klear lets investors give AI agents authority to manage their money, without giv
 This is the order to check it in. Five minutes covers the essentials; forty-five if you rescue a strategy
 yourself. The site's `/judges` page is the same guide, with each live check run as the page loads.
 
-Everything below runs on testnets with test funds, except one authorized mainnet privacy test. Nothing here is
+Everything below runs on testnets with test funds, except two authorized mainnet privacy tests with a few dollars of
+the user's own. Nothing here is
 audited. Commands are view calls that need no account unless marked.
 
 ## In one minute
@@ -15,8 +16,12 @@ audited. Commands are view calls that need no account unless marked.
   that can make NEAR's MPC network sign for the strategy's accounts on Hyperliquid and Base. The AI proposes;
   the judge signs only what fits. If the AI fails, anyone can bring the money home, and is paid only once the
   investor's address shows it arrived.
+- **Private, and still provable.** The strategy can stay sealed: the AI decides in a TEE on NEAR AI Cloud and
+  leaves a signed receipt on chain. Money can sit in a confidential NEAR Intents account whose owner key only NEAR's
+  MPC network holds, tested on mainnet with real funds.
 - **Why NEAR.** Chain Signatures let one locked contract control accounts on two other chains; Read MPC lets it
-  verify what happened there before acting. No bridge, no oracle we run, no key anyone holds.
+  verify what happened there before acting. No bridge, no oracle we run, no key anyone holds. NEAR AI Cloud and
+  NEAR Intents add the private parts, and the same MPC network owns the confidential account.
 
 ## The path
 
@@ -29,7 +34,7 @@ equity points within a median 1.3% of the stake. Rebuild it: `make replay && git
 
 ### 2. Nobody can change the rules (1 min)
 
-Five contracts, each with no access keys and the code built from this repository:
+Seven contracts, each with no access keys and the code built from this repository:
 
 | Contract | Account | Source build sha256 |
 |---|---|---|
@@ -38,6 +43,8 @@ Five contracts, each with no access keys and the code built from this repository
 | Factory | `keel-factory-bcf915.testnet` | `2bd8332e…` ([hashes](docs/results/factory/code-hashes.txt)) |
 | Judge of the practice strategy | `practice.keel-factory-bcf915.testnet` | `2aeaaf8b…` |
 | Judge of the deleverage run | `delever.keel-factory-bcf915.testnet` | `2aeaaf8b…` |
+| TEE registry | `klear-tee-4746e3.testnet` | `ae056966…` ([hash](docs/results/tee/code-hash.txt)) |
+| Confidential mandate owner | `klear-owner-d48b38.testnet` | `b21a30b9…` ([hash](docs/results/owner/code-hash.txt)) |
 
 ```bash
 curl -s https://test.rpc.fastnear.com -H 'content-type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"query","params":{"request_type":"view_access_key_list","finality":"final","account_id":"keel-ai-76e036.testnet"}}'
@@ -79,7 +86,38 @@ keys; its code is the factory's; the Hyperliquid and Base accounts' controllers 
 scripts/testnet/factory.sh verify practice      # needs Foundry's cast; reads only
 ```
 
-### 6. Rescue it yourself (about 45 min, optional)
+### 6. Private, and still provable (3 min)
+
+**A sealed strategy** ([docs/results/sealed](docs/results/sealed/README.md)). The manager can decide inside a TEE on
+NEAR AI Cloud, with its prompt and the investor's strategy encrypted end to end, so nobody reads the strategy, the
+AI provider included. Every decision leaves the TEE's signed receipt on chain, and the judge still bounds every
+order. Check the recorded decision from the chain alone:
+
+```bash
+pip install -r agents/requirements-sealed.txt
+python3 agents/verify_sealed.py FBtEF756kZ4GiWpwzBiY2ixjZt9wniFce6Sojo1uDRE manager.keel-delever-7953ec.testnet
+# add --attestation (with a NEAR AI Cloud key in .env) to check the signer is the model's attested TEE key today
+```
+
+NEAR verifies it too: the locked TEE registry had NEAR's DCAP verifier prove the model's TDX quote
+([`G1JbmpNR…`](https://testnet.nearblocks.io/txns/G1JbmpNRoXTjBV6V2nQSz5E7doJAyFhBD3vEkcLhzXY2)) and then checked this
+receipt's signature with NEAR's ed25519 ([`YJ3JvkHU…`](https://testnet.nearblocks.io/txns/YJ3JvkHU9973GuUi6B2jw4J2nWjY8RNmN4H5KR2GWVA));
+an altered copy was refused ([docs/results/tee](docs/results/tee/README.md)).
+
+**A confidential mandate, on mainnet with real funds** ([docs/results/mandate](docs/results/mandate/README.md)). A
+NEAR Intents account whose policy is the mandate, owned by a key that exists only inside NEAR's MPC network. With 3
+USDC of the user's own, a sealed AI swapped inside it, a withdrawal to a stranger was refused
+(`policy_destination_denied`), and the exit revoked the AI's grant and returned 1.9952 USDC and 0.2831 NEAR to the
+user. Each owner signature is an MPC request you can open on testnet; each effect is on mainnet. A second account is
+owned by a locked contract that, once sealed, signs only grant changes it can read, on a trigger: a stranger used it to
+cut the AI off on the investor's exit, and it refused without a trigger ([docs/results/owner](docs/results/owner/README.md)).
+
+### 7. Rescue it yourself (about 45 min, optional)
+
+An agent nobody wrote for Klear already has: Claude Code, with only Klear's MCP tools and a faucet account, rescued
+the practice strategy and was paid 0.15 NEAR, its full transcript recorded ([docs/results/agent-runs](docs/results/agent-runs/README.md)).
+The hosted MCP server needs nothing installed: `claude mcp add --transport http klear https://klear-near.vercel.app/api/mcp`.
+
 
 The practice strategy fails every day on purpose: its manager goes silent, and the mandate says a silent manager
 means exit. From 14:40 to 17:40 UTC anyone may rescue it, and the judge pays whoever delivers. **Sends testnet
@@ -95,7 +133,7 @@ make rescue ACCOUNT=<you>.testnet
 What you sign and what the judge checks at each step: [docs/practice.md](docs/practice.md). Every cycle so far:
 [docs/results/drill](docs/results/drill).
 
-### 7. Rebuild it (10 min)
+### 8. Rebuild it (10 min)
 
 ```bash
 make test        # 127 tests: Rust rules and engine, Foundry, end to end through the judge, both NEAR contracts
@@ -107,7 +145,7 @@ The deployed builds are not reproducible across machines (`cargo near build non-
 absolute paths); the archived sources rebuild to the deployed hashes at the original path
 ([g7](docs/results/g7/judge-source), [factory](docs/results/factory/source)).
 
-### 8. What it does not do (2 min)
+### 9. What it does not do (2 min)
 
 [docs/trust-model.md](docs/trust-model.md): what "no keys" means and does not mean, what NEAR's MPC network is
 trusted for, and what could still go wrong.
@@ -119,6 +157,10 @@ trusted for, and what could still go wrong.
 - The replay is a counterfactual: Klear's rules applied to real fills, with the closing cost modelled.
 - The daily drill and the courier run on GitHub Actions, with our testnet keys. The courier only pays gas; it cannot change anything the
   judge signs.
-- The AI manager is Claude through its CLI, with no tools; every prompt and decision is logged with its run.
-- Mainnet: only the privacy test ([docs/results/mainnet](docs/results/mainnet/README.md)): 2.799671 USDC into a
-  NEAR Intents confidential balance. It hides the recipient and its balance, not the amount.
+- The AI manager is Claude through its CLI, with no tools, or in sealed mode an open model in a TEE on NEAR AI Cloud;
+  every decision is logged, and a sealed one's prompt stays with the investor.
+- Mainnet: two privacy tests with a few dollars of the user's own. A private payout
+  ([docs/results/mainnet](docs/results/mainnet/README.md)): 2.799671 USDC into a NEAR Intents confidential balance,
+  hiding the recipient and its balance, not the amount. A confidential mandate
+  ([docs/results/mandate](docs/results/mandate/README.md)): the confidential ledger is access control, not
+  cryptography, and its policy is enforced by the provider's backend, not by a Klear contract.

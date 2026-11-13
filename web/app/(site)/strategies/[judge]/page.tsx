@@ -6,6 +6,7 @@ import { StrategyActions } from "@/components/flows/StrategyActions";
 import { notFound } from "next/navigation";
 import { SiteLink } from "@/components/site/SiteLink";
 import { PhasePill } from "@/components/strategies/PhasePill";
+import { SetupProgress } from "@/components/strategies/SetupProgress";
 import { Check, Cross } from "@/components/ui/icons";
 import { LiveValue } from "@/components/ui/LiveValue";
 import { Card, Pill, Section } from "@/components/ui/primitives";
@@ -203,6 +204,7 @@ export default async function InspectPage({ params }: PageProps<"/strategies/[ju
           Strategy controls
         </SiteLink>
       </div>
+      <SetupProgress x={x} verified={Boolean(verified)} />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <Card raised>
           <h2 id="verify-and-fund" className="mb-1 font-sans text-lg font-semibold">

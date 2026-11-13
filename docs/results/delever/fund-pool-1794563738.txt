@@ -1,0 +1,38 @@
+├  Unsigned transaction:
+│    signer_id:    keel-delever-7953ec.testnet
+│    receiver_id:  delever.keel-factory-bcf915.testnet
+│    actions:
+│       -- function call:      
+│                       method name:  fund_pool
+│                       args:         {}
+│                       gas:          300.0 Tgas
+│                       deposit:      1 NEAR
+│     [0m
+├  Your transaction was signed successfully.
+│    Public key: ed25519:A53Zv5KE5WF1ww5QsDhcvenvDkLYGC1TQnsTCrj9Qf7V
+│    Signature:  ed25519:YdjBHQp8g2xYZDmGXCZapUCykaaWKP4dHaHySEhn2Xae7Bkj9ReGMULsw8JDnRnthSZUMEQT1YHpdnFzZtNueEN
+│     [0m
+├  Transaction Execution Info:
+│    Gas used: 3.4 Tgas
+│    Transaction fee: 0.0003170296926707 NEAR
+│    Transaction ID: Un6L6eZ5D8hP6pSD4Ms2FG4b7REqcYMLoYqeBFpELe6
+│    To see the transaction in the transaction explorer, please open this url in your browser:
+│    https://explorer.testnet.near.org/transactions/Un6L6eZ5D8hP6pSD4Ms2FG4b7REqcYMLoYqeBFpELe6
+│     [0m
+├  Function execution logs:
+│    [36mLogs [delever.keel-factory-bcf915.testnet]:[39m   [2mNo logs[0m
+│    [36mLogs [keel-delever-7953ec.testnet]:[39m   [2mNo logs[0m
+│     [0m
+├  Function execution return value:
+│    Empty return value
+│     [0m
+
+
+The "fund_pool" call to <delever.keel-factory-bcf915.testnet> on behalf of <keel-delever-7953ec.testnet> succeeded.
+
+
+
+
+Here is your console command if you need to script it or re-run:
+    [33m/Users/mac/work/web3/near/keel/node_modules/near-cli-rs/node_modules/.bin_real/near contract call-function as-transaction delever.keel-factory-bcf915.testnet fund_pool json-args {} prepaid-gas '300.0 Tgas' attached-deposit '1 NEAR' sign-as keel-delever-7953ec.testnet network-config testnet sign-with-access-key-file .secrets/near/keel-delever-7953ec.testnet.json send[39m
+

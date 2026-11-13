@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { SiteLink } from "@/components/site/SiteLink";
 import { TxLink } from "@/components/ui/Tx";
+import { utc } from "@/lib/format";
 import { attest, confirmExit, openFlatten, settle, type Tx } from "@/lib/keel/calls";
 import { parseGlance, rescueDue, type Glance } from "@/lib/keel/glance";
 import { ConnectNear } from "./ConnectNear";
@@ -76,9 +78,20 @@ const STEPS: { id: Step; title: string; text: string }[] = [
 
 const RETRY = /attempt-not-resolved|snapshot-not-settled|stale-evidence|not-settled|evidence-reused/;
 
-export function RescueFlow({ judge, nonce, connect = true }: { judge: string; nonce?: string; connect?: boolean }) {
+export function RescueFlow({
+  judge,
+  nonce,
+  connect = true,
+  practiceWindow,
+}: {
+  judge: string;
+  nonce?: string;
+  connect?: boolean;
+  practiceWindow?: string;
+}) {
   const me = useNearAccount();
   const [state, setState] = useState<State | null>(null);
+  const [readFailed, setReadFailed] = useState(false);
   const [perp, setPerp] = useState<string | null>(null);
   const [exitKey, setExitKey] = useState<string | null>(null);
   const [exitLog, setExitLog] = useState<unknown>(null);
@@ -87,8 +100,15 @@ export function RescueFlow({ judge, nonce, connect = true }: { judge: string; no
   const { state: tx, run } = useTx();
 
   const refresh = useCallback(async () => {
-    const r = await fetch(`/api/keel/strategy?judge=${judge}`, { cache: "no-store" });
-    if (r.ok) setState({ ...(await r.json()), at: Date.now() });
+    try {
+      const response = await fetch(`/api/keel/strategy?judge=${judge}`, { cache: "no-store" });
+      if (!response.ok) throw new Error("Strategy unavailable");
+      const fresh = await response.json();
+      setState({ ...fresh, at: Date.now() });
+      setReadFailed(false);
+    } catch {
+      setReadFailed(true);
+    }
   }, [judge]);
   useEffect(() => {
     const first = setTimeout(() => void refresh(), 0);
@@ -177,9 +197,31 @@ export function RescueFlow({ judge, nonce, connect = true }: { judge: string; no
 
   const mine = (state?.payouts ?? []).filter((p) => p.agent === me);
   const current = STEPS.findIndex((s) => s.id === step);
+  const readiness = practiceWindow ? practiceReadiness(state, glance, readFailed, practiceWindow) : null;
 
   return (
     <div className="grid gap-5">
+      {readiness && (
+        <div className="rounded-md border border-line bg-canvas-tint p-4">
+          <div aria-live="polite">
+            <p className="font-semibold">{readiness.title}</p>
+            <p className="mt-1 text-sm text-ink-2">{readiness.detail}</p>
+          </div>
+          {state && (
+            <p className="mt-2 text-xs text-ink-3">
+              Last checked <time dateTime={new Date(state.at).toISOString()}>{utc(state.at)}</time>
+            </p>
+          )}
+          {!readiness.open && (
+            <SiteLink
+              href="/try#recorded-rescue"
+              className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold underline hover:text-accent"
+            >
+              Rehearse the rescue without a wallet
+            </SiteLink>
+          )}
+        </div>
+      )}
       {connect && <ConnectNear nonce={nonce} />}
       {me && (
         <>
@@ -242,6 +284,42 @@ export function RescueFlow({ judge, nonce, connect = true }: { judge: string; no
       )}
     </div>
   );
+}
+
+function practiceReadiness(state: State | null, g: Glance | null, readFailed: boolean, window: string) {
+  if (readFailed)
+    return {
+      title: "Live status unavailable",
+      detail: "The judge could not be reached. Check again shortly.",
+      open: false,
+    };
+  if (!state || !g) return { title: "Checking the judge", detail: `Scheduled rescue window ${window}.`, open: false };
+  if (g.mode === "flattened")
+    return { title: "Rescue complete", detail: "The next cycle starts at the daily drill.", open: false };
+  if (g.mode === "frozen")
+    return {
+      title: "Strategy frozen",
+      detail: "The judge is not accepting rescue actions in this state.",
+      open: false,
+    };
+  if (state.job && state.job.expiresAt * 1000 >= state.at) {
+    return {
+      title:
+        state.rescue.spot === "open" && state.rescue.exitNonce != null && state.rescue.perp !== "open"
+          ? "Base delivery awaiting confirmation"
+          : "A guardian has claimed the rescue",
+      detail: `Current guardian ${state.job.agent}. The job expires ${utc(state.job.expiresAt * 1000)}.`,
+      open: false,
+    };
+  }
+  if (rescueDue(g) || g.mode === "flattening") {
+    return { title: "Rescue open", detail: "Connect a NEAR testnet wallet to take the next step.", open: true };
+  }
+  return {
+    title: "No rescue is due",
+    detail: `The scheduled window is ${window}. The judge opens the rescue when its trigger is met.`,
+    open: false,
+  };
 }
 
 function nextStep(

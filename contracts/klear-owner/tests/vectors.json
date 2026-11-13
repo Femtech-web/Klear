@@ -1,0 +1,36 @@
+[
+ {
+  "name": "agent_create",
+  "primaryType": "WalletMessage",
+  "message": {
+   "ops": "[]",
+   "out": "{\"after\":[],\"then\":[{\"receiver_id\":\"outlayer.near\",\"actions\":[{\"action\":\"function_call\",\"function_name\":\"store_wallet_policy\",\"args\":\"eyJ3YWxsZXRfcHVia2V5IjoiZWQyNTUxOTo2MGQ4NjExNGY1OTFiZmQ2ODZlNDFjMWRlZTNiYWI2YWJmYTk3ZjYyZmNiNDIyMzE3ZTI3ODNhMzFhOWI1ZTE2IiwiZW5jcnlwdGVkX2RhdGEiOiJBUWlmRUswTGtWVnJmNkV1QmJOQWw1cVM1MFF0ZExSV2JlWjVkdHVXVVdvUVpLTlJGRkc1bDVlcGRVNmJpa3hzY3V0SDJCckFaVERBUit5WHNDbWpobjlkZXNSTmxrQXRnSGlYWHpUdVRnVTFaWWJNc0pNZW5IQU80dkliZ1U1Ni9idEt5L0Z4cjZzZ25zNWt1VWhtZmw5STZYMnRKLzRmTnk0NDRaRUMzdWJ2bVdmRHlxdGVHTy9zb2xaeFBWZEhOU1VadTJ5ZWNsNWlTQWdzbjVhOVgrWWdxQVB0TGlweFNaK0htYWVtVUQ2VWVJL0UzWExsVFd2TFVUT0ZBcUNUWE9UOC9PQ0dJbW1oc3BUWEpXbTJNdWJRbWIyQ2E2MmpKbTJKM0tzVHB1eTdXVCtYNE41MkcrcDIxa2QyRks5ZVdIOHhBeDdWVW4vcW5FUGljcGtlblFpbGdicnZydnRGaHNjSEpmeWtEUTRWTnVQbzNiQjNUSzluU1BaSExBYXM5Tnk1VTZ5KzhqdEpaUHlHRmNvRm5tN0I0TGw5V3BJVmdlMHRiZEFFTWdlSTRoOTM0TDZyN1hIZ1FvVWI0OFBOY1hZemxlbytwWXd0L0YvczVBNk40K0VkWmtwSTZVMVhYbStkTHF1TnBOTWhpS1BuOGhrSzloa3FkOUd1ZmJmMlZOTWl6WmROTFcwUGdYZzBWNGhXTXNTRkJ0ZlFHNXdNanNuOEZLZGhmQk5weW5tZFVDd2tvRGVId1p5U1hKMk42ZXN4UlphUkx4ZFBQRFE2R0gwOXdRRWpvQkRZS2RreGJXbmIrUTdpOE9GbVNaT3ZYS0t2SEZDcDd5VE1sQ3VZZ1J4ZHZqMS93TFFma3NGT2JEM2lLTnR5ckxxRTdVK2kxYzVuOEx4ZmFxaDZIV3RIWHdhOUl3anNOdTRqOUVQRHJyV1BoN09Zc2dVUVVkSlZrbW5yQ2h5OWFLeG1vSkVDcjNoWmJ1cFROdG50UFJlSXVMU1dPQ2ZuVUtvaFNtNVN1RDJWWURWZ2FXeUg2bVNMM0U0bk5iYTB2WjcrNGRQa2YvOVE2QT09Iiwid2FsbGV0X3NpZ25hdHVyZSI6IjZmOGU2NTRkMzBjYjgzYjg4MTBkMGI0ZDRjNmM4NjZlMGNlN2UxZWI2ZjQyNTZjOTFhNTc5ZjhkZDc1ZGZiMjQ4NzNjMWE0OTgzYTI1OWRlZjgzZGJmZmExMmNjOWU4YWJiMDdmZTc4ZDlmOTBhNmI4OTI2ZTdiYzU5NmYxNzA3IiwidmVyc2lvbiI6MSwibG9ja2VkIjpmYWxzZSwidmFsaWRfdW50aWwiOjE3OTUxMzQ3MzMsImFnZW50X3BvbGljeV9oYXNoIjoiZGVmZjU4NDk3YWY5MWU1ODFjNzQzZmZhNWI4ZmE0ODQyMTgxYTkzYTI0MzdlM2Q4ODYzMTdjMjQ2M2UwNjIxNyIsInN0b3JhZ2VfcmVmdW5kX3RvIjoiY2Y0ZjQ2N2I2NGEzMjlkOGJmNmJiZGUwMzNkNGQwZDlhYzNjMTlhNGU4YzNlYzg1NTU0YTY2MGZiMjQzMjdhZSJ9\",\"deposit\":\"13310000000000000000000\",\"min_gas\":\"100000000000000\"}]}]}",
+   "nonce": 494267434,
+   "chainId": "mainnet",
+   "signerId": "0sfcb2d84415522cba5367fc7a454168eca6ccb4cf",
+   "createdAt": "2026-11-13T00:31:43Z",
+   "timeoutSecs": 600
+  },
+  "digest": "c8d1c281ca82da671fa3e10ddf19d575a94221f10574fa178ff4fa70a215d25d"
+ },
+ {
+  "name": "grant_issue",
+  "primaryType": "Authorization",
+  "message": {
+   "payload": "{\"agent_id\":\"976397f12f18cdbba7e7abce15346ef9cde9051eb9859dbc51d51e7b93dcf148\",\"credential\":\"abababababababababababababababababababababababababababababababab\",\"domain\":\"near-intents-agent-api.agent-grant.v6\",\"expires_at_ms\":1795132800000,\"issued_at_ms\":1794564669114,\"label\":\"x\",\"network\":\"mainnet\",\"nonce\":\"0e1876fc9d608d09295038e00bc42b3f72989fba79656fc8351520e3ed8d4c63\",\"owner\":{\"address\":\"0xc21f1df7cfea35180066e10508dc7cc2ee998397\",\"chain_id\":8453,\"public_key\":\"0x0c4c231959e2d43d5a263f8d4b4e89a7bbefd81a497caf38f0ac9e3f71ce93aeb81869cf74b98df70db73fb4daed5ee26953e315763ef15773edc28975ba129e\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\",\"wallet_id\":\"4e8b5e43-a15b-4f61-b4ad-95e08e2853bb\"}",
+   "purpose": "PROVE_OWNERSHIP",
+   "recipient": "api.demo.agentsonintents.com"
+  },
+  "digest": "d613de221bc8caef9584ac09640f9df0a0eed241229a8746fdddc94284cd8a12"
+ },
+ {
+  "name": "grant_revoke",
+  "primaryType": "Authorization",
+  "message": {
+   "payload": "{\"action\":\"revoke_grant\",\"agent_id\":\"976397f12f18cdbba7e7abce15346ef9cde9051eb9859dbc51d51e7b93dcf148\",\"domain\":\"near-intents-agent-api.owner-admin.v2\",\"expires_at_ms\":1794564968008,\"issued_at_ms\":1794564668008,\"network\":\"mainnet\",\"nonce\":\"d18a0a3ec992c0bbbf7d9c449f329f51009c1863c12042285caff244aa999a2a\",\"owner\":{\"address\":\"0xc21f1df7cfea35180066e10508dc7cc2ee998397\",\"chain_id\":8453,\"public_key\":\"0x0c4c231959e2d43d5a263f8d4b4e89a7bbefd81a497caf38f0ac9e3f71ce93aeb81869cf74b98df70db73fb4daed5ee26953e315763ef15773edc28975ba129e\",\"type\":\"evm\"},\"owner_epoch\":1,\"recipient\":\"api.demo.agentsonintents.com\",\"target_id\":\"87b06cdcadc27ed8644d5db24a5922750008c23c9d102d98263f2d389f266c92\",\"tenant_id\":\"cd3625fb495be5f2423fab4d9a7f3ad4bfcd146c84182ad95ebae406a72340fe\"}",
+   "purpose": "PROVE_OWNERSHIP",
+   "recipient": "api.demo.agentsonintents.com"
+  },
+  "digest": "939d45b42e4ffc50073500b00e03b813b5e8a384b19bf1c18a7c2e40232cf2c5"
+ }
+]

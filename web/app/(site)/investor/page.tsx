@@ -33,7 +33,22 @@ const setup = [
   {
     title: "Run the manager or request an exit",
     description:
-      "Run the configured manager and a relayer outside the site so approved orders can reach the trading account. To exit, sign with your investor wallet. A guardian then carries out the rescue.",
+      "Run the configured manager and a relayer outside the site so approved orders can reach the trading account. Run it sealed to keep your strategy private. To exit, sign with your investor wallet. A guardian then carries out the rescue.",
+  },
+] as const;
+
+const privateOptions = [
+  {
+    href: "/proof/sealed",
+    title: "Run your manager sealed",
+    text: "Start the manager with --sealed and your strategy file. It decides inside a TEE on NEAR AI Cloud with your strategy encrypted end to end; each decision leaves a signed receipt on chain, and the judge checks every order as usual.",
+    note: "Live on testnet. A TEE flaw could leak the strategy, never move money.",
+  },
+  {
+    href: "/proof/mandate",
+    title: "Hold the money confidentially",
+    text: "For money that should stay out of public view end to end: a confidential account with your mandate as its policy, whose owner key only NEAR's MPC network holds. Withdrawals go only to you.",
+    note: "Run on mainnet with real funds. Its policy is enforced by the provider, not by a judge.",
   },
 ] as const;
 
@@ -54,6 +69,12 @@ export default async function InvestorPage() {
             Find a strategy
           </LinkButton>
         </div>
+        <SiteLink
+          href={`/strategies/${factory.practice.judge}#setup-progress`}
+          className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold hover:text-accent"
+        >
+          Inspect the practice strategy without a wallet <ArrowRight size={16} />
+        </SiteLink>
       </header>
 
       <div className="mt-9 grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.7fr)] lg:gap-16">
@@ -101,6 +122,28 @@ export default async function InvestorPage() {
         </aside>
       </div>
 
+      <section aria-labelledby="private-title" className="mt-10 border-t border-line pt-7 md:mt-14">
+        <h2 id="private-title" className="text-h2">
+          Keep it private
+        </h2>
+        <p className="mt-2 max-w-measure text-sm text-ink-2">
+          The judge needs your positions public to check them. Your strategy, and if you choose, your balance, do not
+          have to be.
+        </p>
+        <ul className="mt-4 grid list-none gap-3 p-0 md:grid-cols-2">
+          {privateOptions.map(({ href, title, text, note }) => (
+            <li key={href} className="rounded-md border border-line bg-surface p-5">
+              <h3 className="text-lg">{title}</h3>
+              <p className="mt-1.5 text-sm text-ink-2">{text}</p>
+              <p className="mt-2 text-xs text-ink-3">{note}</p>
+              <SiteLink href={href} className="mt-3 inline-flex min-h-10 items-center gap-2 text-sm font-semibold">
+                See it run <ArrowRight size={14} />
+              </SiteLink>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section id="manage" aria-labelledby="manage-title" className="mt-10 border-t border-line pt-7 md:mt-14">
         <h2 id="manage-title" className="text-h2">
           Find a strategy
@@ -127,7 +170,7 @@ export default async function InvestorPage() {
                         </div>
                       </div>
                       <SiteLink
-                        href={`/strategies/${judge}#investor-controls`}
+                        href={`/strategies/${judge}#setup-progress`}
                         aria-label={`Open strategy: ${label || judge}`}
                         className="inline-flex min-h-9 items-center gap-2 justify-self-start text-sm font-semibold text-accent no-underline hover:underline"
                       >

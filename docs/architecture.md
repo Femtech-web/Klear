@@ -36,9 +36,24 @@ left to the investor's fixed addresses and is paid only when it arrives.
 | Engine modules | `crates/keel-core/src/engine/` | `mod.rs` state, evidence and nonce resolution, transactional commits; `orders.rs` bounded IOC planning and execution checks; `valuation.rs` the liquidation value; `mandate.rs` manager, investor and exit triggers; `repair.rs` hedge repair; `rescue.rs` the per-leg exit |
 | Judge | `contracts/near-keel` | Read MPC attestation, MPC signing, rewards. Thin: every decision is keel-core's |
 | CLI | `crates/keel-core/src/bin/keel-judge.rs` | The same rules over a JSON state file, for Foundry `ffi` tests and off-chain checks |
-| Agents | `agents/` | `manager.py` (Claude proposes trades), `guardian.py` (AI or deterministic rescue); `keel_agents/` holds chain I/O, market data, the LLM call and its decision log |
+| Agents | `agents/` | `manager.py` (Claude proposes trades, or a sealed model in a TEE with `--sealed`; `verify_sealed.py` checks its receipts), `guardian.py` (AI or deterministic rescue); `keel_agents/` holds chain I/O, market data, the LLM call and its decision log |
 | Runbooks | `scripts/testnet/g*.sh` | Chain I/O for each live gate; `g7.sh` is the current one |
 | Evidence | `docs/results/g*/` | Every live transaction, log and decision behind the claims in the docs |
+
+## Private paths
+
+- **Sealed manager** (`agents/manager.py --sealed`, `agents/keel_agents/sealed.py`): before each decision NEAR AI's
+  SDK verifies the gateway and the model's TEE (Intel TDX quote, NVIDIA GPU evidence); the prompt, with the
+  investor's strategy, is encrypted end to end to the model's attested key; the answer is used only after its
+  signature verifies. The receipt (signed `model:sha256(request):sha256(response)`, signer, attestation status,
+  plaintext hashes) rides in the manager's own `propose_order` or `heartbeat` arguments, which the judge ignores.
+  `agents/verify_sealed.py` checks it from the chain.
+- **Confidential mandate** (`scripts/mainnet/mandate.py`): a NEAR Intents Agent API account whose policy is the
+  mandate. Its owner is the EVM key NEAR's MPC network derives for a NEAR account: each owner action (create,
+  policy, grant, freeze, revoke) is EIP-712 typed data the script has the MPC network sign, and checks to recover to
+  the owner before it is sent. The AI acts under a grant; the policy refuses anything else.
+- **Private payout**: a strategy's immutable payout can be a Confidential Intents deposit address
+  (`scripts/mainnet/intents.mjs`); the rescue stays public and verified up to that address.
 
 ## One rule: evidence in, signatures out
 

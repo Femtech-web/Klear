@@ -74,7 +74,20 @@ write("replay.json", {
 });
 
 // ---- the live rescue timeline ----
-write("moment.json", JSON.parse(read("docs/results/g7/timeline.json")));
+const moment = JSON.parse(read("docs/results/g7/timeline.json"));
+const rescueSection =
+  read("README.md")
+    .split(/^## The live rescue$/m)[1]
+    ?.split(/^## /m)[0] ?? "";
+const rescueClock = tableRows(rescueSection, "Time").map(([time, event]) => {
+  const parts = strip(time).match(/^(?:(\d+) min )?(\d+) s$/);
+  if (!parts) throw new Error(`Unrecognized rescue time: ${time}`);
+  return {
+    seconds: Number(parts[1] ?? 0) * 60 + Number(parts[2]),
+    tx: event.match(/nearblocks\.io\/txns\/([1-9A-HJ-NP-Za-km-z]+)/)?.[1] ?? null,
+  };
+});
+write("moment.json", { ...moment, rescueClock });
 
 // ---- live bypass attempts ----
 const attacks = [];
@@ -143,6 +156,14 @@ write("factory.json", {
     investor: pe.G7_INVESTOR,
   },
   delever: { judge: de.G7_JUDGE, leg: de.G7_LEG, vault: de.G7_VAULT },
+});
+
+// ---- the private parts' contracts: the TEE registry and the confidential mandate's owner ----
+const te = env(read("docs/results/tee/env"));
+const oe = env(read("docs/results/owner/env"));
+write("privacy.json", {
+  tee: { account: te.TEE_REGISTRY, codeSha256: read("docs/results/tee/code-hash.txt").trim() },
+  owner: { account: oe.OWNER_CONTRACT, codeSha256: read("docs/results/owner/code-hash.txt").trim() },
 });
 
 // ---- the daily drill: one summary per cycle, newest first ----

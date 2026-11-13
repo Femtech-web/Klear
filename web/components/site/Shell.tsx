@@ -3,7 +3,7 @@ import { KeelMark } from "@/components/ui/icons";
 import { JudgesLink, Nav } from "./Nav";
 import { ThemeToggle } from "./ThemeToggle";
 import { config } from "@/lib/config";
-import { LEARN, NAV, PROOF } from "./nav-items";
+import { JUDGES } from "./nav-items";
 
 function Brand({ size = 26 }: { size?: number }) {
   return (
@@ -47,49 +47,45 @@ export function Header() {
   );
 }
 
-const COLUMNS = [
-  {
-    title: "Use it",
-    links: [
-      ...NAV.filter((n) => n.href !== "/proof"),
-      { href: "/rules", label: "Your rules" },
-      { href: "/create", label: "Create a strategy" },
-      { href: "/strategies/practice.keel-factory-bcf915.testnet", label: "Inspect a strategy" },
-    ],
-  },
-  { title: "Proof", links: PROOF },
-  { title: "Learn", links: LEARN },
+const FOOTER_LINKS = [
+  { href: "/try", label: "Try it" },
+  { href: "/investor", label: "Investor" },
+  { href: "/how", label: "How it works" },
+  JUDGES,
+  { href: "/proof", label: "Proof" },
+  { href: "/trust", label: "Trust model" },
 ] as const;
 
 export function Footer() {
-  const heading = "mb-3 font-sans text-xs font-semibold uppercase tracking-[0.12em] text-ink-3";
-  const link = "text-ink-2 no-underline hover:text-ink";
+  const link = "inline-flex min-h-11 items-center text-ink-2 no-underline hover:text-ink";
   return (
-    <footer className="mt-28 border-t border-line pb-18 pt-12 text-sm text-ink-3">
-      <div className="page grid grid-cols-2 gap-8 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-        <div className="col-span-2 md:col-span-1">
+    <footer className="mt-20 border-t border-line py-8 text-sm">
+      <div className="page flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">
+        <div>
           <Brand size={22} />
-          <p className="mt-3 max-w-[40ch] text-ink-2">
-            Rules an AI cannot break, and a way home for your money that nobody can block. Built on NEAR.
-          </p>
-          <a href={config.repo} target="_blank" rel="noreferrer" className={`mt-4 inline-block ${link}`}>
-            Source on GitHub
-          </a>
+          <p className="mt-2 text-sm text-ink-3">A way home for your money. Built on NEAR.</p>
         </div>
-        {COLUMNS.map((c) => (
-          <div key={c.title}>
-            <h2 className={heading}>{c.title}</h2>
-            <ul className="grid gap-1.5">
-              {c.links.map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className={link}>
-                    {n.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <nav aria-label="Footer" className="md:min-w-[28rem]">
+          <ul className="grid grid-cols-2 gap-x-6 sm:grid-cols-4 sm:gap-x-5">
+            {FOOTER_LINKS.map(({ href, label }) => (
+              <li key={href}>
+                <Link href={href} className={link}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <a href={`${config.repo}/tree/main/agents`} className={link}>
+                Agent guide
+              </a>
+            </li>
+            <li>
+              <a href={config.repo} target="_blank" rel="noreferrer" className={link}>
+                Source on GitHub
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </footer>
   );

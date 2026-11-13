@@ -29,8 +29,16 @@ const FAQ = [
     "The rescue closes positions in bounded steps within a price band, and retries what does not fill. Each leg moves on its own, so one stuck asset never holds the rest back.",
   ],
   [
+    "Can my strategy stay private?",
+    "Yes. In sealed mode the AI decides inside a TEE on NEAR AI Cloud with your strategy encrypted end to end, so nobody reads it, the AI provider included. Each decision leaves a signed receipt on chain, and the contract still checks every order.",
+  ],
+  [
+    "Can my balance stay private?",
+    "The trading accounts' positions are public, because the contract has to check them. For money that should stay private end to end, Klear ran a confidential account on mainnet: your mandate as its policy, owned by a key only NEAR's signing network holds. Its rules are enforced by the provider, not by the contract, and we say so.",
+  ],
+  [
     "Does this work today?",
-    "On testnets, yes: two live rescues across Hyperliquid and Base, judged on NEAR. It is not audited and not on mainnet.",
+    "On testnets, yes: six live rescues across Hyperliquid and Base, an early risk cut and a daily drill, all judged on NEAR. The privacy parts also ran on mainnet with a few dollars of real funds. It is not audited.",
   ],
 ];
 
