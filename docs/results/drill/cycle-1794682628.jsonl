@@ -1,0 +1,87 @@
+{"at": 1794682628, "role": "drill", "kind": "resume", "reason": "the rescue is already due"}
+{"at": 1794682629, "role": "drill", "kind": "rescue-due", "reason": "manager silent", "grace_s": 10800.0}
+{"at": 1794682633, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794682629-perp-log.json"}
+{"at": 1794682789, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794682786-perp-log.json"}
+{"at": 1794682945, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794682941-perp-log.json"}
+{"at": 1794683104, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794683097-perp-log.json"}
+{"at": 1794683258, "role": "drill", "kind": "courier-retry", "error": "g7.sh snapshot c-1794683257: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server"}
+{"at": 1794683291, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794683288-perp-log.json"}
+{"at": 1794683446, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794683443-perp-log.json"}
+{"at": 1794683602, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794683599-perp-log.json"}
+{"at": 1794683759, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794683754-perp-log.json"}
+{"at": 1794683915, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794683912-perp-log.json"}
+{"at": 1794684072, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794684067-perp-log.json"}
+{"at": 1794684133, "role": "courier", "kind": "spot-probe"}
+{"at": 1794684229, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794684225-perp-log.json"}
+{"at": 1794684386, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794684382-perp-log.json"}
+{"at": 1794684543, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794684539-perp-log.json"}
+{"at": 1794684699, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794684696-perp-log.json"}
+{"at": 1794684856, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794684851-perp-log.json"}
+{"at": 1794685012, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794685009-perp-log.json"}
+{"at": 1794685168, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794685165-perp-log.json"}
+{"at": 1794685290, "role": "courier", "kind": "spot-attested", "out": ["base:0x51a6de248d8183c087364f840427b5032feb5847ffb6740f98d85238e14240c8:2"]}
+{"at": 1794685326, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794685320-perp-log.json"}
+{"at": 1794685483, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794685478-perp-log.json"}
+{"at": 1794685640, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794685636-perp-log.json"}
+{"at": 1794685640, "role": "courier", "kind": "spot-probe"}
+{"at": 1794685796, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794685793-perp-log.json"}
+{"at": 1794685953, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794685949-perp-log.json"}
+{"at": 1794686109, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794686106-perp-log.json"}
+{"at": 1794686266, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794686262-perp-log.json"}
+{"at": 1794686422, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794686419-perp-log.json"}
+{"at": 1794686579, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794686574-perp-log.json"}
+{"at": 1794686735, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794686732-perp-log.json"}
+{"at": 1794686826, "role": "courier", "kind": "spot-attested", "out": ["base:0xd8ca1b3de820ae206d8104f0e69b29ebbbcbbe9e839f3b3d19e19bb75685ddea:0"]}
+{"at": 1794686892, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794686888-perp-log.json"}
+{"at": 1794687048, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794687045-perp-log.json"}
+{"at": 1794687139, "role": "courier", "kind": "spot-probe"}
+{"at": 1794687205, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794687200-perp-log.json"}
+{"at": 1794687363, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794687358-perp-log.json"}
+{"at": 1794687519, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794687516-perp-log.json"}
+{"at": 1794687676, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794687671-perp-log.json"}
+{"at": 1794687832, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794687829-perp-log.json"}
+{"at": 1794687989, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794687984-perp-log.json"}
+{"at": 1794688145, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794688142-perp-log.json"}
+{"at": 1794688302, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794688297-perp-log.json"}
+{"at": 1794688363, "role": "courier", "kind": "spot-attested", "out": ["base:0xdb86a2bd6b515315c15a209543efc6959aab2e3338d226e08c8d13babfa799a6:0"]}
+{"at": 1794688458, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794688455-perp-log.json"}
+{"at": 1794688615, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794688610-perp-log.json"}
+{"at": 1794688646, "role": "courier", "kind": "spot-probe"}
+{"at": 1794688772, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794688768-perp-log.json"}
+{"at": 1794688928, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794688925-perp-log.json"}
+{"at": 1794689085, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794689080-perp-log.json"}
+{"at": 1794689241, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794689238-perp-log.json"}
+{"at": 1794689397, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794689394-perp-log.json"}
+{"at": 1794689554, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794689550-perp-log.json"}
+{"at": 1794689710, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794689707-perp-log.json"}
+{"at": 1794689867, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794689863-perp-log.json"}
+{"at": 1794689898, "role": "courier", "kind": "spot-attested", "out": ["base:0xd0a9a4054bb9ead823e56f76f6a552b0c4eda6741046d1b334c101955010afc9:1"]}
+{"at": 1794690022, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794690020-perp-log.json"}
+{"at": 1794690180, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794690175-perp-log.json"}
+{"at": 1794690180, "role": "courier", "kind": "spot-probe"}
+{"at": 1794690338, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794690333-perp-log.json"}
+{"at": 1794690494, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794690491-perp-log.json"}
+{"at": 1794690650, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794690647-perp-log.json"}
+{"at": 1794690807, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794690803-perp-log.json"}
+{"at": 1794690964, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794690960-perp-log.json"}
+{"at": 1794691121, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794691116-perp-log.json"}
+{"at": 1794691277, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794691274-perp-log.json"}
+{"at": 1794691433, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794691430-perp-log.json"}
+{"at": 1794691433, "role": "courier", "kind": "spot-attested", "out": ["base:0x672dd069b60bc3f7244395338c7cda6a3133beaa18057c2b3b478e0323d7a1f3:3"]}
+{"at": 1794691590, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794691585-perp-log.json"}
+{"at": 1794691681, "role": "courier", "kind": "spot-probe"}
+{"at": 1794691747, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794691743-perp-log.json"}
+{"at": 1794691903, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794691900-perp-log.json"}
+{"at": 1794692060, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794692056-perp-log.json"}
+{"at": 1794692216, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794692213-perp-log.json"}
+{"at": 1794692372, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794692369-perp-log.json"}
+{"at": 1794692527, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794692524-perp-log.json"}
+{"at": 1794692684, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794692680-perp-log.json"}
+{"at": 1794692841, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794692837-perp-log.json"}
+{"at": 1794692964, "role": "courier", "kind": "spot-attested", "out": ["base:0x46f9636da392fa5e4ca23f81c12692899e571fc621df1a2aa203ad414ff63d56:15"]}
+{"at": 1794692997, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794692994-perp-log.json"}
+{"at": 1794693154, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794693149-perp-log.json"}
+{"at": 1794693185, "role": "courier", "kind": "spot-probe"}
+{"at": 1794693310, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794693307-perp-log.json"}
+{"at": 1794693432, "role": "drill", "kind": "spot-reused", "evidence": "base:0x46f9636da392fa5e4ca23f81c12692899e571fc621df1a2aa203ad414ff63d56:15", "age_s": 1750}
+{"at": 1794693452, "role": "guardian", "kind": "open", "tx": "4tzCfLzB2sbc64Lb7q1b3mff26SBp5hvvEecrgfjwgeq", "refused": null, "outcome": {"outcome": "rescue", "job_id": 5, "trigger": "floor", "order": null, "sweep": null, "exit": null, "delivered": [], "paid": [], "perp": "empty", "spot": "empty", "ended": null, "done": true}}
