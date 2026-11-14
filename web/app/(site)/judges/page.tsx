@@ -446,6 +446,9 @@ export default async function JudgesPage() {
               <LinkButton href="/proof" variant="secondary">
                 Browse proof
               </LinkButton>
+              <LinkButton href="https://youtu.be/h-ct15lOJb4" variant="secondary">
+                Watch the demo
+              </LinkButton>
             </div>
           </div>
 

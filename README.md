@@ -9,7 +9,7 @@
 ### When your AI trader fails, anyone can bring your money home.
 **The money can only go to you, and they are paid only when it lands.**
 
-[Live site](https://klear-near.vercel.app) · [The recorded rescue](docs/results/g7/README.md) · [For judges](JUDGES.md) · [For AI agents](AGENTS.md) · [Rescue it yourself](docs/practice.md)
+[Live site](https://klear-near.vercel.app) · [Demo video](https://youtu.be/h-ct15lOJb4) · [The recorded rescue](docs/results/g7/README.md) · [For judges](JUDGES.md) · [For AI agents](AGENTS.md) · [Rescue it yourself](docs/practice.md)
 
 [![CI](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml)
 [![Drill](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml)
@@ -74,6 +74,8 @@ whose rules are the mandate and whose owner key exists only inside NEAR's MPC ne
 ([private, and still provable](#private-and-still-provable)).
 
 ## For judges
+
+**Watch first:** [the demo video](https://youtu.be/h-ct15lOJb4).
 
 Five minutes, no wallet:
 

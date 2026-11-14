@@ -4,6 +4,8 @@ Klear lets investors give AI agents authority to manage their money, without giv
 This is the order to check it in. Five minutes covers the essentials; forty-five if you rescue a strategy
 yourself. The site's `/judges` page is the same guide, with each live check run as the page loads.
 
+**Watch first:** [the demo video](https://youtu.be/h-ct15lOJb4).
+
 Everything below runs on testnets with test funds, except two authorized mainnet privacy tests with a few dollars of
 the user's own. Nothing here is
 audited. Commands are view calls that need no account unless marked.
