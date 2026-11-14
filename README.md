@@ -13,6 +13,7 @@
 
 [![CI](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/ci.yml)
 [![Drill](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/drill.yml)
+[![Live check](https://github.com/Femtech-web/Klear/actions/workflows/live-check.yml/badge.svg)](https://github.com/Femtech-web/Klear/actions/workflows/live-check.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-0b6e66)](LICENSE)
 ![Tests](https://img.shields.io/badge/tests-310%20passing-0b6e66)
 ![Locked](https://img.shields.io/badge/contracts-locked%20·%200%20keys-0b6e66)
@@ -78,6 +79,20 @@ whose rules are the mandate and whose owner key exists only inside NEAR's MPC ne
 ## For judges
 
 **Watch first:** [the demo video](https://youtu.be/h-ct15lOJb4).
+
+**Check every claim in one command**, from a clone, with Node 20+ and nothing to install, no account and no key:
+
+```bash
+node scripts/check-live.mjs
+```
+
+It reads NEAR testnet, Hyperliquid's HyperEVM testnet, Base Sepolia and the live site, and prints one line per claim,
+each `PASS` with what it read, then `9 of 9 passed.` in about fifteen seconds: both live-run judges, the factory, its
+strategies, the TEE registry and the mandate's owner keyless and running their published builds; each judge's
+Hyperliquid account and Base vault controlled only by the judge's own MPC key (rederived from NEAR's MPC network) and
+paying only the investor; the recorded rescue delivered before the guardian was paid; an AI agent and a stranger paid
+for rescues; eleven refusals on chain in the judge's own words; the site and its MCP server up. A
+[workflow](.github/workflows/live-check.yml) runs it every six hours.
 
 Five minutes, no wallet:
 
@@ -439,8 +454,8 @@ it was so its hashes still match.
    API's backend enforces its policy; and its owner contract signs the setup without reading the encrypted policy.
 5. **The courier is ours today.** It pays the EVM gas for every rescue and cannot change what the judge signs, but
    anyone else could run one. The daily drill runs on GitHub Actions with our testnet keys.
-6. **Rescues are slow to repeat.** A Base exit waits about 25 minutes for finality, so agent runs are few: four so
-   far, three paid.
+6. **Rescues are slow to repeat.** A Base exit waits about 25 minutes for finality, so agent runs are few: seven so
+   far, four paid ([every run](docs/results/agent-runs/README.md)).
 7. **The replay is a counterfactual.** Klear's rules applied to real AI traders' fills, with the closing cost
    modelled, not trades Klear made.
 

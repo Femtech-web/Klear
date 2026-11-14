@@ -1,0 +1,26 @@
+name: live-check
+
+# Runs scripts/check-live.mjs against NEAR testnet, HyperEVM testnet, Base Sepolia and the live site every six hours,
+# so the badge in the README says whether every claim still holds. Read-only: no secret, no account, no key.
+
+on:
+  schedule:
+    - cron: "50 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scripts/check-live.mjs"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-live.mjs

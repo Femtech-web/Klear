@@ -10,6 +10,18 @@ Everything below runs on testnets with test funds, except two authorized mainnet
 the user's own. Nothing here is
 audited. Commands are view calls that need no account unless marked.
 
+## One command: every claim, checked live
+
+From a clone, with Node 20+ and nothing to install (no account, no key):
+
+```bash
+node scripts/check-live.mjs
+```
+
+Nine lines, each `PASS` with what it read from NEAR testnet, HyperEVM testnet, Base Sepolia or the live site, then
+`9 of 9 passed.` It exits non-zero if any claim fails. [The script](scripts/check-live.mjs) is plain Node and short
+enough to read before you run it.
+
 ## In one minute
 
 - **The problem.** Giving an AI agent money means giving it the keys. In Alpha Arena's Season 1.5, 30 of 32 AI
