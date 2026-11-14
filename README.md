@@ -18,6 +18,8 @@
 ![Locked](https://img.shields.io/badge/contracts-locked%20·%200%20keys-0b6e66)
 ![NEAR](https://img.shields.io/badge/NEAR-Chain%20Signatures%20·%20Read%20MPC%20·%20NEAR%20AI%20·%20Intents-0d1b2e)
 
+**NEAR HACKATHON tracks:** Unstoppable DeFi · AI Security & Defense · Privacy & Private AI · Agent Economy
+
 </div>
 
 In Alpha Arena's Season 1.5, AI models were each given $10,000 to trade on Hyperliquid, live and in public.
@@ -367,6 +369,8 @@ own equity points. With a 3x leverage cap and a floor 30% down:
   ([hashes](docs/results/g7/code-hashes.txt), [factory](docs/results/factory/code-hashes.txt)).
 - **Any strategy can be inspected** before you trust it: no keys, the factory's code, controllers that are the
   judge's own MPC keys, payouts only to the investor (`/strategies/<judge>` runs all six live).
+- **[A threat model](docs/threat-model.md)**: what an AI manager, a guardian, a stranger or the infrastructure could
+  try, and what stops each, with the live refusal or test behind it; how to report a flaw: [SECURITY.md](SECURITY.md).
 - **An internal security review**, which is not an audit: Slither, clippy, cargo audit, npm audit, and the
   invariants checked by hand, with every finding and what is still open ([docs/security-review.md](docs/security-review.md)).
 - **A daily drill** fails and rescues the practice strategy on GitHub Actions and records every cycle,
@@ -453,7 +457,8 @@ it was so its hashes still match.
 
 ## Hackathon
 
-- **Tracks:** `defi` (primary): trading agents on Hyperliquid perps and a Base vault, settled across chains with
+- **Tracks entered:** Unstoppable DeFi (`defi`, primary), AI Security & Defense (`security`), Privacy & Private AI
+  (`privacy`) and Agent Economy (`agents`). `defi`: trading agents on Hyperliquid perps and a Base vault, settled across chains with
   Chain Signatures. `security`: an AI holds money without the keys, under a policy engine it cannot change, with a
   function-call key and TEE attestation verified on NEAR. `privacy`: a sealed strategy on NEAR AI Cloud and a
   confidential mandate. `agents`: off-the-shelf agents earn rescue rewards over MCP, paid only on proof.
