@@ -2,14 +2,23 @@ name: release
 
 # On a version tag: the judge's wasm, the EVM contracts' ABIs and bytecode, the keel-judge CLI and the
 # replay for Linux and macOS, one SHA256SUMS over everything, build provenance, and a GitHub release whose
-# notes are docs/releases/<tag>.md, or else the tag's section of CHANGELOG.md.
+# notes are docs/releases/<tag>.md, or else the tag's section of CHANGELOG.md. Run it by hand with an existing tag
+# to (re)build that tag's release.
 
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "An existing tag, e.g. v0.2.0"
+        required: true
 
 permissions:
   contents: read
+
+env:
+  TAG: ${{ inputs.tag || github.ref_name }}
 
 jobs:
   binaries:
@@ -22,12 +31,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
       - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
-      - run: cargo build --locked --release -p keel-core --bin keel-judge -p keel-replay
+      # --bin applies to every selected package: name both binaries, or keel-replay is never built.
+      - run: cargo build --locked --release -p keel-core -p keel-replay --bin keel-judge --bin keel-replay
       - name: package
         run: |
           mkdir -p dist
-          tar -czf "dist/keel-${{ github.ref_name }}-${{ matrix.target }}.tar.gz" -C target/release keel-judge keel-replay
+          tar -czf "dist/keel-${{ env.TAG }}-${{ matrix.target }}.tar.gz" -C target/release keel-judge keel-replay
       - uses: actions/upload-artifact@v4
         with:
           name: bin-${{ matrix.target }}
@@ -38,6 +50,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -55,11 +69,11 @@ jobs:
       - name: collect
         run: |
           mkdir -p dist/evm
-          cp contracts/near-keel/target/near/near_keel.wasm "dist/near_keel-${{ github.ref_name }}.wasm"
-          cp contracts/near-keel-factory/target/near/near_keel_factory.wasm "dist/near_keel_factory-${{ github.ref_name }}.wasm"
+          cp contracts/near-keel/target/near/near_keel.wasm "dist/near_keel-${{ env.TAG }}.wasm"
+          cp contracts/near-keel-factory/target/near/near_keel_factory.wasm "dist/near_keel_factory-${{ env.TAG }}.wasm"
           for c in KeelLeg KeelVault KeelDeployer BalanceProbe; do cp "contracts/evm/out/$c.sol/$c.json" "dist/evm/$c.json"; done
-          tar -czf "dist/keel-evm-${{ github.ref_name }}.tar.gz" -C dist evm && rm -r dist/evm
-          cp docs/results/replay/summary.json "dist/alpha-arena-replay-${{ github.ref_name }}.json"
+          tar -czf "dist/keel-evm-${{ env.TAG }}.tar.gz" -C dist evm && rm -r dist/evm
+          cp docs/results/replay/summary.json "dist/alpha-arena-replay-${{ env.TAG }}.json"
       - uses: actions/upload-artifact@v4
         with:
           name: contracts
@@ -75,6 +89,8 @@ jobs:
       attestations: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
       - uses: actions/download-artifact@v4
         with:
           path: dist
@@ -83,9 +99,9 @@ jobs:
         run: |
           cd dist && sha256sum * > SHA256SUMS && cat SHA256SUMS && cd ..
           # The release's own notes (docs/releases/<tag>.md) when written, else the tag's CHANGELOG section.
-          if [ -f "docs/releases/${GITHUB_REF_NAME}.md" ]; then cp "docs/releases/${GITHUB_REF_NAME}.md" notes.md
-          else awk -v tag="${GITHUB_REF_NAME}" '$0 ~ "^## " tag {on=1; next} /^## /{on=0} on' CHANGELOG.md > notes.md; fi
-          test -s notes.md || { echo "no release notes for ${GITHUB_REF_NAME}"; exit 1; }
+          if [ -f "docs/releases/${TAG}.md" ]; then cp "docs/releases/${TAG}.md" notes.md
+          else awk -v tag="${TAG}" '$0 ~ "^## " tag {on=1; next} /^## /{on=0} on' CHANGELOG.md > notes.md; fi
+          test -s notes.md || { echo "no release notes for ${TAG}"; exit 1; }
       # GitHub signs provenance only for public repositories on the Free plan.
       - uses: actions/attest-build-provenance@v1
         if: ${{ !github.event.repository.private }}
@@ -93,5 +109,7 @@ jobs:
           subject-path: dist/*
       - uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
         with:
+          tag_name: ${{ env.TAG }}
+          name: Klear ${{ env.TAG }}
           body_path: notes.md
           files: dist/*
