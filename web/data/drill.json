@@ -1,5 +1,20 @@
 [
  {
+  "cycle": 5,
+  "started": 1794771180,
+  "ended": 1794771249,
+  "ok": false,
+  "error": "scripts/testnet/practice.sh fund: relayer spot to perp: {\"status\": \"err\", \"response\": \"Insufficient balance for token transfer\"}",
+  "rescuer": null,
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": "Ho5LRyu8HRWLe5uqu7omeaChwKHGeAoQj7dDh9if73xP",
+   "short": null
+  }
+ },
+ {
   "cycle": 4,
   "started": 1794682628,
   "ended": 1794693453,
