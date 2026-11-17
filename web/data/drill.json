@@ -1,6 +1,21 @@
 [
  {
   "cycle": 5,
+  "started": 1794870748,
+  "ended": 1794881586,
+  "ok": true,
+  "error": null,
+  "rescuer": "guardian.keel-practice-53ee75.testnet",
+  "trigger": "floor",
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": null,
+   "short": null
+  }
+ },
+ {
+  "cycle": 5,
   "started": 1794771180,
   "ended": 1794771249,
   "ok": false,
