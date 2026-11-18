@@ -1,0 +1,99 @@
+{"at": 1794952870, "role": "drill", "kind": "rearm", "tx": "3cNjeAYVNGyNsC8EWgXn5zdDRK2PDhJqSsqgCjMYGYv9", "refused": null, "outcome": null}
+{"at": 1794952875, "role": "drill", "kind": "heartbeat", "tx": "5H2hsbVWCP97sXpgvxvYwMPuPS48ZiARSYzGBk7YiVoL", "refused": null, "outcome": null}
+{"at": 1794952887, "role": "drill", "kind": "fund", "out": "leg: 3.5 USDC | vault: 4000000000000000 WETH wei"}
+{"at": 1794952887, "role": "drill", "kind": "spot-probe", "waiting": "Base finality, about 25 minutes"}
+{"at": 1794953181, "role": "drill", "kind": "heartbeat", "tx": "DF1nnJsYMaDHWXXYXYdEcoGU1b8BEGc2V68t5rA664Ev", "refused": null, "outcome": null}
+{"at": 1794953485, "role": "drill", "kind": "heartbeat", "tx": "YrGnXSK8P9Yt1noc42LdUToHfksPsD1akpafoTHaHPp", "refused": null, "outcome": null}
+{"at": 1794953790, "role": "drill", "kind": "heartbeat", "tx": "4BD8y4CqYXV6mH9ghtqi4fSWFRnV5qAccVCmt2tEhLdC", "refused": null, "outcome": null}
+{"at": 1794954095, "role": "drill", "kind": "heartbeat", "tx": "DeGrcnM3xgo92oX6jfJRAQQ92Df5GrxBN1a3TLYkEjTh", "refused": null, "outcome": null}
+{"at": 1794954235, "role": "drill", "kind": "spot-attested", "evidence": "base:0xf30726168ac7643d3e8863583833ea22cca85bf10123b5711ca33dbf8389ca28:17"}
+{"at": 1794954271, "role": "drill", "kind": "open-short", "tx": "CAK7d1nqk4xNBX3cLXnfiYYUZ38gaMTRydyHz4Hvs1vk", "refused": null, "outcome": {"outcome": "sign", "job_id": 0, "order": {"nonce": 9, "is_buy": false, "limit_px": 178280000000, "sz": 600000, "reduce_only": false, "cloid": "71618078916976969847629983945573530873", "deadline": 1794954563}, "digest": "0x7acb5c54d14e8561f1bbd61087fc68992f9615bc4f5d6963f6df223e75c3d88b"}}
+{"at": 1794954280, "role": "drill", "kind": "relayed-short", "tx": "0xbe2ab974aa7110052ffb7229a9f21b3dcc26b96fd541b89bbcab05164f695404", "fill": {"queued_l1": 778279289, "seen_l1": 778279318, "blocks": 29, "szi": -60, "entry_ntl": 10741800, "seconds": 0.4}}
+{"at": 1794954280, "role": "drill", "kind": "manager-silent", "last_heartbeat": 1794954263}
+{"at": 1794955188, "role": "drill", "kind": "rescue-due", "reason": "manager silent", "grace_s": 10800.0}
+{"at": 1794955193, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794955188-perp-log.json"}
+{"at": 1794955353, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794955348-perp-log.json"}
+{"at": 1794955509, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794955507-perp-log.json"}
+{"at": 1794955668, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794955663-perp-log.json"}
+{"at": 1794955791, "role": "courier", "kind": "spot-probe"}
+{"at": 1794955824, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794955822-perp-log.json"}
+{"at": 1794955983, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794955979-perp-log.json"}
+{"at": 1794956142, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794956137-perp-log.json"}
+{"at": 1794956298, "role": "drill", "kind": "courier-retry", "error": "g7.sh snapshot c-1794956296: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"server returned an error response: error code -32603: invalid block height: 69901524\"}], \"warnings\": []}"}
+{"at": 1794956333, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794956328-perp-log.json"}
+{"at": 1794956489, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794956487-perp-log.json"}
+{"at": 1794956646, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794956644-perp-log.json"}
+{"at": 1794956803, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794956801-perp-log.json"}
+{"at": 1794956962, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794956957-perp-log.json"}
+{"at": 1794957121, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794957116-perp-log.json"}
+{"at": 1794957280, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794957275-perp-log.json"}
+{"at": 1794957310, "role": "courier", "kind": "spot-attested", "out": ["base:0x2dfa1d745f163ccb41fcd63b41657ce8b5510fa39920140c5f592ba577db53cf:0"]}
+{"at": 1794957310, "role": "courier", "kind": "spot-probe"}
+{"at": 1794957435, "role": "drill", "kind": "courier-retry", "error": "g7.sh snapshot c-1794957434: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server"}
+{"at": 1794957470, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794957465-perp-log.json"}
+{"at": 1794957626, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794957624-perp-log.json"}
+{"at": 1794957786, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794957781-perp-log.json"}
+{"at": 1794957945, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794957940-perp-log.json"}
+{"at": 1794958104, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794958099-perp-log.json"}
+{"at": 1794958262, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794958258-perp-log.json"}
+{"at": 1794958419, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794958417-perp-log.json"}
+{"at": 1794958578, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794958574-perp-log.json"}
+{"at": 1794958737, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794958732-perp-log.json"}
+{"at": 1794958829, "role": "courier", "kind": "spot-attested", "out": ["base:0x6f7fb88c42b23ce6ae607195aebc62299fa588fd4512f9f2f7f697b7b2bab64e:9"]}
+{"at": 1794958829, "role": "courier", "kind": "spot-probe"}
+{"at": 1794958894, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794958891-perp-log.json"}
+{"at": 1794959050, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794959048-perp-log.json"}
+{"at": 1794959208, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794959205-perp-log.json"}
+{"at": 1794959367, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794959362-perp-log.json"}
+{"at": 1794959524, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794959521-perp-log.json"}
+{"at": 1794959681, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794959679-perp-log.json"}
+{"at": 1794959840, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794959836-perp-log.json"}
+{"at": 1794959999, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794959994-perp-log.json"}
+{"at": 1794959999, "role": "courier", "kind": "spot-attested", "out": ["base:0xaeeda194f605831105d30bb1dafc987f6b07c26642e2dcb4ca80a8fca238c05a:7"]}
+{"at": 1794960158, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794960153-perp-log.json"}
+{"at": 1794960315, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794960312-perp-log.json"}
+{"at": 1794960345, "role": "courier", "kind": "spot-probe"}
+{"at": 1794960473, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794960469-perp-log.json"}
+{"at": 1794960629, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794960627-perp-log.json"}
+{"at": 1794960787, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794960784-perp-log.json"}
+{"at": 1794960946, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794960943-perp-log.json"}
+{"at": 1794961103, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794961100-perp-log.json"}
+{"at": 1794961260, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794961257-perp-log.json"}
+{"at": 1794961416, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794961414-perp-log.json"}
+{"at": 1794961540, "role": "courier", "kind": "spot-attested", "out": ["base:0xaec408bc2ac2758a402646c19a9e5fc4f5a349cc1ed67b9158e3206a4b2f0ec9:13"]}
+{"at": 1794961574, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794961571-perp-log.json"}
+{"at": 1794961733, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794961728-perp-log.json"}
+{"at": 1794961856, "role": "courier", "kind": "spot-probe"}
+{"at": 1794961892, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794961887-perp-log.json"}
+{"at": 1794961984, "role": "courier", "kind": "spot-failed", "out": ["send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"transaction was not confirmed within the timeout\"}], \"warnings\": []}"]}
+{"at": 1794962050, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794962046-perp-log.json"}
+{"at": 1794962206, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794962204-perp-log.json"}
+{"at": 1794962363, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794962361-perp-log.json"}
+{"at": 1794962524, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794962519-perp-log.json"}
+{"at": 1794962693, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794962678-perp-log.json"}
+{"at": 1794962851, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794962848-perp-log.json"}
+{"at": 1794963007, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794963005-perp-log.json"}
+{"at": 1794963165, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794963162-perp-log.json"}
+{"at": 1794963322, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794963319-perp-log.json"}
+{"at": 1794963384, "role": "courier", "kind": "spot-probe"}
+{"at": 1794963415, "role": "courier", "kind": "spot-failed", "out": ["send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"server returned an error response: error code -32000: replacement transaction underpriced\"}], \"warnings\": []}"]}
+{"at": 1794963479, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794963476-perp-log.json"}
+{"at": 1794963635, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794963633-perp-log.json"}
+{"at": 1794963794, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794963790-perp-log.json"}
+{"at": 1794963953, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794963948-perp-log.json"}
+{"at": 1794964112, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794964107-perp-log.json"}
+{"at": 1794964268, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794964265-perp-log.json"}
+{"at": 1794964427, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794964423-perp-log.json"}
+{"at": 1794964586, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794964581-perp-log.json"}
+{"at": 1794964746, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794964740-perp-log.json"}
+{"at": 1794964903, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794964901-perp-log.json"}
+{"at": 1794964903, "role": "courier", "kind": "spot-probe"}
+{"at": 1794965061, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794965058-perp-log.json"}
+{"at": 1794965218, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794965215-perp-log.json"}
+{"at": 1794965377, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794965373-perp-log.json"}
+{"at": 1794965535, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794965532-perp-log.json"}
+{"at": 1794965692, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794965689-perp-log.json"}
+{"at": 1794965851, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1794965846-perp-log.json"}
+{"at": 1794966005, "role": "drill", "kind": "spot-attested", "evidence": "base:0x29ba5f76d1ba77a76c4fdf20dfe9a660dd08ad9853c39b7dfcfdf4255c0731ba:0"}
+{"at": 1794966026, "role": "guardian", "kind": "open", "tx": "9gfXBCcLDgYcqLw6ZKPD7SbhGwARiFgemgBD9ZfvBCsV", "refused": "stale-evidence", "outcome": null}
+{"at": 1794966027, "role": "drill", "kind": "failed", "error": "rescue ended in mode active"}

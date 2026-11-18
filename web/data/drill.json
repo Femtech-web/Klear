@@ -1,5 +1,20 @@
 [
  {
+  "cycle": 6,
+  "started": 1794952864,
+  "ended": 1794966027,
+  "ok": false,
+  "error": "rescue ended in mode active",
+  "rescuer": "guardian.keel-practice-53ee75.testnet",
+  "trigger": null,
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": "3cNjeAYVNGyNsC8EWgXn5zdDRK2PDhJqSsqgCjMYGYv9",
+   "short": "CAK7d1nqk4xNBX3cLXnfiYYUZ38gaMTRydyHz4Hvs1vk"
+  }
+ },
+ {
   "cycle": 5,
   "started": 1794870748,
   "ended": 1794881586,
