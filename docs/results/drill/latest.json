@@ -1,10 +1,10 @@
 {
- "cycle": 6,
+ "cycle": null,
  "judge": "practice.keel-factory-bcf915.testnet",
- "started": 1795038181,
- "ended": 1795050154,
+ "started": 1795125513,
+ "ended": 1795125514,
  "ok": false,
- "error": "g7.sh perp g-1795050153 guardian.keel-practice-53ee75.testnet: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server",
+ "error": "not ready: mode flattening, job {'id': 7, 'kind': 'flatten', 'agent': 'guardian.keel-practice-53ee75.testnet', 'expires_at': 1795064463}",
  "rescuer": null,
  "mode": "flattening",
  "trigger": "manager-silent",
@@ -12,31 +12,10 @@
  "deliveries": [],
  "steps": [
   {
-   "at": 1795038181,
-   "step": "resume",
-   "reason": "the rescue is already due"
-  },
-  {
-   "at": 1795038182,
-   "step": "rescue-due",
-   "reason": "manager silent",
-   "grace_s": 10800.0
-  },
-  {
-   "at": 1795038810,
-   "step": "courier-retry",
-   "error": "g7.sh snapshot c-1795038809: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server"
-  },
-  {
-   "at": 1795050046,
-   "step": "spot-attested",
-   "evidence": "base:0xbc05327c578ef75ee77e3f90b6c19986361a0247f1652db3c968cb1eab8175dd:5"
-  },
-  {
-   "at": 1795050154,
+   "at": 1795125513,
    "step": "failed",
-   "error": "g7.sh perp g-1795050153 guardian.keel-practice-53ee75.testnet: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server"
+   "error": "not ready: mode flattening, job {'id': 7, 'kind': 'flatten', 'agent': 'guardian.keel-practice-53ee75.testnet', 'expires_at': 1795064463}"
   }
  ],
- "log": "cycle-1795038181.jsonl"
+ "log": "cycle-1795125513.jsonl"
 }

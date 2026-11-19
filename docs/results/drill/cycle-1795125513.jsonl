@@ -1,0 +1,1 @@
+{"at": 1795125513, "role": "drill", "kind": "failed", "error": "not ready: mode flattening, job {'id': 7, 'kind': 'flatten', 'agent': 'guardian.keel-practice-53ee75.testnet', 'expires_at': 1795064463}"}
