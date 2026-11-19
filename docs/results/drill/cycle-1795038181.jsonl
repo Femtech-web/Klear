@@ -1,0 +1,92 @@
+{"at": 1795038181, "role": "drill", "kind": "resume", "reason": "the rescue is already due"}
+{"at": 1795038182, "role": "drill", "kind": "rescue-due", "reason": "manager silent", "grace_s": 10800.0}
+{"at": 1795038184, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795038182-perp-log.json"}
+{"at": 1795038341, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795038339-perp-log.json"}
+{"at": 1795038499, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795038497-perp-log.json"}
+{"at": 1795038655, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795038653-perp-log.json"}
+{"at": 1795038810, "role": "drill", "kind": "courier-retry", "error": "g7.sh snapshot c-1795038809: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server"}
+{"at": 1795038844, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795038840-perp-log.json"}
+{"at": 1795039001, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795038998-perp-log.json"}
+{"at": 1795039158, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795039155-perp-log.json"}
+{"at": 1795039314, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795039312-perp-log.json"}
+{"at": 1795039472, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795039469-perp-log.json"}
+{"at": 1795039628, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795039626-perp-log.json"}
+{"at": 1795039690, "role": "courier", "kind": "spot-probe"}
+{"at": 1795039787, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795039782-perp-log.json"}
+{"at": 1795039943, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795039941-perp-log.json"}
+{"at": 1795040103, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795040098-perp-log.json"}
+{"at": 1795040271, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795040256-perp-log.json"}
+{"at": 1795040430, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795040425-perp-log.json"}
+{"at": 1795040588, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795040584-perp-log.json"}
+{"at": 1795040745, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795040742-perp-log.json"}
+{"at": 1795040837, "role": "courier", "kind": "spot-attested", "out": ["base:0xdaab8230b17e3e65631d9278a263b881a479d2ca98b8de13ca753b0943ddbe14:0"]}
+{"at": 1795040903, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795040898-perp-log.json"}
+{"at": 1795041063, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795041057-perp-log.json"}
+{"at": 1795041222, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795041217-perp-log.json"}
+{"at": 1795041222, "role": "courier", "kind": "spot-probe"}
+{"at": 1795041381, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795041376-perp-log.json"}
+{"at": 1795041539, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795041534-perp-log.json"}
+{"at": 1795041695, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795041693-perp-log.json"}
+{"at": 1795041853, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795041850-perp-log.json"}
+{"at": 1795042011, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795042007-perp-log.json"}
+{"at": 1795042170, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795042165-perp-log.json"}
+{"at": 1795042326, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795042324-perp-log.json"}
+{"at": 1795042388, "role": "courier", "kind": "spot-attested", "out": ["base:0x78ffef6755503a005ec8c703af88604bc1b050da8814cff8f9a638f2eeeee9aa:29"]}
+{"at": 1795042484, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795042481-perp-log.json"}
+{"at": 1795042643, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795042638-perp-log.json"}
+{"at": 1795042735, "role": "courier", "kind": "spot-probe"}
+{"at": 1795042799, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795042797-perp-log.json"}
+{"at": 1795042958, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795042953-perp-log.json"}
+{"at": 1795043114, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795043112-perp-log.json"}
+{"at": 1795043272, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795043269-perp-log.json"}
+{"at": 1795043431, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795043426-perp-log.json"}
+{"at": 1795043587, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795043585-perp-log.json"}
+{"at": 1795043746, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795043741-perp-log.json"}
+{"at": 1795043903, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795043900-perp-log.json"}
+{"at": 1795043934, "role": "courier", "kind": "spot-attested", "out": ["base:0x77975eeba86a1d7c9c5f7b35b3d86cf372dc6ba6177191eeb1032bd20b391842:1"]}
+{"at": 1795044062, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795044057-perp-log.json"}
+{"at": 1795044219, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795044217-perp-log.json"}
+{"at": 1795044250, "role": "courier", "kind": "spot-probe"}
+{"at": 1795044376, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795044374-perp-log.json"}
+{"at": 1795044535, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795044530-perp-log.json"}
+{"at": 1795044692, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795044689-perp-log.json"}
+{"at": 1795044849, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795044847-perp-log.json"}
+{"at": 1795045006, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795045004-perp-log.json"}
+{"at": 1795045165, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795045161-perp-log.json"}
+{"at": 1795045323, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795045319-perp-log.json"}
+{"at": 1795045446, "role": "courier", "kind": "spot-attested", "out": ["base:0x9f1a0c4b8dc98aca4450617c02952026b418caf71be0607b3b43e52a48509766:2"]}
+{"at": 1795045479, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795045477-perp-log.json"}
+{"at": 1795045638, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795045633-perp-log.json"}
+{"at": 1795045761, "role": "courier", "kind": "spot-probe"}
+{"at": 1795045794, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795045792-perp-log.json"}
+{"at": 1795045952, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795045949-perp-log.json"}
+{"at": 1795046109, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795046106-perp-log.json"}
+{"at": 1795046265, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795046263-perp-log.json"}
+{"at": 1795046422, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795046420-perp-log.json"}
+{"at": 1795046581, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795046576-perp-log.json"}
+{"at": 1795046740, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795046735-perp-log.json"}
+{"at": 1795046898, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795046893-perp-log.json"}
+{"at": 1795046991, "role": "courier", "kind": "spot-attested", "out": ["base:0x32c8ecba12a10be293b9a9893d8aebb817745e9377d49fcf5367d47ebf4677e3:10"]}
+{"at": 1795047057, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795047052-perp-log.json"}
+{"at": 1795047216, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795047211-perp-log.json"}
+{"at": 1795047277, "role": "courier", "kind": "spot-probe"}
+{"at": 1795047373, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795047370-perp-log.json"}
+{"at": 1795047531, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795047526-perp-log.json"}
+{"at": 1795047688, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795047685-perp-log.json"}
+{"at": 1795047845, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795047842-perp-log.json"}
+{"at": 1795048004, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795048000-perp-log.json"}
+{"at": 1795048163, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795048158-perp-log.json"}
+{"at": 1795048324, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795048317-perp-log.json"}
+{"at": 1795048483, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795048478-perp-log.json"}
+{"at": 1795048576, "role": "courier", "kind": "spot-failed", "out": ["not attested"]}
+{"at": 1795048642, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795048637-perp-log.json"}
+{"at": 1795048801, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795048796-perp-log.json"}
+{"at": 1795048801, "role": "courier", "kind": "spot-probe"}
+{"at": 1795048960, "role": "courier", "kind": "snapshot", "file": "docs/results/practice/c-1795048955-perp-log.json"}
+{"at": 1795050046, "role": "drill", "kind": "spot-attested", "evidence": "base:0xbc05327c578ef75ee77e3f90b6c19986361a0247f1652db3c968cb1eab8175dd:5"}
+{"at": 1795050071, "role": "guardian", "kind": "open", "tx": "7w6BmXsVWZropDJT18eixA1WzhpCvd5neXZvyuRVkBeK", "refused": null, "outcome": {"outcome": "rescue", "job_id": 7, "trigger": "manager-silent", "order": {"order": {"nonce": 10, "is_buy": true, "limit_px": 178480000000, "sz": 600000, "reduce_only": true, "cloid": "170277119729428711339202559025643425473", "deadline": 1795050363}, "digest": "0x081554b9a4e255a7ef41b4c119ae551837cfb274c900331dbd03b269b70e781f"}, "sweep": null, "exit": {"exit": {"nonce": 4, "token": "0x4200000000000000000000000000000000000006", "deadline": 1795050363}, "digest": "0xcd64130c8d41449764f51c14aafc1e46c66c3043f937f5fa8541391dcaaa2c29"}, "delivered": [], "paid": [], "perp": "open", "spot": "open", "ended": null, "done": false}}
+{"at": 1795050072, "role": "guardian", "kind": "relayed-exit", "tx": "0xc91e72aecab12edde1f4c899beb0f4116dfaedf37a0abe18556b46f5040f7fab"}
+{"at": 1795050075, "role": "guardian", "kind": "relayed-order", "tx": "0x3ee453597eb0d5e830e7aedd30839eb31a983ff2996695b7867d74a8def42fb1", "fill": {"queued_l1": 779605152, "seen_l1": 779605165, "blocks": 13, "szi": 0, "entry_ntl": 0, "seconds": 0.4}}
+{"at": 1795050124, "role": "guardian", "kind": "settle", "tx": "BgjoTqy62kn2cy3eHjrGCD3QANpZMPhJrxe8v1dP3XxG", "refused": null, "outcome": {"outcome": "rescue", "job_id": 7, "trigger": "manager-silent", "order": null, "sweep": {"sweep": {"nonce": 11, "usd_ntl": 3420184, "usdc_wei": 342018400, "deadline": 1795050416}, "digest": "0xeca7cfafd17aa82399d576c5efedf3c59dc2562affa6f5678954dc082080fc95"}, "exit": null, "delivered": [], "paid": [], "perp": "open", "spot": "open", "ended": null, "done": false}}
+{"at": 1795050128, "role": "guardian", "kind": "relayed-sweep", "tx": "0x6228604b55f50618da77b44eac7b26fa67283e0656058aed38311fa31264c460"}
+{"at": 1795050154, "role": "drill", "kind": "failed", "error": "g7.sh perp g-1795050153 guardian.keel-practice-53ee75.testnet: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server"}

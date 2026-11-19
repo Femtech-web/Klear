@@ -1,6 +1,21 @@
 [
  {
   "cycle": 6,
+  "started": 1795038181,
+  "ended": 1795050154,
+  "ok": false,
+  "error": "g7.sh perp g-1795050153 guardian.keel-practice-53ee75.testnet: send failed: {\"schema_version\": 1, \"success\": false, \"data\": null, \"errors\": [{\"level\": \"error\", \"code\": \"cast.error\", \"message\": \"Failed to fetch fee history for EIP-1559 estimation\"}, {\"level\": \"error\", \"code\": \"cast.error.context\", \"message\": \"server",
+  "rescuer": null,
+  "trigger": "manager-silent",
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": null,
+   "short": null
+  }
+ },
+ {
+  "cycle": 6,
   "started": 1794952864,
   "ended": 1794966027,
   "ok": false,
