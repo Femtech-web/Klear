@@ -1,6 +1,21 @@
 [
  {
   "cycle": null,
+  "started": 1795292560,
+  "ended": 1795292561,
+  "ok": false,
+  "error": "not ready: mode flattening, job {'id': 7, 'kind': 'flatten', 'agent': 'guardian.keel-practice-53ee75.testnet', 'expires_at': 1795064463}",
+  "rescuer": null,
+  "trigger": "manager-silent",
+  "payouts": [],
+  "deliveries": [],
+  "txs": {
+   "rearm": null,
+   "short": null
+  }
+ },
+ {
+  "cycle": null,
   "started": 1795210851,
   "ended": 1795210853,
   "ok": false,
