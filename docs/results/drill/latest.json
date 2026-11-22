@@ -1,8 +1,8 @@
 {
  "cycle": null,
  "judge": "practice.keel-factory-bcf915.testnet",
- "started": 1795292560,
- "ended": 1795292561,
+ "started": 1795379722,
+ "ended": 1795379723,
  "ok": false,
  "error": "not ready: mode flattening, job {'id': 7, 'kind': 'flatten', 'agent': 'guardian.keel-practice-53ee75.testnet', 'expires_at': 1795064463}",
  "rescuer": null,
@@ -12,10 +12,10 @@
  "deliveries": [],
  "steps": [
   {
-   "at": 1795292560,
+   "at": 1795379722,
    "step": "failed",
    "error": "not ready: mode flattening, job {'id': 7, 'kind': 'flatten', 'agent': 'guardian.keel-practice-53ee75.testnet', 'expires_at': 1795064463}"
   }
  ],
- "log": "cycle-1795292560.jsonl"
+ "log": "cycle-1795379722.jsonl"
 }
